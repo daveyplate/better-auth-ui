@@ -92,6 +92,7 @@ export const defaultLocalization = {
     reset_password_email: "Check your email for the password reset link",
     magic_link_email: "Check your email for the magic link",
     password_updated: "Password updated",
+    loading: "Loading",
     error: "Error",
     alert: "Alert",
     or_continue_with: "Or continue with",
@@ -686,7 +687,12 @@ export function AuthCard({
                                 onClick={() => setView(view == "magic-link" ? "login" : "magic-link")}
                                 disabled={!["signup", "login", "magic-link"].includes(view!)}
                             >
-                                {view == "magic-link" ? <LockIcon /> : <MailIcon />}
+                                {loading ? (
+                                    <Loader2 className="animate-spin" />
+                                ) : (
+                                    view == "magic-link" ? <LockIcon /> : <MailIcon />
+                                )}
+                                
                                 {localization.provider_prefix}
                                 {" "}
                                 {view == "magic-link" ? localization.password_provider : localization.magic_link_provider}
@@ -721,7 +727,12 @@ export function AuthCard({
                                 }}
                                 disabled={!["login", "magic-link"].includes(view!)}
                             >
-                                <Key />
+                                {loading ? (
+                                    <Loader2 className="animate-spin" />
+                                ) : (
+                                    <Key />
+                                )}
+
                                 {localization.provider_prefix}
                                 {" "}
                                 {localization.passkey_provider}
@@ -768,13 +779,17 @@ export function AuthCard({
                                             }
                                         }}
                                     >
-                                        {socialProvider.icon}
+                                        {loading ? (
+                                            <Loader2 className="animate-spin" />
+                                        ) : (
+                                            socialProvider.icon
+                                        )}
 
                                         {socialLayout == "vertical" && (
                                             <>
                                                 {localization.provider_prefix}
                                                 {" "}
-                                                {socialProvider.name}
+                                                {loading ? localization.loading : socialProvider.name}
                                             </>
                                         )}
                                     </Button>
