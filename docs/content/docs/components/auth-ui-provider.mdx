@@ -23,7 +23,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       navigate={router.push}
       replace={router.replace}
       onSessionChange={() => router.refresh()}
-      Link={Link}
+      LinkComponent={Link}
     >
       {children}
     </AuthUIProvider>
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             return data.url
           }}
           settingsUrl="/dashboard/settings"
-          Link={Link}
+          LinkComponent={Link}
         >
           {children}
         </AuthUIProvider>

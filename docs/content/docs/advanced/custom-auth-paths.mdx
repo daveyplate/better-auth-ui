@@ -26,7 +26,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             navigate={router.push}
             replace={router.replace}
             onSessionChange={() => router.refresh()}
-            Link={Link}
+            LinkComponent={Link}
             viewPaths={{
                 signIn: "login",
                 signOut: "logout",

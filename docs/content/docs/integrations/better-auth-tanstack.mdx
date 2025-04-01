@@ -26,7 +26,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       persistClient={false}
       replace={router.replace}
       onSessionChange={() => router.refresh()}
-      Link={Link}
+      LinkComponent={Link}
     >
       {children}
     </AuthUIProviderTanstack>

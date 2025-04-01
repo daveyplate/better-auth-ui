@@ -40,7 +40,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             replace={router.replace}
             onSessionChange={() => router.refresh()}
             settingsUrl="/dashboard/settings" // Your custom settings route
-            Link={Link}
+            LinkComponent={Link}
         >
             {children}
         </AuthUIProvider>

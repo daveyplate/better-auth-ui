@@ -46,7 +46,7 @@ export function Providers({ children }: { children: ReactNode }) {
                 // Clear router cache (protected routes)
                 router.refresh()
             }}
-            Link={Link}
+            LinkComponent={Link}
         >
             {children}
         </AuthUIProvider>
@@ -169,7 +169,7 @@ export default function App({ Component, pageProps }: AppProps) {
             navigate={router.push}
             replace={router.replace}
             onSessionChange={() => router.reload()}
-            Link={Link}
+            LinkComponent={Link}
         >
             <Component {...pageProps} />
         </AuthUIProvider>

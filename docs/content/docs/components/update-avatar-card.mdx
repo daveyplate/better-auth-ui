@@ -55,7 +55,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
                 const { data } = await res.json()
                 return data.url
             }}
-            Link={Link}
+            LinkComponent={Link}
         >
             {children}
         </AuthUIProvider>
