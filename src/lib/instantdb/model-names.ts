@@ -1,4 +1,4 @@
-const namespaces = ["user", "session", "account", "passkey"] as const
+const namespaces = ["user", "session", "account", "passkey", "twoFactor"] as const
 type Namespace = (typeof namespaces)[number]
 
 export type ModelNames = {

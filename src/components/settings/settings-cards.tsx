@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 
 import { useAuthenticate } from "../../hooks/use-authenticate"
 import type { AuthLocalization } from "../../lib/auth-localization"
@@ -18,6 +18,7 @@ import { PasskeysCard } from "./passkeys-card"
 import { ProvidersCard } from "./providers-card"
 import { SessionsCard } from "./sessions-card"
 import type { SettingsCardClassNames } from "./settings-card"
+import { TwoFactorCard } from "./two-factor-card"
 import { UpdateAvatarCard } from "./update-avatar-card"
 import { UpdateFieldCard } from "./update-field-card"
 import { UpdateNameCard } from "./update-name-card"
@@ -58,13 +59,14 @@ export function SettingsCards({ className, classNames, localization }: SettingsC
         passkey,
         providers,
         settingsFields,
-        username
+        username,
+        twoFactor
     } = useContext(AuthUIContext)
     localization = { ...authLocalization, ...localization }
     const { useListAccounts, useListDeviceSessions, useListPasskeys, useListSessions, useSession } =
         hooks
     useAuthenticate()
-    const { data: sessionData, isPending: sessionPending } = useSession()
+    const { data: sessionData, isPending: sessionPending, refetch: refetchSession } = useSession()
     const {
         data: accounts,
         isPending: accountsPending,
@@ -75,6 +77,13 @@ export function SettingsCards({ className, classNames, localization }: SettingsC
         isPending: sessionsPending,
         refetch: refetchSessions
     } = useListSessions()
+
+    // Effect to check if we need to refetch data after 2FA setup
+    useEffect(() => {
+        if (sessionStorage.getItem("twoFactorRefetchFunction") === "custom") {
+            refetchSession?.()
+        }
+    }, [refetchSession])
 
     let passkeys: { id: string; createdAt: Date }[] | undefined | null = undefined
     let passkeysPending: boolean | undefined = undefined
@@ -255,6 +264,16 @@ export function SettingsCards({ className, classNames, localization }: SettingsC
                             classNames={classNames?.card}
                             isPending={sessionPending}
                             localization={localization}
+                            skipHook
+                        />
+                    )}
+
+                    {twoFactor && (
+                        <TwoFactorCard
+                            isPending={sessionPending}
+                            classNames={classNames?.card}
+                            localization={localization}
+                            twoFactorEnabled={(sessionData?.user as any)?.twoFactorEnabled}
                             skipHook
                         />
                     )}

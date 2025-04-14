@@ -14,7 +14,13 @@ export const authViewPaths = {
     /** @default "sign-out" */
     signOut: "sign-out",
     /** @default "sign-up" */
-    signUp: "sign-up"
+    signUp: "sign-up",
+    /** @default "two-factor" */
+    twoFactorPrompt: "two-factor",
+    /** @default "two-factor-setup" */
+    twoFactorSetup: "two-factor-setup",
+    /** @default "two-factor-recovery" */
+    twoFactorRecovery: "two-factor-recovery"
 }
 
 export type AuthViewPaths = typeof authViewPaths

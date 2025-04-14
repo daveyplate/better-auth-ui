@@ -8,18 +8,36 @@ import { AuthUIContext } from "../../lib/auth-ui-provider"
 import type { AuthView } from "../../lib/auth-view-paths"
 import { socialProviders } from "../../lib/social-providers"
 import { cn, isValidEmail } from "../../lib/utils"
+import { Button } from "../ui/button"
 import { Checkbox } from "../ui/checkbox"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 
 import type { SocialProvider } from "better-auth/social-providers"
-import type { AuthClient } from "../../types/auth-client"
 import { PasswordInput } from "../password-input"
+import { TwoFactorInput } from "../two-factor/two-factor-input"
+import { TwoFactorQR } from "../two-factor/two-factor-qr"
+import { TwoFactorPrompt } from "../two-factor/two-factor-prompt"
+import { TwoFactorRecovery } from "../two-factor/two-factor-recovery"
 import { Separator } from "../ui/separator"
 import { ActionButton } from "./action-button"
 import { MagicLinkButton } from "./magic-link-button"
 import { PasskeyButton } from "./passkey-button"
 import { ProviderButton } from "./provider-button"
+
+// Type representing the authentication response
+// with the twoFactorRedirect property added by the 2FA plugin
+interface SignInResponseWithTwoFactor {
+    redirect?: boolean
+    token?: string
+    url?: string
+    user?: {
+        id: string
+        email: string
+        // other user fields
+    }
+    twoFactorRedirect?: boolean
+}
 
 export type AuthFormClassNames = {
     base?: string
@@ -52,6 +70,9 @@ export function AuthForm({
     view?: AuthView
 }) {
     const [isLoading, setIsLoading] = useState(false)
+    const [twoFactorCode, setTwoFactorCode] = useState("")
+    const [isBackupCode, setIsBackupCode] = useState(false)
+    const [twoFactorUrl, setTwoFactorUrl] = useState<string>("")
 
     const {
         additionalFields,
@@ -182,7 +203,8 @@ export function AuthForm({
         }
 
         if (formData.get("passkey")) {
-            const response = await (authClient as AuthClient).signIn.passkey()
+            // @ts-ignore passkey is added by the passkey plugin
+            const response = await authClient.signIn.passkey()
             const error = response?.error
             if (error) {
                 toast({ variant: "error", message: error.message || error.statusText })
@@ -242,13 +264,17 @@ export function AuthForm({
                     }
                 }
 
-                const { error } = await authClient.signIn.email({
+                // Handle sign-in with 2FA support
+                const { data, error } = await authClient.signIn.email({
                     email,
                     ...params
                 })
 
                 if (error) {
                     toast({ variant: "error", message: error.message || error.statusText })
+                } else if ((data as SignInResponseWithTwoFactor)?.twoFactorRedirect) {
+                    // Redirect to 2FA verification screen if required
+                    navigate(`${basePath}/${viewPaths.twoFactorPrompt}`)
                 } else {
                     onSuccess()
                 }
@@ -375,6 +401,125 @@ export function AuthForm({
 
                 break
             }
+
+            case "twoFactorPrompt": {
+                const code = formData.get("twoFactorCode") as string
+                const trustDevice = formData.has("trustDevice")
+                
+                // Validate code format before sending to API
+                if (formData.has("isBackupCode") && !/^[a-zA-Z0-9]{10}$/.test(code)) {
+                    toast({ 
+                        variant: "error", 
+                        message: localization.invalidTwoFactorCode || "Invalid backup code format"
+                    })
+                    return
+                } else if (!formData.has("isBackupCode") && !/^[0-9]{6}$/.test(code)) {
+                    toast({ 
+                        variant: "error", 
+                        message: localization.invalidTwoFactorCode || "Invalid authentication code format" 
+                    })
+                    return
+                }
+
+                if (formData.has("isBackupCode")) {
+                    // Using backup code
+                    // @ts-expect-error Optional plugin
+                    const { error } = await authClient.twoFactor.verifyBackupCode({
+                        code,
+                        trustDevice
+                    })
+
+                    if (error) {
+                        toast({ variant: "error", message: error.message || error.statusText })
+                    } else {
+                        onSuccess()
+                    }
+                } else {
+                    // Using TOTP code
+                    // @ts-expect-error Optional plugin
+                    const { error } = await authClient.twoFactor.verifyTotp({
+                        code,
+                        trustDevice
+                    })
+
+                    if (error) {
+                        toast({ variant: "error", message: error.message || error.statusText })
+                    } else {
+                        onSuccess()
+                    }
+                }
+
+                break
+            }
+
+            case "twoFactorSetup": {
+                const code = formData.get("twoFactorCode") as string
+                
+                // Validate code format before sending to API
+                if (!/^[0-9]{6}$/.test(code)) {
+                    toast({ 
+                        variant: "error", 
+                        message: localization.invalidTwoFactorCode || "Invalid authentication code format" 
+                    })
+                    return
+                }
+                
+                // Use the proper method for verifying during setup
+                // @ts-expect-error Optional plugin
+                const response = await authClient.twoFactor.verifyTotp({
+                    code
+                })
+                
+                const { error } = response || {}
+                
+                if (error) {
+                    toast({ variant: "error", message: error.message || error.statusText })
+                } else {
+                    // After successful verification, generate backup codes
+                    // @ts-expect-error Optional plugin
+                    const backupResponse = await authClient.twoFactor.generateBackupCodes()
+                    
+                    if (backupResponse.error) {
+                        toast({ 
+                            variant: "error", 
+                            message: backupResponse.error.message || "Failed to generate backup codes" 
+                        })
+                    } else if (backupResponse.data?.backupCodes?.length) {
+                        // Store backup codes in sessionStorage for the recovery page
+                        sessionStorage.setItem("twoFactorBackupCodes", JSON.stringify(backupResponse.data.backupCodes))
+                        sessionStorage.setItem("shouldRefreshAfterTwoFactorSetup", "true")
+                        
+                        // Redirect to recovery codes page
+                        navigate(`${basePath}/${viewPaths.twoFactorRecovery}`)
+                    } else {
+                        toast({ variant: "success", message: localization.twoFactorEnabled! })
+                        setTwoFactorCode("")
+                        
+                        // Check if we need to refresh session data after setup
+                        const shouldRefresh = sessionStorage.getItem("shouldRefreshAfterTwoFactorSetup") === "true"
+                        if (shouldRefresh) {
+                            sessionStorage.removeItem("shouldRefreshAfterTwoFactorSetup")
+                            
+                            // Determine which refetch function to use
+                            const refetchFunction = sessionStorage.getItem("twoFactorRefetchFunction")
+                            sessionStorage.removeItem("twoFactorRefetchFunction")
+                            
+                            // Always refresh session data
+                            await refetchSession?.()
+                            await onSessionChange?.()
+                        }
+                        
+                        navigate(getRedirectTo())
+                    }
+                }
+                
+                break
+            }
+
+            case "twoFactorRecovery": {
+                // Handled by the TwoFactorRecovery component
+                break
+            }
         }
     }
 
@@ -444,7 +589,112 @@ export function AuthForm({
         onSuccess()
     }, [isRestoring, view, replace, persistClient, getRedirectTo, onSuccess])
 
+    useEffect(() => {
+        if (view === "twoFactorSetup" && !twoFactorUrl) {
+            // Retrieve URI from sessionStorage (stored by TwoFactorCard)
+            const storedUri = sessionStorage.getItem("twoFactorSetupURI")
+            if (storedUri) {
+                setTwoFactorUrl(storedUri)
+                // Clean up after use
+                sessionStorage.removeItem("twoFactorSetupURI")
+            } else {
+                // Fallback to enable method if URI is not found in sessionStorage
+                // @ts-expect-error Optional plugin
+                authClient.twoFactor.enable().then((response) => {
+                    if (!response.error && response.data?.totpURI) {
+                        setTwoFactorUrl(response.data.totpURI)
+                    }
+                })
+            }
+        }
+    }, [view, authClient, twoFactorUrl])
+
     if (["signOut", "callback"].includes(view)) return <Loader2 className="animate-spin" />
+
+    if (view === "twoFactorPrompt" || view === "twoFactorSetup") {
+        return (
+            <form
+                action={formAction}
+                className={cn("grid w-full gap-6", className, classNames?.base)}
+            >
+                {view === "twoFactorSetup" && twoFactorUrl && (
+                    <>
+                        <div className="flex justify-center py-2">
+                            <TwoFactorQR uri={twoFactorUrl} localization={localization} />
+                        </div>
+                    </>
+                )}
+
+                <div className="grid gap-2">
+                    <Label className={classNames?.label} htmlFor="twoFactorCode">
+                        {isBackupCode
+                            ? localization.enterBackupCode
+                            : localization.enterTwoFactorCode}
+                    </Label>
+
+                    <TwoFactorInput
+                        id="twoFactorCode"
+                        name="twoFactorCode"
+                        value={twoFactorCode}
+                        onChange={setTwoFactorCode}
+                        placeholder={
+                            isBackupCode
+                                ? localization.backupCodePlaceholder
+                                : localization.twoFactorCodePlaceholder
+                        }
+                        className={classNames?.input}
+                        maxLength={isBackupCode ? 10 : 6}
+                        onComplete={() => formAction(new FormData())}
+                        isBackupCode={isBackupCode}
+                    />
+
+                    {/* Hidden input to submit the value with the form */}
+                    <input type="hidden" name="twoFactorCode" value={twoFactorCode} />
+                </div>
+
+                {view === "twoFactorPrompt" && (
+                    <>
+                        <div className="flex items-center gap-2">
+                            <Checkbox id="trustDevice" name="trustDevice" />
+                            <Label htmlFor="trustDevice" className="text-sm">
+                                {localization.rememberDevice}
+                            </Label>
+                        </div>
+
+                        <Button
+                            type="button"
+                            variant="link"
+                            className="justify-start px-0 text-sm"
+                            onClick={() => setIsBackupCode(!isBackupCode)}
+                        >
+                            {isBackupCode
+                                ? localization.enterTwoFactorCode
+                                : localization.useBackupCode}
+                        </Button>
+
+                        {isBackupCode && <input type="hidden" name="isBackupCode" value="true" />}
+                    </>
+                )}
+
+                <Button
+                    type="submit"
+                    className={classNames?.actionButton}
+                    disabled={
+                        isLoading ||
+                        (isBackupCode ? twoFactorCode.length < 10 : twoFactorCode.length < 6)
+                    }
+                >
+                    {isLoading ? (
+                        <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        </>
+                    ) : (
+                        localization.verifyTwoFactorAction
+                    )}
+                </Button>
+            </form>
+        )
+    }
 
     return (
         <form action={formAction} className={cn("grid w-full gap-6", className, classNames?.base)}>

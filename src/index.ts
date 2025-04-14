@@ -29,3 +29,9 @@ export * from "./lib/auth-localization"
 export * from "./lib/auth-ui-provider"
 export * from "./lib/auth-view-paths"
 export * from "./lib/social-providers"
+
+// New 2FA components
+export * from "./components/two-factor/two-factor-input"
+export * from "./components/two-factor/two-factor-qr"
+export * from "./components/two-factor/backup-codes-display"
+export * from "./components/settings/two-factor-card"

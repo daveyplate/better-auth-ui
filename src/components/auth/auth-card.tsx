@@ -106,6 +106,44 @@ export function AuthCard({
             <SettingsCards className={cn(className)} classNames={classNames?.settings} />
         )
 
+    if (["twoFactorPrompt", "twoFactorSetup"].includes(view)) {
+        const description =
+            view === "twoFactorPrompt"
+                ? localization.twoFactorPromptDescription
+                : localization.twoFactorSetupDescription
+
+        return (
+            <Card className={cn("w-full max-w-sm text-start", className, classNames?.base)}>
+                <CardHeader className={classNames?.header}>
+                    <CardTitle className={cn("text-lg md:text-xl", classNames?.title)}>
+                        {view === "twoFactorPrompt"
+                            ? localization.twoFactorPrompt
+                            : localization.twoFactorSetup}
+                    </CardTitle>
+
+                    {description && (
+                        <CardDescription
+                            className={cn("text-xs md:text-sm", classNames?.description)}
+                        >
+                            {description}
+                        </CardDescription>
+                    )}
+                </CardHeader>
+
+                <CardContent className={classNames?.content}>
+                    <AuthForm
+                        callbackURL={callbackURL}
+                        classNames={classNames?.form}
+                        localization={localization}
+                        redirectTo={redirectTo}
+                        socialLayout={socialLayout}
+                        view={view}
+                    />
+                </CardContent>
+            </Card>
+        )
+    }
+
     const description =
         !credentials && !magicLink
             ? localization.disabledCredentialsDescription

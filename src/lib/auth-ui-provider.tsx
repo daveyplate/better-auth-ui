@@ -149,6 +149,11 @@ export type AuthUIContextType = {
      */
     passkey?: boolean
     /**
+     * Enable or disable two-factor authentication support
+     * @default false
+     */
+    twoFactor?: boolean
+    /**
      * Enable or disable persisting the client with better-auth-tanstack
      * @default false
      */
@@ -272,6 +277,8 @@ export const AuthUIProvider = ({
     mutators,
     localization,
     nameRequired = true,
+    passkey,
+    twoFactor,
     settingsFields = ["name"],
     signUp = true,
     signUpFields = ["name"],
@@ -350,6 +357,7 @@ export const AuthUIProvider = ({
                 viewPaths: { ...authViewPaths, ...viewPaths },
                 uploadAvatar,
                 Link,
+                twoFactor,
                 ...props
             }}
         >
