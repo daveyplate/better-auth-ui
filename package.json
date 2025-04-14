@@ -136,6 +136,7 @@
     },
     "packageManager": "pnpm@10.7.1",
     "dependencies": {
+        "@radix-ui/react-switch": "^1.1.4",
         "input-otp": "^1.4.2"
     }
 }
