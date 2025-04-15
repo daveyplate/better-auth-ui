@@ -274,7 +274,7 @@ export function TwoFactorCard({
             <Switch
               id="two-factor-toggle"
               checked={twoFactorEnabled}
-              onCheckedChange={(checked) => {
+              onCheckedChange={(checked: boolean) => {
                 if (checked) {
                   handleEnableClick();
                 } else {

@@ -249,6 +249,16 @@ export function SettingsCards({ className, classNames, localization }: SettingsC
                         />
                     )}
 
+                    {twoFactor && (
+                        <TwoFactorCard
+                            isPending={sessionPending}
+                            classNames={classNames?.card}
+                            localization={localization}
+                            twoFactorEnabled={(sessionData?.user as any)?.twoFactorEnabled}
+                            skipHook
+                        />
+                    )}
+
                     <SessionsCard
                         classNames={classNames?.card}
                         isPending={sessionsPending}
@@ -264,16 +274,6 @@ export function SettingsCards({ className, classNames, localization }: SettingsC
                             classNames={classNames?.card}
                             isPending={sessionPending}
                             localization={localization}
-                            skipHook
-                        />
-                    )}
-
-                    {twoFactor && (
-                        <TwoFactorCard
-                            isPending={sessionPending}
-                            classNames={classNames?.card}
-                            localization={localization}
-                            twoFactorEnabled={(sessionData?.user as any)?.twoFactorEnabled}
                             skipHook
                         />
                     )}

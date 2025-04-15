@@ -1,0 +1,84 @@
+---
+title: <TwoFactorCard />
+---
+
+The `<TwoFactorCard />` provides a secure interface for managing two-factor authentication (2FA), allowing users to enable or disable 2FA with password confirmation. It handles the complete setup flow including QR code scanning and backup codes generation.
+
+<img alt="Two Factor Card" src="/screenshots/two-factor-card-dark.png" className="rounded-xl hidden dark:block w-lg mt-0 mb-0" />
+<img alt="Two Factor Card" src="/screenshots/two-factor-card-light.png" className="rounded-xl dark:hidden w-lg mt-0 mb-0" />
+
+## Usage
+
+Here's how you can include `<TwoFactorCard />` in your settings page:
+
+```tsx
+import { TwoFactorCard } from "@daveyplate/better-auth-ui"
+
+export default function SettingsPage() {
+    return (
+        <div className="flex flex-col gap-6">
+            <TwoFactorCard />
+        </div>
+    )
+}
+```
+
+This component automatically handles the complete 2FA workflow through the [`AuthUIProvider`](/components/auth-ui-provider), including QR code generation, verification, and backup codes management.
+
+## Reference
+
+The following props can be utilized to customize `<TwoFactorCard />`:
+
+<AutoTypeTable path="../src/components/settings/two-factor-card.tsx" name="TwoFactorCardProps" />
+
+## Styling
+
+Customize the component appearance using Tailwind CSS classes through the `classNames` prop:
+
+```tsx
+<TwoFactorCard
+    classNames={{
+        base: "border-primary shadow",
+        header: "bg-primary-foreground",
+        title: "text-primary font-semibold text-xl",
+        description: "text-muted-foreground",
+        content: "bg-background",
+        footer: "bg-muted",
+        button: "bg-primary hover:bg-primary-foreground",
+        instructions: "text-muted-foreground"
+    }}
+/>
+```
+
+### Manual state control
+
+For advanced use cases, you can manually control the 2FA state:
+
+```tsx
+<TwoFactorCard
+    skipHook
+    twoFactorEnabled={user.twoFactorEnabled}
+    refetch={refetchUserData}
+/>
+```
+
+---
+
+## Localization
+
+Customize the displayed text through the localization prop:
+
+```tsx
+<TwoFactorCard
+    localization={{
+        twoFactor: "Two-Factor Authentication",
+        twoFactorDescription: "Add an extra layer of security to your account",
+        twoFactorEnabledInstructions: "Scan the QR code with your authenticator app",
+        twoFactorDisableInstructions: "Enter your password to disable 2FA",
+        confirmPassword: "Confirm Password",
+        passwordRequired: "Password is required",
+        twoFactorEnabled: "Two-factor authentication enabled",
+        twoFactorDisabled: "Two-factor authentication disabled"
+    }}
+/>
+``` 
