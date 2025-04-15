@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { Loader2 } from "lucide-react"
 import { useCallback, useContext, useEffect, useRef, useState } from "react"
@@ -13,6 +13,7 @@ import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 
 import type { SocialProvider } from "better-auth/social-providers"
+import type { AuthClient } from "../../types/auth-client"
 import { PasswordInput } from "../password-input"
 import { TwoFactorPrompt } from "../two-factor/two-factor-prompt"
 import { TwoFactorQR } from "../two-factor/two-factor-qr"
@@ -96,42 +97,42 @@ export function AuthForm({
     username: usernamePlugin,
     viewPaths,
     onSessionChange,
-    Link,
-  } = useContext(AuthUIContext);
+    Link
+  } = useContext(AuthUIContext)
 
   const {
     data: sessionData,
     error: sessionError,
     isPending: sessionPending,
-    refetch: refetchSession,
-  } = useSession();
+    refetch: refetchSession
+  } = useSession()
 
-  localization = { ...authLocalization, ...localization };
+  localization = { ...authLocalization, ...localization }
 
-  const isRestoring = useIsRestoring?.();
+  const isRestoring = useIsRestoring?.()
 
-  const signingOut = useRef(false);
-  const isRedirecting = useRef(false);
-  const checkingResetPasswordToken = useRef(false);
+  const signingOut = useRef(false)
+  const isRedirecting = useRef(false)
+  const checkingResetPasswordToken = useRef(false)
 
   if (socialLayout === "auto") {
     socialLayout = !credentials
       ? "vertical"
       : providers && providers.length > 2
         ? "horizontal"
-        : "vertical";
+        : "vertical"
   }
 
-  const path = pathname?.split("/").pop();
+  const path = pathname?.split("/").pop()
 
   if (path && !Object.values(viewPaths).includes(path)) {
-    console.error(`Invalid auth view: ${path}`);
+    console.error(`Invalid auth view: ${path}`)
   }
 
   view =
     view ||
     ((Object.entries(viewPaths).find(([_, value]) => value === path)?.[0] ||
-      "signIn") as AuthView);
+      "signIn") as AuthView)
 
   const getRedirectTo = useCallback(
     () =>
@@ -139,7 +140,7 @@ export function AuthForm({
       new URLSearchParams(window.location.search).get("redirectTo") ||
       defaultRedirectTo,
     [defaultRedirectTo, redirectTo]
-  );
+  )
 
   const getCallbackURL = useCallback(
     () =>
@@ -150,70 +151,69 @@ export function AuthForm({
           : getRedirectTo())
       }`,
     [baseURL, callbackURL, persistClient, viewPaths, basePath, getRedirectTo]
-  );
+  )
 
   const onSuccess = useCallback(async () => {
-    setIsLoading(true);
+    setIsLoading(true)
 
-    await refetchSession?.();
-    await onSessionChange?.();
+    await refetchSession?.()
+    await onSessionChange?.()
 
-    navigate(getRedirectTo());
-    setIsLoading(false);
-  }, [refetchSession, onSessionChange, navigate, getRedirectTo]);
+    navigate(getRedirectTo())
+    setIsLoading(false)
+  }, [refetchSession, onSessionChange, navigate, getRedirectTo])
 
   const formAction = async (formData: FormData) => {
-    const provider = formData.get("provider") as SocialProvider;
+    const provider = formData.get("provider") as SocialProvider
 
     if (provider) {
       const { error } = await authClient.signIn.social({
         provider,
-        callbackURL: getCallbackURL(),
-      });
+        callbackURL: getCallbackURL()
+      })
 
       if (error) {
-        toast({ variant: "error", message: error.message || error.statusText });
+        toast({ variant: "error", message: error.message || error.statusText })
       } else {
-        setIsLoading(true);
+        setIsLoading(true)
       }
 
-      return;
+      return
     }
 
-    const otherProvider = formData.get("otherProvider") as string;
+    const otherProvider = formData.get("otherProvider") as string
 
     if (otherProvider) {
       // @ts-ignore
       const { error } = await authClient.signIn.oauth2({
         providerId: otherProvider,
-        callbackURL: getCallbackURL(),
-      });
+        callbackURL: getCallbackURL()
+      })
 
       if (error) {
-        toast({ variant: "error", message: error.message || error.statusText });
+        toast({ variant: "error", message: error.message || error.statusText })
       } else {
-        setIsLoading(true);
+        setIsLoading(true)
       }
 
-      return;
+      return
     }
 
     if (formData.get("passkey")) {
-      // @ts-ignore passkey is added by the passkey plugin
-      const response = await authClient.signIn.passkey();
-      const error = response?.error;
+      const response = await (authClient as AuthClient).signIn.passkey()
+      const error = response?.error
       if (error) {
-        toast({ variant: "error", message: error.message || error.statusText });
+        toast({ variant: "error", message: error.message || error.statusText })
       } else {
-        onSuccess();
+        onSuccess()
       }
 
-      return;
+      return
     }
 
-    let email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const name = formData.get("name") || ("" as string);
+    let email = formData.get("email") as string
+    const password = formData.get("password") as string
+    const name = formData.get("name") || ("" as string)
 
     switch (view) {
       case "signIn": {
@@ -221,103 +221,85 @@ export function AuthForm({
           // @ts-expect-error Optional plugin
           const { error } = await authClient.signIn.magicLink({
             email,
-            callbackURL: getCallbackURL(),
-          });
+            callbackURL: getCallbackURL()
+          })
 
           if (error) {
-            toast({
-              variant: "error",
-              message: error.message || error.statusText,
-            });
+            toast({ variant: "error", message: error.message || error.statusText })
           } else {
-            toast({
-              variant: "success",
-              message: localization.magicLinkEmail!,
-            });
+            toast({ variant: "success", message: localization.magicLinkEmail! })
           }
 
-          return;
+          return
         }
 
         const params = {
           password,
-          rememberMe: !rememberMe || formData.has("rememberMe"),
-        };
+          rememberMe: !rememberMe || formData.has("rememberMe")
+        }
 
         if (usernamePlugin) {
-          const username = formData.get("username") as string;
+          const username = formData.get("username") as string
 
           if (isValidEmail(username)) {
-            email = username;
+            email = username
           } else {
             // @ts-expect-error Optional plugin
             const { error } = await authClient.signIn.username({
               username,
-              ...params,
-            });
+              ...params
+            })
 
             if (error) {
-              toast({
-                variant: "error",
-                message: error.message || error.statusText,
-              });
+              toast({ variant: "error", message: error.message || error.statusText })
             } else {
-              onSuccess();
+              onSuccess()
             }
 
-            return;
+            return
           }
         }
 
         // Handle sign-in with 2FA support
         const { data, error } = await authClient.signIn.email({
           email,
-          ...params,
-        });
+          ...params
+        })
 
         if (error) {
-          toast({
-            variant: "error",
-            message: error.message || error.statusText,
-          });
+          toast({ variant: "error", message: error.message || error.statusText })
         } else if ((data as SignInResponseWithTwoFactor)?.twoFactorRedirect) {
           // Redirect to 2FA verification screen if required
-          navigate(`${basePath}/${viewPaths.twoFactorPrompt}`);
+          navigate(`${basePath}/${viewPaths.twoFactorPrompt}`)
         } else {
-          onSuccess();
+          onSuccess()
         }
 
-        break;
+        break
       }
 
       case "magicLink": {
         // @ts-expect-error Optional plugin
         const { error } = await authClient.signIn.magicLink({
           email,
-          callbackURL: getCallbackURL(),
-        });
+          callbackURL: getCallbackURL()
+        })
 
         if (error) {
-          toast({
-            variant: "error",
-            message: error.message || error.statusText,
-          });
+          toast({ variant: "error", message: error.message || error.statusText })
         } else {
-          toast({ variant: "success", message: localization.magicLinkEmail! });
+          toast({ variant: "success", message: localization.magicLinkEmail! })
         }
 
-        break;
+        break
       }
 
       case "signUp": {
         if (confirmPasswordEnabled) {
-          const confirmPassword = formData.get("confirmPassword") as string;
+          const confirmPassword = formData.get("confirmPassword") as string
           if (password !== confirmPassword) {
-            toast({
-              variant: "error",
-              message: localization.passwordsDoNotMatch!,
-            });
-            return;
+            toast({ variant: "error", message: localization.passwordsDoNotMatch! })
+            return
           }
         }
 
@@ -325,28 +307,28 @@ export function AuthForm({
           email,
           password,
           name,
-          callbackURL: getCallbackURL(),
-        } as Record<string, unknown>;
+          callbackURL: getCallbackURL()
+        } as Record<string, unknown>
 
         if (usernamePlugin) {
-          params.username = formData.get("username");
+          params.username = formData.get("username")
         }
 
         signUpFields?.map((field) => {
-          if (field === "name") return;
+          if (field === "name") return
 
-          const additionalField = additionalFields?.[field];
-          if (!additionalField) return;
+          const additionalField = additionalFields?.[field]
+          if (!additionalField) return
 
           if (formData.has(field)) {
-            const value = formData.get(field) as string;
+            const value = formData.get(field) as string
 
             if (additionalField.validate && !additionalField.validate(value)) {
               toast({
                 variant: "error",
-                message: `${localization.failedToValidate} ${field}`,
-              });
-              return;
+                message: `${localization.failedToValidate} ${field}`
+              })
+              return
             }
 
             params[field] =
@@ -354,107 +336,89 @@ export function AuthForm({
                 ? Number.parseFloat(value)
                 : additionalField.type === "boolean"
                   ? value === "on"
-                  : value;
+                  : value
           }
-        });
+        })
 
         // @ts-ignore
-        const { data, error } = await authClient.signUp.email(params);
+        const { data, error } = await authClient.signUp.email(params)
 
         if (error) {
-          toast({
-            variant: "error",
-            message: error.message || error.statusText,
-          });
+          toast({ variant: "error", message: error.message || error.statusText })
         } else if (data.token) {
-          onSuccess();
+          onSuccess()
         } else {
-          navigate(`${basePath}/${viewPaths.signIn}`);
-          toast({ variant: "success", message: localization.signUpEmail! });
+          navigate(`${basePath}/${viewPaths.signIn}`)
+          toast({ variant: "success", message: localization.signUpEmail! })
         }
 
-        break;
+        break
       }
 
       case "forgotPassword": {
         const { error } = await authClient.forgetPassword({
           email: email,
-          redirectTo: `${baseURL}${basePath}/${viewPaths.resetPassword}`,
-        });
+          redirectTo: `${baseURL}${basePath}/${viewPaths.resetPassword}`
+        })
 
         if (error) {
-          toast({
-            variant: "error",
-            message: error.message || error.statusText,
-          });
+          toast({ variant: "error", message: error.message || error.statusText })
         } else {
-          toast({
-            variant: "success",
-            message: localization.forgotPasswordEmail!,
-          });
-          navigate(`${basePath}/${viewPaths.signIn}`);
+          toast({ variant: "success", message: localization.forgotPasswordEmail! })
+          navigate(`${basePath}/${viewPaths.signIn}`)
         }
 
-        break;
+        break
       }
 
       case "resetPassword": {
         if (confirmPasswordEnabled) {
-          const confirmPassword = formData.get("confirmPassword") as string;
+          const confirmPassword = formData.get("confirmPassword") as string
           if (password !== confirmPassword) {
-            toast({
-              variant: "error",
-              message: localization.passwordsDoNotMatch!,
-            });
-            return;
+            toast({ variant: "error", message: localization.passwordsDoNotMatch! })
+            return
           }
         }
 
-        const searchParams = new URLSearchParams(window.location.search);
-        const token = searchParams.get("token") as string;
+        const searchParams = new URLSearchParams(window.location.search)
+        const token = searchParams.get("token") as string
 
         const { error } = await authClient.resetPassword({
           newPassword: password,
-          token,
-        });
+          token
+        })
 
         if (error) {
-          toast({
-            variant: "error",
-            message: error.message || error.statusText,
-          });
+          toast({ variant: "error", message: error.message || error.statusText })
         } else {
-          toast({
-            variant: "success",
-            message: localization.resetPasswordSuccess!,
-          });
-          navigate(`${basePath}/${viewPaths.signIn}`);
+          toast({ variant: "success", message: localization.resetPasswordSuccess! })
+          navigate(`${basePath}/${viewPaths.signIn}`)
         }
 
-        break;
+        break
       }
 
       case "twoFactorPrompt": {
-        const code = formData.get("twoFactorCode") as string;
-        const trustDevice = formData.has("trustDevice");
-        const isBackupCode = formData.has("isBackupCode");
+        const code = formData.get("twoFactorCode") as string
+        const trustDevice = formData.has("trustDevice")
+        const isBackupCode = formData.has("isBackupCode")
 
         // Validate code format before sending to API
         if (isBackupCode && !/^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$/.test(code)) {
           toast({
             variant: "error",
             message:
-              localization.invalidTwoFactorCode || "Invalid backup code format",
-          });
-          return;
+              localization.invalidTwoFactorCode || "Invalid backup code format"
+          })
+          return
         } else if (!isBackupCode && !/^[0-9]{6}$/.test(code)) {
           toast({
             variant: "error",
             message:
               localization.invalidTwoFactorCode ||
-              "Invalid authentication code format",
-          });
-          return;
+              "Invalid authentication code format"
+          })
+          return
         }
 
         if (isBackupCode) {
@@ -462,40 +426,40 @@ export function AuthForm({
           // @ts-expect-error Optional plugin
           const { error } = await authClient.twoFactor.verifyBackupCode({
             code,
-            trustDevice,
-          });
+            trustDevice
+          })
 
           if (error) {
             toast({
               variant: "error",
-              message: error.message || error.statusText,
-            });
+              message: error.message || error.statusText
+            })
           } else {
-            onSuccess();
+            onSuccess()
           }
         } else {
           // Using TOTP code
           // @ts-expect-error Optional plugin
           const { error } = await authClient.twoFactor.verifyTotp({
             code,
-            trustDevice,
-          });
+            trustDevice
+          })
 
           if (error) {
             toast({
               variant: "error",
-              message: error.message || error.statusText,
-            });
+              message: error.message || error.statusText
+            })
           } else {
-            onSuccess();
+            onSuccess()
           }
         }
 
-        break;
+        break
       }
 
       case "twoFactorSetup": {
-        const code = formData.get("twoFactorCode") as string;
+        const code = formData.get("twoFactorCode") as string
 
         // Validate code format before sending to API
         if (!/^[0-9]{6}$/.test(code)) {
@@ -503,210 +467,195 @@ export function AuthForm({
             variant: "error",
             message:
               localization.invalidTwoFactorCode ||
-              "Invalid authentication code format",
-          });
-          return;
+              "Invalid authentication code format"
+          })
+          return
         }
 
         // Use the proper method for verifying during setup
         // @ts-expect-error Optional plugin
         const response = await authClient.twoFactor.verifyTotp({
-          code,
-        });
+          code
+        })
 
-        const { error } = response || {};
+        const { error } = response || {}
 
         if (error) {
           toast({
             variant: "error",
-            message: error.message || error.statusText,
-          });
+            message: error.message || error.statusText
+          })
         } else {
           // Afficher un message de succès et rediriger
           toast({
             variant: "success",
-            message: localization.twoFactorEnabled!,
-          });
-          setTwoFactorUrl("");
+            message: localization.twoFactorEnabled!
+          })
+          setTwoFactorUrl("")
 
           // Check if we need to refresh session data after setup
           const shouldRefresh =
             sessionStorage.getItem("shouldRefreshAfterTwoFactorSetup") ===
-            "true";
+            "true"
           if (shouldRefresh) {
-            sessionStorage.removeItem("shouldRefreshAfterTwoFactorSetup");
+            sessionStorage.removeItem("shouldRefreshAfterTwoFactorSetup")
 
             // Determine which refetch function to use
             const refetchFunction = sessionStorage.getItem(
               "twoFactorRefetchFunction"
-            );
-            sessionStorage.removeItem("twoFactorRefetchFunction");
+            )
+            sessionStorage.removeItem("twoFactorRefetchFunction")
 
             // Always refresh session data
-            await refetchSession?.();
-            await onSessionChange?.();
+            await refetchSession?.()
+            await onSessionChange?.()
           }
 
-          navigate(getRedirectTo());
+          navigate(getRedirectTo())
         }
 
-        break;
+        break
       }
     }
-  };
+  }
 
   const handleTwoFactorComplete = async (
     code: string,
     trustDevice: boolean = false,
     isBackupCode: boolean = false
   ) => {
-    if (!code) return;
+    if (!code) return
 
     // Prevent multiple submissions of the same code
-    if (isLoading) return;
+    if (isLoading) return
 
-    setIsLoading(true);
+    setIsLoading(true)
     try {
       if (isBackupCode) {
         // Using backup code
         // @ts-expect-error Optional plugin
         const { error } = await authClient.twoFactor.verifyBackupCode({
           code,
-          trustDevice,
-        });
+          trustDevice
+        })
 
         if (error) {
           toast({
             variant: "error",
-            message: error.message || error.statusText,
-          });
+            message: error.message || error.statusText
+          })
         } else {
-          onSuccess();
+          onSuccess()
         }
       } else {
         // Using TOTP code
         // @ts-expect-error Optional plugin
         const { error } = await authClient.twoFactor.verifyTotp({
           code,
-          trustDevice,
-        });
+          trustDevice
+        })
 
         if (error) {
           toast({
             variant: "error",
-            message: error.message || error.statusText,
-          });
+            message: error.message || error.statusText
+          })
         } else {
-          onSuccess();
+          onSuccess()
         }
       }
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
     if (view !== "signOut") {
-      signingOut.current = false;
+      signingOut.current = false
     }
 
     if (view !== "callback") {
-      isRedirecting.current = false;
+      isRedirecting.current = false
     }
-  }, [view]);
+  }, [view])
 
   useEffect(() => {
-    if (view !== "signOut" || signingOut.current) return;
+    if (view !== "signOut" || signingOut.current) return
 
-    signingOut.current = true;
+    signingOut.current = true
     authClient.signOut().finally(async () => {
-      await refetchSession?.();
-      await onSessionChange?.();
-      replace(`${basePath}/${viewPaths.signIn}`);
-    });
-  }, [
-    view,
-    authClient,
-    onSessionChange,
-    refetchSession,
-    replace,
-    basePath,
-    viewPaths,
-  ]);
+      await refetchSession?.()
+      await onSessionChange?.()
+      replace(`${basePath}/${viewPaths.signIn}`)
+    })
+  }, [view, authClient, onSessionChange, refetchSession, replace, basePath, viewPaths])
 
   useEffect(() => {
-    if (view !== "resetPassword" || checkingResetPasswordToken.current) return;
+    if (view !== "resetPassword" || checkingResetPasswordToken.current) return
 
-    checkingResetPasswordToken.current = true;
+    checkingResetPasswordToken.current = true
 
-    const searchParams = new URLSearchParams(window.location.search);
-    const token = searchParams.get("token");
+    const searchParams = new URLSearchParams(window.location.search)
+    const token = searchParams.get("token")
     if (!token || token === "INVALID_TOKEN") {
-      navigate(`${basePath}/${viewPaths.signIn}`);
+      navigate(`${basePath}/${viewPaths.signIn}`)
       setTimeout(() => {
-        toast({
-          variant: "error",
-          message: localization.resetPasswordInvalidToken!,
-        });
-        checkingResetPasswordToken.current = false;
-      }, 100);
+        toast({ variant: "error", message: localization.resetPasswordInvalidToken! })
+        checkingResetPasswordToken.current = false
+      }, 100)
     }
-  }, [basePath, view, viewPaths, navigate, localization, toast]);
+  }, [basePath, view, viewPaths, navigate, localization, toast])
 
   useEffect(() => {
     if (view === "magicLink" && !magicLink) {
-      replace(`${basePath}/${viewPaths.signIn}`);
+      replace(`${basePath}/${viewPaths.signIn}`)
     }
 
     if (view === "signUp" && !signUp) {
-      replace(`${basePath}/${viewPaths.signIn}`);
+      replace(`${basePath}/${viewPaths.signIn}`)
     }
 
-    if (
-      ["signUp", "forgotPassword", "resetPassword"].includes(view) &&
-      !credentials
-    ) {
-      replace(`${basePath}/${viewPaths.signIn}`);
+    if (["signUp", "forgotPassword", "resetPassword"].includes(view) && !credentials) {
+      replace(`${basePath}/${viewPaths.signIn}`)
     }
-  }, [basePath, view, viewPaths, credentials, replace, signUp, magicLink]);
+  }, [basePath, view, viewPaths, credentials, replace, signUp, magicLink])
 
   useEffect(() => {
-    if (view !== "callback" || isRedirecting.current) return;
+    if (view !== "callback" || isRedirecting.current) return
 
     if (!persistClient) {
-      replace(getRedirectTo());
-      return;
+      replace(getRedirectTo())
+      return
     }
 
-    if (isRestoring) return;
+    if (isRestoring) return
 
-    isRedirecting.current = true;
+    isRedirecting.current = true
 
-    onSuccess();
-  }, [isRestoring, view, replace, persistClient, getRedirectTo, onSuccess]);
+    onSuccess()
+  }, [isRestoring, view, replace, persistClient, getRedirectTo, onSuccess])
 
   useEffect(() => {
     if (view === "twoFactorSetup" && !twoFactorUrl) {
       // Retrieve URI from sessionStorage (stored by TwoFactorCard)
-      const storedUri = sessionStorage.getItem("twoFactorSetupURI");
+      const storedUri = sessionStorage.getItem("twoFactorSetupURI")
       if (storedUri) {
-        setTwoFactorUrl(storedUri);
+        setTwoFactorUrl(storedUri)
         // Clean up after use
-        sessionStorage.removeItem("twoFactorSetupURI");
+        sessionStorage.removeItem("twoFactorSetupURI")
       } else {
         // Fallback to enable method if URI is not found in sessionStorage
         // @ts-expect-error Optional plugin
         authClient.twoFactor.enable().then((response) => {
           if (!response.error && response.data?.totpURI) {
-            setTwoFactorUrl(response.data.totpURI);
+            setTwoFactorUrl(response.data.totpURI)
           }
-        });
+        })
       }
     }
-  }, [view, authClient, twoFactorUrl]);
+  }, [view, authClient, twoFactorUrl])
 
-  if (["signOut", "callback"].includes(view))
-    return <Loader2 className="animate-spin" />;
+  if (["signOut", "callback"].includes(view)) return <Loader2 className="animate-spin" />
 
   if (view === "twoFactorPrompt" || view === "twoFactorSetup") {
     return (
@@ -724,29 +673,26 @@ export function AuthForm({
           error={sessionError?.message}
           isSubmitting={isLoading}
           onSubmit={(code, trustDevice) => {
-            const formData = new FormData();
-            formData.append("twoFactorCode", code);
+            const formData = new FormData()
+            formData.append("twoFactorCode", code)
             if (trustDevice) {
-              formData.append("trustDevice", "true");
+              formData.append("trustDevice", "true")
             }
             if (isBackupCode) {
-              formData.append("isBackupCode", "true");
+              formData.append("isBackupCode", "true")
             }
-            formAction(formData);
+            formAction(formData)
           }}
           onBackupCodeToggle={setIsBackupCode}
           localization={localization}
           isSetup={view === "twoFactorSetup"}
         />
       </form>
-    );
+    )
   }
 
   return (
-    <form
-      action={formAction}
-      className={cn("grid w-full gap-6", className, classNames?.base)}
-    >
+    <form action={formAction} className={cn("grid w-full gap-6", className, classNames?.base)}>
       {credentials &&
         view === "signUp" &&
         (nameRequired || signUpFields?.includes("name")) && (
@@ -840,26 +786,25 @@ export function AuthForm({
             />
           </div>
 
-          {confirmPasswordEnabled &&
-            ["signUp", "resetPassword"].includes(view) && (
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label className={classNames?.label} htmlFor="password">
-                    {localization.confirmPassword}
-                  </Label>
-                </div>
-
-                <PasswordInput
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  autoComplete="new-password"
-                  className={classNames?.input}
-                  enableToggle
-                  placeholder={localization.confirmPasswordPlaceholder}
-                  required
-                />
+          {confirmPasswordEnabled && ["signUp", "resetPassword"].includes(view) && (
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label className={classNames?.label} htmlFor="password">
+                  {localization.confirmPassword}
+                </Label>
               </div>
-            )}
+
+              <PasswordInput
+                id="confirmPassword"
+                name="confirmPassword"
+                autoComplete="new-password"
+                className={classNames?.input}
+                enableToggle
+                placeholder={localization.confirmPasswordPlaceholder}
+                required
+              />
+            </div>
+          )}
         </>
       )}
 
@@ -875,11 +820,11 @@ export function AuthForm({
         signUpFields
           ?.filter((field) => field !== "name")
           .map((field) => {
-            const additionalField = additionalFields?.[field];
+            const additionalField = additionalFields?.[field]
 
             if (!additionalField) {
-              console.error(`Invalid additional field: ${field}`);
-              return null;
+              console.error(`Invalid additional field: ${field}`)
+              return null
             }
 
             return additionalField.type === "boolean" ? (
@@ -914,12 +859,11 @@ export function AuthForm({
                   type={additionalField?.type === "number" ? "number" : "text"}
                 />
               </div>
-            );
+            )
           })}
 
       <div className="flex flex-col gap-4">
-        {(credentials ||
-          (["signIn", "magicLink"].includes(view) && magicLink)) && (
+        {(credentials || (["signIn", "magicLink"].includes(view) && magicLink)) && (
           <ActionButton
             authView={view}
             className={classNames?.actionButton}
@@ -962,8 +906,8 @@ export function AuthForm({
               {providers?.map((provider) => {
                 const socialProvider = socialProviders.find(
                   (socialProvider) => socialProvider.provider === provider
-                );
-                if (!socialProvider) return null;
+                )
+                if (!socialProvider) return null
 
                 return (
                   <ProviderButton
@@ -974,7 +918,7 @@ export function AuthForm({
                     socialLayout={socialLayout}
                     provider={socialProvider}
                   />
-                );
+                )
               })}
 
               {otherProviders?.map((provider) => (
@@ -1000,5 +944,5 @@ export function AuthForm({
         />
       )}
     </form>
-  );
+  )
 }
