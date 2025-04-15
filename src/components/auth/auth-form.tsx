@@ -14,7 +14,7 @@ import { Label } from "../ui/label";
 
 import type { SocialProvider } from "better-auth/social-providers";
 import { PasswordInput } from "../password-input";
-import { TwoFactorInput } from "../two-factor/two-factor-input";
+import { TwoFactorPrompt } from "../two-factor/two-factor-prompt";
 import { TwoFactorQR } from "../two-factor/two-factor-qr";
 import { Separator } from "../ui/separator";
 import { ActionButton } from "./action-button";
@@ -67,9 +67,8 @@ export function AuthForm({
   view?: AuthView;
 }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [twoFactorCode, setTwoFactorCode] = useState("");
-  const [isBackupCode, setIsBackupCode] = useState(false);
   const [twoFactorUrl, setTwoFactorUrl] = useState<string>("");
+  const [isBackupCode, setIsBackupCode] = useState(false);
 
   const {
     additionalFields,
@@ -438,16 +437,17 @@ export function AuthForm({
       case "twoFactorPrompt": {
         const code = formData.get("twoFactorCode") as string;
         const trustDevice = formData.has("trustDevice");
+        const isBackupCode = formData.has("isBackupCode");
 
         // Validate code format before sending to API
-        if (formData.has("isBackupCode") && !/^[a-zA-Z0-9]{10}$/.test(code)) {
+        if (isBackupCode && !/^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$/.test(code)) {
           toast({
             variant: "error",
             message:
               localization.invalidTwoFactorCode || "Invalid backup code format",
           });
           return;
-        } else if (!formData.has("isBackupCode") && !/^[0-9]{6}$/.test(code)) {
+        } else if (!isBackupCode && !/^[0-9]{6}$/.test(code)) {
           toast({
             variant: "error",
             message:
@@ -457,7 +457,7 @@ export function AuthForm({
           return;
         }
 
-        if (formData.has("isBackupCode")) {
+        if (isBackupCode) {
           // Using backup code
           // @ts-expect-error Optional plugin
           const { error } = await authClient.twoFactor.verifyBackupCode({
@@ -527,7 +527,7 @@ export function AuthForm({
             variant: "success",
             message: localization.twoFactorEnabled!,
           });
-          setTwoFactorCode("");
+          setTwoFactorUrl("");
 
           // Check if we need to refresh session data after setup
           const shouldRefresh =
@@ -552,11 +552,56 @@ export function AuthForm({
 
         break;
       }
+    }
+  };
 
-      case "twoFactorRecovery": {
-        // Handled by the TwoFactorRecovery component
-        break;
+  const handleTwoFactorComplete = async (
+    code: string,
+    trustDevice: boolean = false,
+    isBackupCode: boolean = false
+  ) => {
+    if (!code) return;
+
+    // Prevent multiple submissions of the same code
+    if (isLoading) return;
+
+    setIsLoading(true);
+    try {
+      if (isBackupCode) {
+        // Using backup code
+        // @ts-expect-error Optional plugin
+        const { error } = await authClient.twoFactor.verifyBackupCode({
+          code,
+          trustDevice,
+        });
+
+        if (error) {
+          toast({
+            variant: "error",
+            message: error.message || error.statusText,
+          });
+        } else {
+          onSuccess();
+        }
+      } else {
+        // Using TOTP code
+        // @ts-expect-error Optional plugin
+        const { error } = await authClient.twoFactor.verifyTotp({
+          code,
+          trustDevice,
+        });
+
+        if (error) {
+          toast({
+            variant: "error",
+            message: error.message || error.statusText,
+          });
+        } else {
+          onSuccess();
+        }
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -670,57 +715,29 @@ export function AuthForm({
         className={cn("grid w-full gap-6", className, classNames?.base)}
       >
         {view === "twoFactorSetup" && twoFactorUrl && (
-          <>
-            <div className="flex justify-center py-2">
-              <TwoFactorQR uri={twoFactorUrl} localization={localization} />
-            </div>
-          </>
+          <div className="flex justify-center py-2 mb-6">
+            <TwoFactorQR uri={twoFactorUrl} localization={localization} />
+          </div>
         )}
 
-        <div className="grid gap-2">
-          <Label className={classNames?.label} htmlFor="twoFactorCode">
-            {isBackupCode
-              ? localization.enterBackupCode
-              : localization.enterTwoFactorCode}
-          </Label>
-
-          <TwoFactorInput
-            id="twoFactorCode"
-            name="twoFactorCode"
-            value={twoFactorCode}
-            onChange={setTwoFactorCode}
-            placeholder={
-              isBackupCode
-                ? localization.backupCodePlaceholder
-                : localization.twoFactorCodePlaceholder
+        <TwoFactorPrompt
+          error={sessionError?.message}
+          isSubmitting={isLoading}
+          onSubmit={(code, trustDevice) => {
+            const formData = new FormData();
+            formData.append("twoFactorCode", code);
+            if (trustDevice) {
+              formData.append("trustDevice", "true");
             }
-            className={classNames?.input}
-            maxLength={isBackupCode ? 10 : 6}
-            onComplete={() => {
-              const formData = new FormData();
-              formData.append("twoFactorCode", twoFactorCode);
-              formAction(formData);
-            }}
-            isBackupCode={isBackupCode}
-          />
-
-          {/* Hidden input to submit the value with the form */}
-          <input type="hidden" name="twoFactorCode" value={twoFactorCode} />
-        </div>
-
-        {view === "twoFactorPrompt" && (
-          <>
-            <div className="flex items-center gap-2">
-              <Checkbox id="trustDevice" name="trustDevice" />
-              <Label htmlFor="trustDevice" className="text-sm">
-                {localization.rememberDevice}
-              </Label>
-            </div>
-            {isBackupCode && (
-              <input type="hidden" name="isBackupCode" value="true" />
-            )}
-          </>
-        )}
+            if (isBackupCode) {
+              formData.append("isBackupCode", "true");
+            }
+            formAction(formData);
+          }}
+          onBackupCodeToggle={setIsBackupCode}
+          localization={localization}
+          isSetup={view === "twoFactorSetup"}
+        />
       </form>
     );
   }

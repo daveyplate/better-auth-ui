@@ -6,6 +6,7 @@ import { AuthUIContext } from "../../lib/auth-ui-provider";
 import { cn } from "../../lib/utils";
 import type { User } from "../../types/user";
 import { PasswordInput } from "../password-input";
+import { BackupCodesDisplay } from "../two-factor/backup-codes-display";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -24,6 +25,7 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { Label } from "../ui/label";
+import { Skeleton } from "../ui/skeleton";
 import { Switch } from "../ui/switch";
 import type { SettingsCardClassNames } from "./settings-card";
 import { ProvidersCardSkeleton } from "./skeletons/providers-card-skeleton";
@@ -75,6 +77,12 @@ export function TwoFactorCard({
   const [password, setPassword] = useState("");
   const [showDisableDialog, setShowDisableDialog] = useState(false);
   const [disablePassword, setDisablePassword] = useState("");
+  const [showBackupCodesDialog, setShowBackupCodesDialog] = useState(false);
+  const [backupCodes, setBackupCodes] = useState<string[]>([]);
+  const [isLoadingBackupCodes, setIsLoadingBackupCodes] = useState(false);
+  const [showBackupCodesPasswordDialog, setShowBackupCodesPasswordDialog] =
+    useState(false);
+  const [backupCodesPassword, setBackupCodesPassword] = useState("");
 
   // Get required context values from AuthUIContext
   const {
@@ -231,6 +239,59 @@ export function TwoFactorCard({
     }
   };
 
+  /**
+   * Handle click on the view backup codes button
+   * Opens password confirmation dialog
+   */
+  const handleViewBackupCodes = () => {
+    setShowBackupCodesPasswordDialog(true);
+  };
+
+  /**
+   * Handle password confirmation for generating backup codes
+   * Generates backup codes and displays them
+   */
+  const handleBackupCodesPasswordConfirm = async () => {
+    // Validate password is provided
+    if (!backupCodesPassword) {
+      toast({
+        variant: "error",
+        message: localization.passwordRequired || "Password is required",
+      });
+      return;
+    }
+
+    setShowBackupCodesPasswordDialog(false);
+    setIsLoadingBackupCodes(true);
+    setShowBackupCodesDialog(true);
+
+    try {
+      // @ts-expect-error Optional plugin
+      const response = await authClient.twoFactor.generateBackupCodes({
+        password: backupCodesPassword,
+      });
+
+      if (response?.error) {
+        toast({
+          variant: "error",
+          message: response.error.message || "Failed to generate backup codes",
+        });
+        setShowBackupCodesDialog(false);
+      } else if (response.data?.backupCodes) {
+        setBackupCodes(response.data.backupCodes);
+      }
+    } catch (error) {
+      toast({
+        variant: "error",
+        message: (error as Error).message || "Failed to generate backup codes",
+      });
+      setShowBackupCodesDialog(false);
+    } finally {
+      setIsLoadingBackupCodes(false);
+      setBackupCodesPassword(""); // Reset password
+    }
+  };
+
   // Show skeleton while loading
   if (isPending) {
     return (
@@ -256,6 +317,20 @@ export function TwoFactorCard({
               ? localization.twoFactorEnabledInstructions
               : localization.twoFactorDescription}
           </CardDescription>
+
+          {twoFactorEnabled && (
+            <div className="mt-4">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleViewBackupCodes}
+                disabled={isLoadingBackupCodes}
+              >
+                {localization.backupCodes || "View Backup Codes"}
+              </Button>
+            </div>
+          )}
         </CardContent>
         <CardFooter
           className={cn(
@@ -381,6 +456,98 @@ export function TwoFactorCard({
               </Button>
             </DialogFooter>
           </form>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={showBackupCodesPasswordDialog}
+        onOpenChange={setShowBackupCodesPasswordDialog}
+      >
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>{localization.confirmPassword}</DialogTitle>
+            <DialogDescription>
+              {localization.backupCodesPasswordDescription}
+            </DialogDescription>
+          </DialogHeader>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (backupCodesPassword) {
+                handleBackupCodesPasswordConfirm();
+              }
+            }}
+          >
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="backupCodesPassword">
+                  {localization.password}
+                </Label>
+                <PasswordInput
+                  id="backupCodesPassword"
+                  name="backupCodesPassword"
+                  placeholder={localization.passwordPlaceholder}
+                  value={backupCodesPassword}
+                  onChange={(e) => setBackupCodesPassword(e.target.value)}
+                  autoComplete="current-password"
+                  required
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowBackupCodesPasswordDialog(false)}
+              >
+                {localization.cancel}
+              </Button>
+              <Button type="submit" disabled={!backupCodesPassword}>
+                {localization.confirm}
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={showBackupCodesDialog}
+        onOpenChange={setShowBackupCodesDialog}
+      >
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>{localization.backupCodes}</DialogTitle>
+            <DialogDescription>
+              {localization.backupCodesDescription}
+            </DialogDescription>
+          </DialogHeader>
+
+          {isLoadingBackupCodes ? (
+            <div className="space-y-4 py-4">
+              <div className="grid grid-cols-2 gap-2">
+                {Array.from({ length: 10 }).map((_, index) => (
+                  <Skeleton key={index} className="h-10 w-full" />
+                ))}
+              </div>
+              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-4 w-full" />
+            </div>
+          ) : backupCodes.length > 0 ? (
+            <BackupCodesDisplay
+              codes={backupCodes}
+              localization={localization}
+            />
+          ) : null}
+
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowBackupCodesDialog(false)}
+            >
+              {localization.cancel || "Close"}
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>

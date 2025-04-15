@@ -26,7 +26,6 @@ export * from "./components/two-factor/backup-codes-display";
 export * from "./components/two-factor/two-factor-input";
 export * from "./components/two-factor/two-factor-prompt";
 export * from "./components/two-factor/two-factor-qr";
-export * from "./components/two-factor/two-factor-recovery";
 export * from "./components/user";
 export * from "./components/user-avatar";
 export * from "./components/user-button";

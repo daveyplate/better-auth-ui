@@ -38,6 +38,7 @@ export function TwoFactorInput({
   isBackupCode = false,
 }: TwoFactorInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const hasCompletedRef = useRef(false);
 
   // Focus the input on mount
   useEffect(() => {
@@ -48,8 +49,11 @@ export function TwoFactorInput({
 
   // Call onComplete when the code is fully entered
   useEffect(() => {
-    if (value.length === maxLength && onComplete) {
+    if (value.length === maxLength && onComplete && !hasCompletedRef.current) {
+      hasCompletedRef.current = true;
       onComplete();
+    } else if (value.length < maxLength) {
+      hasCompletedRef.current = false;
     }
   }, [value, maxLength, onComplete]);
 
@@ -72,7 +76,13 @@ export function TwoFactorInput({
           autoCapitalize="off"
           spellCheck="false"
           onKeyDown={(e) => {
-            if (e.key === "Enter" && value.length === maxLength && onComplete) {
+            if (
+              e.key === "Enter" &&
+              value.length === maxLength &&
+              onComplete &&
+              !hasCompletedRef.current
+            ) {
+              hasCompletedRef.current = true;
               onComplete();
             }
           }}

@@ -1,128 +1,112 @@
 "use client";
 
-import { useContext, useEffect, useRef, useState } from "react";
-import type { AuthLocalization } from "../../lib/auth-localization";
-import { AuthUIContext } from "../../lib/auth-ui-provider";
+import { AlertCircle, Info } from "lucide-react";
+import { useState } from "react";
+import { AuthLocalization } from "../../lib/auth-localization";
 import { cn } from "../../lib/utils";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { TwoFactorInput } from "./two-factor-input";
 
-interface TwoFactorPromptProps {
-  className?: string;
-  defaultValue?: string;
+export interface TwoFactorPromptProps {
   error?: string;
   isSubmitting?: boolean;
-  /**
-   * @default authLocalization
-   * @remarks `AuthLocalization`
-   */
-  localization?: Partial<AuthLocalization>;
-  onSubmit?: (code: string, trustDevice: boolean) => void;
+  onSubmit: (code: string, trustDevice: boolean) => void;
+  onBackupCodeToggle?: (isBackupCode: boolean) => void;
+  localization: AuthLocalization;
+  className?: string;
+  isSetup?: boolean;
 }
 
-export function TwoFactorPrompt({
-  className,
-  defaultValue = "",
+export const TwoFactorPrompt = ({
   error,
-  isSubmitting = false,
-  localization: propLocalization,
+  isSubmitting,
   onSubmit,
-}: TwoFactorPromptProps) {
-  const [code, setCode] = useState(defaultValue);
+  onBackupCodeToggle,
+  localization,
+  className,
+  isSetup = false,
+}: TwoFactorPromptProps) => {
+  const [code, setCode] = useState("");
   const [trustDevice, setTrustDevice] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
+  const [isBackupCode, setIsBackupCode] = useState(false);
 
-  const { localization: authLocalization } = useContext(AuthUIContext);
-  const localization = { ...authLocalization, ...propLocalization };
-
-  // Reset code when error occurs
-  useEffect(() => {
-    if (error) {
-      console.log("TwoFactorPrompt - Erreur reçue:", error);
-      setCode("");
+  const handleCodeChange = (newCode: string) => {
+    setCode(newCode);
+    if (newCode.length === (isBackupCode ? 11 : 6)) {
+      onSubmit(newCode, trustDevice);
     }
-  }, [error]);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(
-      "TwoFactorPrompt - Soumission du formulaire, code:",
-      code,
-      "trustDevice:",
-      trustDevice
-    );
-    onSubmit?.(code, trustDevice);
   };
 
-  // Auto-submit when code reaches 6 characters
-  const handleCodeChange = (newCode: string) => {
-    console.log("TwoFactorPrompt - Changement de code:", newCode);
-    setCode(newCode);
-    if (newCode.length === 6 && !isSubmitting && formRef.current) {
-      console.log("TwoFactorPrompt - Code complet, soumission automatique");
-      formRef.current.requestSubmit();
-    }
+  const toggleBackupCode = () => {
+    const newIsBackupCode = !isBackupCode;
+    setIsBackupCode(newIsBackupCode);
+    setCode("");
+    onBackupCodeToggle?.(newIsBackupCode);
   };
 
   return (
-    <Card className={cn("w-full max-w-md", className)}>
-      <CardHeader>
-        <CardTitle>{localization.twoFactorPrompt}</CardTitle>
-        <CardDescription>
-          {localization.twoFactorPromptDescription}
-        </CardDescription>
-      </CardHeader>
-      <form ref={formRef} onSubmit={handleSubmit}>
-        <CardContent>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="twoFactorCode">
-                {localization.enterTwoFactorCode}
-              </Label>
-              <TwoFactorInput
-                id="twoFactorCode"
-                value={code}
-                onChange={handleCodeChange}
-                placeholder={localization.twoFactorCodePlaceholder}
-                maxLength={6}
-              />
-              {error && <p className="text-sm text-destructive">{error}</p>}
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="trustDevice"
-                checked={trustDevice}
-                onCheckedChange={(checked) => {
-                  console.log(
-                    "TwoFactorPrompt - Changement de trustDevice:",
-                    checked
-                  );
-                  setTrustDevice(checked === true);
-                }}
-              />
-              <Label htmlFor="trustDevice" className="text-sm font-normal">
-                {localization.rememberDevice}
-              </Label>
-            </div>
+    <div className={cn("space-y-6", className)}>
+      <div className="space-y-2">
+        {!isSetup && (
+          <div className="flex items-center justify-between">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={toggleBackupCode}
+              className="text-xs"
+            >
+              {isBackupCode
+                ? localization.useTwoFactorCode
+                : localization.useBackupCode}
+            </Button>
           </div>
-        </CardContent>
-        {isSubmitting && (
-          <CardFooter>
-            <div className="w-full text-center text-sm text-muted-foreground">
-              {localization.verifying}
-            </div>
-          </CardFooter>
         )}
-      </form>
-    </Card>
+
+        {isBackupCode && (
+          <Alert>
+            <Info className="h-4 w-4" />
+            <AlertTitle>{localization.enterBackupCode}</AlertTitle>
+            <AlertDescription>
+              {localization.backupCodePlaceholder}
+            </AlertDescription>
+          </Alert>
+        )}
+      </div>
+
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+
+      <div className="space-y-4">
+        <TwoFactorInput
+          value={code}
+          onChange={handleCodeChange}
+          maxLength={isBackupCode ? 11 : 6}
+          isBackupCode={isBackupCode}
+        />
+
+        <div className="flex items-center space-x-2">
+          <Checkbox
+            id="trust-device"
+            checked={trustDevice}
+            onCheckedChange={(checked: boolean) => setTrustDevice(checked)}
+            disabled={isSubmitting}
+          />
+          <Label
+            htmlFor="trust-device"
+            className="text-sm text-muted-foreground"
+          >
+            {localization.rememberDevice}
+          </Label>
+        </div>
+      </div>
+    </div>
   );
-}
+};

@@ -304,8 +304,8 @@ export const authLocalization = {
   /** @default "Two-Factor Authentication" */
   twoFactorPrompt: "Two-Factor Authentication",
 
-  /** @default "Enter the authentication code from your app" */
-  twoFactorPromptDescription: "Enter the authentication code from your app",
+  /** @default "Open your authenticator app to generate a code" */
+  twoFactorPromptDescription: "Open your authenticator app to generate a code",
 
   /** @default "Two-Factor Setup" */
   twoFactorSetup: "Two-Factor Setup",
@@ -329,11 +329,15 @@ export const authLocalization = {
   /** @default "Use Backup Code" */
   useBackupCode: "Use Backup Code",
 
+  /** @default "Use Two-Factor Code" */
+  useTwoFactorCode: "Use Two-Factor Code",
+
   /** @default "Enter Backup Code" */
   enterBackupCode: "Enter Backup Code",
 
-  /** @default "Enter one of your backup codes" */
-  backupCodePlaceholder: "Enter one of your backup codes",
+  /** @default "Enter one of your backup codes. Once used, each code can only be used once and will be invalidated after use." */
+  backupCodePlaceholder:
+    "Enter one of your backup codes. Once used, each code can only be used once and will be invalidated after use.",
 
   /** @default "Two-Factor Authentication enabled successfully" */
   twoFactorEnabledSuccess: "Two-Factor Authentication enabled successfully",
@@ -355,7 +359,11 @@ export const authLocalization = {
 
   /** @default "Save these codes in a safe place for account recovery" */
   backupCodesDescription:
-    "Save these codes in a safe place for account recovery",
+    "Save these backup codes in a secure place. You can use them to access your account if you lose your two-factor authentication device.",
+
+  /** @default "Please enter your password to view your backup codes." */
+  backupCodesPasswordDescription:
+    "Please enter your password to view your backup codes.",
 
   /** @default "Two-Factor Authentication" */
   twoFactor: "Two-Factor Authentication",
@@ -495,6 +503,9 @@ export const authLocalization = {
 
   /** @default "Verifying..." */
   verifying: "Verifying...",
+
+  /** @default "Copied to clipboard" */
+  copied: "Copied to clipboard",
 };
 
 export type AuthLocalization = Partial<typeof authLocalization>;
