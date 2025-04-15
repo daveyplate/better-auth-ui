@@ -26,25 +26,25 @@ import { ProviderButton } from "./provider-button"
 // Type representing the authentication response
 // with the twoFactorRedirect property added by the 2FA plugin
 interface SignInResponseWithTwoFactor {
-  redirect?: boolean;
-  token?: string;
-  url?: string;
+  redirect?: boolean,
+  token?: string,
+  url?: string,
   user?: {
-    id: string;
-    email: string;
+    id: string,
+    email: string,
     // other user fields
-  };
-  twoFactorRedirect?: boolean;
+  },
+  twoFactorRedirect?: boolean
 }
 
 export type AuthFormClassNames = {
-  base?: string
-  actionButton?: string
-  forgotPasswordLink?: string
-  input?: string
-  label?: string
-  description?: string
-  providerButton?: string
+  base?: string,
+  actionButton?: string,
+  forgotPasswordLink?: string,
+  input?: string,
+  label?: string,
+  description?: string,
+  providerButton?: string,
   secondaryButton?: string
 }
 
@@ -58,13 +58,13 @@ export function AuthForm({
   socialLayout = "auto",
   view
 }: {
-  className?: string
-  classNames?: AuthFormClassNames
-  callbackURL?: string
-  localization?: Partial<AuthLocalization>
-  pathname?: string
-  redirectTo?: string
-  socialLayout?: "auto" | "horizontal" | "grid" | "vertical"
+  className?: string,
+  classNames?: AuthFormClassNames,
+  callbackURL?: string,
+  localization?: Partial<AuthLocalization>,
+  pathname?: string,
+  redirectTo?: string,
+  socialLayout?: "auto" | "horizontal" | "grid" | "vertical",
   view?: AuthView
 }) {
   const [isLoading, setIsLoading] = useState(false)
