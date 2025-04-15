@@ -126,5 +126,6 @@
     },
     "pnpm": {
         "overrides": {}
-    }
+    },
+    "packageManager": "pnpm@10.7.1"
 }
