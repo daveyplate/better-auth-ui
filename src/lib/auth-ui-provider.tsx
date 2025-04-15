@@ -277,8 +277,6 @@ export const AuthUIProvider = ({
     mutators,
     localization,
     nameRequired = true,
-    passkey,
-    twoFactor,
     settingsFields = ["name"],
     signUp = true,
     signUpFields = ["name"],
@@ -357,7 +355,6 @@ export const AuthUIProvider = ({
                 viewPaths: { ...authViewPaths, ...viewPaths },
                 uploadAvatar,
                 Link,
-                twoFactor,
                 ...props
             }}
         >

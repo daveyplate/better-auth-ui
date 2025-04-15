@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
 import { useAuthenticate } from "../../hooks/use-authenticate"
 import type { AuthLocalization } from "../../lib/auth-localization"
@@ -66,7 +66,7 @@ export function SettingsCards({ className, classNames, localization }: SettingsC
     const { useListAccounts, useListDeviceSessions, useListPasskeys, useListSessions, useSession } =
         hooks
     useAuthenticate()
-    const { data: sessionData, isPending: sessionPending, refetch: refetchSession } = useSession()
+    const { data: sessionData, isPending: sessionPending } = useSession()
     const {
         data: accounts,
         isPending: accountsPending,
@@ -77,13 +77,6 @@ export function SettingsCards({ className, classNames, localization }: SettingsC
         isPending: sessionsPending,
         refetch: refetchSessions
     } = useListSessions()
-
-    // Effect to check if we need to refetch data after 2FA setup
-    useEffect(() => {
-        if (sessionStorage.getItem("twoFactorRefetchFunction") === "custom") {
-            refetchSession?.()
-        }
-    }, [refetchSession])
 
     let passkeys: { id: string; createdAt: Date }[] | undefined | null = undefined
     let passkeysPending: boolean | undefined = undefined

@@ -53,17 +53,8 @@
             }
         }
     },
-    "files": [
-        "src",
-        "dist"
-    ],
-    "keywords": [
-        "typescript",
-        "react",
-        "better-auth",
-        "shadcn",
-        "nextjs"
-    ],
+    "files": ["src", "dist"],
+    "keywords": ["typescript", "react", "better-auth", "shadcn", "nextjs"],
     "author": "daveycodez",
     "license": "MIT",
     "devDependencies": {
@@ -91,7 +82,6 @@
         "lucide-react": "^0.487.0",
         "next": "^15.2.4",
         "nodemon": "^3.1.9",
-        "qrcode.react": "^4.2.0",
         "react-router": "^7.5.0",
         "tailwind-merge": "^3.2.0",
         "tailwindcss-animate": "^1.0.7",
@@ -123,21 +113,18 @@
         "class-variance-authority": ">=0.7.0",
         "clsx": ">=2.1.0",
         "lucide-react": ">=0.469.0",
-        "qrcode.react": ">=3.0.0",
+        "qrcode.react": "^4.2.0",
         "react": ">=18.0.0",
         "react-dom": ">=18.0.0",
         "sonner": ">=1.7.0",
         "tailwind-merge": ">=2.6.0",
         "tailwindcss": ">=3.0.0",
-        "ua-parser-js": ">=2.0.0"
-    },
-    "pnpm": {
-        "overrides": {}
-    },
-    "packageManager": "pnpm@10.7.1",
-    "dependencies": {
+        "ua-parser-js": ">=2.0.0",
         "@radix-ui/react-switch": "^1.1.4",
         "@radix-ui/react-tooltip": "^1.2.0",
         "input-otp": "^1.4.2"
+    },
+    "pnpm": {
+        "overrides": {}
     }
 }

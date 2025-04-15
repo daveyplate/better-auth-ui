@@ -1,26 +1,26 @@
 "use client";
 
-import { Loader2 } from "lucide-react";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { Loader2 } from "lucide-react"
+import { useCallback, useContext, useEffect, useRef, useState } from "react"
 
-import type { AuthLocalization } from "../../lib/auth-localization";
-import { AuthUIContext } from "../../lib/auth-ui-provider";
-import type { AuthView } from "../../lib/auth-view-paths";
-import { socialProviders } from "../../lib/social-providers";
-import { cn, isValidEmail } from "../../lib/utils";
-import { Checkbox } from "../ui/checkbox";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import type { AuthLocalization } from "../../lib/auth-localization"
+import { AuthUIContext } from "../../lib/auth-ui-provider"
+import type { AuthView } from "../../lib/auth-view-paths"
+import { socialProviders } from "../../lib/social-providers"
+import { cn, isValidEmail } from "../../lib/utils"
+import { Checkbox } from "../ui/checkbox"
+import { Input } from "../ui/input"
+import { Label } from "../ui/label"
 
-import type { SocialProvider } from "better-auth/social-providers";
-import { PasswordInput } from "../password-input";
-import { TwoFactorPrompt } from "../two-factor/two-factor-prompt";
-import { TwoFactorQR } from "../two-factor/two-factor-qr";
-import { Separator } from "../ui/separator";
-import { ActionButton } from "./action-button";
-import { MagicLinkButton } from "./magic-link-button";
-import { PasskeyButton } from "./passkey-button";
-import { ProviderButton } from "./provider-button";
+import type { SocialProvider } from "better-auth/social-providers"
+import { PasswordInput } from "../password-input"
+import { TwoFactorPrompt } from "../two-factor/two-factor-prompt"
+import { TwoFactorQR } from "../two-factor/two-factor-qr"
+import { Separator } from "../ui/separator"
+import { ActionButton } from "./action-button"
+import { MagicLinkButton } from "./magic-link-button"
+import { PasskeyButton } from "./passkey-button"
+import { ProviderButton } from "./provider-button"
 
 // Type representing the authentication response
 // with the twoFactorRedirect property added by the 2FA plugin
@@ -37,15 +37,15 @@ interface SignInResponseWithTwoFactor {
 }
 
 export type AuthFormClassNames = {
-  base?: string;
-  actionButton?: string;
-  forgotPasswordLink?: string;
-  input?: string;
-  label?: string;
-  description?: string;
-  providerButton?: string;
-  secondaryButton?: string;
-};
+  base?: string
+  actionButton?: string
+  forgotPasswordLink?: string
+  input?: string
+  label?: string
+  description?: string
+  providerButton?: string
+  secondaryButton?: string
+}
 
 export function AuthForm({
   className,
@@ -55,20 +55,20 @@ export function AuthForm({
   pathname,
   redirectTo,
   socialLayout = "auto",
-  view,
+  view
 }: {
-  className?: string;
-  classNames?: AuthFormClassNames;
-  callbackURL?: string;
-  localization?: Partial<AuthLocalization>;
-  pathname?: string;
-  redirectTo?: string;
-  socialLayout?: "auto" | "horizontal" | "grid" | "vertical";
-  view?: AuthView;
+  className?: string
+  classNames?: AuthFormClassNames
+  callbackURL?: string
+  localization?: Partial<AuthLocalization>
+  pathname?: string
+  redirectTo?: string
+  socialLayout?: "auto" | "horizontal" | "grid" | "vertical"
+  view?: AuthView
 }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [twoFactorUrl, setTwoFactorUrl] = useState<string>("");
-  const [isBackupCode, setIsBackupCode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  const [twoFactorUrl, setTwoFactorUrl] = useState<string>("")
+  const [isBackupCode, setIsBackupCode] = useState(false)
 
   const {
     additionalFields,
