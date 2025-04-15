@@ -23,8 +23,6 @@ export default function SettingsPage() {
 }
 ```
 
-This component automatically handles the complete 2FA workflow through the [`AuthUIProvider`](/components/auth-ui-provider), including QR code generation, verification, and backup codes management.
-
 ## Reference
 
 The following props can be utilized to customize `<TwoFactorCard />`:
@@ -66,19 +64,32 @@ For advanced use cases, you can manually control the 2FA state:
 
 ## Localization
 
-Customize the displayed text through the localization prop:
+The text within `<TwoFactorCard />` can be customized through the `localization` prop, allowing you to adapt it to different languages or contexts:
 
 ```tsx
 <TwoFactorCard
     localization={{
-        twoFactor: "Two-Factor Authentication",
-        twoFactorDescription: "Add an extra layer of security to your account",
-        twoFactorEnabledInstructions: "Scan the QR code with your authenticator app",
-        twoFactorDisableInstructions: "Enter your password to disable 2FA",
+        backupCodes: "Backup Codes",
+        backupCodesDescription: "Save these backup codes in a secure place. You can use them to access your account if you lose your two-factor authentication device"
+        backupCodesPasswordDescription: "Please enter your password to view your backup codes",
+        cancel: "Cancel",
+        confirm: "Confirm",
         confirmPassword: "Confirm Password",
+        disable: "Disable",
+        noTotpUriError: "No TOTP URI received from server",
+        password: "Password",
+        passwordPlaceholder: "Password",
         passwordRequired: "Password is required",
+        twoFactor: "Two-Factor Authentication",
+        twoFactorConfirmPasswordDescription: "For security reasons, please enter your password to enable two-factor authentication",
+        twoFactorDescription: "Add an extra layer of security to your account",
+        twoFactorDisableConfirmDescription: "For security reasons, please enter your password to disable two-factor authentication",
+        twoFactorDisableInstructions: "Enter your password to disable 2FA",
+        twoFactorDisabled: "Two-factor authentication disabled",
+        twoFactorDisabledSuccess: "Two-Factor Authentication disabled successfully",
+        twoFactorEnableInstructions: "Please prepare your authenticator app to scan the QR code",
         twoFactorEnabled: "Two-factor authentication enabled",
-        twoFactorDisabled: "Two-factor authentication disabled"
+        twoFactorEnabledInstructions: "Scan the QR code with your authenticator app",
     }}
 />
-``` 
+```
