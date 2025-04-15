@@ -248,6 +248,7 @@ export function SettingsCards({ className, classNames, localization }: SettingsC
                             classNames={classNames?.card}
                             localization={localization}
                             twoFactorEnabled={(sessionData?.user as any)?.twoFactorEnabled}
+                            refetch={refetchSessions}
                             skipHook
                         />
                     )}

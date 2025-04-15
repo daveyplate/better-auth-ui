@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import type { AuthLocalization } from "../../lib/auth-localization"
 import { AuthUIContext } from "../../lib/auth-ui-provider"
 import { cn } from "../../lib/utils"
@@ -75,6 +75,7 @@ export function TwoFactorCard({
     const [isLoadingBackupCodes, setIsLoadingBackupCodes] = useState(false)
     const [showBackupCodesPasswordDialog, setShowBackupCodesPasswordDialog] = useState(false)
     const [backupCodesPassword, setBackupCodesPassword] = useState("")
+    const [localTwoFactorEnabled, setLocalTwoFactorEnabled] = useState(propTwoFactorEnabled)
 
     // Get required context values from AuthUIContext
     const {
@@ -91,8 +92,13 @@ export function TwoFactorCard({
     const localization = { ...authLocalization, ...propLocalization }
 
     // Initialize state variables
-    const twoFactorEnabled = propTwoFactorEnabled
+    const twoFactorEnabled = localTwoFactorEnabled
     let isPending = propIsPending
+
+    // Update local state when prop changes
+    useEffect(() => {
+        setLocalTwoFactorEnabled(propTwoFactorEnabled)
+    }, [propTwoFactorEnabled])
 
     // If not skipping hooks, use useSession to fetch user data
     if (!skipHook) {
@@ -185,7 +191,6 @@ export function TwoFactorCard({
      * Disables two-factor authentication and refreshes data
      */
     const handleDisableConfirm = async () => {
-        // Validate password is provided
         if (!disablePassword) {
             toast({
                 variant: "error",
@@ -211,6 +216,7 @@ export function TwoFactorCard({
                     variant: "success",
                     message: localization.twoFactorDisabledSuccess
                 })
+                setLocalTwoFactorEnabled(false)
                 // Refresh data after successful operation
                 await refetch?.()
             }
