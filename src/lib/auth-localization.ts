@@ -373,11 +373,11 @@ export const authLocalization = {
     /** @default "Unlink" */
     unlink: "Unlink",
 
-    /** @default "Use Backup Code" */
-    useBackupCode: "Use Backup Code",
+    /** @default "Forgot your authenticator?" */
+    useBackupCode: "Forgot your authenticator?",
 
-    /** @default "Use Two-Factor Code" */
-    useTwoFactorCode: "Use Two-Factor Code",
+    /** @default "Use authenticator?" */
+    useTwoFactorCode: "Use authenticator?",
 
     /** @default "Username" */
     username: "Username",

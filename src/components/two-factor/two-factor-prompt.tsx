@@ -51,22 +51,6 @@ export const TwoFactorPrompt = ({
     return (
         <div className={cn("space-y-6", className)}>
             <div className="space-y-2">
-                {!isSetup && (
-                    <div className="flex items-center justify-between">
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={toggleBackupCode}
-                            className="text-xs"
-                        >
-                            {isBackupCode
-                                ? localization.useTwoFactorCode
-                                : localization.useBackupCode}
-                        </Button>
-                    </div>
-                )}
-
                 {isBackupCode && (
                     <Alert>
                         <Info className="h-4 w-4" />
@@ -74,46 +58,63 @@ export const TwoFactorPrompt = ({
                         <AlertDescription>{localization.backupCodePlaceholder}</AlertDescription>
                     </Alert>
                 )}
-            </div>
 
-            {error && (
-                <Alert variant="destructive">
-                    <AlertCircle className="h-4 w-4" />
-                    <AlertDescription>{error}</AlertDescription>
-                </Alert>
-            )}
+                {error && (
+                    <Alert variant="destructive">
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                )}
 
-            <div className="space-y-4">
-                <TwoFactorInput
-                    value={code}
-                    onChange={handleCodeChange}
-                    maxLength={isBackupCode ? 11 : 6}
-                    isBackupCode={isBackupCode}
-                />
+                <div className="space-y-6">
+                    <div className="space-y-2">
+                        <TwoFactorInput
+                            value={code}
+                            onChange={handleCodeChange}
+                            maxLength={isBackupCode ? 11 : 6}
+                            isBackupCode={isBackupCode}
+                        />
+                    </div>
 
-                <div className="flex items-center space-x-2">
-                    <Checkbox
-                        id="trust-device"
-                        checked={trustDevice}
-                        onCheckedChange={(checked) => setTrustDevice(checked as boolean)}
-                        disabled={isSubmitting}
-                    />
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Label
-                                    htmlFor="trust-device"
-                                    className="text-sm text-muted-foreground cursor-help"
-                                >
-                                    {localization.rememberDevice}
-                                </Label>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                {localization.rememberDeviceDescription}
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
+                    <div className="flex flex-row items-center gap-2">
+                        <Checkbox
+                            id="trust-device"
+                            checked={trustDevice}
+                            onCheckedChange={(checked) => setTrustDevice(checked as boolean)}
+                            disabled={isSubmitting}
+                        />
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Label
+                                        htmlFor="trust-device"
+                                        className="text-sm text-muted-foreground cursor-help"
+                                    >
+                                        {localization.rememberDevice}
+                                    </Label>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    {localization.rememberDeviceDescription}
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
                 </div>
+                {!isSetup && (
+                            <div className="flex justify-end">
+                                <Button
+                                    type="button"
+                                    variant="link"
+                                    size="sm"
+                                    onClick={toggleBackupCode}
+                                    className="px-0 h-auto text-xs font-medium text-muted-foreground hover:text-primary"
+                                >
+                                    {isBackupCode
+                                        ? localization.useTwoFactorCode
+                                        : localization.useBackupCode}
+                                </Button>
+                            </div>
+                        )}
             </div>
         </div>
     )
