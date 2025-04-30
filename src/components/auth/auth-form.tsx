@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react"
 import type { AuthLocalization } from "../../lib/auth-localization"
 import { AuthUIContext } from "../../lib/auth-ui-provider"
 import type { AuthView } from "../../lib/auth-view-paths"
-import { getKeyByValue } from "../../lib/utils"
+import { getAuthViewPath } from "../../lib/utils"
 import { AuthCallback } from "./auth-callback"
 import { ForgotPasswordForm } from "./forms/forgot-password-form"
 import { MagicLinkForm } from "./forms/magic-link-form"
@@ -76,13 +76,13 @@ export function AuthForm({
     const path = pathname?.split("/").pop()
 
     useEffect(() => {
-        if (path && !getKeyByValue(viewPaths, path)) {
+        if (path && !getAuthViewPath(viewPaths, path)) {
             console.error(`Invalid auth view: ${path}`)
             replace(`${basePath}/${viewPaths.signIn}${window.location.search}`)
         }
     }, [path, viewPaths, basePath, replace])
 
-    view = view || getKeyByValue(viewPaths, path) || "signIn"
+    view = view || getAuthViewPath(viewPaths, path) || "signIn"
 
     // Redirect to appropriate view based on enabled features
     useEffect(() => {

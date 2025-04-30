@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import type { AuthLocalization } from "./auth-localization"
+import type { AuthView, AuthViewPaths} from "./auth-view-paths";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
@@ -53,6 +54,19 @@ export function getSearchParam(paramName: string) {
     return typeof window !== "undefined"
         ? new URLSearchParams(window.location.search).get(paramName)
         : null
+}
+
+export function getAuthViewPath(
+    authViewPaths: AuthViewPaths,
+    view?: string | undefined,
+): AuthView | undefined {
+    if (!view) {
+        return undefined
+    }
+
+    if (view in authViewPaths) {
+        return view as AuthView
+    }
 }
 
 export function getKeyByValue<T extends Record<string, unknown>>(

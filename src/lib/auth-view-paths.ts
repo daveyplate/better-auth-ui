@@ -19,7 +19,7 @@ export const authViewPaths = {
     signUp: "sign-up",
     /** @default "two-factor" */
     twoFactor: "two-factor"
-}
+} as const
 
 export type AuthViewPaths = typeof authViewPaths
-export type AuthView = keyof typeof authViewPaths
+export type AuthView = keyof AuthViewPaths
