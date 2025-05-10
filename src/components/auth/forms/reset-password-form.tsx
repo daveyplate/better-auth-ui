@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 
 import type { AuthLocalization } from "../../../lib/auth-localization"
-import { AuthUIContext } from "../../../lib/auth-ui-provider"
-import { cn, getLocalizedError } from "../../../lib/utils"
+import { AuthUIContext, type PasswordValidation } from "../../../lib/auth-ui-provider"
+import { cn, getLocalizedError, getPasswordSchema } from "../../../lib/utils"
 import { PasswordInput } from "../../password-input"
 import { Button } from "../../ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form"
@@ -18,9 +18,15 @@ export interface ResetPasswordFormProps {
     className?: string
     classNames?: AuthFormClassNames
     localization: Partial<AuthLocalization>
+    passwordValidation?: PasswordValidation
 }
 
-export function ResetPasswordForm({ className, classNames, localization }: ResetPasswordFormProps) {
+export function ResetPasswordForm({
+    className,
+    classNames,
+    localization,
+    passwordValidation
+}: ResetPasswordFormProps) {
     const tokenChecked = useRef(false)
 
     const {
@@ -30,20 +36,28 @@ export function ResetPasswordForm({ className, classNames, localization }: Reset
         localization: contextLocalization,
         viewPaths,
         navigate,
-        toast
+        toast,
+        passwordValidation: contextPasswordValidation
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
+    passwordValidation = { ...contextPasswordValidation, ...passwordValidation }
 
     const formSchema = z
         .object({
-            newPassword: z.string().min(1, {
-                message: `${localization.password} ${localization.isRequired}`
+            newPassword: getPasswordSchema(passwordValidation, {
+                passwordRequired: localization.newPasswordRequired,
+                passwordTooShort: localization.passwordTooShort,
+                passwordTooLong: localization.passwordTooLong,
+                passwordInvalid: localization.passwordInvalid
             }),
             confirmPassword: confirmPasswordEnabled
-                ? z.string().min(1, {
-                      message: `${localization.confirmPassword} ${localization.isRequired}`
-                  })
+                ? getPasswordSchema(passwordValidation, {
+                    passwordRequired: localization.confirmPasswordRequired,
+                    passwordTooShort: localization.passwordTooShort,
+                    passwordTooLong: localization.passwordTooLong,
+                    passwordInvalid: localization.passwordInvalid
+                })
                 : z.string().optional()
         })
         .refine((data) => !confirmPasswordEnabled || data.newPassword === data.confirmPassword, {

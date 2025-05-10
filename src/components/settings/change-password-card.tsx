@@ -5,8 +5,8 @@ import { useContext } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import type { AuthLocalization } from "../../lib/auth-localization"
-import { AuthUIContext } from "../../lib/auth-ui-provider"
-import { cn, getLocalizedError } from "../../lib/utils"
+import { AuthUIContext, type PasswordValidation } from "../../lib/auth-ui-provider"
+import { cn, getLocalizedError, getPasswordSchema } from "../../lib/utils"
 import { PasswordInput } from "../password-input"
 import { CardContent } from "../ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
@@ -20,6 +20,7 @@ export interface ChangePasswordCardProps {
     isPending?: boolean
     localization?: AuthLocalization
     skipHook?: boolean
+    passwordValidation?: PasswordValidation
 }
 
 export function ChangePasswordCard({
@@ -28,7 +29,8 @@ export function ChangePasswordCard({
     accounts,
     isPending,
     localization,
-    skipHook
+    skipHook,
+    passwordValidation
 }: ChangePasswordCardProps) {
     const {
         authClient,
@@ -38,10 +40,12 @@ export function ChangePasswordCard({
         hooks: { useSession, useListAccounts },
         localization: contextLocalization,
         viewPaths,
-        toast
+        toast,
+        passwordValidation: contextPasswordValidation
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
+    passwordValidation = { ...contextPasswordValidation, ...passwordValidation }
 
     const { data: sessionData } = useSession()
 
@@ -53,10 +57,20 @@ export function ChangePasswordCard({
 
     const formSchema = z
         .object({
-            currentPassword: z.string().min(1, { message: localization.passwordRequired }),
-            newPassword: z.string().min(1, { message: localization.newPasswordRequired }),
+            currentPassword: getPasswordSchema(passwordValidation, localization),
+            newPassword: getPasswordSchema(passwordValidation, {
+                passwordRequired: localization.newPasswordRequired,
+                passwordTooShort: localization.passwordTooShort,
+                passwordTooLong: localization.passwordTooLong,
+                passwordInvalid: localization.passwordInvalid
+            }),
             confirmPassword: confirmPasswordEnabled
-                ? z.string().min(1, { message: localization.confirmPasswordRequired })
+                ? getPasswordSchema(passwordValidation, {
+                    passwordRequired: localization.confirmPasswordRequired,
+                    passwordTooShort: localization.passwordTooShort,
+                    passwordTooLong: localization.passwordTooLong,
+                    passwordInvalid: localization.passwordInvalid
+                })
                 : z.string().optional()
         })
         .refine((data) => !confirmPasswordEnabled || data.newPassword === data.confirmPassword, {

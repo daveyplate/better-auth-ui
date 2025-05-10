@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import * as z from "zod"
 import type { AuthLocalization } from "./auth-localization"
+import { PasswordValidation } from "./auth-ui-provider"
 import type { AuthView, AuthViewPaths } from "./auth-view-paths"
 
 export function cn(...inputs: ClassValue[]) {
@@ -69,4 +71,29 @@ export function getKeyByValue<T extends Record<string, unknown>>(
     value?: T[keyof T]
 ): keyof T | undefined {
     return (Object.keys(object) as Array<keyof T>).find((key) => object[key] === value)
+}
+
+export function getPasswordSchema(
+    passwordValidation?: PasswordValidation,
+    localization?: Partial<AuthLocalization>
+) {
+    let schema = z.string().min(1, {
+        message: localization?.passwordRequired
+    })
+    if (passwordValidation?.minLength) {
+        schema = schema.min(passwordValidation.minLength, {
+            message: localization?.passwordTooShort
+        })
+    }
+    if (passwordValidation?.maxLength) {
+        schema = schema.max(passwordValidation.maxLength, {
+            message: localization?.passwordTooLong
+        })
+    }
+    if (passwordValidation?.regex) {
+        schema = schema.regex(passwordValidation.regex, {
+            message: localization?.passwordInvalid
+        })
+    }
+    return schema
 }

@@ -9,8 +9,8 @@ import * as z from "zod"
 import { useIsHydrated } from "../../../hooks/use-hydrated"
 import { useOnSuccessTransition } from "../../../hooks/use-success-transition"
 import type { AuthLocalization } from "../../../lib/auth-localization"
-import { AuthUIContext } from "../../../lib/auth-ui-provider"
-import { cn, getLocalizedError, getSearchParam } from "../../../lib/utils"
+import { AuthUIContext, type PasswordValidation } from "../../../lib/auth-ui-provider"
+import { cn, getLocalizedError, getPasswordSchema, getSearchParam } from "../../../lib/utils"
 import type { AuthClient } from "../../../types/auth-client"
 import { PasswordInput } from "../../password-input"
 import { Button } from "../../ui/button"
@@ -27,6 +27,7 @@ export interface SignUpFormProps {
     localization: Partial<AuthLocalization>
     redirectTo?: string
     setIsSubmitting?: (value: boolean) => void
+    passwordValidation?: PasswordValidation
 }
 
 export function SignUpForm({
@@ -36,7 +37,8 @@ export function SignUpForm({
     isSubmitting,
     localization,
     redirectTo,
-    setIsSubmitting
+    setIsSubmitting,
+    passwordValidation
 }: SignUpFormProps) {
     const isHydrated = useIsHydrated()
 
@@ -55,10 +57,12 @@ export function SignUpForm({
         username: usernameEnabled,
         viewPaths,
         navigate,
-        toast
+        toast,
+        passwordValidation: contextPasswordValidation
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
+    passwordValidation = { ...contextPasswordValidation, ...passwordValidation }
 
     const getRedirectTo = useCallback(
         () => redirectTo || getSearchParam("redirectTo") || contextRedirectTo,
@@ -88,15 +92,16 @@ export function SignUpForm({
             .email({
                 message: `${localization.email} ${localization.isInvalid}`
             }),
-        password: z.string().min(1, {
-            message: `${localization.password} ${localization.isRequired}`
-        })
+        password: getPasswordSchema(passwordValidation, localization)
     }
 
     // Add confirmPassword field if enabled
     if (confirmPasswordEnabled) {
-        schemaFields.confirmPassword = z.string().min(1, {
-            message: `${localization.confirmPassword} ${localization.isRequired}`
+        schemaFields.confirmPassword = getPasswordSchema(passwordValidation, {
+            passwordRequired: localization.confirmPasswordRequired,
+            passwordTooShort: localization.passwordTooShort,
+            passwordTooLong: localization.passwordTooLong,
+            passwordInvalid: localization.passwordInvalid
         })
     }
 
