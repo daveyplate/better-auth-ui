@@ -1,4 +1,4 @@
-import { type AuthLocalization } from "@daveyplate/better-auth-ui"
+import { type AuthLocalization } from "../../../../src/lib/auth-localization"
 
 export const dutchLocalization: AuthLocalization = {
     account: "Account",
