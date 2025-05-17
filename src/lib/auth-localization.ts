@@ -78,6 +78,9 @@ export const authLocalization = {
     /** @default "Copied to clipboard" */
     copiedToClipboard: "Copied to clipboard",
 
+    /** @default "Copy to clipboard" */
+    copyToClipboard: "Copy to clipboard",
+
     /** @default "Copy all codes" */
     copyAllCodes: "Copy all codes",
 
@@ -127,6 +130,9 @@ export const authLocalization = {
 
     /** @default "Don't have an account?" */
     dontHaveAnAccount: "Don't have an account?",
+
+    /** @default "Done" */
+    done: "Done",
 
     /** @default "Email" */
     email: "Email",
@@ -260,6 +266,56 @@ export const authLocalization = {
     /** @default "Securely access your account without a password." */
     passkeysInstructions: "Securely access your account without a password.",
 
+    /** @default "API Keys" */
+    apiKeys: "API Keys",
+
+    /** @default "Manage your API keys for secure access." */
+    apiKeysDescription: "Manage your API keys for secure access.",
+
+    /** @default "Generate API keys to access your account programmatically." */
+    apiKeysInstructions: "Generate API keys to access your account programmatically.",
+
+    /** @default "Create API Key" */
+    createApiKey: "Create API Key",
+
+    /** @default "Enter a unique name for your API key to differentiate it from other keys." */
+    createApiKeyDescription:
+        "Enter a unique name for your API key to differentiate it from other keys.",
+
+    /** @default "New API Key" */
+    apiKeyNamePlaceholder: "New API Key",
+
+    /** @default "API Key Created" */
+    apiKeyCreated: "API Key Created",
+
+    /** @default "Please copy your API key and store it in a safe place. For security reasons we cannot show it again." */
+    apiKeyCreatedDescription:
+        "Please copy your API key and store it in a safe place. For security reasons we cannot show it again.",
+
+    /** @default "Expires In" */
+    expiresIn: "Expires In",
+
+    /** @default "Never Expires" */
+    neverExpires: "Never Expires",
+
+    /** @default "Expires" */
+    expires: "Expires",
+
+    /** @default "No Expiration" */
+    noExpiration: "No Expiration",
+
+    /** @default "Day" */
+    day: "Day",
+
+    /** @default "Days" */
+    days: "Days",
+
+    /** @default "Year" */
+    year: "Year",
+
+    /** @default "Create" */
+    create: "Create",
+
     /** @default "Password" */
     password: "Password",
 
@@ -316,6 +372,15 @@ export const authLocalization = {
 
     /** @default "Revoke" */
     revoke: "Revoke",
+
+    /** @default "Delete API Key" */
+    deleteApiKey: "Delete API Key",
+
+    /** @default "Are you sure you want to delete this API key?" */
+    deleteApiKeyConfirmation: "Are you sure you want to delete this API key?",
+
+    /** @default "API Key" */
+    apiKey: "API Key",
 
     /** @default "Sign In" */
     signIn: "Sign In",

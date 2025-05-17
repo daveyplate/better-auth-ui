@@ -64,6 +64,21 @@ export type AuthUIContextType = {
      */
     additionalFields?: AdditionalFields
     /**
+     * API Keys plugin configuration
+     */
+    apiKeys?:
+        | {
+              /**
+               * Prefix for API Keys
+               */
+              prefix?: string
+              /**
+               * Metadata for API Keys
+               */
+              metadata?: Record<string, unknown>
+          }
+        | boolean
+    /**
      * Enable or disable Avatar support
      * @default false
      */
@@ -350,6 +365,11 @@ export const AuthUIProvider = ({
 }: AuthUIProviderProps) => {
     const defaultMutators = useMemo(() => {
         return {
+            deleteApiKey: (params) =>
+                (authClient as AuthClient).apiKey.delete({
+                    ...params,
+                    fetchOptions: { throw: true }
+                }),
             deletePasskey: (params) =>
                 (authClient as AuthClient).passkey.deletePasskey({
                     ...params,
@@ -392,7 +412,8 @@ export const AuthUIProvider = ({
                     queryFn: (authClient as AuthClient).multiSession.listDeviceSessions
                 }),
             useListSessions: () => useAuthData({ queryFn: authClient.listSessions }),
-            useListPasskeys: (authClient as AuthClient).useListPasskeys
+            useListPasskeys: (authClient as AuthClient).useListPasskeys,
+            useListApiKeys: () => useAuthData({ queryFn: (authClient as AuthClient).apiKey.list })
         } as AuthHooks
     }, [authClient])
 
