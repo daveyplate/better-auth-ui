@@ -14,8 +14,10 @@ import type { AuthMutators } from "../types/auth-mutators"
 import type { CaptchaProvider } from "../types/captcha-provider"
 import type { Link } from "../types/link"
 import type { RenderToast } from "../types/render-toast"
-import { type AuthLocalization, authLocalization } from "./auth-localization"
+import type { AuthLocalization } from "./auth-localization"
+import { authLocalization } from "./auth-localization"
 import { type AuthViewPaths, authViewPaths } from "./auth-view-paths"
+import { type SupportedLocale, getLocale } from "./locale/locale-manager"
 import type { Provider } from "./social-providers"
 
 const DefaultLink: Link = ({ href, className, children }) => (
@@ -328,6 +330,12 @@ export type AuthUIProviderProps = {
      */
     localization?: AuthLocalization
     /**
+     * Set locale for localization
+     * @default "en"
+     * @remarks SupportedLocale
+     */
+    locale?: SupportedLocale
+    /**
      * ADVANCED: Custom mutators for updating auth data
      */
     mutators?: Partial<AuthMutators>
@@ -351,6 +359,7 @@ export const AuthUIProvider = ({
     hooks: hooksProp,
     mutators: mutatorsProp,
     localization: localizationProp,
+    locale = "undefined",
     nameRequired = true,
     settingsFields = ["name"],
     signUp = true,
@@ -363,6 +372,16 @@ export const AuthUIProvider = ({
     Link = DefaultLink,
     ...props
 }: AuthUIProviderProps) => {
+
+    const localization = useMemo(() => {
+        const localeLocalization = getLocale(locale)
+        return {
+            ...authLocalization,
+            ...localeLocalization,
+            ...localizationProp
+        } as AuthLocalization
+    }, [localizationProp, locale])
+
     const defaultMutators = useMemo(() => {
         return {
             deleteApiKey: (params) =>
@@ -420,10 +439,6 @@ export const AuthUIProvider = ({
     const viewPaths = useMemo(() => {
         return { ...authViewPaths, ...viewPathsProp } as AuthViewPaths
     }, [viewPathsProp])
-
-    const localization = useMemo(() => {
-        return { ...authLocalization, ...localizationProp } as AuthLocalization
-    }, [localizationProp])
 
     const hooks = useMemo(() => {
         return { ...defaultHooks, ...hooksProp } as AuthHooks
