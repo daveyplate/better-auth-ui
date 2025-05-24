@@ -4,9 +4,12 @@
     "version": "1.7.3",
     "description": "Plug & play shadcn/ui components for better-auth",
     "scripts": {
+        
+    "example": "echo $DEEPL_API_KEY",
         "build": "tsup --clean --dts",
         "dev": "tsc-watch",
-        "prepublishOnly": "rm -rf dist && turbo build"
+        "prepublishOnly": "rm -rf dist && turbo build",
+        "translate": "./src/lib/locale/update-enjson.sh && pnpx json-autotranslate --input src/lib/locale/jsons --delete-unused-strings --source-language en --service deepl-free --directory-structure ngx-translate --config $DEEPL_API_KEY --type key-based"
     },
     "type": "module",
     "main": "./dist/index.cjs",

@@ -31,6 +31,8 @@
 | UK | Ukrainian |
 | ZH | Chinese |
 
+Above languages are covered by following api.
+https://support.deepl.com/hc/en-us/articles/360020695820-API-Key-for-DeepL-s-API
 
 Following are not cover because Deepl free does not cover.
 | Code | Language |
@@ -38,3 +40,8 @@ Following are not cover because Deepl free does not cover.
 | TH | Thai |
 | VI | Vietnamese |
 | HE | Hebrew |
+
+
+To update json language files, please run as follows
+export DEEPL_API_KEY=your_api_key
+pnpm run translate

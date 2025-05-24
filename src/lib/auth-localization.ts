@@ -228,7 +228,7 @@ export const authLocalization = {
     emailOTPVerificationSent: "Please check your email for the verification code.",
 
     /** @default "Name" */
-    name: "Name2",
+    name: "Name",
 
     /** @default "Please enter your full name, or a display name." */
     nameDescription: "Please enter your full name, or a display name.",
