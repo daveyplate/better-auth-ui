@@ -16,6 +16,7 @@ import type { Link } from "../types/link"
 import type { RenderToast } from "../types/render-toast"
 import { type AuthLocalization, authLocalization } from "./auth-localization"
 import { type AuthViewPaths, authViewPaths } from "./auth-view-paths"
+import { type SupportedLocale, getLocale } from "./locale/locale-manager"
 import type { Provider } from "./social-providers"
 
 const DefaultLink: Link = ({ href, className, children }) => (
@@ -328,6 +329,12 @@ export type AuthUIProviderProps = {
      */
     localization?: AuthLocalization
     /**
+     * Set locale for localization
+     * @default "en"
+     * @remarks SupportedLocale
+     */
+    locale?: SupportedLocale
+    /**
      * ADVANCED: Custom mutators for updating auth data
      */
     mutators?: Partial<AuthMutators>
@@ -351,6 +358,7 @@ export const AuthUIProvider = ({
     hooks: hooksProp,
     mutators: mutatorsProp,
     localization: localizationProp,
+    locale = "en",
     nameRequired = true,
     settingsFields = ["name"],
     signUp = true,
@@ -422,8 +430,14 @@ export const AuthUIProvider = ({
     }, [viewPathsProp])
 
     const localization = useMemo(() => {
-        return { ...authLocalization, ...localizationProp } as AuthLocalization
-    }, [localizationProp])
+        const baseLocalization = { ...authLocalization }
+        const localeLocalization = locale ? getLocale(locale) : {}
+        return {
+            ...baseLocalization,
+            ...localeLocalization,
+            ...localizationProp
+        } as AuthLocalization
+    }, [localizationProp, locale])
 
     const hooks = useMemo(() => {
         return { ...defaultHooks, ...hooksProp } as AuthHooks
