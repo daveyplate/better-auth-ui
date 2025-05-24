@@ -359,7 +359,7 @@ export const AuthUIProvider = ({
     hooks: hooksProp,
     mutators: mutatorsProp,
     localization: localizationProp,
-    locale = "en",
+    locale = "undefined",
     nameRequired = true,
     settingsFields = ["name"],
     signUp = true,
@@ -372,20 +372,15 @@ export const AuthUIProvider = ({
     Link = DefaultLink,
     ...props
 }: AuthUIProviderProps) => {
-    const browserLocale = useMemo(() => {
-        if (locale) return locale
-        return "en"
-    }, [locale])
 
     const localization = useMemo(() => {
-        const baseLocalization = { ...authLocalization }
-        const localeLocalization = getLocale(browserLocale)
+        const localeLocalization = getLocale(locale)
         return {
-            ...baseLocalization,
+            ...authLocalization,
             ...localeLocalization,
             ...localizationProp
         } as AuthLocalization
-    }, [localizationProp, browserLocale])
+    }, [localizationProp, locale])
 
     const defaultMutators = useMemo(() => {
         return {
