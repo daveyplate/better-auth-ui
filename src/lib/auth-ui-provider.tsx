@@ -17,7 +17,7 @@ import type { RenderToast } from "../types/render-toast"
 import type { AuthLocalization } from "./auth-localization"
 import { authLocalization } from "./auth-localization"
 import { type AuthViewPaths, authViewPaths } from "./auth-view-paths"
-import { type SupportedLocale, getLocale, isSupportedLocale } from "./locale/locale-manager"
+import { type SupportedLocale, getLocale } from "./locale/locale-manager"
 import type { Provider } from "./social-providers"
 
 const DefaultLink: Link = ({ href, className, children }) => (
@@ -336,11 +336,6 @@ export type AuthUIProviderProps = {
      */
     locale?: SupportedLocale
     /**
-     * Use browser language for localization
-     * @default false
-     */
-    useBrowserLang?: boolean
-    /**
      * ADVANCED: Custom mutators for updating auth data
      */
     mutators?: Partial<AuthMutators>
@@ -365,7 +360,6 @@ export const AuthUIProvider = ({
     mutators: mutatorsProp,
     localization: localizationProp,
     locale = "en",
-    useBrowserLang = false,
     nameRequired = true,
     settingsFields = ["name"],
     signUp = true,
@@ -380,14 +374,8 @@ export const AuthUIProvider = ({
 }: AuthUIProviderProps) => {
     const browserLocale = useMemo(() => {
         if (locale) return locale
-
-        if (!useBrowserLang) return "en"
-
-        const browserLang = (navigator.language || navigator.languages[0] || "")
-            .split("-")[0]
-            .toLowerCase()
-        return isSupportedLocale(browserLang) ? browserLang : "en"
-    }, [useBrowserLang, locale])
+        return "en"
+    }, [locale])
 
     const localization = useMemo(() => {
         const baseLocalization = { ...authLocalization }

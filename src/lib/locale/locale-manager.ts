@@ -59,8 +59,9 @@ export type SupportedLocale =
     | "tr"
     | "uk"
     | "zh"
+    | "undefined"
 
-const locales: Record<SupportedLocale, AuthLocalization> = {
+const locales: Record<SupportedLocale, AuthLocalization|undefined> = {
     en,
     ja,
     ar,
@@ -89,10 +90,11 @@ const locales: Record<SupportedLocale, AuthLocalization> = {
     sv,
     tr,
     uk,
-    zh
+    zh,
+    undefined: undefined
 }
 
-export const getLocale = (locale: SupportedLocale): AuthLocalization => {
+export const getLocale = (locale: SupportedLocale): AuthLocalization | undefined => {
     return locales[locale]
 }
 

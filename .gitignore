@@ -132,3 +132,5 @@ dist
 .DS_Store
 .source
 .vscode
+
+.json-autotranslate-cache/*
