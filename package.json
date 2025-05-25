@@ -4,7 +4,6 @@
     "version": "1.7.3",
     "description": "Plug & play shadcn/ui components for better-auth",
     "scripts": {
-        "example":"echo hello",
         "build": "tsup --clean --dts",
         "dev": "tsc-watch",
         "prepublishOnly": "rm -rf dist && turbo build",
@@ -62,6 +61,16 @@
             "require": {
                 "types": "./dist/triplit.d.cts",
                 "default": "./dist/triplit.cjs"
+            }
+        },
+        "./locales": {
+            "import": {
+                "types": "./dist/locales.d.ts",
+                "default": "./dist/locales.js"
+            },
+            "require": {
+                "types": "./dist/locales.d.cts",
+                "default": "./dist/locales.cjs"
             }
         }
     },

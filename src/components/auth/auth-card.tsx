@@ -7,7 +7,6 @@ import { useIsHydrated } from "../../hooks/use-hydrated"
 import type { AuthLocalization } from "../../lib/auth-localization"
 import { AuthUIContext } from "../../lib/auth-ui-provider"
 import type { AuthView } from "../../lib/auth-view-paths"
-import { type SupportedLocale, getLocale, isSupportedLocale } from "../../lib/locale/locale-manager"
 import { socialProviders } from "../../lib/social-providers"
 import { cn, getAuthViewByPath } from "../../lib/utils"
 import { SettingsCards, type SettingsCardsClassNames } from "../settings/settings-cards"
@@ -46,16 +45,6 @@ export interface AuthCardProps {
      * @remarks `AuthLocalization`
      */
     localization?: AuthLocalization
-    /**
-     * @default "en"
-     * @remarks The locale to use for translations
-     */
-    locale?: SupportedLocale
-    /**
-     * @default false
-     * @remarks Whether to use the browser's language
-     */
-    useBrowserLang?: boolean
     pathname?: string
     redirectTo?: string
     /**
@@ -78,8 +67,6 @@ export function AuthCard({
     callbackURL,
     cardHeader,
     localization,
-    locale = "undefined",
-    useBrowserLang = false,
     pathname,
     redirectTo,
     socialLayout = "auto",
@@ -105,21 +92,7 @@ export function AuthCard({
         Link
     } = useContext(AuthUIContext)
 
-    const [currentLocale, setCurrentLocale] = useState<SupportedLocale>(locale)
-
-    useEffect(() => {
-        if (locale === "undefined" && useBrowserLang && typeof window !== "undefined") {
-            const browserLang = window.navigator.language.split("-")[0]
-            console.log("browserLang", browserLang)
-            if (isSupportedLocale(browserLang)) {
-                setCurrentLocale(browserLang)
-            }
-        }
-        console.log("currentLocale", currentLocale)
-    }, [useBrowserLang, currentLocale])
-
-    const localeLocalization = getLocale(locale === "undefined" ? currentLocale : locale)
-    localization = { ...contextLocalization, ...localeLocalization, ...localization }
+    localization = { ...contextLocalization, ...localization }
 
     if (socialLayout === "auto") {
         socialLayout = !credentials

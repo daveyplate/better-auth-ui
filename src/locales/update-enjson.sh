@@ -1,8 +1,9 @@
 #!/bin/bash
+echo "Updating src/locales/jsons/en.json from src/lib/auth-localization.ts"
 
 # Get the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-SRC="$SCRIPT_DIR/../auth-localization.ts"
+SRC="$SCRIPT_DIR/../lib/auth-localization.ts"
 DST="$SCRIPT_DIR/jsons/en.json"
 
 awk '
@@ -24,3 +25,5 @@ NR==1 { print "{"; next }
 /^[ \t]*}[ \t]*$/ { sub(/,[ \t]*$/, ""); }
 { print }
 ' "$SRC" > "$DST"
+
+echo "Done"
