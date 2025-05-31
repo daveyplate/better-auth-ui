@@ -84,94 +84,114 @@ export function SignUpForm({
         [callbackURL, persistClient, basePath, viewPaths, baseURL, getRedirectTo]
     )
 
-    const { onSuccess, isPending: transitionPending } = useOnSuccessTransition({ redirectTo })
+    const { onSuccess, isPending: transitionPending } = useOnSuccessTransition({
+        redirectTo
+    })
 
-    // Create the base schema for standard fields
-    const schemaFields: Record<string, z.ZodTypeAny> = {
-        email: z
-            .string()
-            .min(1, {
-                message: `${localization.email} ${localization.isRequired}`
-            })
-            .email({
-                message: `${localization.email} ${localization.isInvalid}`
-            }),
-        password: getPasswordSchema(passwordValidation, localization)
+    // Determine the full list of fields to render, in order
+    const requiredFields: string[] = [
+        ...(nameRequired ? ["name"] : []),
+        ...(usernameEnabled ? ["username"] : []),
+        "email",
+        "password",
+        ...(confirmPasswordEnabled ? ["confirmPassword"] : [])
+    ]
+    let fields: string[]
+    if (
+        signUpFields &&
+        // Avoid unexpected behaviour if the default is in use
+        !(signUpFields.length === 1 && signUpFields[0] === "name")
+    ) {
+        // Add any missing required fields to the front, preserving order
+        const missingRequired = requiredFields.filter((f) => !signUpFields.includes(f))
+        fields = [...missingRequired, ...signUpFields]
+    } else {
+        fields = [...requiredFields]
     }
 
-    // Add confirmPassword field if enabled
-    if (confirmPasswordEnabled) {
-        schemaFields.confirmPassword = getPasswordSchema(passwordValidation, {
-            passwordRequired: localization.confirmPasswordRequired,
-            passwordTooShort: localization.passwordTooShort,
-            passwordTooLong: localization.passwordTooLong,
-            passwordInvalid: localization.passwordInvalid
-        })
-    }
-
-    // Add name field if required or included in signUpFields
-    if (nameRequired || signUpFields?.includes("name")) {
-        schemaFields.name = nameRequired
-            ? z.string().min(1, {
-                  message: `${localization.name} ${localization.isRequired}`
-              })
-            : z.string().optional()
-    }
-
-    // Add username field if enabled
-    if (usernameEnabled) {
-        schemaFields.username = z.string().min(1, {
-            message: `${localization.username} ${localization.isRequired}`
-        })
-    }
-
-    // Add additional fields from signUpFields
-    if (signUpFields) {
-        for (const field of signUpFields) {
-            if (field === "name") continue // Already handled above
-
-            const additionalField = additionalFields?.[field]
-            if (!additionalField) continue
-
-            let fieldSchema: z.ZodTypeAny
-
-            // Create the appropriate schema based on field type
-            if (additionalField.type === "number") {
-                fieldSchema = additionalField.required
-                    ? z.preprocess(
-                          (val) => (!val ? undefined : Number(val)),
-                          z.number({
-                              required_error: `${additionalField.label} ${localization.isRequired}`,
-                              invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
-                          })
-                      )
-                    : z.coerce
-                          .number({
-                              invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
-                          })
-                          .optional()
-            } else if (additionalField.type === "boolean") {
-                fieldSchema = additionalField.required
-                    ? z.coerce
-                          .boolean({
-                              required_error: `${additionalField.label} ${localization.isRequired}`,
-                              invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
-                          })
-                          .refine((val) => val === true, {
-                              message: `${additionalField.label} ${localization.isRequired}`
-                          })
-                    : z.coerce
-                          .boolean({
-                              invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
-                          })
-                          .optional()
-            } else {
-                fieldSchema = additionalField.required
-                    ? z.string().min(1, `${additionalField.label} ${localization.isRequired}`)
+    const schemaFields: Record<string, z.ZodTypeAny> = {}
+    const defaultValues: Record<string, unknown> = {}
+    for (const field of fields) {
+        switch (field) {
+            case "name":
+                schemaFields.name = nameRequired
+                    ? z.string().min(1, {
+                          message: `${localization.name} ${localization.isRequired}`
+                      })
                     : z.string().optional()
+                defaultValues.name = ""
+                break
+            case "username":
+                schemaFields.username = z.string().min(1, {
+                    message: `${localization.username} ${localization.isRequired}`
+                })
+                defaultValues.username = ""
+                break
+            case "email":
+                schemaFields.email = z
+                    .string()
+                    .min(1, {
+                        message: `${localization.email} ${localization.isRequired}`
+                    })
+                    .email({
+                        message: `${localization.email} ${localization.isInvalid}`
+                    })
+                defaultValues.email = ""
+                break
+            case "password":
+                schemaFields.password = getPasswordSchema(passwordValidation, localization)
+                defaultValues.password = ""
+                break
+            case "confirmPassword":
+                schemaFields.confirmPassword = getPasswordSchema(passwordValidation, {
+                    passwordRequired: localization.confirmPasswordRequired,
+                    passwordTooShort: localization.passwordTooShort,
+                    passwordTooLong: localization.passwordTooLong,
+                    passwordInvalid: localization.passwordInvalid
+                })
+                defaultValues.confirmPassword = ""
+                break
+            default: {
+                const additionalField = additionalFields?.[field]
+                if (!additionalField) continue
+                let fieldSchema: z.ZodTypeAny
+                if (additionalField.type === "number") {
+                    fieldSchema = additionalField.required
+                        ? z.preprocess(
+                              (val) => (!val ? undefined : Number(val)),
+                              z.number({
+                                  required_error: `${additionalField.label} ${localization.isRequired}`,
+                                  invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
+                              })
+                          )
+                        : z.coerce
+                              .number({
+                                  invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
+                              })
+                              .optional()
+                } else if (additionalField.type === "boolean") {
+                    fieldSchema = additionalField.required
+                        ? z.coerce
+                              .boolean({
+                                  required_error: `${additionalField.label} ${localization.isRequired}`,
+                                  invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
+                              })
+                              .refine((val) => val === true, {
+                                  message: `${additionalField.label} ${localization.isRequired}`
+                              })
+                        : z.coerce
+                              .boolean({
+                                  invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
+                              })
+                              .optional()
+                } else {
+                    fieldSchema = additionalField.required
+                        ? z.string().min(1, `${additionalField.label} ${localization.isRequired}`)
+                        : z.string().optional()
+                }
+                schemaFields[field] = fieldSchema
+                defaultValues[field] = additionalField.type === "boolean" ? false : ""
             }
-
-            schemaFields[field] = fieldSchema
         }
     }
 
@@ -186,26 +206,6 @@ export function SignUpForm({
             path: ["confirmPassword"]
         }
     )
-
-    // Create default values for the form
-    const defaultValues: Record<string, unknown> = {
-        email: "",
-        password: "",
-        ...(confirmPasswordEnabled && { confirmPassword: "" }),
-        ...(nameRequired || signUpFields?.includes("name") ? { name: "" } : {}),
-        ...(usernameEnabled ? { username: "" } : {})
-    }
-
-    // Add default values for additional fields
-    if (signUpFields) {
-        for (const field of signUpFields) {
-            if (field === "name") continue
-            const additionalField = additionalFields?.[field]
-            if (!additionalField) continue
-
-            defaultValues[field] = additionalField.type === "boolean" ? false : ""
-        }
-    }
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -279,142 +279,144 @@ export function SignUpForm({
                 noValidate={isHydrated}
                 className={cn("grid w-full gap-6", className, classNames?.base)}
             >
-                {(nameRequired || signUpFields?.includes("name")) && (
-                    <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className={classNames?.label}>
-                                    {localization.name}
-                                </FormLabel>
-
-                                <FormControl>
-                                    <Input
-                                        className={classNames?.input}
-                                        placeholder={localization.namePlaceholder}
-                                        disabled={isSubmitting}
-                                        {...field}
-                                    />
-                                </FormControl>
-
-                                <FormMessage className={classNames?.error} />
-                            </FormItem>
-                        )}
-                    />
-                )}
-
-                {usernameEnabled && (
-                    <FormField
-                        control={form.control}
-                        name="username"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className={classNames?.label}>
-                                    {localization.username}
-                                </FormLabel>
-
-                                <FormControl>
-                                    <Input
-                                        className={classNames?.input}
-                                        placeholder={localization.usernamePlaceholder}
-                                        disabled={isSubmitting}
-                                        {...field}
-                                    />
-                                </FormControl>
-
-                                <FormMessage className={classNames?.error} />
-                            </FormItem>
-                        )}
-                    />
-                )}
-
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel className={classNames?.label}>
-                                {localization.email}
-                            </FormLabel>
-
-                            <FormControl>
-                                <Input
-                                    className={classNames?.input}
-                                    type="email"
-                                    placeholder={localization.emailPlaceholder}
-                                    disabled={isSubmitting}
-                                    {...field}
-                                />
-                            </FormControl>
-
-                            <FormMessage className={classNames?.error} />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel className={classNames?.label}>
-                                {localization.password}
-                            </FormLabel>
-
-                            <FormControl>
-                                <PasswordInput
-                                    autoComplete="new-password"
-                                    className={classNames?.input}
-                                    placeholder={localization.passwordPlaceholder}
-                                    disabled={isSubmitting}
-                                    enableToggle
-                                    {...field}
-                                />
-                            </FormControl>
-
-                            <FormMessage className={classNames?.error} />
-                        </FormItem>
-                    )}
-                />
-
-                {confirmPasswordEnabled && (
-                    <FormField
-                        control={form.control}
-                        name="confirmPassword"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className={classNames?.label}>
-                                    {localization.confirmPassword}
-                                </FormLabel>
-
-                                <FormControl>
-                                    <PasswordInput
-                                        autoComplete="new-password"
-                                        className={classNames?.input}
-                                        placeholder={localization.confirmPasswordPlaceholder}
-                                        disabled={isSubmitting}
-                                        enableToggle
-                                        {...field}
-                                    />
-                                </FormControl>
-
-                                <FormMessage className={classNames?.error} />
-                            </FormItem>
-                        )}
-                    />
-                )}
-
-                {signUpFields
-                    ?.filter((field) => field !== "name")
-                    .map((field) => {
-                        const additionalField = additionalFields?.[field]
-                        if (!additionalField) {
-                            console.error(`Additional field ${field} not found`)
-                            return null
-                        }
-
-                        return additionalField.type === "boolean" ? (
+                {fields.map((field) => {
+                    if (field === "name") {
+                        return (
+                            <FormField
+                                key="name"
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className={classNames?.label}>
+                                            {localization.name}
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                className={classNames?.input}
+                                                placeholder={localization.namePlaceholder}
+                                                disabled={isSubmitting}
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage className={classNames?.error} />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
+                    if (field === "email") {
+                        return (
+                            <FormField
+                                key="email"
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className={classNames?.label}>
+                                            {localization.email}
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                className={classNames?.input}
+                                                type="email"
+                                                placeholder={localization.emailPlaceholder}
+                                                disabled={isSubmitting}
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage className={classNames?.error} />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
+                    if (field === "password") {
+                        return (
+                            <FormField
+                                key="password"
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className={classNames?.label}>
+                                            {localization.password}
+                                        </FormLabel>
+                                        <FormControl>
+                                            <PasswordInput
+                                                autoComplete="new-password"
+                                                className={classNames?.input}
+                                                placeholder={localization.passwordPlaceholder}
+                                                disabled={isSubmitting}
+                                                enableToggle
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage className={classNames?.error} />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
+                    if (field === "confirmPassword") {
+                        return (
+                            <FormField
+                                key="confirmPassword"
+                                control={form.control}
+                                name="confirmPassword"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className={classNames?.label}>
+                                            {localization.confirmPassword}
+                                        </FormLabel>
+                                        <FormControl>
+                                            <PasswordInput
+                                                autoComplete="new-password"
+                                                className={classNames?.input}
+                                                placeholder={
+                                                    localization.confirmPasswordPlaceholder
+                                                }
+                                                disabled={isSubmitting}
+                                                enableToggle
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage className={classNames?.error} />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
+                    if (field === "username") {
+                        return (
+                            <FormField
+                                key="username"
+                                control={form.control}
+                                name="username"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className={classNames?.label}>
+                                            {localization.username}
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                className={classNames?.input}
+                                                placeholder={localization.usernamePlaceholder}
+                                                disabled={isSubmitting}
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage className={classNames?.error} />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
+                    // Additional fields
+                    const additionalField = additionalFields?.[field]
+                    if (!additionalField) return null
+                    if (additionalField.type === "boolean") {
+                        return (
                             <FormField
                                 key={field}
                                 control={form.control}
@@ -428,51 +430,49 @@ export function SignUpForm({
                                                 disabled={isSubmitting}
                                             />
                                         </FormControl>
-
                                         <FormLabel className={classNames?.label}>
                                             {additionalField.label}
                                         </FormLabel>
-
-                                        <FormMessage className={classNames?.error} />
-                                    </FormItem>
-                                )}
-                            />
-                        ) : (
-                            <FormField
-                                key={field}
-                                control={form.control}
-                                name={field}
-                                render={({ field: formField }) => (
-                                    <FormItem>
-                                        <FormLabel className={classNames?.label}>
-                                            {additionalField.label}
-                                        </FormLabel>
-
-                                        <FormControl>
-                                            <Input
-                                                className={classNames?.input}
-                                                type={
-                                                    additionalField.type === "number"
-                                                        ? "number"
-                                                        : "text"
-                                                }
-                                                placeholder={
-                                                    additionalField.placeholder ||
-                                                    (typeof additionalField.label === "string"
-                                                        ? additionalField.label
-                                                        : "")
-                                                }
-                                                disabled={isSubmitting}
-                                                {...formField}
-                                            />
-                                        </FormControl>
-
                                         <FormMessage className={classNames?.error} />
                                     </FormItem>
                                 )}
                             />
                         )
-                    })}
+                    }
+                    return (
+                        <FormField
+                            key={field}
+                            control={form.control}
+                            name={field}
+                            render={({ field: formField }) => (
+                                <FormItem>
+                                    <FormLabel className={classNames?.label}>
+                                        {additionalField.label}
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className={classNames?.input}
+                                            type={
+                                                additionalField.type === "number"
+                                                    ? "number"
+                                                    : "text"
+                                            }
+                                            placeholder={
+                                                additionalField.placeholder ||
+                                                (typeof additionalField.label === "string"
+                                                    ? additionalField.label
+                                                    : "")
+                                            }
+                                            disabled={isSubmitting}
+                                            {...formField}
+                                        />
+                                    </FormControl>
+                                    <FormMessage className={classNames?.error} />
+                                </FormItem>
+                            )}
+                        />
+                    )
+                })}
 
                 <Captcha ref={captchaRef} localization={localization} action="/sign-up/email" />
 
