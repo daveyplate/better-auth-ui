@@ -19,6 +19,7 @@ import { PasswordInput } from "../../password-input"
 import { Button } from "../../ui/button"
 import { Checkbox } from "../../ui/checkbox"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../ui/select"
 import { Input } from "../../ui/input"
 import type { AuthFormClassNames } from "../auth-form"
 
@@ -184,6 +185,23 @@ export function SignUpForm({
                                   invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
                               })
                               .optional()
+                } else if (
+                    additionalField.type === "select" &&
+                    Array.isArray(additionalField.options) &&
+                    additionalField.options.length > 0
+                ) {
+                    const optionValues = additionalField.options.map((opt) => opt.value)
+                    if (additionalField.required) {
+                        fieldSchema = z.enum(optionValues as [string, ...string[]], {
+                            required_error: `${additionalField.label} ${localization.isRequired}`,
+                            invalid_type_error: `${additionalField.label} ${localization.isInvalid}`
+                        })
+                    } else {
+                        fieldSchema = z
+                            .union([z.enum(optionValues as [string, ...string[]]), z.literal("")])
+                            .optional()
+                    }
+                    defaultValues[field] = ""
                 } else {
                     fieldSchema = additionalField.required
                         ? z.string().min(1, `${additionalField.label} ${localization.isRequired}`)
@@ -433,6 +451,53 @@ export function SignUpForm({
                                         <FormLabel className={classNames?.label}>
                                             {additionalField.label}
                                         </FormLabel>
+                                        <FormMessage className={classNames?.error} />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
+                    if (additionalField.type === "select" && additionalField.options) {
+                        return (
+                            <FormField
+                                key={field}
+                                control={form.control}
+                                name={field}
+                                render={({ field: formField }) => (
+                                    <FormItem>
+                                        <FormLabel className={classNames?.label}>
+                                            {additionalField.label}
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Select
+                                                value={formField.value}
+                                                onValueChange={formField.onChange}
+                                                disabled={isSubmitting}
+                                                name={formField.name}
+                                            >
+                                                <SelectTrigger className={classNames?.input}>
+                                                    <SelectValue
+                                                        placeholder={
+                                                            additionalField.placeholder ||
+                                                            (typeof additionalField.label ===
+                                                            "string"
+                                                                ? additionalField.label
+                                                                : "")
+                                                        }
+                                                    />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {additionalField.options?.map((opt) => (
+                                                        <SelectItem
+                                                            key={opt.value}
+                                                            value={opt.value}
+                                                        >
+                                                            {opt.label}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
                                         <FormMessage className={classNames?.error} />
                                     </FormItem>
                                 )}
