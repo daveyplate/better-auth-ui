@@ -63,6 +63,10 @@ export interface UserButtonProps {
      * @default "icon"
      */
     size?: "icon" | "full"
+    /**
+     * @default "end"
+     */
+    align?: "start" | "center" | "end"
 }
 
 type DeviceSession = {
@@ -86,7 +90,8 @@ export function UserButton({
     additionalLinks,
     disableDefaultLinks,
     localization,
-    size = "icon"
+    size = "icon",
+    align = "end"
 }: UserButtonProps) {
     const {
         basePath,
@@ -142,7 +147,7 @@ export function UserButton({
     }, [sessionData, multiSession])
 
     return (
-        <DropdownMenu>
+        <DropdownMenu >
             <DropdownMenuTrigger
                 asChild={size === "full"}
                 className={cn(size === "icon" && "rounded-full", classNames?.trigger?.base)}
@@ -189,6 +194,7 @@ export function UserButton({
             <DropdownMenuContent
                 className={cn("max-w-64", classNames?.content?.base)}
                 onCloseAutoFocus={(e) => e.preventDefault()}
+                align={align}
             >
                 <div className={cn("p-2", classNames?.content?.menuItem)}>
                     {(user && !user.isAnonymous) || isPending ? (
