@@ -30,6 +30,7 @@ export interface UpdateFieldCardProps {
     type?: FieldType
     value?: unknown
     validate?: (value: string) => boolean | Promise<boolean>
+    onSuccess?: () => void
 }
 
 export function UpdateFieldCard({
@@ -45,7 +46,8 @@ export function UpdateFieldCard({
     label,
     type,
     value,
-    validate
+    validate,
+    onSuccess
 }: UpdateFieldCardProps) {
     const {
         hooks: { useSession },
@@ -138,9 +140,14 @@ export function UpdateFieldCard({
         }
     }
 
+    const handleUpdateField = async (values: Record<string, unknown>) => {
+        await updateField(values);
+        onSuccess?.();
+      };
+
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(updateField)}>
+            <form onSubmit={form.handleSubmit(handleUpdateField)}>
                 <SettingsCard
                     className={className}
                     classNames={classNames}
