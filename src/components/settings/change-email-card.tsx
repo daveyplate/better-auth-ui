@@ -19,13 +19,15 @@ export interface ChangeEmailCardProps {
     classNames?: SettingsCardClassNames
     isPending?: boolean
     localization?: AuthLocalization
+    onSuccess?: () => void
 }
 
 export function ChangeEmailCard({
     className,
     classNames,
     isPending,
-    localization
+    localization,
+    onSuccess
 }: ChangeEmailCardProps) {
     const {
         authClient,
@@ -109,10 +111,20 @@ export function ChangeEmailCard({
         }
     }
 
+    const handleChangeEmail = async (data: z.infer<typeof formSchema>) => {
+        await changeEmail(data)
+        onSuccess?.()
+    }
+
+    const handleResendVerification = async () => {
+        await resendVerification()
+        onSuccess?.()
+    }
+
     return (
         <>
             <Form {...form}>
-                <form noValidate onSubmit={form.handleSubmit(changeEmail)}>
+                <form noValidate onSubmit={form.handleSubmit(handleChangeEmail)}>
                     <SettingsCard
                         className={className}
                         classNames={classNames}
@@ -153,7 +165,7 @@ export function ChangeEmailCard({
 
             {emailVerification && sessionData?.user && !sessionData?.user.emailVerified && (
                 <Form {...resendForm}>
-                    <form onSubmit={resendForm.handleSubmit(resendVerification)}>
+                    <form onSubmit={resendForm.handleSubmit(handleResendVerification)}>
                         <SettingsCard
                             className={className}
                             classNames={classNames}
