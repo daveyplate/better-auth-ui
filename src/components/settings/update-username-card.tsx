@@ -12,13 +12,15 @@ export interface UpdateUsernameCardProps {
     classNames?: SettingsCardClassNames
     isPending?: boolean
     localization?: AuthLocalization
+    onSuccess?: () => void
 }
 
 export function UpdateUsernameCard({
     className,
     classNames,
     isPending,
-    localization
+    localization,
+    onSuccess
 }: UpdateUsernameCardProps) {
     const {
         hooks: { useSession },
@@ -43,6 +45,7 @@ export function UpdateUsernameCard({
             localization={localization}
             placeholder={localization.usernamePlaceholder}
             required
+            onSuccess={onSuccess}
         />
     )
 }
