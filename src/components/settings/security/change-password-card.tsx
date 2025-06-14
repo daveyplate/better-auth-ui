@@ -33,6 +33,7 @@ export interface ChangePasswordCardProps {
     localization?: AuthLocalization
     skipHook?: boolean
     passwordValidation?: PasswordValidation
+    onSave?: () => void
 }
 
 export function ChangePasswordCard({
@@ -42,7 +43,8 @@ export function ChangePasswordCard({
     isPending,
     localization,
     skipHook,
-    passwordValidation
+    passwordValidation,
+    onSave
 }: ChangePasswordCardProps) {
     const {
         authClient,
@@ -166,10 +168,21 @@ export function ChangePasswordCard({
         (acc) => acc.provider === "credential"
     )
 
+    const handleSetPassword = async () => {
+        await setPassword()
+        onSave?.()
+    }
+
+    const handleChangePassword = async (values: z.infer<typeof formSchema>) => {
+        await changePassword(values)
+        onSave?.()
+    }
+
+
     if (!isPending && !credentialsLinked) {
         return (
             <Form {...setPasswordForm}>
-                <form onSubmit={setPasswordForm.handleSubmit(setPassword)}>
+                <form onSubmit={setPasswordForm.handleSubmit(handleSetPassword)}>
                     <SettingsCard
                         title={localization.SET_PASSWORD}
                         description={localization.SET_PASSWORD_DESCRIPTION}
@@ -185,7 +198,7 @@ export function ChangePasswordCard({
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(changePassword)}>
+            <form onSubmit={form.handleSubmit(handleChangePassword)}>
                 <SettingsCard
                     className={className}
                     classNames={classNames}

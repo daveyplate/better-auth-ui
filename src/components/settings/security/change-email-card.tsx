@@ -23,6 +23,7 @@ export function ChangeEmailCard({
     className,
     classNames,
     localization,
+    onSave,
     ...props
 }: SettingsCardProps) {
     const {
@@ -119,10 +120,21 @@ export function ChangeEmailCard({
         }
     }
 
+    const handleChangeEmail = async (data: z.infer<typeof formSchema>) => {
+        await changeEmail(data)
+        onSave?.()
+    }
+
+    const handleResendVerification = async () => {
+        await resendVerification()
+        onSave?.()
+    }
+
+    
     return (
         <>
             <Form {...form}>
-                <form noValidate onSubmit={form.handleSubmit(changeEmail)}>
+                <form noValidate onSubmit={form.handleSubmit(handleChangeEmail)}>
                     <SettingsCard
                         className={className}
                         classNames={classNames}
@@ -179,7 +191,7 @@ export function ChangeEmailCard({
                     <Form {...resendForm}>
                         <form
                             onSubmit={resendForm.handleSubmit(
-                                resendVerification
+                                handleResendVerification
                             )}
                         >
                             <SettingsCard

@@ -53,6 +53,7 @@ export interface SettingsCardProps
     variant?: "default" | "destructive"
     localization?: AuthLocalization
     action?: () => Promise<unknown> | unknown
+    onSave?: () => void
 }
 
 export function SettingsCard({
