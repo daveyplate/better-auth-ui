@@ -10,7 +10,6 @@ export default defineConfig((env) => {
             instantdb: "./src/instantdb.ts",
             triplit: "./src/triplit.ts",
             utils: "./src/utils.ts",
-            ui: "./src/ui.ts",
             captcha: "./src/captcha.ts"
         },
         format: ["esm", "cjs"],
