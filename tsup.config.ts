@@ -8,7 +8,9 @@ export default defineConfig((env) => {
             server: "./src/server.ts",
             tanstack: "./src/tanstack.ts",
             instantdb: "./src/instantdb.ts",
-            triplit: "./src/triplit.ts"
+            triplit: "./src/triplit.ts",
+            utils: "./src/utils.ts",
+            captcha: "./src/captcha.ts"
         },
         format: ["esm", "cjs"],
         splitting: true,
