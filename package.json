@@ -61,6 +61,26 @@
                 "types": "./dist/triplit.d.cts",
                 "default": "./dist/triplit.cjs"
             }
+        },
+        "./utils": {
+            "import": {
+                "types": "./dist/utils.d.ts",
+                "default": "./dist/utils.js"
+            },
+            "require": {
+                "types": "./dist/utils.d.cts",
+                "default": "./dist/utils.cjs"
+            }
+        },
+        "./captcha": {
+            "import": {
+                "types": "./dist/captcha.d.ts",
+                "default": "./dist/captcha.js"
+            },
+            "require": {
+                "types": "./dist/captcha.d.cts",
+                "default": "./dist/captcha.cjs"
+            }
         }
     },
     "files": [
