@@ -9,6 +9,7 @@ export function UpdateNameCard({
     className,
     classNames,
     localization,
+    onSave,
     ...props
 }: SettingsCardProps) {
     const {
@@ -33,6 +34,7 @@ export function UpdateNameCard({
             localization={localization}
             placeholder={localization.NAME_PLACEHOLDER}
             required={nameRequired}
+            onSave={onSave}
             {...props}
         />
     )
