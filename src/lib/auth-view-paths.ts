@@ -15,6 +15,8 @@ export const authViewPaths = {
     MEMBERS: "members",
     /** @default "organization" */
     ORGANIZATION: "organization",
+    /** @default "organization-api-keys" */
+    ORGANIZATION_API_KEYS: "organization-api-keys",
     /** @default "organizations" */
     ORGANIZATIONS: "organizations",
     /** @default "recover-account" */

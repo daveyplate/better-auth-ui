@@ -120,6 +120,7 @@ function OrganizationNameForm({
 
         try {
             await authClient.organization.update({
+                organizationId: activeOrganization.id,
                 data: { name },
                 fetchOptions: {
                     throw: true

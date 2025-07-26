@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useState } from "react"
+import { useContext, useMemo, useState } from "react"
 import { AuthUIContext } from "../../../lib/auth-ui-provider"
 import { cn } from "../../../lib/utils"
 import { CardContent } from "../../ui/card"
@@ -10,12 +10,17 @@ import { APIKeyCell } from "./api-key-cell"
 import { APIKeyDisplayDialog } from "./api-key-display-dialog"
 import { CreateAPIKeyDialog } from "./create-api-key-dialog"
 
+export interface APIKeysCardProps extends SettingsCardProps {
+    organizationId?: string
+}
+
 export function APIKeysCard({
     className,
     classNames,
     localization,
+    organizationId,
     ...props
-}: SettingsCardProps) {
+}: APIKeysCardProps) {
     const {
         hooks: { useListApiKeys },
         localization: contextLocalization
@@ -24,6 +29,13 @@ export function APIKeysCard({
     localization = { ...contextLocalization, ...localization }
 
     const { data: apiKeys, isPending, refetch } = useListApiKeys()
+
+    // Filter API keys by organizationId
+    const filteredApiKeys = useMemo(() => {
+        return apiKeys?.filter(
+            (apiKey) => organizationId === apiKey.metadata?.organizationId
+        )
+    }, [apiKeys, organizationId])
 
     const [createDialogOpen, setCreateDialogOpen] = useState(false)
     const [displayDialogOpen, setDisplayDialogOpen] = useState(false)
@@ -47,11 +59,11 @@ export function APIKeysCard({
                 action={() => setCreateDialogOpen(true)}
                 {...props}
             >
-                {apiKeys && apiKeys.length > 0 && (
+                {filteredApiKeys && filteredApiKeys.length > 0 && (
                     <CardContent
                         className={cn("grid gap-4", classNames?.content)}
                     >
-                        {apiKeys?.map((apiKey) => (
+                        {filteredApiKeys?.map((apiKey) => (
                             <APIKeyCell
                                 key={apiKey.id}
                                 classNames={classNames}
@@ -71,6 +83,7 @@ export function APIKeysCard({
                 onOpenChange={setCreateDialogOpen}
                 onSuccess={handleCreateApiKey}
                 refetch={refetch}
+                organizationId={organizationId}
             />
 
             <APIKeyDisplayDialog

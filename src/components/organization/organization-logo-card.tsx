@@ -166,6 +166,7 @@ function OrganizationLogoForm({
 
         try {
             await authClient.organization.update({
+                organizationId: activeOrganization.id,
                 data: { logo: image },
                 fetchOptions: { throw: true }
             })
@@ -189,6 +190,7 @@ function OrganizationLogoForm({
 
         try {
             await authClient.organization.update({
+                organizationId: activeOrganization.id,
                 data: { logo: "" },
                 fetchOptions: { throw: true }
             })

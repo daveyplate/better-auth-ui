@@ -37,7 +37,6 @@ export function ProviderCell({
         authClient,
         basePath,
         baseURL,
-        colorIcons,
         localization: contextLocalization,
         mutators: { unlinkAccount },
         viewPaths,
@@ -104,31 +103,9 @@ export function ProviderCell({
                 classNames?.cell
             )}
         >
-            {provider.icon &&
-                (colorIcons === true ? (
-                    <provider.icon
-                        className={cn("size-4", classNames?.icon)}
-                        variant="color"
-                    />
-                ) : colorIcons === false ? (
-                    <provider.icon className={cn("size-4", classNames?.icon)} />
-                ) : (
-                    <>
-                        <provider.icon
-                            className={cn(
-                                "size-4 dark:hidden",
-                                classNames?.icon
-                            )}
-                            variant="color"
-                        />
-                        <provider.icon
-                            className={cn(
-                                "hidden size-4 dark:block",
-                                classNames?.icon
-                            )}
-                        />
-                    </>
-                ))}
+            {provider.icon && (
+                <provider.icon className={cn("size-4", classNames?.icon)} />
+            )}
 
             <span className="text-sm">{provider.name}</span>
 

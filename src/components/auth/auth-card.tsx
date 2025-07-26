@@ -41,6 +41,7 @@ export interface AuthCardClassNames {
     description?: string
     footer?: string
     footerLink?: string
+    continueWith?: string
     form?: AuthFormClassNames
     header?: string
     separator?: string
@@ -136,7 +137,18 @@ export function AuthCard({
     useEffect(() => {
         if (view === "SETTINGS" && settings?.url) replace(settings.url)
         if (view === "SETTINGS" && !settings) replace(redirectTo || "/")
-    }, [replace, settings, view, redirectTo])
+
+        // Handle basePath redirects for settings views
+        if (
+            settings?.basePath &&
+            settingsViews.includes(view as SettingsView)
+        ) {
+            const viewPath = viewPaths[view as keyof typeof viewPaths]
+            const redirectPath = `${settings.basePath}/${viewPath}`
+
+            replace(redirectPath)
+        }
+    }, [replace, settings, view, redirectTo, viewPaths])
 
     if (view === "CALLBACK") return <AuthCallback redirectTo={redirectTo} />
     if (view === "SIGN_OUT") return <SignOut />
@@ -265,10 +277,15 @@ export function AuthCard({
                 {view !== "RESET_PASSWORD" &&
                     (social?.providers?.length ||
                         genericOAuth?.providers?.length ||
-                        passkey) && (
+                        (view === "SIGN_IN" && passkey)) && (
                         <>
                             {(credentials || magicLink || emailOTP) && (
-                                <div className="flex items-center gap-2">
+                                <div
+                                    className={cn(
+                                        "flex items-center gap-2",
+                                        classNames?.continueWith
+                                    )}
+                                >
                                     <Separator
                                         className={cn(
                                             "!w-auto grow",

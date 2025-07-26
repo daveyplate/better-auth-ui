@@ -66,6 +66,13 @@ export interface OrganizationSwitcherProps
     trigger?: ReactNode
     localization?: AuthLocalization
     onSetActive?: (organizationId: string | null) => void
+    /**
+     * Hide the personal organization option from the switcher.
+     * When true, users can only switch between organizations and cannot access their personal account.
+     * If no organization is active, the first available organization will be automatically selected.
+     * @default false
+     */
+    hidePersonal?: boolean
 }
 
 /**
@@ -86,6 +93,7 @@ export function OrganizationSwitcher({
     localization: localizationProp,
     size,
     onSetActive,
+    hidePersonal,
     ...props
 }: OrganizationSwitcherProps) {
     const {
@@ -93,6 +101,7 @@ export function OrganizationSwitcher({
         basePath,
         hooks: { useActiveOrganization, useSession, useListOrganizations },
         localization: contextLocalization,
+        settings,
         toast,
         viewPaths,
         Link
@@ -131,6 +140,11 @@ export function OrganizationSwitcher({
 
     const switchOrganization = useCallback(
         async (organizationId: string | null) => {
+            // Prevent switching to personal account when hidePersonal is true
+            if (hidePersonal && organizationId === null) {
+                return
+            }
+
             setActiveOrganizationPending(true)
 
             try {
@@ -156,9 +170,37 @@ export function OrganizationSwitcher({
             toast,
             localization,
             onSetActive,
-            refetchActiveOrganization
+            refetchActiveOrganization,
+            hidePersonal
         ]
     )
+
+    // Determine whether to show personal view based on hidePersonal prop
+    const shouldShowPersonal =
+        !hidePersonal && !activeOrganization && !activeOrganizationPending
+
+    // Auto-select first organization when hidePersonal is true
+    useEffect(() => {
+        if (
+            hidePersonal &&
+            !activeOrganization &&
+            !activeOrganizationPending &&
+            organizations &&
+            organizations.length > 0 &&
+            !sessionPending &&
+            !organizationPending
+        ) {
+            switchOrganization(organizations[0].id)
+        }
+    }, [
+        hidePersonal,
+        activeOrganization,
+        activeOrganizationPending,
+        organizations,
+        sessionPending,
+        organizationPending,
+        switchOrganization
+    ])
 
     return (
         <>
@@ -180,7 +222,8 @@ export function OrganizationSwitcher({
                                 {(!sessionData && !isPending) ||
                                 activeOrganizationPending ||
                                 activeOrganization ||
-                                (user as User)?.isAnonymous ? (
+                                (user as User)?.isAnonymous ||
+                                hidePersonal ? (
                                     <OrganizationLogo
                                         key={activeOrganization?.logo}
                                         className={cn(
@@ -224,7 +267,8 @@ export function OrganizationSwitcher({
                                 {(!sessionData && !isPending) ||
                                 activeOrganizationPending ||
                                 activeOrganization ||
-                                (user as User)?.isAnonymous ? (
+                                (user as User)?.isAnonymous ||
+                                hidePersonal ? (
                                     <OrganizationView
                                         classNames={
                                             classNames?.trigger?.organization
@@ -269,7 +313,8 @@ export function OrganizationSwitcher({
                         {(user && !(user as User).isAnonymous) || isPending ? (
                             <>
                                 {activeOrganizationPending ||
-                                activeOrganization ? (
+                                activeOrganization ||
+                                hidePersonal ? (
                                     <OrganizationView
                                         classNames={
                                             classNames?.content?.organization
@@ -292,7 +337,7 @@ export function OrganizationSwitcher({
 
                                 {!isPending && (
                                     <Link
-                                        href={`${basePath}/${
+                                        href={`${settings?.basePath || basePath}/${
                                             activeOrganization
                                                 ? viewPaths.ORGANIZATION
                                                 : viewPaths.SETTINGS
@@ -322,7 +367,7 @@ export function OrganizationSwitcher({
                         className={classNames?.content?.separator}
                     />
 
-                    {activeOrganization && (
+                    {activeOrganization && !hidePersonal && (
                         <DropdownMenuItem
                             onClick={() => switchOrganization(null)}
                         >
@@ -356,11 +401,13 @@ export function OrganizationSwitcher({
                             )
                     )}
 
-                    {organizations && organizations.length > 0 && (
-                        <DropdownMenuSeparator
-                            className={classNames?.content?.separator}
-                        />
-                    )}
+                    {organizations &&
+                        organizations.length > 0 &&
+                        (!hidePersonal || organizations.length > 1) && (
+                            <DropdownMenuSeparator
+                                className={classNames?.content?.separator}
+                            />
+                        )}
 
                     {!isPending &&
                     sessionData &&

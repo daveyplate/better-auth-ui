@@ -27,6 +27,11 @@ export type OrganizationOptions = {
      * @default []
      */
     customRoles?: Array<{ role: string; label: string }>
+    /**
+     * Enable or disable API key support for organizations
+     * @default false
+     */
+    apiKey?: boolean
 }
 
 export type OrganizationOptionsContext = {
@@ -40,4 +45,9 @@ export type OrganizationOptionsContext = {
      * @default []
      */
     customRoles: Array<{ role: string; label: string }>
+    /**
+     * Enable or disable API key support for organizations
+     * @default false
+     */
+    apiKey?: boolean
 }

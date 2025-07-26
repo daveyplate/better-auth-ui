@@ -182,6 +182,7 @@ export function SignInForm({
 
                             <FormControl>
                                 <Input
+                                    autoComplete={usernameEnabled ? "username" : "email"}
                                     className={classNames?.input}
                                     type={usernameEnabled ? "text" : "email"}
                                     placeholder={

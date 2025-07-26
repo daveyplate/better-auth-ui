@@ -125,6 +125,7 @@ function OrganizationSlugForm({
 
         try {
             await authClient.organization.update({
+                organizationId: activeOrganization.id,
                 data: { slug },
                 fetchOptions: {
                     throw: true

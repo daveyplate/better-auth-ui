@@ -3,24 +3,32 @@ title: Custom Settings
 icon: Cog
 ---
 
-The default authentication components provided by `@daveyplate/better-auth-ui` include a built-in settings page accessible at `/auth/settings`.
+The default authentication components provided by `@daveyplate/better-auth-ui` include built-in settings pages accessible under the same base path as your auth views (e.g., `/auth/settings`, `/auth/security`, etc.).
 
-However, for advanced use cases or customization needs, you may want to provide a user settings interface at your own custom path or selectively use only certain settings components within your own application structure.
+However, for advanced use cases, you may want to:
+1. Move the built-in settings views to a different base path (using `settings.basePath`)
+2. Replace the settings with a completely custom implementation (using `settings.url`)
+3. Build your own settings page using individual components
 
 ## Overview
 
-You have two primary ways to create a custom settings page experience:
+You have three primary ways to customize the settings experience:
 
-1. Use the built-in plug-and-play `<SettingsCards />` component on your custom route.
-2. Selectively import and use individual components to build your own specific settings page layout.
+1. **Move settings to a different path**: Use `settings.basePath` to relocate all built-in settings views while keeping their functionality
+2. **Replace with custom settings**: Use `settings.url` to redirect to your completely custom settings implementation
+3. **Build custom layouts**: Import individual settings components to create your own layouts
 
-## Step 1: Setting `settings.url`
+### Quick Comparison
 
-To override the default built-in settings page URL (`/auth/settings`) with your custom URL (example: `/dashboard/settings`):
+| Option | Use Case | Configuration | Result |
+|--------|----------|---------------|---------|
+| `settings.basePath` | Keep built-in settings but move to different path | `settings: { basePath: "/dashboard" }` | Settings at `/dashboard/settings`, `/dashboard/security`, etc. |
+| `settings.url` | Replace with completely custom settings | `settings: { url: "/my-settings" }` | All settings routes redirect to `/my-settings` |
+| Individual components | Build custom layouts with specific components | Import components directly | Full control over layout and functionality |
 
-### With AuthUIProvider:
+## Option 1: Moving Settings to a Different Base Path
 
-Set the `settings.url` prop within your main application provider:
+If you want to keep the built-in settings functionality but move it to a different location (e.g., from `/auth/settings` to `/dashboard/settings`), use the `settings.basePath` option:
 
 ```tsx title="app/providers.tsx"
 "use client"
@@ -40,7 +48,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             replace={router.replace}
             onSessionChange={() => router.refresh()}
             settings={{
-                url: "/dashboard/settings" // Your custom settings route
+                basePath: "/dashboard" // Settings views will be at /dashboard/settings, /dashboard/security, etc.
             }}
             Link={Link}
         >
@@ -50,13 +58,82 @@ export function Providers({ children }: { children: React.ReactNode }) {
 }
 ```
 
-> **Important**: Once `settings.url` is set, the built-in `/auth/settings` route will automatically redirect users visiting `/auth/settings` to your custom path, providing a seamless replacement of the default option.
+With this configuration:
+- Auth views remain at: `/auth/sign-in`, `/auth/sign-up`, etc.
+- Settings views move to: `/dashboard/settings`, `/dashboard/security`, `/dashboard/api-keys`, `/dashboard/organization`, etc.
+- The `<UserButton />` and `<SettingsCards />` components automatically use the new base path
 
-## Step 2: Implementing Custom Settings UI
+You can combine `basePath` with other settings options:
 
-### Option A: Using `<SettingsCards />`
+```tsx
+settings={{
+    basePath: "/dashboard",
+    fields: ["image", "name", "age"] // Specify which fields to show
+}}
 
-The easiest way is to use the `<SettingsCards />` component, which automatically handles displaying all enabled settings. This includes avatar, email, username, password, linked social providers, session management, delete account, and custom additional fields you've provided.
+### Using SettingsCards with pathname
+
+When using `settings.basePath`, you can pass the `pathname` prop to `<SettingsCards />` to automatically determine the current view:
+
+```tsx title="app/dashboard/[...settings]/page.tsx"
+import { SettingsCards } from "@daveyplate/better-auth-ui"
+
+export default function SettingsPage({ 
+    params 
+}: { 
+    params: { settings: string[] } 
+}) {
+    const pathname = `/dashboard/${params.settings?.join("/") || "settings"}`
+    
+    return (
+        <div className="mx-auto max-w-4xl py-12 px-4">
+            <SettingsCards pathname={pathname} />
+        </div>
+    )
+}
+```
+
+## Option 2: Completely Custom Settings Page
+
+To replace the built-in settings with your own custom implementation, use `settings.url`:
+
+```tsx title="app/providers.tsx"
+"use client"
+
+import { AuthUIProvider } from "@daveyplate/better-auth-ui"
+import { authClient } from "@/lib/auth-client"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
+
+export function Providers({ children }: { children: React.ReactNode }) {
+    const router = useRouter()
+
+    return (
+        <AuthUIProvider
+            authClient={authClient}
+            navigate={router.push}
+            replace={router.replace}
+            onSessionChange={() => router.refresh()}
+            settings={{
+                url: "/my-custom-settings" // Redirects to your custom settings page
+            }}
+            Link={Link}
+        >
+            {children}
+        </AuthUIProvider>
+    )
+}
+```
+
+> **Important**: When `settings.url` is set, all built-in settings routes will redirect to your custom URL. You're responsible for implementing the entire settings functionality.
+
+## Option 3: Building Custom Settings Layouts
+
+For maximum control, you can build your own settings page layouts using individual components.
+
+### Using Individual Settings Components
+
+The easiest way to get started is using the `<SettingsCards />` component, which automatically handles displaying all enabled settings. This includes avatar, email, username, password, linked social providers, session management, delete account, and custom additional fields you've provided.
 
 ```tsx title="app/dashboard/settings/page.tsx"
 import { SettingsCards } from "@daveyplate/better-auth-ui"
@@ -88,7 +165,7 @@ You can customize the appearance using TailwindCSS classes through `classNames` 
 />
 ```
 
-### Option B: Individually Using Settings Components
+### Individually Using Settings Components
 
 For finer-grained control, selectively import the components you want:
 

@@ -26,6 +26,7 @@ export function Header() {
 - **Organization Settings**: Quick access to organization settings
 - **Responsive Design**: Adapts to different screen sizes
 - **Custom Trigger**: Use your own trigger element
+- **Hide Personal Mode**: Option to enforce organization-only usage
 
 ## Reference
 
@@ -105,6 +106,20 @@ import { Button } from '@/components/ui/button'
   }}
 />
 ```
+
+### Hide Personal Account
+
+For applications that require users to always work within an organization context, you can hide the personal account option:
+
+```tsx
+<OrganizationSwitcher hidePersonal />
+```
+
+When `hidePersonal` is set to `true`:
+- The personal account option is removed from the dropdown
+- If no organization is active, the first available organization is automatically selected
+- Users cannot switch back to their personal account
+- The switcher only shows and allows switching between organizations
 
 ## Behavior
 

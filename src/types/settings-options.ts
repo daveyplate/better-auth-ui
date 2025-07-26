@@ -4,6 +4,10 @@ export type SettingsOptions = {
      */
     url?: string
     /**
+     * Base path for settings views
+     */
+    basePath?: string
+    /**
      * Array of fields to show in `<SettingsCards />`
      * @default ["image", "name"]
      */

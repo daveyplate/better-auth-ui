@@ -264,6 +264,7 @@ export function AuthForm({
                 <SignUpForm
                     className={className}
                     classNames={classNames}
+                    callbackURL={callbackURL}
                     localization={localization}
                     redirectTo={redirectTo}
                     isSubmitting={isSubmitting}

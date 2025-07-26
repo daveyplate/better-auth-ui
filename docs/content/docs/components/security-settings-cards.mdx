@@ -1,0 +1,113 @@
+---
+title: <SecuritySettingsCards />
+description: A collection of security-related settings cards for user account protection
+---
+
+## Import
+
+```tsx
+import { SecuritySettingsCards } from "@daveyplate/better-auth-ui"
+```
+
+## Usage
+
+```tsx
+<SecuritySettingsCards />
+```
+
+## Props
+
+| Name           | Type                            | Default     | Description                                |
+|----------------|---------------------------------|-------------|--------------------------------------------|
+| `className`    | `string`                        | `undefined` | Additional CSS classes for the container   |
+| `classNames`   | `SettingsCardsClassNames`       | `undefined` | Class names for individual components      |
+| `localization` | `Partial<AuthLocalization>`     | `undefined` | Localization object for translations       |
+
+## Example
+
+```tsx
+import { SecuritySettingsCards } from "@daveyplate/better-auth-ui"
+
+export function SecuritySettings() {
+    return (
+        <div className="container mx-auto p-6">
+            <h1 className="text-2xl font-bold mb-6">Security Settings</h1>
+            <SecuritySettingsCards />
+        </div>
+    )
+}
+```
+
+## Custom Styling
+
+```tsx
+<SecuritySettingsCards
+    className="space-y-8"
+    classNames={{
+        cards: "gap-6",
+        card: {
+            base: "border-dashed",
+            header: "bg-red-50 dark:bg-red-950"
+        }
+    }}
+/>
+```
+
+## Features
+
+The `SecuritySettingsCards` component automatically renders security-related cards based on your Better Auth configuration:
+
+### Included Cards
+
+- **Change Password Card** - For updating account password (if credentials are enabled)
+- **Providers Card** - Manage linked social accounts (if social providers are configured)
+- **Two-Factor Authentication Card** - Enable/disable 2FA (if two-factor is enabled and credentials are linked)
+- **Passkeys Card** - Manage passkeys for passwordless authentication (if passkeys are enabled)
+- **Sessions Card** - View and manage active sessions
+- **Delete Account Card** - Allow users to delete their account (if delete user is enabled)
+
+### Conditional Rendering
+
+Cards are conditionally rendered based on:
+- Your Better Auth configuration
+- User's current authentication state
+- Available authentication methods
+
+For example:
+- Password card only appears if `credentials` is enabled
+- Two-factor card requires both `twoFactor` enabled and a credential-linked account
+- Providers card appears if either `social.providers` or `genericOAuth.providers` are configured
+
+## Localization
+
+The component supports full localization through the `localization` prop:
+
+```tsx
+<SecuritySettingsCards
+    localization={{
+        security: {
+            title: "Sécurité",
+            changePassword: "Changer le mot de passe",
+            twoFactorAuth: "Authentification à deux facteurs",
+            sessions: "Sessions actives"
+            // ... other translations
+        }
+    }}
+/>
+```
+
+## Security Considerations
+
+This component handles sensitive security settings. It includes:
+- Session freshness checks for critical operations
+- Proper authentication state validation
+- Secure password change flows
+- Safe account deletion with confirmation
+
+## Related Components
+
+- [`<SettingsCards />`](/docs/components/settings-cards) - Parent component with navigation
+- [`<ChangePasswordCard />`](/docs/components/change-password-card) - Individual password change card
+- [`<TwoFactorCard />`](/docs/components/two-factor-card) - Two-factor authentication management
+- [`<SessionsCard />`](/docs/components/sessions-card) - Active sessions management
+- [`<DeleteAccountCard />`](/docs/components/delete-account-card) - Account deletion 

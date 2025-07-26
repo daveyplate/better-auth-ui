@@ -103,12 +103,6 @@ export type AuthUIContextType = {
      * Captcha configuration
      */
     captcha?: CaptchaOptions
-    /**
-     * Enable or disable color icons for both light and dark themes
-     * The default is to use color icons for light mode and black & white icons for dark mode
-     * @default undefined
-     */
-    colorIcons?: boolean | undefined
     credentials?: CredentialsOptions
     /**
      * Default redirect URL after authenticating
@@ -322,10 +316,7 @@ export type AuthUIProviderProps = {
      * @deprecated use credentials.forgotPassword instead
      */
     forgotPassword?: boolean
-    /**
-     * @deprecated use colorIcons instead
-     */
-    noColorIcons?: boolean
+
     /**
      * @deprecated use credentials.passwordValidation instead
      */
@@ -392,7 +383,6 @@ export const AuthUIProvider = ({
     basePath = "/auth",
     baseURL = "",
     captcha,
-    colorIcons,
     redirectTo = "/",
     credentials: credentialsProp,
     confirmPassword,
@@ -406,7 +396,6 @@ export const AuthUIProvider = ({
     mutators: mutatorsProp,
     localization: localizationProp,
     nameRequired = true,
-    noColorIcons,
     organization: organizationProp,
     signUp: signUpProp = true,
     signUpFields,
@@ -419,12 +408,6 @@ export const AuthUIProvider = ({
     ...props
 }: AuthUIProviderProps) => {
     useEffect(() => {
-        if (noColorIcons !== undefined) {
-            console.warn(
-                "[Better Auth UI] noColorIcons is deprecated, use colorIcons instead"
-            )
-        }
-
         if (uploadAvatar !== undefined) {
             console.warn(
                 "[Better Auth UI] uploadAvatar is deprecated, use avatar.upload instead"
@@ -515,7 +498,6 @@ export const AuthUIProvider = ({
             )
         }
     }, [
-        noColorIcons,
         uploadAvatar,
         avatarExtension,
         avatarSize,
@@ -532,10 +514,6 @@ export const AuthUIProvider = ({
         username,
         signUpFields
     ])
-
-    if (noColorIcons) {
-        colorIcons = false
-    }
 
     const authClient = authClientProp as AuthClient
 
@@ -567,8 +545,14 @@ export const AuthUIProvider = ({
             }
         }
 
+        // Remove trailing slash from basePath
+        const basePath = settingsProp.basePath?.endsWith("/")
+            ? settingsProp.basePath.slice(0, -1)
+            : settingsProp.basePath
+
         return {
             url: settingsProp.url,
+            basePath,
             fields: settingsProp.fields || ["image", "name"]
         }
     }, [settingsProp, settingsFields, settingsURL])
@@ -627,7 +611,7 @@ export const AuthUIProvider = ({
             confirmPassword:
                 credentialsProp?.confirmPassword || confirmPassword,
             forgotPassword:
-                (credentialsProp?.forgotPassword || forgotPassword) ?? true,
+                credentialsProp?.forgotPassword ?? forgotPassword ?? true,
             passwordValidation:
                 credentialsProp?.passwordValidation || passwordValidation,
             rememberMe: credentialsProp?.rememberMe || rememberMe,
@@ -818,7 +802,6 @@ export const AuthUIProvider = ({
                 basePath: basePath === "/" ? "" : basePath,
                 baseURL,
                 captcha,
-                colorIcons,
                 redirectTo,
                 changeEmail,
                 credentials,
@@ -842,6 +825,7 @@ export const AuthUIProvider = ({
             }}
         >
             {sessionData &&
+                organization &&
                 (hooks.useActiveOrganization ===
                     authClient.useActiveOrganization ||
                     hooks.useListOrganizations ===

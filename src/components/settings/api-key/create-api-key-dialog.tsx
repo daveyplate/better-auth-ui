@@ -6,11 +6,14 @@ import { type ComponentProps, useContext } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import type { Organization } from "better-auth/plugins/organization"
 import { useLang } from "../../../hooks/use-lang"
 import { AuthUIContext } from "../../../lib/auth-ui-provider"
 import { cn, getLocalizedError } from "../../../lib/utils"
 import type { AuthLocalization } from "../../../localization/auth-localization"
 import type { Refetch } from "../../../types/refetch"
+import { OrganizationView } from "../../organization/organization-view"
+import { PersonalAccountView } from "../../organization/personal-account-view"
 import { Button } from "../../ui/button"
 import {
     Dialog,
@@ -43,6 +46,7 @@ interface CreateAPIKeyDialogProps extends ComponentProps<typeof Dialog> {
     localization?: AuthLocalization
     onSuccess: (key: string) => void
     refetch?: Refetch
+    organizationId?: string
 }
 
 export function CreateAPIKeyDialog({
@@ -50,13 +54,16 @@ export function CreateAPIKeyDialog({
     localization,
     onSuccess,
     refetch,
+    organizationId,
     onOpenChange,
     ...props
 }: CreateAPIKeyDialogProps) {
     const {
         authClient,
         apiKey,
+        hooks: { useListOrganizations, useSession },
         localization: contextLocalization,
+        organization: contextOrganization,
         toast
     } = useContext(AuthUIContext)
 
@@ -64,18 +71,38 @@ export function CreateAPIKeyDialog({
 
     const { lang } = useLang()
 
+    let organizations: Organization[] | null | undefined
+    if (contextOrganization) {
+        const { data } = useListOrganizations()
+        organizations = data
+    }
+
+    const { data: sessionData } = useSession()
+    const user = sessionData?.user
+
+    const showOrganizationSelect = contextOrganization?.apiKey
+
     const formSchema = z.object({
         name: z
             .string()
             .min(1, `${localization.NAME} ${localization.IS_REQUIRED}`),
-        expiresInDays: z.string().optional()
+        expiresInDays: z.string().optional(),
+        organizationId: showOrganizationSelect
+            ? z
+                  .string()
+                  .min(
+                      1,
+                      `${localization.ORGANIZATION} ${localization.IS_REQUIRED}`
+                  )
+            : z.string().optional()
     })
 
     const form = useForm({
         resolver: zodResolver(formSchema),
-        defaultValues: {
+        values: {
             name: "",
-            expiresInDays: "none"
+            expiresInDays: "none",
+            organizationId: organizationId ?? "personal"
         }
     })
 
@@ -88,12 +115,24 @@ export function CreateAPIKeyDialog({
                     ? Number.parseInt(values.expiresInDays) * 60 * 60 * 24
                     : undefined
 
+            const selectedOrgId =
+                values.organizationId === "personal"
+                    ? undefined
+                    : values.organizationId
+
+            const metadata = {
+                ...(typeof apiKey === "object" ? apiKey.metadata : {}),
+                ...(contextOrganization && selectedOrgId
+                    ? { organizationId: selectedOrgId }
+                    : {})
+            }
+
             const result = await authClient.apiKey.create({
                 name: values.name,
                 expiresIn,
                 prefix: typeof apiKey === "object" ? apiKey.prefix : undefined,
                 metadata:
-                    typeof apiKey === "object" ? apiKey.metadata : undefined,
+                    Object.keys(metadata).length > 0 ? metadata : undefined,
                 fetchOptions: { throw: true }
             })
 
@@ -139,6 +178,80 @@ export function CreateAPIKeyDialog({
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-6"
                     >
+                        {showOrganizationSelect && (
+                            <FormField
+                                control={form.control}
+                                name="organizationId"
+                                render={({ field }) => (
+                                    <FormItem className="w-full">
+                                        <FormLabel
+                                            className={classNames?.label}
+                                        >
+                                            {localization.ORGANIZATION}
+                                        </FormLabel>
+
+                                        <Select
+                                            onValueChange={field.onChange}
+                                            value={field.value}
+                                            disabled={isSubmitting}
+                                        >
+                                            <FormControl>
+                                                <SelectTrigger
+                                                    className={cn(
+                                                        "w-full",
+                                                        classNames?.input
+                                                    )}
+                                                >
+                                                    <SelectValue
+                                                        placeholder={
+                                                            localization.ORGANIZATION
+                                                        }
+                                                    />
+                                                </SelectTrigger>
+                                            </FormControl>
+
+                                            <SelectContent className="w-[--radix-select-trigger-width]">
+                                                <SelectItem
+                                                    value="personal"
+                                                    className="p-2"
+                                                    textValue={
+                                                        localization.PERSONAL_ACCOUNT
+                                                    }
+                                                >
+                                                    <PersonalAccountView
+                                                        user={user}
+                                                        localization={
+                                                            localization
+                                                        }
+                                                        size="sm"
+                                                    />
+                                                </SelectItem>
+
+                                                {organizations?.map((org) => (
+                                                    <SelectItem
+                                                        key={org.id}
+                                                        value={org.id}
+                                                        className="p-2"
+                                                        textValue={org.name}
+                                                    >
+                                                        <OrganizationView
+                                                            organization={org}
+                                                            localization={
+                                                                localization
+                                                            }
+                                                            size="sm"
+                                                        />
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        )}
+
                         <div className="flex gap-4">
                             <FormField
                                 control={form.control}

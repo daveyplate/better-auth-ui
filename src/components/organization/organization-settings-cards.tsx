@@ -21,6 +21,7 @@ export function OrganizationSettingsCards({
         basePath,
         hooks: { useActiveOrganization },
         organization,
+        settings,
         replace,
         viewPaths
     } = useContext(AuthUIContext)
@@ -33,12 +34,14 @@ export function OrganizationSettingsCards({
 
     useEffect(() => {
         if (organizationPending || organizationFetching) return
-        if (!activeOrganization) replace(`${basePath}/${viewPaths.SETTINGS}`)
+        if (!activeOrganization)
+            replace(`${settings?.basePath || basePath}/${viewPaths.SETTINGS}`)
     }, [
         activeOrganization,
         organizationPending,
         organizationFetching,
         basePath,
+        settings?.basePath,
         replace,
         viewPaths.SETTINGS
     ])

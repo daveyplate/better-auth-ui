@@ -19,6 +19,7 @@ import {
     useState
 } from "react"
 
+import { useIsHydrated } from "../hooks/use-hydrated"
 import { AuthUIContext } from "../lib/auth-ui-provider"
 import { getLocalizedError } from "../lib/utils"
 import { cn } from "../lib/utils"
@@ -63,6 +64,7 @@ export interface UserButtonProps {
         icon?: ReactNode
         label: ReactNode
         signedIn?: boolean
+        separator?: boolean
     }[]
     trigger?: ReactNode
     disableDefaultLinks?: boolean
@@ -129,7 +131,8 @@ export function UserButton({
     const user = sessionData?.user
     const [activeSessionPending, setActiveSessionPending] = useState(false)
 
-    const isPending = sessionPending || activeSessionPending
+    const isHydrated = useIsHydrated()
+    const isPending = sessionPending || activeSessionPending || !isHydrated
 
     const switchAccount = useCallback(
         async (sessionToken: string) => {
@@ -248,20 +251,31 @@ export function UserButton({
                 />
 
                 {additionalLinks?.map(
-                    ({ href, icon, label, signedIn }, index) =>
+                    ({ href, icon, label, signedIn, separator }, index) =>
                         (signedIn === undefined ||
                             (signedIn && !!sessionData) ||
                             (!signedIn && !sessionData)) && (
-                            <Link key={index} href={href}>
-                                <DropdownMenuItem
-                                    className={classNames?.content?.menuItem}
-                                >
-                                    <>
-                                        {icon}
-                                        {label}
-                                    </>
-                                </DropdownMenuItem>
-                            </Link>
+                            <Fragment key={index}>
+                                <Link href={href}>
+                                    <DropdownMenuItem
+                                        className={
+                                            classNames?.content?.menuItem
+                                        }
+                                    >
+                                        <>
+                                            {icon}
+                                            {label}
+                                        </>
+                                    </DropdownMenuItem>
+                                </Link>
+                                {separator && (
+                                    <DropdownMenuSeparator
+                                        className={
+                                            classNames?.content?.separator
+                                        }
+                                    />
+                                )}
+                            </Fragment>
                         )
                 )}
 
@@ -295,7 +309,7 @@ export function UserButton({
                             <Link
                                 href={
                                     settings.url ||
-                                    `${basePath}/${viewPaths.SETTINGS}`
+                                    `${settings.basePath || basePath}/${viewPaths.SETTINGS}`
                                 }
                             >
                                 <DropdownMenuItem

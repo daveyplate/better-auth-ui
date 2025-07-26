@@ -1,0 +1,45 @@
+---
+title: <PasskeysCard />
+description: Displays and manages user's passkeys/WebAuthn credentials
+---
+
+## Import
+
+```tsx
+import { PasskeysCard } from "@better-auth/ui-react/components"
+```
+
+## Usage
+
+```tsx
+<PasskeysCard />
+```
+
+## Props
+
+| Name          | Type                       | Default     | Description                                |
+|---------------|----------------------------|-------------|--------------------------------------------|
+| `className`   | `string`                   | `undefined` | Additional CSS classes for styling         |
+| `localization`| `AuthLocalization`         | `undefined` | Localization object for translations       |
+
+## Example
+
+```tsx
+import { PasskeysCard } from "@better-auth/ui-react/components"
+
+export function SecuritySettings() {
+    return (
+        <div className="space-y-4">
+            <PasskeysCard />
+        </div>
+    )
+}
+```
+
+## Features
+
+- View all registered passkeys
+- Add new passkeys
+- Delete existing passkeys
+- Shows passkey creation date and device info
+- Built-in loading states 

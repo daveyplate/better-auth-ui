@@ -1,0 +1,98 @@
+---
+title: <AccountSettingsCards />
+description: A collection of account management cards for user profile settings
+---
+
+## Import
+
+```tsx
+import { AccountSettingsCards } from "@daveyplate/better-auth-ui"
+```
+
+## Usage
+
+```tsx
+<AccountSettingsCards />
+```
+
+## Props
+
+| Name           | Type                            | Default     | Description                                |
+|----------------|---------------------------------|-------------|--------------------------------------------|
+| `className`    | `string`                        | `undefined` | Additional CSS classes for the container   |
+| `classNames`   | `SettingsCardsClassNames`       | `undefined` | Class names for individual components      |
+| `localization` | `Partial<AuthLocalization>`     | `undefined` | Localization object for translations       |
+
+## Example
+
+```tsx
+import { AccountSettingsCards } from "@daveyplate/better-auth-ui"
+
+export function AccountSettings() {
+    return (
+        <div className="container mx-auto p-6">
+            <h1 className="text-2xl font-bold mb-6">Account Settings</h1>
+            <AccountSettingsCards />
+        </div>
+    )
+}
+```
+
+## Custom Styling
+
+```tsx
+<AccountSettingsCards
+    className="space-y-8"
+    classNames={{
+        cards: "gap-6",
+        card: {
+            base: "border-2",
+            header: "bg-gray-50"
+        }
+    }}
+/>
+```
+
+## Features
+
+The `AccountSettingsCards` component automatically renders relevant account management cards based on your Better Auth configuration:
+
+### Included Cards
+
+- **Update Avatar Card** - If avatar support is enabled
+- **Update Username Card** - If username credentials are enabled
+- **Update Name Card** - If name field is included in settings
+- **Change Email Card** - If email changes are enabled
+- **Custom Fields** - Any additional fields configured in your auth setup
+- **Accounts Card** - If multi-session support is enabled
+
+### Conditional Rendering
+
+Cards are conditionally rendered based on your Better Auth configuration. For example:
+- Avatar card only appears if `avatar` is configured
+- Username card only appears if `credentials.username` is enabled
+- Custom fields are rendered dynamically based on `additionalFields`
+
+## Localization
+
+The component supports full localization through the `localization` prop:
+
+```tsx
+<AccountSettingsCards
+    localization={{
+        accountSettings: {
+            title: "Paramètres du compte",
+            updateAvatar: "Mettre à jour l'avatar",
+            updateName: "Mettre à jour le nom"
+            // ... other translations
+        }
+    }}
+/>
+```
+
+## Related Components
+
+- [`<SettingsCards />`](/docs/components/settings-cards) - Parent component with navigation
+- [`<UpdateAvatarCard />`](/docs/components/update-avatar-card) - Individual avatar update card
+- [`<UpdateNameCard />`](/docs/components/update-name-card) - Individual name update card
+- [`<AccountsCard />`](/docs/components/accounts-card) - Linked accounts management 

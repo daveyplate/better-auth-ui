@@ -1,0 +1,85 @@
+---
+title: <UpdateFieldCard />
+description: Generic settings card for updating custom user fields
+---
+
+## Import
+
+```tsx
+import { UpdateFieldCard } from "@better-auth/ui-react/components"
+```
+
+## Usage
+
+```tsx
+<UpdateFieldCard 
+    name="phoneNumber"
+    label="Phone Number"
+    type="text"
+    placeholder="Enter your phone number"
+/>
+```
+
+## Props
+
+| Name           | Type                                    | Default     | Description                                    |
+|----------------|-----------------------------------------|-------------|------------------------------------------------|
+| `name`         | `string`                                | (required)  | Field name in the user object                  |
+| `label`        | `ReactNode`                             | `undefined` | Display label for the field                    |
+| `type`         | `"text" \| "number" \| "boolean"`       | `"text"`    | Input type for the field                       |
+| `value`        | `unknown`                               | `undefined` | Current field value                            |
+| `placeholder`  | `string`                                | `undefined` | Input placeholder text                         |
+| `required`     | `boolean`                               | `false`     | Whether the field is required                  |
+| `description`  | `ReactNode`                             | `undefined` | Description text shown below the title         |
+| `instructions` | `ReactNode`                             | `undefined` | Additional instructions shown in the card      |
+| `validate`     | `(value: string) => boolean \| Promise<boolean>` | `undefined` | Custom validation function         |
+| `className`    | `string`                                | `undefined` | Additional CSS classes for styling             |
+| `classNames`   | `SettingsCardClassNames`                | `undefined` | Class names for individual card components     |
+| `localization` | `Partial<AuthLocalization>`             | `undefined` | Localization object for translations           |
+
+## Examples
+
+### Text Field
+
+```tsx
+<UpdateFieldCard 
+    name="bio"
+    label="Bio"
+    type="text"
+    placeholder="Tell us about yourself"
+    description="A short description about you"
+/>
+```
+
+### Number Field
+
+```tsx
+<UpdateFieldCard 
+    name="age"
+    label="Age"
+    type="number"
+    required
+    validate={(value) => Number(value) >= 18}
+/>
+```
+
+### Boolean Field
+
+```tsx
+<UpdateFieldCard 
+    name="newsletter"
+    label="Subscribe to newsletter"
+    type="boolean"
+    description="Receive updates about new features"
+/>
+```
+
+## Features
+
+- Supports text, number, and boolean field types
+- Built-in form validation
+- Custom validation support
+- Success/error feedback
+- Loading states during update
+- Checkbox UI for boolean fields
+- Integrated with Better Auth additional fields 

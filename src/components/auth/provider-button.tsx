@@ -37,7 +37,6 @@ export function ProviderButton({
         authClient,
         basePath,
         baseURL,
-        colorIcons,
         persistClient,
         redirectTo: contextRedirectTo,
         viewPaths,
@@ -130,31 +129,9 @@ export function ProviderButton({
             variant="outline"
             onClick={doSignInSocial}
         >
-            {provider.icon &&
-                (colorIcons === true ? (
-                    <provider.icon
-                        variant="color"
-                        className={classNames?.form?.icon}
-                    />
-                ) : colorIcons === false ? (
-                    <provider.icon className={classNames?.form?.icon} />
-                ) : (
-                    <>
-                        <provider.icon
-                            className={cn(
-                                "dark:hidden",
-                                classNames?.form?.icon
-                            )}
-                            variant="color"
-                        />
-                        <provider.icon
-                            className={cn(
-                                "hidden dark:block",
-                                classNames?.form?.icon
-                            )}
-                        />
-                    </>
-                ))}
+            {provider.icon && (
+                <provider.icon className={classNames?.form?.icon} />
+            )}
 
             {socialLayout === "grid" && provider.name}
             {socialLayout === "vertical" &&
