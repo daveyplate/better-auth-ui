@@ -92,6 +92,7 @@ export function ChangeEmailCard({
                 message: getLocalizedError({ error, localization })
             })
         }
+        onSave?.()
     }
 
     const resendVerification = async () => {
@@ -118,23 +119,13 @@ export function ChangeEmailCard({
             setResendDisabled(false)
             throw error
         }
-    }
-
-    const handleChangeEmail = async (data: z.infer<typeof formSchema>) => {
-        await changeEmail(data)
         onSave?.()
     }
-
-    const handleResendVerification = async () => {
-        await resendVerification()
-        onSave?.()
-    }
-
     
     return (
         <>
             <Form {...form}>
-                <form noValidate onSubmit={form.handleSubmit(handleChangeEmail)}>
+                <form noValidate onSubmit={form.handleSubmit(changeEmail)}>
                     <SettingsCard
                         className={className}
                         classNames={classNames}
@@ -191,7 +182,7 @@ export function ChangeEmailCard({
                     <Form {...resendForm}>
                         <form
                             onSubmit={resendForm.handleSubmit(
-                                handleResendVerification
+                                resendVerification
                             )}
                         >
                             <SettingsCard

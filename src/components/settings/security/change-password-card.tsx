@@ -136,6 +136,7 @@ export function ChangePasswordCard({
                 message: getLocalizedError({ error, localization })
             })
         }
+        onSave?.()
     }
 
     const changePassword = async ({
@@ -162,27 +163,19 @@ export function ChangePasswordCard({
         }
 
         form.reset()
+
+        onSave?.()
     }
 
     const credentialsLinked = accounts?.some(
         (acc) => acc.provider === "credential"
     )
 
-    const handleSetPassword = async () => {
-        await setPassword()
-        onSave?.()
-    }
-
-    const handleChangePassword = async (values: z.infer<typeof formSchema>) => {
-        await changePassword(values)
-        onSave?.()
-    }
-
 
     if (!isPending && !credentialsLinked) {
         return (
             <Form {...setPasswordForm}>
-                <form onSubmit={setPasswordForm.handleSubmit(handleSetPassword)}>
+                <form onSubmit={setPasswordForm.handleSubmit(setPassword)}>
                     <SettingsCard
                         title={localization.SET_PASSWORD}
                         description={localization.SET_PASSWORD_DESCRIPTION}
@@ -198,7 +191,7 @@ export function ChangePasswordCard({
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleChangePassword)}>
+            <form onSubmit={form.handleSubmit(changePassword)}>
                 <SettingsCard
                     className={className}
                     classNames={classNames}

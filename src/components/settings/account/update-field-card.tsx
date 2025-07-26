@@ -150,16 +150,13 @@ export function UpdateFieldCard({
                 message: getLocalizedError({ error, localization })
             })
         }
-    }
 
-    const handleUpdateField = async (values: Record<string, unknown>) => {
-        await updateField(values)
         onSave?.()
     }
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleUpdateField)}>
+            <form onSubmit={form.handleSubmit(updateField)}>
                 <SettingsCard
                     className={className}
                     classNames={classNames}
