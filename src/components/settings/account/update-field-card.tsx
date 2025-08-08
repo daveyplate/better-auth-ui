@@ -38,7 +38,8 @@ export interface UpdateFieldCardProps {
     label?: ReactNode
     type?: FieldType
     value?: unknown
-    validate?: (value: string) => boolean | Promise<boolean>
+    validate?: (value: string) => boolean | Promise<boolean>,
+    onSave?: () => void
 }
 
 export function UpdateFieldCard({
@@ -53,7 +54,8 @@ export function UpdateFieldCard({
     label,
     type,
     value,
-    validate
+    validate,
+    onSave
 }: UpdateFieldCardProps) {
     const {
         hooks: { useSession },
@@ -148,6 +150,8 @@ export function UpdateFieldCard({
                 message: getLocalizedError({ error, localization })
             })
         }
+
+        onSave?.()
     }
 
     return (
