@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import type { BetterFetchOption } from "better-auth/react"
 import { useCaptcha } from "../../../hooks/use-captcha"
 import { useIsHydrated } from "../../../hooks/use-hydrated"
 import { useOnSuccessTransition } from "../../../hooks/use-success-transition"
@@ -94,11 +95,16 @@ function EmailForm({
     }, [form.formState.isSubmitting, setIsSubmitting])
 
     async function sendEmailOTP({ email }: z.infer<typeof formSchema>) {
+        const fetchOptions: BetterFetchOption = {
+            throw: true,
+            headers: await getCaptchaHeaders("/email-otp/send-verification-otp")
+        }
+
         try {
             await authClient.emailOtp.sendVerificationOtp({
                 email,
                 type: "sign-in",
-                fetchOptions: { throw: true }
+                fetchOptions
             })
 
             toast({
