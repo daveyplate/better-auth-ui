@@ -6,11 +6,13 @@ import { useContext, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import { useCaptcha } from "../../../hooks/use-captcha"
 import { useIsHydrated } from "../../../hooks/use-hydrated"
 import { useOnSuccessTransition } from "../../../hooks/use-success-transition"
 import { AuthUIContext } from "../../../lib/auth-ui-provider"
 import { cn, getLocalizedError } from "../../../lib/utils"
 import type { AuthLocalization } from "../../../localization/auth-localization"
+import { Captcha } from "../../captcha/captcha"
 import { Button } from "../../ui/button"
 import {
     Form,
@@ -57,6 +59,7 @@ function EmailForm({
     setEmail: (email: string) => void
 }) {
     const isHydrated = useIsHydrated()
+    const { captchaRef, getCaptchaHeaders } = useCaptcha({ localization })
 
     const {
         authClient,
@@ -141,6 +144,12 @@ function EmailForm({
                             <FormMessage className={classNames?.error} />
                         </FormItem>
                     )}
+                />
+
+                <Captcha
+                    ref={captchaRef}
+                    localization={localization}
+                    action="/email-otp/send-verification-otp"
                 />
 
                 <Button
