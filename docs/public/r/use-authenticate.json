@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-authenticate",
+  "type": "registry:hook",
+  "title": "Use Authenticate",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/any-auth-client.json",
+    "http://localhost:3000/r/auth-ui-provider.json"
+  ],
+  "files": [
+    {
+      "path": "src/hooks/use-authenticate.ts",
+      "content": "import { useContext, useEffect } from \"react\"\nimport { AuthUIContext } from \"../lib/auth-ui-provider\"\nimport type { AuthViewPath } from \"../server\"\nimport type { AnyAuthClient } from \"../types/any-auth-client\"\n\ninterface AuthenticateOptions<TAuthClient extends AnyAuthClient> {\n    authClient?: TAuthClient\n    authView?: AuthViewPath\n    enabled?: boolean\n}\n\nexport function useAuthenticate<TAuthClient extends AnyAuthClient>(\n    options?: AuthenticateOptions<TAuthClient>\n) {\n    type Session = TAuthClient[\"$Infer\"][\"Session\"][\"session\"]\n    type User = TAuthClient[\"$Infer\"][\"Session\"][\"user\"]\n\n    const { authView = \"SIGN_IN\", enabled = true } = options ?? {}\n\n    const {\n        hooks: { useSession },\n        basePath,\n        viewPaths,\n        replace\n    } = useContext(AuthUIContext)\n\n    const { data, isPending, error, refetch } = useSession()\n    const sessionData = data as\n        | {\n              session: Session\n              user: User\n          }\n        | null\n        | undefined\n\n    useEffect(() => {\n        if (!enabled || isPending || sessionData) return\n\n        replace(\n            `${basePath}/${viewPaths[authView]}?redirectTo=${window.location.href.replace(window.location.origin, \"\")}`\n        )\n    }, [\n        isPending,\n        sessionData,\n        basePath,\n        viewPaths,\n        replace,\n        authView,\n        enabled\n    ])\n\n    return {\n        data: sessionData,\n        user: sessionData?.user,\n        isPending,\n        error,\n        refetch\n    }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "magic-link-button",
+  "type": "registry:component",
+  "title": "Magic Link Button",
+  "description": "",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/auth-view.json",
+    "button",
+    "http://localhost:3000/r/utils.json",
+    "http://localhost:3000/r/view-paths.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/auth/magic-link-button.tsx",
+      "content": "import { LockIcon, MailIcon } from \"lucide-react\"\nimport { useContext } from \"react\"\n\nimport { AuthUIContext } from \"../../lib/auth-ui-provider\"\nimport { cn } from \"../../lib/utils\"\nimport type { AuthViewPath } from \"../../lib/view-paths\"\nimport type { AuthLocalization } from \"../../localization/auth-localization\"\nimport { Button } from \"../ui/button\"\nimport type { AuthViewClassNames } from \"./auth-view\"\n\ninterface MagicLinkButtonProps {\n    classNames?: AuthViewClassNames\n    isSubmitting?: boolean\n    localization: Partial<AuthLocalization>\n    view: AuthViewPath\n}\n\nexport function MagicLinkButton({\n    classNames,\n    isSubmitting,\n    localization,\n    view\n}: MagicLinkButtonProps) {\n    const { viewPaths, navigate, basePath, credentials } =\n        useContext(AuthUIContext)\n\n    return (\n        <Button\n            className={cn(\n                \"w-full\",\n                classNames?.form?.button,\n                classNames?.form?.secondaryButton\n            )}\n            disabled={isSubmitting}\n            type=\"button\"\n            variant=\"secondary\"\n            onClick={() =>\n                navigate(\n                    `${basePath}/${view === \"MAGIC_LINK\" || !credentials ? viewPaths.SIGN_IN : viewPaths.MAGIC_LINK}${window.location.search}`\n                )\n            }\n        >\n            {view === \"MAGIC_LINK\" ? (\n                <LockIcon className={classNames?.form?.icon} />\n            ) : (\n                <MailIcon className={classNames?.form?.icon} />\n            )}\n            {localization.SIGN_IN_WITH}{\" \"}\n            {view === \"MAGIC_LINK\"\n                ? localization.PASSWORD\n                : localization.MAGIC_LINK}\n        </Button>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

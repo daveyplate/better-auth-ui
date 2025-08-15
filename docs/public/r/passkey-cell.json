@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "passkey-cell",
+  "type": "registry:component",
+  "title": "Passkey Cell",
+  "description": "",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "button",
+    "card",
+    "http://localhost:3000/r/session-freshness-dialog.json",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/passkey/passkey-cell.tsx",
+      "content": "\"use client\"\n\nimport { FingerprintIcon, Loader2 } from \"lucide-react\"\nimport { useContext, useState } from \"react\"\n\nimport { AuthUIContext } from \"../../../lib/auth-ui-provider\"\nimport { cn, getLocalizedError } from \"../../../lib/utils\"\nimport type { AuthLocalization } from \"../../../localization/auth-localization\"\nimport { Button } from \"../../ui/button\"\nimport { Card } from \"../../ui/card\"\nimport { SessionFreshnessDialog } from \"../shared/session-freshness-dialog\"\nimport type { SettingsCardClassNames } from \"../shared/settings-card\"\n\nexport interface PasskeyCellProps {\n    className?: string\n    classNames?: SettingsCardClassNames\n    localization?: Partial<AuthLocalization>\n    passkey: { id: string; createdAt: Date }\n}\n\nexport function PasskeyCell({\n    className,\n    classNames,\n    localization,\n    passkey\n}: PasskeyCellProps) {\n    const {\n        freshAge,\n        hooks: { useSession, useListPasskeys },\n        localization: contextLocalization,\n        mutators: { deletePasskey },\n        toast\n    } = useContext(AuthUIContext)\n\n    localization = { ...contextLocalization, ...localization }\n\n    const { refetch } = useListPasskeys()\n\n    const { data: sessionData } = useSession()\n    const session = sessionData?.session\n    const isFresh = session\n        ? Date.now() - new Date(session?.createdAt).getTime() < freshAge * 1000\n        : false\n\n    const [showFreshnessDialog, setShowFreshnessDialog] = useState(false)\n    const [isLoading, setIsLoading] = useState(false)\n\n    const handleDeletePasskey = async () => {\n        // If session isn't fresh, show the freshness dialog\n        if (!isFresh) {\n            setShowFreshnessDialog(true)\n            return\n        }\n\n        setIsLoading(true)\n\n        try {\n            await deletePasskey({ id: passkey.id })\n            refetch?.()\n        } catch (error) {\n            setIsLoading(false)\n\n            toast({\n                variant: \"error\",\n                message: getLocalizedError({ error, localization })\n            })\n        }\n    }\n\n    return (\n        <>\n            <SessionFreshnessDialog\n                open={showFreshnessDialog}\n                onOpenChange={setShowFreshnessDialog}\n                classNames={classNames}\n                localization={localization}\n            />\n\n            <Card\n                className={cn(\n                    \"flex-row items-center p-4\",\n                    className,\n                    classNames?.cell\n                )}\n            >\n                <div className=\"flex items-center gap-3\">\n                    <FingerprintIcon\n                        className={cn(\"size-4\", classNames?.icon)}\n                    />\n                    <span className=\"text-sm\">\n                        {new Date(passkey.createdAt).toLocaleString()}\n                    </span>\n                </div>\n\n                <Button\n                    className={cn(\n                        \"relative ms-auto\",\n                        classNames?.button,\n                        classNames?.outlineButton\n                    )}\n                    disabled={isLoading}\n                    size=\"sm\"\n                    variant=\"outline\"\n                    onClick={handleDeletePasskey}\n                >\n                    {isLoading && <Loader2 className=\"animate-spin\" />}\n\n                    {localization.DELETE}\n                </Button>\n            </Card>\n        </>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

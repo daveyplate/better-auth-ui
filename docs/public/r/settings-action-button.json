@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "settings-action-button",
+  "type": "registry:component",
+  "title": "Settings Action Button",
+  "description": "",
+  "dependencies": [
+    "lucide-react",
+    "react-hook-form"
+  ],
+  "registryDependencies": [
+    "button",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/shared/settings-action-button.tsx",
+      "content": "\"use client\"\n\nimport { Loader2 } from \"lucide-react\"\nimport type { ComponentProps, ReactNode } from \"react\"\nimport { useFormState } from \"react-hook-form\"\n\nimport { cn } from \"../../../lib/utils\"\nimport { Button } from \"../../ui/button\"\nimport type { SettingsCardClassNames } from \"./settings-card\"\n\ninterface SettingsActionButtonProps extends ComponentProps<typeof Button> {\n    classNames?: SettingsCardClassNames\n    actionLabel: ReactNode\n    disabled?: boolean\n    isSubmitting?: boolean\n}\n\nexport function SettingsActionButton({\n    classNames,\n    actionLabel,\n    disabled,\n    isSubmitting,\n    variant,\n    onClick,\n    ...props\n}: SettingsActionButtonProps) {\n    if (!onClick) {\n        const formState = useFormState()\n        isSubmitting = formState.isSubmitting\n    }\n\n    return (\n        <Button\n            className={cn(\n                \"md:ms-auto\",\n                classNames?.button,\n                variant === \"default\" && classNames?.primaryButton,\n                variant === \"destructive\" && classNames?.destructiveButton\n            )}\n            disabled={isSubmitting || disabled}\n            size=\"sm\"\n            type={onClick ? \"button\" : \"submit\"}\n            variant={variant}\n            onClick={onClick}\n            {...props}\n        >\n            {isSubmitting && <Loader2 className=\"animate-spin\" />}\n            {actionLabel}\n        </Button>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

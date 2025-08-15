@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-current-organization",
+  "type": "registry:hook",
+  "title": "Use Current Organization",
+  "description": "",
+  "dependencies": [
+    "better-auth"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-ui-provider.json"
+  ],
+  "files": [
+    {
+      "path": "src/hooks/use-current-organization.ts",
+      "content": "import type { Organization } from \"better-auth/plugins/organization\"\nimport { useContext, useMemo } from \"react\"\nimport { AuthUIContext } from \"../lib/auth-ui-provider\"\n\nexport function useCurrentOrganization({\n    slug: slugProp\n}: {\n    slug?: string\n} = {}) {\n    const {\n        organization: organizationOptions,\n        hooks: { useActiveOrganization, useListOrganizations }\n    } = useContext(AuthUIContext)\n\n    const { pathMode, slug: contextSlug } = organizationOptions || {}\n\n    let data: Organization | null | undefined\n    let isPending: boolean | undefined\n    let isRefetching: boolean | undefined\n\n    let refetch: (() => void) | undefined\n\n    const {\n        data: organizations,\n        isPending: organizationsPending,\n        isRefetching: organizationsRefetching\n    } = useListOrganizations()\n\n    if (pathMode === \"slug\") {\n        const slug = slugProp || contextSlug\n\n        data = organizations?.find((organization) => organization.slug === slug)\n        isPending = organizationsPending\n        isRefetching = organizationsRefetching\n    } else {\n        const {\n            data: activeOrganization,\n            isPending: organizationPending,\n            isRefetching: organizationRefetching,\n            refetch: refetchOrganization\n        } = useActiveOrganization()\n\n        refetch = refetchOrganization\n\n        data = activeOrganization\n        isPending = organizationPending\n        isRefetching = organizationRefetching\n    }\n\n    return useMemo(\n        () => ({\n            data,\n            isPending,\n            isRefetching,\n            refetch\n        }),\n        [data, isPending, isRefetching, refetch]\n    )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

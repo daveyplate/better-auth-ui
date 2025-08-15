@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "redirect-to-sign-in",
+  "type": "registry:component",
+  "title": "Redirect To Sign In",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/use-authenticate.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/redirect-to-sign-in.tsx",
+      "content": "\"use client\"\n\nimport type { ReactNode } from \"react\"\nimport { useAuthenticate } from \"../hooks/use-authenticate\"\n\n/**\n * Redirects the user to the sign-in page\n *\n * Renders nothing and automatically redirects the current user to the authentication\n * sign-in page. Useful for protecting routes that require authentication or\n * redirecting users to sign in from various parts of the application.\n */\nexport function RedirectToSignIn(): ReactNode {\n    useAuthenticate({ authView: \"SIGN_IN\" })\n    return null\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

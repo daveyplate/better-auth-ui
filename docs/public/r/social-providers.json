@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "social-providers",
+  "type": "registry:lib",
+  "title": "Social Providers",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/provider-icons.json"
+  ],
+  "files": [
+    {
+      "path": "src/lib/social-providers.ts",
+      "content": "import {\n    AppleIcon,\n    DiscordIcon,\n    DropboxIcon,\n    FacebookIcon,\n    GitHubIcon,\n    GitLabIcon,\n    GoogleIcon,\n    HuggingFaceIcon,\n    KickIcon,\n    LinearIcon,\n    LinkedInIcon,\n    MicrosoftIcon,\n    NotionIcon,\n    type ProviderIcon,\n    RedditIcon,\n    RobloxIcon,\n    SlackIcon,\n    SpotifyIcon,\n    TikTokIcon,\n    TwitchIcon,\n    VKIcon,\n    XIcon,\n    ZoomIcon\n} from \"../components/provider-icons\"\n\nexport const socialProviders = [\n    {\n        provider: \"apple\",\n        name: \"Apple\",\n        icon: AppleIcon\n    },\n    {\n        provider: \"discord\",\n        name: \"Discord\",\n        icon: DiscordIcon\n    },\n    {\n        provider: \"dropbox\",\n        name: \"Dropbox\",\n        icon: DropboxIcon\n    },\n    {\n        provider: \"facebook\",\n        name: \"Facebook\",\n        icon: FacebookIcon\n    },\n    {\n        provider: \"github\",\n        name: \"GitHub\",\n        icon: GitHubIcon\n    },\n    {\n        provider: \"gitlab\",\n        name: \"GitLab\",\n        icon: GitLabIcon\n    },\n    {\n        provider: \"google\",\n        name: \"Google\",\n        icon: GoogleIcon\n    },\n    {\n        provider: \"huggingface\",\n        name: \"Hugging Face\",\n        icon: HuggingFaceIcon\n    },\n    {\n        provider: \"kick\",\n        name: \"Kick\",\n        icon: KickIcon\n    },\n    {\n        provider: \"linear\",\n        name: \"Linear\",\n        icon: LinearIcon\n    },\n    {\n        provider: \"linkedin\",\n        name: \"LinkedIn\",\n        icon: LinkedInIcon\n    },\n    {\n        provider: \"microsoft\",\n        name: \"Microsoft\",\n        icon: MicrosoftIcon\n    },\n    {\n        provider: \"notion\",\n        name: \"Notion\",\n        icon: NotionIcon\n    },\n    {\n        provider: \"reddit\",\n        name: \"Reddit\",\n        icon: RedditIcon\n    },\n    {\n        provider: \"roblox\",\n        name: \"Roblox\",\n        icon: RobloxIcon\n    },\n    {\n        provider: \"slack\",\n        name: \"Slack\",\n        icon: SlackIcon\n    },\n    {\n        provider: \"spotify\",\n        name: \"Spotify\",\n        icon: SpotifyIcon\n    },\n    {\n        provider: \"tiktok\",\n        name: \"TikTok\",\n        icon: TikTokIcon\n    },\n    {\n        provider: \"twitch\",\n        name: \"Twitch\",\n        icon: TwitchIcon\n    },\n    {\n        provider: \"vk\",\n        name: \"VK\",\n        icon: VKIcon\n    },\n    {\n        provider: \"twitter\",\n        name: \"X\",\n        icon: XIcon\n    },\n    {\n        provider: \"zoom\",\n        name: \"Zoom\",\n        icon: ZoomIcon\n    }\n] as const\n\nexport type Provider = {\n    provider: string\n    name: string\n    icon?: ProviderIcon\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

@@ -1,0 +1,3567 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "local",
+  "homepage": "https://better-auth-ui.com",
+  "items": [
+    {
+      "name": "accept-invitation-card",
+      "title": "Accept Invitation Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "http://localhost:3000/r/organization-cell-view.json",
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "http://localhost:3000/r/use-authenticate.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/accept-invitation-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "account-cell",
+      "title": "Account Cell",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dropdown-menu",
+        "http://localhost:3000/r/refetch.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/user-view.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/account/account-cell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "account-options",
+      "title": "Account Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/account-options.ts",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/view-paths.json"],
+      "files": [
+        {
+          "path": "src/types/account-options.ts",
+          "type": "registry:file",
+          "target": "types/account-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "account-settings-cards",
+      "title": "Account Settings Cards",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/accounts-card.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/change-email-card.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/update-avatar-card.json",
+        "http://localhost:3000/r/update-field-card.json",
+        "http://localhost:3000/r/update-name-card.json",
+        "http://localhost:3000/r/update-username-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/account-settings-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "account-view",
+      "title": "Account View",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/account-settings-cards.json",
+        "http://localhost:3000/r/api-keys-card.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "drawer",
+        "label",
+        "http://localhost:3000/r/organizations-card.json",
+        "http://localhost:3000/r/security-settings-cards.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/user-invitations-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/account/account-view.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "accounts-card",
+      "title": "Accounts Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/account-cell.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/account/accounts-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "additional-fields",
+      "title": "Additional Fields",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/additional-fields.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/additional-fields.ts",
+          "type": "registry:file",
+          "target": "types/additional-fields.ts"
+        }
+      ]
+    },
+    {
+      "name": "admin-error-codes",
+      "title": "Admin Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/admin-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/admin-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/admin-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "anonymous-error-codes",
+      "title": "Anonymous Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/anonymous-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/anonymous-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/anonymous-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "any-auth-client",
+      "title": "Any Auth Client",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/any-auth-client.ts",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/any-auth-client.ts",
+          "type": "registry:file",
+          "target": "types/any-auth-client.ts"
+        }
+      ]
+    },
+    {
+      "name": "api-key",
+      "title": "Api Key",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/api-key.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/api-key.ts",
+          "type": "registry:file",
+          "target": "types/api-key.ts"
+        }
+      ]
+    },
+    {
+      "name": "api-key-cell",
+      "title": "Api Key Cell",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/api-key.json",
+        "http://localhost:3000/r/api-key-delete-dialog.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "http://localhost:3000/r/refetch.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/use-lang.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/api-key/api-key-cell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "api-key-delete-dialog",
+      "title": "Api Key Delete Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/api-key.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dialog",
+        "http://localhost:3000/r/refetch.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/use-lang.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/api-key/api-key-delete-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "api-key-display-dialog",
+      "title": "Api Key Display Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "dialog",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/api-key/api-key-display-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "api-key-error-codes",
+      "title": "Api Key Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/api-key-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/api-key-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/api-key-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "api-keys-card",
+      "title": "Api Keys Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/api-key-cell.json",
+        "http://localhost:3000/r/api-key-display-dialog.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "http://localhost:3000/r/create-api-key-dialog.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/api-key/api-keys-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "auth-callback",
+      "title": "Auth Callback",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/use-success-transition.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/auth-callback.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "auth-client",
+      "title": "Auth Client",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/auth-client.ts",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/auth-client.ts",
+          "type": "registry:file",
+          "target": "types/auth-client.ts"
+        }
+      ]
+    },
+    {
+      "name": "auth-data-cache",
+      "title": "Auth Data Cache",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/lib/auth-data-cache.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "auth-form",
+      "title": "Auth Form",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-callback.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/email-otp-form.json",
+        "http://localhost:3000/r/forgot-password-form.json",
+        "http://localhost:3000/r/magic-link-form.json",
+        "http://localhost:3000/r/recover-account-form.json",
+        "http://localhost:3000/r/reset-password-form.json",
+        "http://localhost:3000/r/sign-in-form.json",
+        "http://localhost:3000/r/sign-out.json",
+        "http://localhost:3000/r/sign-up-form.json",
+        "http://localhost:3000/r/two-factor-form.json",
+        "http://localhost:3000/r/utils.json",
+        "http://localhost:3000/r/view-paths.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/auth-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "auth-hooks",
+      "title": "Auth Hooks",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/auth-hooks.ts",
+      "dependencies": ["@better-fetch/fetch", "better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/any-auth-client.json",
+        "http://localhost:3000/r/api-key.json",
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/invitation.json",
+        "http://localhost:3000/r/refetch.json"
+      ],
+      "files": [
+        {
+          "path": "src/types/auth-hooks.ts",
+          "type": "registry:file",
+          "target": "types/auth-hooks.ts"
+        }
+      ]
+    },
+    {
+      "name": "auth-loading",
+      "title": "Auth Loading",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/auth-ui-provider.json"],
+      "files": [
+        {
+          "path": "src/components/auth-loading.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "auth-localization",
+      "title": "Auth Localization",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/auth-localization.ts",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/admin-error-codes.json",
+        "http://localhost:3000/r/anonymous-error-codes.json",
+        "http://localhost:3000/r/api-key-error-codes.json",
+        "http://localhost:3000/r/base-error-codes.json",
+        "http://localhost:3000/r/captcha-error-codes.json",
+        "http://localhost:3000/r/email-otp-error-codes.json",
+        "http://localhost:3000/r/generic-oauth-error-codes.json",
+        "http://localhost:3000/r/haveibeenpwned-error-codes.json",
+        "http://localhost:3000/r/multi-session-error-codes.json",
+        "http://localhost:3000/r/organization-error-codes.json",
+        "http://localhost:3000/r/passkey-error-codes.json",
+        "http://localhost:3000/r/phone-number-error-codes.json",
+        "http://localhost:3000/r/stripe-localization.json",
+        "http://localhost:3000/r/two-factor-error-codes.json",
+        "http://localhost:3000/r/username-error-codes.json"
+      ],
+      "files": [
+        {
+          "path": "src/localization/auth-localization.ts",
+          "type": "registry:file",
+          "target": "localization/auth-localization.ts"
+        }
+      ]
+    },
+    {
+      "name": "auth-mutators",
+      "title": "Auth Mutators",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/auth-mutators.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/auth-mutators.ts",
+          "type": "registry:file",
+          "target": "types/auth-mutators.ts"
+        }
+      ]
+    },
+    {
+      "name": "auth-ui-provider",
+      "title": "Auth Ui Provider",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["sonner"],
+      "registryDependencies": [
+        "http://localhost:3000/r/account-options.json",
+        "http://localhost:3000/r/additional-fields.json",
+        "http://localhost:3000/r/any-auth-client.json",
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-mutators.json",
+        "http://localhost:3000/r/avatar-options.json",
+        "http://localhost:3000/r/captcha-options.json",
+        "http://localhost:3000/r/credentials-options.json",
+        "http://localhost:3000/r/delete-user-options.json",
+        "http://localhost:3000/r/generic-oauth-options.json",
+        "http://localhost:3000/r/gravatar-options.json",
+        "http://localhost:3000/r/link.json",
+        "http://localhost:3000/r/organization-options.json",
+        "http://localhost:3000/r/organization-refetcher.json",
+        "http://localhost:3000/r/recaptcha-v3.json",
+        "http://localhost:3000/r/render-toast.json",
+        "http://localhost:3000/r/sign-up-options.json",
+        "http://localhost:3000/r/social-options.json",
+        "http://localhost:3000/r/use-auth-data.json",
+        "http://localhost:3000/r/view-paths.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/auth-ui-provider.tsx",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "auth-ui-provider-tanstack",
+      "title": "Auth Ui Provider Tanstack",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/use-tanstack-options.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/tanstack/auth-ui-provider-tanstack.tsx",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "auth-view",
+      "title": "Auth View",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-callback.json",
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "http://localhost:3000/r/email-otp-button.json",
+        "http://localhost:3000/r/magic-link-button.json",
+        "http://localhost:3000/r/one-tap.json",
+        "http://localhost:3000/r/passkey-button.json",
+        "http://localhost:3000/r/provider-button.json",
+        "separator",
+        "http://localhost:3000/r/sign-out.json",
+        "http://localhost:3000/r/social-providers.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/utils.json",
+        "http://localhost:3000/r/view-paths.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/auth-view.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["@radix-ui/react-avatar"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar-options",
+      "title": "Avatar Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/avatar-options.ts",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/image.json"],
+      "files": [
+        {
+          "path": "src/types/avatar-options.ts",
+          "type": "registry:file",
+          "target": "types/avatar-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "backup-codes-dialog",
+      "title": "Backup Codes Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "dialog",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/two-factor/backup-codes-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "base-error-codes",
+      "title": "Base Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/base-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/base-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/base-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "captcha",
+      "title": "Captcha",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["@hcaptcha/react-hcaptcha", "@marsidev/react-turnstile"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/recaptcha-badge.json",
+        "http://localhost:3000/r/recaptcha-v2.json",
+        "http://localhost:3000/r/use-theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/captcha/captcha.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "captcha-error-codes",
+      "title": "Captcha Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/captcha-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/captcha-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/captcha-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "captcha-options",
+      "title": "Captcha Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/captcha-options.ts",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/captcha-provider.json"],
+      "files": [
+        {
+          "path": "src/types/captcha-options.ts",
+          "type": "registry:file",
+          "target": "types/captcha-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "captcha-provider",
+      "title": "Captcha Provider",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/captcha-provider.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/captcha-provider.ts",
+          "type": "registry:file",
+          "target": "types/captcha-provider.ts"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "change-email-card",
+      "title": "Change Email Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["@hookform/resolvers", "react-hook-form", "zod"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "form",
+        "input",
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/security/change-email-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "change-password-card",
+      "title": "Change Password Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["@hookform/resolvers", "react-hook-form", "zod"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "form",
+        "http://localhost:3000/r/input-field-skeleton.json",
+        "http://localhost:3000/r/password-input.json",
+        "http://localhost:3000/r/password-validation.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/security/change-password-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["@radix-ui/react-checkbox", "lucide-react"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "create-api-key-dialog",
+      "title": "Create Api Key Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "better-auth",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "dialog",
+        "form",
+        "input",
+        "http://localhost:3000/r/organization-cell-view.json",
+        "http://localhost:3000/r/personal-account-view.json",
+        "http://localhost:3000/r/refetch.json",
+        "select",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/use-lang.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/api-key/create-api-key-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "create-organization-dialog",
+      "title": "Create Organization Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "dialog",
+        "dropdown-menu",
+        "form",
+        "http://localhost:3000/r/image-utils.json",
+        "input",
+        "http://localhost:3000/r/organization-logo.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/create-organization-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "credentials-options",
+      "title": "Credentials Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/credentials-options.ts",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/password-validation.json"
+      ],
+      "files": [
+        {
+          "path": "src/types/credentials-options.ts",
+          "type": "registry:file",
+          "target": "types/credentials-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "delete-account-card",
+      "title": "Delete Account Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/delete-account-dialog.json",
+        "http://localhost:3000/r/settings-card.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/account/delete-account-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "delete-account-dialog",
+      "title": "Delete Account Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dialog",
+        "form",
+        "input",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/user-view.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/account/delete-account-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "delete-organization-card",
+      "title": "Delete Organization Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/delete-organization-dialog.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/use-current-organization.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/delete-organization-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "delete-organization-dialog",
+      "title": "Delete Organization Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "better-auth",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dialog",
+        "form",
+        "input",
+        "http://localhost:3000/r/organization-cell-view.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/delete-organization-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "delete-user-options",
+      "title": "Delete User Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/delete-user-options.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/delete-user-options.ts",
+          "type": "registry:file",
+          "target": "types/delete-user-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["@radix-ui/react-dialog", "lucide-react"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "title": "Drawer",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["vaul"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "title": "Dropdown Menu",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["@radix-ui/react-dropdown-menu", "lucide-react"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "email-otp-button",
+      "title": "Email Otp Button",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/auth-view.json",
+        "button",
+        "http://localhost:3000/r/utils.json",
+        "http://localhost:3000/r/view-paths.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/email-otp-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "email-otp-error-codes",
+      "title": "Email Otp Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/email-otp-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/email-otp-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/email-otp-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "email-otp-form",
+      "title": "Email Otp Form",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "form",
+        "input",
+        "input-otp",
+        "http://localhost:3000/r/otp-input-group.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/use-success-transition.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/forms/email-otp-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "email-template",
+      "title": "Email Template",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["@react-email/components"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/email/email-template.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "fetch-error",
+      "title": "Fetch Error",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/fetch-error.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/fetch-error.ts",
+          "type": "registry:file",
+          "target": "types/fetch-error.ts"
+        }
+      ]
+    },
+    {
+      "name": "forgot-password-form",
+      "title": "Forgot Password Form",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "better-auth",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "http://localhost:3000/r/captcha.json",
+        "form",
+        "input",
+        "http://localhost:3000/r/use-captcha.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/forms/forgot-password-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "form",
+      "title": "Form",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-label",
+        "@radix-ui/react-slot",
+        "react-hook-form"
+      ],
+      "registryDependencies": ["label", "http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/form.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "form-error",
+      "title": "Form Error",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react", "react-hook-form"],
+      "registryDependencies": [
+        "alert",
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/form-error.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "generic-oauth-error-codes",
+      "title": "Generic Oauth Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/generic-oauth-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/generic-oauth-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/generic-oauth-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "generic-oauth-options",
+      "title": "Generic Oauth Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/generic-oauth-options.ts",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/social-providers.json"
+      ],
+      "files": [
+        {
+          "path": "src/types/generic-oauth-options.ts",
+          "type": "registry:file",
+          "target": "types/generic-oauth-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "gravatar-options",
+      "title": "Gravatar Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/gravatar-options.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/gravatar-options.ts",
+          "type": "registry:file",
+          "target": "types/gravatar-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "gravatar-utils",
+      "title": "Gravatar Utils",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["@noble/hashes"],
+      "registryDependencies": ["http://localhost:3000/r/gravatar-options.json"],
+      "files": [
+        {
+          "path": "src/lib/gravatar-utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "haveibeenpwned-error-codes",
+      "title": "Haveibeenpwned Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/haveibeenpwned-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/haveibeenpwned-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/haveibeenpwned-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "image",
+      "title": "Image",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/image.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/image.ts",
+          "type": "registry:file",
+          "target": "types/image.ts"
+        }
+      ]
+    },
+    {
+      "name": "image-utils",
+      "title": "Image Utils",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/lib/image-utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-field-skeleton",
+      "title": "Input Field Skeleton",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/skeletons/input-field-skeleton.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "input-otp",
+      "title": "Input Otp",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["input-otp", "lucide-react"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/input-otp.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "invitation",
+      "title": "Invitation",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/invitation.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/invitation.ts",
+          "type": "registry:file",
+          "target": "types/invitation.ts"
+        }
+      ]
+    },
+    {
+      "name": "invitation-cell",
+      "title": "Invitation Cell",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dropdown-menu",
+        "http://localhost:3000/r/invitation.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/user-avatar.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/invitation-cell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "invite-member-dialog",
+      "title": "Invite Member Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "better-auth",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "dialog",
+        "form",
+        "input",
+        "select",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/invite-member-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["@radix-ui/react-label"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "leave-organization-dialog",
+      "title": "Leave Organization Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dialog",
+        "http://localhost:3000/r/organization-cell-view.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/leave-organization-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "link",
+      "title": "Link",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/link.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/link.ts",
+          "type": "registry:file",
+          "target": "types/link.ts"
+        }
+      ]
+    },
+    {
+      "name": "magic-link-button",
+      "title": "Magic Link Button",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/auth-view.json",
+        "button",
+        "http://localhost:3000/r/utils.json",
+        "http://localhost:3000/r/view-paths.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/magic-link-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "magic-link-form",
+      "title": "Magic Link Form",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "better-auth",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "http://localhost:3000/r/captcha.json",
+        "form",
+        "input",
+        "http://localhost:3000/r/use-captcha.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/forms/magic-link-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "member-cell",
+      "title": "Member Cell",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dropdown-menu",
+        "http://localhost:3000/r/leave-organization-dialog.json",
+        "http://localhost:3000/r/remove-member-dialog.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/update-member-role-dialog.json",
+        "http://localhost:3000/r/user-view.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/member-cell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "model-names",
+      "title": "Model Names",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/lib/instantdb/model-names.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "model-names",
+      "title": "Model Names",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/lib/triplit/model-names.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "multi-session-error-codes",
+      "title": "Multi Session Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/multi-session-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/multi-session-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/multi-session-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "one-tap",
+      "title": "One Tap",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/use-success-transition.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/one-tap.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-cell",
+      "title": "Organization Cell",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dropdown-menu",
+        "http://localhost:3000/r/leave-organization-dialog.json",
+        "http://localhost:3000/r/organization-cell-view.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-cell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-cell-view",
+      "title": "Organization Cell View",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/organization-logo.json",
+        "skeleton",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-cell-view.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-error-codes",
+      "title": "Organization Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/organization-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/organization-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/organization-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "organization-invitations-card",
+      "title": "Organization Invitations Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "http://localhost:3000/r/invitation-cell.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/use-current-organization.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-invitations-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-logo",
+      "title": "Organization Logo",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "avatar",
+        "skeleton",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-logo.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-logo-card",
+      "title": "Organization Logo Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dropdown-menu",
+        "http://localhost:3000/r/image-utils.json",
+        "http://localhost:3000/r/organization-logo.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/settings-card-footer.json",
+        "http://localhost:3000/r/settings-card-header.json",
+        "http://localhost:3000/r/use-current-organization.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-logo-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-members-card",
+      "title": "Organization Members Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "http://localhost:3000/r/invite-member-dialog.json",
+        "http://localhost:3000/r/member-cell.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/use-current-organization.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-members-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-name-card",
+      "title": "Organization Name Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "better-auth",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "form",
+        "input",
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "http://localhost:3000/r/use-current-organization.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-name-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-options",
+      "title": "Organization Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/organization-options.ts",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/view-paths.json"],
+      "files": [
+        {
+          "path": "src/types/organization-options.ts",
+          "type": "registry:file",
+          "target": "types/organization-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "organization-refetcher",
+      "title": "Organization Refetcher",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/use-current-organization.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/organization-refetcher.tsx",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "organization-settings-cards",
+      "title": "Organization Settings Cards",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/delete-organization-card.json",
+        "http://localhost:3000/r/organization-logo-card.json",
+        "http://localhost:3000/r/organization-name-card.json",
+        "http://localhost:3000/r/organization-slug-card.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-settings-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-slug-card",
+      "title": "Organization Slug Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "better-auth",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "form",
+        "input",
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "http://localhost:3000/r/use-current-organization.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-slug-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-switcher",
+      "title": "Organization Switcher",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "http://localhost:3000/r/create-organization-dialog.json",
+        "dropdown-menu",
+        "http://localhost:3000/r/organization-cell-view.json",
+        "http://localhost:3000/r/organization-logo.json",
+        "http://localhost:3000/r/personal-account-view.json",
+        "http://localhost:3000/r/use-current-organization.json",
+        "http://localhost:3000/r/user-avatar.json",
+        "http://localhost:3000/r/user-view.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-switcher.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organization-view",
+      "title": "Organization View",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/account-view.json",
+        "http://localhost:3000/r/api-keys-card.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "drawer",
+        "label",
+        "http://localhost:3000/r/organization-invitations-card.json",
+        "http://localhost:3000/r/organization-members-card.json",
+        "http://localhost:3000/r/organization-settings-cards.json",
+        "http://localhost:3000/r/use-current-organization.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organization-view.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "organizations-card",
+      "title": "Organizations Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "http://localhost:3000/r/create-organization-dialog.json",
+        "http://localhost:3000/r/organization-cell.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/settings-cell-skeleton.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/organizations-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "otp-input-group",
+      "title": "Otp Input Group",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": ["input-otp"],
+      "files": [
+        {
+          "path": "src/components/auth/otp-input-group.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "passkey-button",
+      "title": "Passkey Button",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/auth-view.json",
+        "button",
+        "http://localhost:3000/r/use-success-transition.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/passkey-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "passkey-cell",
+      "title": "Passkey Cell",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "http://localhost:3000/r/session-freshness-dialog.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/passkey/passkey-cell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "passkey-error-codes",
+      "title": "Passkey Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/passkey-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/passkey-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/passkey-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "passkeys-card",
+      "title": "Passkeys Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["react-hook-form"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "form",
+        "http://localhost:3000/r/passkey-cell.json",
+        "http://localhost:3000/r/session-freshness-dialog.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/passkey/passkeys-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "password-input",
+      "title": "Password Input",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "button",
+        "input",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/password-input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "password-validation",
+      "title": "Password Validation",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/password-validation.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/password-validation.ts",
+          "type": "registry:file",
+          "target": "types/password-validation.ts"
+        }
+      ]
+    },
+    {
+      "name": "personal-account-view",
+      "title": "Personal Account View",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "skeleton",
+        "http://localhost:3000/r/user-avatar.json",
+        "http://localhost:3000/r/user-view.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/personal-account-view.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "phone-number-error-codes",
+      "title": "Phone Number Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/phone-number-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/phone-number-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/phone-number-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "profile",
+      "title": "Profile",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/profile.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/profile.ts",
+          "type": "registry:file",
+          "target": "types/profile.ts"
+        }
+      ]
+    },
+    {
+      "name": "provider-button",
+      "title": "Provider Button",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/auth-view.json",
+        "button",
+        "http://localhost:3000/r/social-providers.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/provider-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "provider-cell",
+      "title": "Provider Cell",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "http://localhost:3000/r/refetch.json",
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "http://localhost:3000/r/social-providers.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/providers/provider-cell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "provider-icons",
+      "title": "Provider Icons",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/provider-icons.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "providers-card",
+      "title": "Providers Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "http://localhost:3000/r/provider-cell.json",
+        "http://localhost:3000/r/refetch.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/settings-cell-skeleton.json",
+        "http://localhost:3000/r/social-providers.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/providers/providers-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "recaptcha-badge",
+      "title": "Recaptcha Badge",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/captcha/recaptcha-badge.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "recaptcha-v2",
+      "title": "Recaptcha V2",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["react-google-recaptcha"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/use-lang.json",
+        "http://localhost:3000/r/use-theme.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/captcha/recaptcha-v2.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "recaptcha-v3",
+      "title": "Recaptcha V3",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["@wojtekmaj/react-recaptcha-v3"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/use-lang.json",
+        "http://localhost:3000/r/use-theme.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/captcha/recaptcha-v3.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "recover-account-form",
+      "title": "Recover Account Form",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "form",
+        "input",
+        "http://localhost:3000/r/use-success-transition.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/forms/recover-account-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "redirect-to-sign-in",
+      "title": "Redirect To Sign In",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/use-authenticate.json"],
+      "files": [
+        {
+          "path": "src/components/redirect-to-sign-in.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "redirect-to-sign-up",
+      "title": "Redirect To Sign Up",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/use-authenticate.json"],
+      "files": [
+        {
+          "path": "src/components/redirect-to-sign-up.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "refetch",
+      "title": "Refetch",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/refetch.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/refetch.ts",
+          "type": "registry:file",
+          "target": "types/refetch.ts"
+        }
+      ]
+    },
+    {
+      "name": "remove-member-dialog",
+      "title": "Remove Member Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "dialog",
+        "http://localhost:3000/r/member-cell.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/remove-member-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "render-toast",
+      "title": "Render Toast",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/render-toast.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/render-toast.ts",
+          "type": "registry:file",
+          "target": "types/render-toast.ts"
+        }
+      ]
+    },
+    {
+      "name": "reset-password-form",
+      "title": "Reset Password Form",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "form",
+        "http://localhost:3000/r/password-input.json",
+        "http://localhost:3000/r/password-validation.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/forms/reset-password-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "security-settings-cards",
+      "title": "Security Settings Cards",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/change-password-card.json",
+        "http://localhost:3000/r/delete-account-card.json",
+        "http://localhost:3000/r/passkeys-card.json",
+        "http://localhost:3000/r/providers-card.json",
+        "http://localhost:3000/r/sessions-card.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/two-factor-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/security-settings-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["@radix-ui/react-select", "lucide-react"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["@radix-ui/react-separator"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "session-cell",
+      "title": "Session Cell",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react", "ua-parser-js"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "http://localhost:3000/r/refetch.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/security/session-cell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "session-freshness-dialog",
+      "title": "Session Freshness Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "dialog",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/shared/session-freshness-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sessions-card",
+      "title": "Sessions Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "http://localhost:3000/r/session-cell.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/settings-cell-skeleton.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/security/sessions-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "settings-action-button",
+      "title": "Settings Action Button",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react", "react-hook-form"],
+      "registryDependencies": [
+        "button",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/shared/settings-action-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "settings-card",
+      "title": "Settings Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "card",
+        "http://localhost:3000/r/settings-card-footer.json",
+        "http://localhost:3000/r/settings-card-header.json",
+        "http://localhost:3000/r/user-avatar.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/shared/settings-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "settings-card-footer",
+      "title": "Settings Card Footer",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "http://localhost:3000/r/settings-action-button.json",
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/shared/settings-card-footer.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "settings-card-header",
+      "title": "Settings Card Header",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/shared/settings-card-header.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "settings-cell-skeleton",
+      "title": "Settings Cell Skeleton",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/skeletons/settings-cell-skeleton.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sign-in-form",
+      "title": "Sign In Form",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@better-fetch/fetch",
+        "@hookform/resolvers",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "http://localhost:3000/r/captcha.json",
+        "checkbox",
+        "form",
+        "input",
+        "http://localhost:3000/r/password-input.json",
+        "http://localhost:3000/r/password-validation.json",
+        "http://localhost:3000/r/use-captcha.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/use-success-transition.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/forms/sign-in-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sign-out",
+      "title": "Sign Out",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/use-success-transition.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/sign-out.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sign-up-form",
+      "title": "Sign Up Form",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "better-auth",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "http://localhost:3000/r/captcha.json",
+        "checkbox",
+        "dropdown-menu",
+        "form",
+        "http://localhost:3000/r/image-utils.json",
+        "input",
+        "http://localhost:3000/r/password-input.json",
+        "http://localhost:3000/r/password-validation.json",
+        "textarea",
+        "http://localhost:3000/r/use-captcha.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/use-success-transition.json",
+        "http://localhost:3000/r/user-avatar.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/forms/sign-up-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sign-up-options",
+      "title": "Sign Up Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/sign-up-options.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/types/sign-up-options.ts",
+          "type": "registry:file",
+          "target": "types/sign-up-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "signed-in",
+      "title": "Signed In",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/auth-ui-provider.json"],
+      "files": [
+        {
+          "path": "src/components/signed-in.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "signed-out",
+      "title": "Signed Out",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/auth-ui-provider.json"],
+      "files": [
+        {
+          "path": "src/components/signed-out.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "social-options",
+      "title": "Social Options",
+      "description": "",
+      "type": "registry:file",
+      "target": "types/social-options.ts",
+      "dependencies": ["better-auth"],
+      "registryDependencies": ["http://localhost:3000/r/auth-client.json"],
+      "files": [
+        {
+          "path": "src/types/social-options.ts",
+          "type": "registry:file",
+          "target": "types/social-options.ts"
+        }
+      ]
+    },
+    {
+      "name": "social-providers",
+      "title": "Social Providers",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/provider-icons.json"],
+      "files": [
+        {
+          "path": "src/lib/social-providers.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "stripe-localization",
+      "title": "Stripe Localization",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/stripe-localization.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/stripe-localization.ts",
+          "type": "registry:file",
+          "target": "localization/stripe-localization.ts"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": ["@radix-ui/react-tabs"],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "title": "Textarea",
+      "description": "",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "files": [
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "two-factor-card",
+      "title": "Two Factor Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/two-factor-password-dialog.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/two-factor/two-factor-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "two-factor-error-codes",
+      "title": "Two Factor Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/two-factor-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/two-factor-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/two-factor-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "two-factor-form",
+      "title": "Two Factor Form",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@better-fetch/fetch",
+        "@hookform/resolvers",
+        "lucide-react",
+        "react-hook-form",
+        "react-qr-code",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-form.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "checkbox",
+        "form",
+        "input-otp",
+        "label",
+        "http://localhost:3000/r/otp-input-group.json",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/use-success-transition.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/forms/two-factor-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "two-factor-password-dialog",
+      "title": "Two Factor Password Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [
+        "@hookform/resolvers",
+        "lucide-react",
+        "react-hook-form",
+        "zod"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/backup-codes-dialog.json",
+        "button",
+        "dialog",
+        "form",
+        "http://localhost:3000/r/password-input.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/two-factor/two-factor-password-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "update-avatar-card",
+      "title": "Update Avatar Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dropdown-menu",
+        "http://localhost:3000/r/image-utils.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/settings-card-footer.json",
+        "http://localhost:3000/r/settings-card-header.json",
+        "http://localhost:3000/r/user-avatar.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/account/update-avatar-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "update-field-card",
+      "title": "Update Field Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["@hookform/resolvers", "react-hook-form", "zod"],
+      "registryDependencies": [
+        "http://localhost:3000/r/additional-fields.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "card",
+        "checkbox",
+        "form",
+        "input",
+        "http://localhost:3000/r/settings-card.json",
+        "skeleton",
+        "textarea",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/account/update-field-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "update-member-role-dialog",
+      "title": "Update Member Role Dialog",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["better-auth", "lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "dialog",
+        "http://localhost:3000/r/member-cell.json",
+        "select",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/update-member-role-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "update-name-card",
+      "title": "Update Name Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/update-field-card.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/account/update-name-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "update-username-card",
+      "title": "Update Username Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/update-field-card.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/settings/account/update-username-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "use-auth-data",
+      "title": "Use Auth Data",
+      "description": "",
+      "type": "registry:hook",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-data-cache.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/fetch-error.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/hooks/use-auth-data.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-authenticate",
+      "title": "Use Authenticate",
+      "description": "",
+      "type": "registry:hook",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/any-auth-client.json",
+        "http://localhost:3000/r/auth-ui-provider.json"
+      ],
+      "files": [
+        {
+          "path": "src/hooks/use-authenticate.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-captcha",
+      "title": "Use Captcha",
+      "description": "",
+      "type": "registry:hook",
+      "dependencies": [
+        "@hcaptcha/react-hcaptcha",
+        "@marsidev/react-turnstile",
+        "@wojtekmaj/react-recaptcha-v3",
+        "react-google-recaptcha"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json"
+      ],
+      "files": [
+        {
+          "path": "src/hooks/use-captcha.tsx",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-conditional-query",
+      "title": "Use Conditional Query",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["@triplit/client", "@triplit/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/lib/triplit/use-conditional-query.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-current-organization",
+      "title": "Use Current Organization",
+      "description": "",
+      "type": "registry:hook",
+      "dependencies": ["better-auth"],
+      "registryDependencies": ["http://localhost:3000/r/auth-ui-provider.json"],
+      "files": [
+        {
+          "path": "src/hooks/use-current-organization.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-hydrated",
+      "title": "Use Hydrated",
+      "description": "",
+      "type": "registry:hook",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/hooks/use-hydrated.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-instant-options",
+      "title": "Use Instant Options",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["@instantdb/react", "better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/auth-mutators.json",
+        "http://localhost:3000/r/model-names.json",
+        "http://localhost:3000/r/refetch.json",
+        "http://localhost:3000/r/use-list-accounts.json",
+        "http://localhost:3000/r/use-list-sessions.json",
+        "http://localhost:3000/r/use-session.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/instantdb/use-instant-options.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-lang",
+      "title": "Use Lang",
+      "description": "",
+      "type": "registry:hook",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/hooks/use-lang.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-list-accounts",
+      "title": "Use List Accounts",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["@better-fetch/fetch"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/model-names.json",
+        "http://localhost:3000/r/use-instant-options.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/instantdb/use-list-accounts.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-list-accounts",
+      "title": "Use List Accounts",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/model-names.json",
+        "http://localhost:3000/r/use-conditional-query.json",
+        "http://localhost:3000/r/use-triplit-hooks.json",
+        "http://localhost:3000/r/use-triplit-token.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/triplit/use-list-accounts.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-list-sessions",
+      "title": "Use List Sessions",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/model-names.json",
+        "http://localhost:3000/r/use-instant-options.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/instantdb/use-list-sessions.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-list-sessions",
+      "title": "Use List Sessions",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/model-names.json",
+        "http://localhost:3000/r/use-conditional-query.json",
+        "http://localhost:3000/r/use-triplit-hooks.json",
+        "http://localhost:3000/r/use-triplit-token.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/triplit/use-list-sessions.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-session",
+      "title": "Use Session",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/model-names.json",
+        "http://localhost:3000/r/use-instant-options.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/instantdb/use-session.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-session",
+      "title": "Use Session",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/model-names.json",
+        "http://localhost:3000/r/use-conditional-query.json",
+        "http://localhost:3000/r/use-triplit-hooks.json",
+        "http://localhost:3000/r/use-triplit-token.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/triplit/use-session.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-success-transition",
+      "title": "Use Success Transition",
+      "description": "",
+      "type": "registry:hook",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/hooks/use-success-transition.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-tanstack-options",
+      "title": "Use Tanstack Options",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [
+        "@daveyplate/better-auth-tanstack",
+        "@tanstack/react-query"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/any-auth-client.json",
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/auth-mutators.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/tanstack/use-tanstack-options.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-theme",
+      "title": "Use Theme",
+      "description": "",
+      "type": "registry:hook",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/hooks/use-theme.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-triplit-hooks",
+      "title": "Use Triplit Hooks",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["@triplit/client", "better-auth"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-hooks.json",
+        "http://localhost:3000/r/refetch.json",
+        "http://localhost:3000/r/use-list-accounts.json",
+        "http://localhost:3000/r/use-list-sessions.json",
+        "http://localhost:3000/r/use-session.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/triplit/use-triplit-hooks.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "use-triplit-token",
+      "title": "Use Triplit Token",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["@triplit/client", "@triplit/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/lib/triplit/use-triplit-token.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "user-avatar",
+      "title": "User Avatar",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "avatar",
+        "http://localhost:3000/r/gravatar-utils.json",
+        "http://localhost:3000/r/profile.json",
+        "skeleton",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/user-avatar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "user-button",
+      "title": "User Button",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/any-auth-client.json",
+        "http://localhost:3000/r/auth-client.json",
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "dropdown-menu",
+        "http://localhost:3000/r/use-hydrated.json",
+        "http://localhost:3000/r/user-avatar.json",
+        "http://localhost:3000/r/user-view.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/user-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "user-invitations-card",
+      "title": "User Invitations Card",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "button",
+        "card",
+        "dropdown-menu",
+        "http://localhost:3000/r/settings-card.json",
+        "http://localhost:3000/r/user-avatar.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/organization/user-invitations-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "user-view",
+      "title": "User View",
+      "description": "",
+      "type": "registry:component",
+      "dependencies": [],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/auth-ui-provider.json",
+        "http://localhost:3000/r/profile.json",
+        "skeleton",
+        "http://localhost:3000/r/user-avatar.json",
+        "http://localhost:3000/r/utils.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/user-view.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "username-error-codes",
+      "title": "Username Error Codes",
+      "description": "",
+      "type": "registry:file",
+      "target": "localization/username-error-codes.ts",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/localization/username-error-codes.ts",
+          "type": "registry:file",
+          "target": "localization/username-error-codes.ts"
+        }
+      ]
+    },
+    {
+      "name": "utils",
+      "title": "Utils",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": ["clsx", "tailwind-merge", "zod"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-localization.json",
+        "http://localhost:3000/r/password-validation.json"
+      ],
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "view-paths",
+      "title": "View Paths",
+      "description": "",
+      "type": "registry:lib",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/lib/view-paths.ts",
+          "type": "registry:lib"
+        }
+      ]
+    }
+  ]
+}

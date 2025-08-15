@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "auth-mutators",
+  "type": "registry:file",
+  "title": "Auth Mutators",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/types/auth-mutators.ts",
+      "content": "type MutateFn<T = Record<string, unknown>> = (\n    params: T\n) => Promise<unknown> | Promise<void>\n\nexport interface AuthMutators {\n    deleteApiKey: MutateFn<{ keyId: string }>\n    deletePasskey: MutateFn<{ id: string }>\n    revokeDeviceSession: MutateFn<{ sessionToken: string }>\n    revokeSession: MutateFn<{ token: string }>\n    setActiveSession: MutateFn<{ sessionToken: string }>\n    updateOrganization: MutateFn<{\n        organizationId: string\n        data: Record<string, unknown>\n    }>\n    updateUser: MutateFn\n    unlinkAccount: MutateFn<{ providerId: string; accountId?: string }>\n}\n",
+      "type": "registry:file",
+      "target": "types/auth-mutators.ts"
+    }
+  ]
+}

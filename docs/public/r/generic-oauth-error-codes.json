@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "generic-oauth-error-codes",
+  "type": "registry:file",
+  "title": "Generic Oauth Error Codes",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/localization/generic-oauth-error-codes.ts",
+      "content": "export const GENERIC_OAUTH_ERROR_CODES = {\n    INVALID_OAUTH_CONFIGURATION: \"Invalid OAuth configuration\"\n}\n",
+      "type": "registry:file",
+      "target": "localization/generic-oauth-error-codes.ts"
+    }
+  ]
+}

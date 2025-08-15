@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "recaptcha-v3",
+  "type": "registry:component",
+  "title": "Recaptcha V3",
+  "description": "",
+  "dependencies": [
+    "@wojtekmaj/react-recaptcha-v3"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/use-hydrated.json",
+    "http://localhost:3000/r/use-lang.json",
+    "http://localhost:3000/r/use-theme.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/captcha/recaptcha-v3.tsx",
+      "content": "import {\n    GoogleReCaptchaProvider,\n    useGoogleReCaptcha\n} from \"@wojtekmaj/react-recaptcha-v3\"\nimport { type ReactNode, useContext, useEffect } from \"react\"\n\nimport { useIsHydrated } from \"../../hooks/use-hydrated\"\nimport { useLang } from \"../../hooks/use-lang\"\nimport { useTheme } from \"../../hooks/use-theme\"\nimport { AuthUIContext } from \"../../lib/auth-ui-provider\"\n\nexport function RecaptchaV3({ children }: { children: ReactNode }) {\n    const isHydrated = useIsHydrated()\n    const { captcha } = useContext(AuthUIContext)\n\n    if (captcha?.provider !== \"google-recaptcha-v3\") return children\n\n    return (\n        <GoogleReCaptchaProvider\n            reCaptchaKey={captcha.siteKey}\n            useEnterprise={captcha.enterprise}\n            useRecaptchaNet={captcha.recaptchaNet}\n        >\n            {isHydrated && (\n                <style>{`\n                    .grecaptcha-badge {\n                        visibility: hidden;\n                        border-radius: var(--radius) !important;\n                        --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, #0000000d);\n                        box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow) !important;\n                        border-style: var(--tw-border-style) !important;\n                        border-width: 1px;\n                    }\n\n                    .dark .grecaptcha-badge {\n                        border-color: var(--input) !important;\n                    }\n                `}</style>\n            )}\n\n            <RecaptchaV3Style />\n\n            {children}\n        </GoogleReCaptchaProvider>\n    )\n}\n\nfunction RecaptchaV3Style() {\n    const { executeRecaptcha } = useGoogleReCaptcha()\n    const { theme } = useTheme()\n    const { lang } = useLang()\n\n    useEffect(() => {\n        if (!executeRecaptcha) return\n\n        const updateRecaptcha = async () => {\n            // find iframe with title \"reCAPTCHA\"\n            const iframe = document.querySelector(\n                \"iframe[title='reCAPTCHA']\"\n            ) as HTMLIFrameElement\n            if (iframe) {\n                const iframeSrcUrl = new URL(iframe.src)\n                iframeSrcUrl.searchParams.set(\"theme\", theme)\n                if (lang) iframeSrcUrl.searchParams.set(\"hl\", lang)\n                iframe.src = iframeSrcUrl.toString()\n            }\n        }\n\n        updateRecaptcha()\n    }, [executeRecaptcha, theme, lang])\n\n    return null\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "api-key-cell",
+  "type": "registry:component",
+  "title": "Api Key Cell",
+  "description": "",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/api-key.json",
+    "http://localhost:3000/r/api-key-delete-dialog.json",
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "button",
+    "card",
+    "http://localhost:3000/r/refetch.json",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/use-lang.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/api-key/api-key-cell.tsx",
+      "content": "\"use client\"\n\nimport { KeyRoundIcon } from \"lucide-react\"\nimport { useContext, useState } from \"react\"\n\nimport { useLang } from \"../../../hooks/use-lang\"\nimport { AuthUIContext } from \"../../../lib/auth-ui-provider\"\nimport { cn } from \"../../../lib/utils\"\nimport type { AuthLocalization } from \"../../../localization/auth-localization\"\nimport type { ApiKey } from \"../../../types/api-key\"\nimport type { Refetch } from \"../../../types/refetch\"\nimport { Button } from \"../../ui/button\"\nimport { Card } from \"../../ui/card\"\nimport type { SettingsCardClassNames } from \"../shared/settings-card\"\nimport { ApiKeyDeleteDialog } from \"./api-key-delete-dialog\"\n\nexport interface ApiKeyCellProps {\n    className?: string\n    classNames?: SettingsCardClassNames\n    apiKey: ApiKey\n    localization?: Partial<AuthLocalization>\n    refetch?: Refetch\n}\n\nexport function ApiKeyCell({\n    className,\n    classNames,\n    apiKey,\n    localization,\n    refetch\n}: ApiKeyCellProps) {\n    const { localization: contextLocalization } = useContext(AuthUIContext)\n    localization = { ...contextLocalization, ...localization }\n\n    const { lang } = useLang()\n\n    const [showDeleteDialog, setShowDeleteDialog] = useState(false)\n\n    // Format expiration date or show \"Never expires\"\n    const formatExpiration = () => {\n        if (!apiKey.expiresAt) return localization.NEVER_EXPIRES\n\n        const expiresDate = new Date(apiKey.expiresAt)\n        return `${localization.EXPIRES} ${expiresDate.toLocaleDateString(\n            lang ?? \"en\",\n            {\n                month: \"short\",\n                day: \"numeric\",\n                year: \"numeric\"\n            }\n        )}`\n    }\n\n    return (\n        <>\n            <Card\n                className={cn(\n                    \"flex-row items-center gap-3 truncate px-4 py-3\",\n                    className,\n                    classNames?.cell\n                )}\n            >\n                <KeyRoundIcon\n                    className={cn(\"size-4 flex-shrink-0\", classNames?.icon)}\n                />\n\n                <div className=\"flex flex-col truncate\">\n                    <div className=\"flex items-center gap-2\">\n                        <span className=\"truncate font-semibold text-sm\">\n                            {apiKey.name}\n                        </span>\n\n                        <span className=\"flex-1 truncate text-muted-foreground text-sm\">\n                            {apiKey.start}\n                            {\"******\"}\n                        </span>\n                    </div>\n\n                    <div className=\"truncate text-muted-foreground text-xs\">\n                        {formatExpiration()}\n                    </div>\n                </div>\n\n                <Button\n                    className={cn(\n                        \"relative ms-auto\",\n                        classNames?.button,\n                        classNames?.outlineButton\n                    )}\n                    size=\"sm\"\n                    variant=\"outline\"\n                    onClick={() => setShowDeleteDialog(true)}\n                >\n                    {localization.DELETE}\n                </Button>\n            </Card>\n\n            <ApiKeyDeleteDialog\n                classNames={classNames}\n                apiKey={apiKey}\n                localization={localization}\n                open={showDeleteDialog}\n                onOpenChange={setShowDeleteDialog}\n                refetch={refetch}\n            />\n        </>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

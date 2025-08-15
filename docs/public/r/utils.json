@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "utils",
+  "type": "registry:lib",
+  "title": "Utils",
+  "description": "",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge",
+    "zod"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/password-validation.json"
+  ],
+  "files": [
+    {
+      "path": "src/lib/utils.ts",
+      "content": "import { type ClassValue, clsx } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\nimport * as z from \"zod\"\nimport type { AuthLocalization } from \"../localization/auth-localization\"\nimport type { PasswordValidation } from \"../types/password-validation\"\n\nexport function cn(...inputs: ClassValue[]) {\n    return twMerge(clsx(inputs))\n}\n\nexport function isValidEmail(email: string) {\n    const emailRegex: RegExp = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/\n    return emailRegex.test(email)\n}\n\n/**\n * Converts error codes from SNAKE_CASE to camelCase\n * Example: INVALID_TWO_FACTOR_COOKIE -> invalidTwoFactorCookie\n */\nexport function errorCodeToCamelCase(errorCode: string): string {\n    return errorCode\n        .toLowerCase()\n        .replace(/_([a-z])/g, (_, char) => char.toUpperCase())\n}\n\n/**\n * Gets a localized error message from an error object\n */\nexport function getLocalizedError({\n    error,\n    localization\n}: {\n    // biome-ignore lint/suspicious/noExplicitAny: ignore\n    error: any\n    localization?: Partial<AuthLocalization>\n}) {\n    if (typeof error === \"string\") {\n        if (localization?.[error as keyof AuthLocalization])\n            return localization[error as keyof AuthLocalization]\n    }\n\n    if (error?.error) {\n        if (error.error.code) {\n            const errorCode = error.error.code as keyof AuthLocalization\n            if (localization?.[errorCode]) return localization[errorCode]\n        }\n\n        return (\n            error.error.message ||\n            error.error.code ||\n            error.error.statusText ||\n            localization?.REQUEST_FAILED\n        )\n    }\n\n    return error?.message || localization?.REQUEST_FAILED || \"Request failed\"\n}\n\nexport function getSearchParam(paramName: string) {\n    return typeof window !== \"undefined\"\n        ? new URLSearchParams(window.location.search).get(paramName)\n        : null\n}\n\nexport function getViewByPath<T extends object>(viewPaths: T, path?: string) {\n    for (const key in viewPaths) {\n        if (viewPaths[key] === path) {\n            return key\n        }\n    }\n}\n\nexport function getKeyByValue<T extends Record<string, unknown>>(\n    object: T,\n    value?: T[keyof T]\n): keyof T | undefined {\n    return (Object.keys(object) as Array<keyof T>).find(\n        (key) => object[key] === value\n    )\n}\n\nexport function getPasswordSchema(\n    passwordValidation?: PasswordValidation,\n    localization?: AuthLocalization\n) {\n    let schema = z.string().min(1, {\n        message: localization?.PASSWORD_REQUIRED\n    })\n    if (passwordValidation?.minLength) {\n        schema = schema.min(passwordValidation.minLength, {\n            message: localization?.PASSWORD_TOO_SHORT\n        })\n    }\n    if (passwordValidation?.maxLength) {\n        schema = schema.max(passwordValidation.maxLength, {\n            message: localization?.PASSWORD_TOO_LONG\n        })\n    }\n    if (passwordValidation?.regex) {\n        schema = schema.regex(passwordValidation.regex, {\n            message: localization?.INVALID_PASSWORD\n        })\n    }\n    return schema\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

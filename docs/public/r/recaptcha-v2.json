@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "recaptcha-v2",
+  "type": "registry:component",
+  "title": "Recaptcha V2",
+  "description": "",
+  "dependencies": [
+    "react-google-recaptcha"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/use-lang.json",
+    "http://localhost:3000/r/use-theme.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/captcha/recaptcha-v2.tsx",
+      "content": "import { type RefObject, useContext, useEffect } from \"react\"\nimport ReCAPTCHA from \"react-google-recaptcha\"\nimport { useLang } from \"../../hooks/use-lang\"\nimport { useTheme } from \"../../hooks/use-theme\"\nimport { AuthUIContext } from \"../../lib/auth-ui-provider\"\nimport { cn } from \"../../lib/utils\"\n\nexport function RecaptchaV2({ ref }: { ref: RefObject<ReCAPTCHA | null> }) {\n    const { captcha } = useContext(AuthUIContext)\n    const { theme } = useTheme()\n    const { lang } = useLang()\n\n    useEffect(() => {\n        // biome-ignore lint/suspicious/noExplicitAny: ignore\n        ;(window as any).recaptchaOptions = {\n            useRecaptchaNet: captcha?.recaptchaNet,\n            enterprise: captcha?.enterprise\n        }\n    }, [captcha])\n\n    if (!captcha) return null\n\n    return (\n        <>\n            <style>{`\n                .grecaptcha-badge {\n                    border-radius: var(--radius) !important;\n                    --tw-shadow: 0 1px 2px 0 var(--tw-shadow-color, #0000000d);\n                    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow) !important;\n                    border-style: var(--tw-border-style) !important;\n                    border-width: 1px;\n                }\n\n                .dark .grecaptcha-badge {\n                    border-color: var(--input) !important;\n                }\n            `}</style>\n\n            <ReCAPTCHA\n                ref={ref}\n                key={`${theme}-${lang}-${captcha.provider}`}\n                sitekey={captcha.siteKey}\n                theme={theme}\n                hl={lang}\n                size={\n                    captcha.provider === \"google-recaptcha-v2-invisible\"\n                        ? \"invisible\"\n                        : \"normal\"\n                }\n                className={cn(\n                    captcha.provider === \"google-recaptcha-v2-invisible\"\n                        ? \"absolute\"\n                        : \"mx-auto h-[76px] w-[302px] overflow-hidden rounded bg-muted\"\n                )}\n            />\n        </>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

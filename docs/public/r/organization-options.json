@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "organization-options",
+  "type": "registry:file",
+  "title": "Organization Options",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/view-paths.json"
+  ],
+  "files": [
+    {
+      "path": "src/types/organization-options.ts",
+      "content": "export type OrganizationLogoOptions = {\n    /**\n     * Upload a logo image and return the URL string\n     * @remarks `(file: File) => Promise<string>`\n     */\n    upload?: (file: File) => Promise<string | undefined | null>\n    /**\n     * Delete a previously uploaded logo image from your storage/CDN\n     * @remarks `(url: string) => Promise<void>`\n     */\n    delete?: (url: string) => Promise<void>\n    /**\n     * Logo size for resizing\n     * @default 256 if upload is provided, 128 otherwise\n     */\n    size: number\n    /**\n     * File extension for logo uploads\n     * @default \"png\"\n     */\n    extension: string\n}\n\nimport type { OrganizationViewPaths } from \"../lib/view-paths\"\n\nexport type OrganizationOptions = {\n    /**\n     * Logo configuration\n     * @default undefined\n     */\n    logo?: boolean | Partial<OrganizationLogoOptions>\n    /**\n     * Custom roles to add to the built-in roles (owner, admin, member)\n     * @default []\n     */\n    customRoles?: Array<{ role: string; label: string }>\n    /**\n     * Enable or disable API key support for organizations\n     * @default false\n     */\n    apiKey?: boolean\n    /**\n     * Base path for organization-scoped views (supports slugged or static base)\n     * When using slug paths, set this to the common prefix (e.g. \"/organization\")\n     */\n    basePath?: string\n    /**\n     * Organization path mode\n     * - \"default\": use active-organization based routes\n     * - \"slug\": use slug-based URLs where slug becomes the first path segment\n     *   e.g. \"/[slug]/members\" (or `${basePath}/[slug]/members` if basePath provided)\n     * @default \"default\"\n     */\n    pathMode?: \"default\" | \"slug\"\n    /**\n     * The current organization slug\n     */\n    slug?: string\n    /**\n     * The path to redirect to when Personal Account is selected\n     */\n    personalPath?: string\n    /**\n     * Customize organization view paths\n     */\n    viewPaths?: Partial<OrganizationViewPaths>\n}\n\nexport type OrganizationOptionsContext = {\n    /**\n     * Logo configuration\n     * @default undefined\n     */\n    logo?: OrganizationLogoOptions\n    /**\n     * Custom roles to add to the built-in roles (owner, admin, member)\n     * @default []\n     */\n    customRoles: Array<{ role: string; label: string }>\n    /**\n     * Enable or disable API key support for organizations\n     * @default false\n     */\n    apiKey?: boolean\n    /**\n     * Base path for organization-scoped views\n     */\n    basePath: string\n    /**\n     * Organization path mode\n     * @default \"default\"\n     */\n    pathMode?: \"default\" | \"slug\"\n    /**\n     * The current organization slug\n     */\n    slug?: string\n    /**\n     * The path to redirect to when Personal Account is selected\n     */\n    personalPath?: string\n    /**\n     * Customize organization view paths\n     */\n    viewPaths: OrganizationViewPaths\n}\n",
+      "type": "registry:file",
+      "target": "types/organization-options.ts"
+    }
+  ]
+}

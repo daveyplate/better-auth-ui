@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "organization-settings-cards",
+  "type": "registry:component",
+  "title": "Organization Settings Cards",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/delete-organization-card.json",
+    "http://localhost:3000/r/organization-logo-card.json",
+    "http://localhost:3000/r/organization-name-card.json",
+    "http://localhost:3000/r/organization-slug-card.json",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/organization/organization-settings-cards.tsx",
+      "content": "\"use client\"\n\nimport { useContext } from \"react\"\n\nimport { AuthUIContext } from \"../../lib/auth-ui-provider\"\nimport { cn } from \"../../lib/utils\"\nimport type { AuthLocalization } from \"../../localization/auth-localization\"\nimport type { SettingsCardClassNames } from \"../settings/shared/settings-card\"\nimport { DeleteOrganizationCard } from \"./delete-organization-card\"\nimport { OrganizationLogoCard } from \"./organization-logo-card\"\nimport { OrganizationNameCard } from \"./organization-name-card\"\nimport { OrganizationSlugCard } from \"./organization-slug-card\"\n\nexport type OrganizationSettingsCardsProps = {\n    className?: string\n    classNames?: {\n        card?: SettingsCardClassNames\n        cards?: string\n    }\n    localization?: Partial<AuthLocalization>\n    slug?: string\n}\n\nexport function OrganizationSettingsCards({\n    className,\n    classNames,\n    localization,\n    slug\n}: OrganizationSettingsCardsProps) {\n    const { organization: organizationOptions } = useContext(AuthUIContext)\n\n    return (\n        <div\n            className={cn(\n                \"flex w-full flex-col gap-4 md:gap-6\",\n                className,\n                classNames?.cards\n            )}\n        >\n            {organizationOptions?.logo && (\n                <OrganizationLogoCard\n                    classNames={classNames?.card}\n                    localization={localization}\n                    slug={slug}\n                />\n            )}\n\n            <OrganizationNameCard\n                classNames={classNames?.card}\n                localization={localization}\n                slug={slug}\n            />\n\n            <OrganizationSlugCard\n                classNames={classNames?.card}\n                localization={localization}\n                slug={slug}\n            />\n\n            <DeleteOrganizationCard\n                classNames={classNames?.card}\n                localization={localization}\n                slug={slug}\n            />\n        </div>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

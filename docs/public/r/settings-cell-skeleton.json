@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "settings-cell-skeleton",
+  "type": "registry:component",
+  "title": "Settings Cell Skeleton",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "card",
+    "http://localhost:3000/r/settings-card.json",
+    "skeleton",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/skeletons/settings-cell-skeleton.tsx",
+      "content": "\"use client\"\n\nimport { cn } from \"../../../lib/utils\"\nimport { Card } from \"../../ui/card\"\nimport { Skeleton } from \"../../ui/skeleton\"\nimport type { SettingsCardClassNames } from \"../shared/settings-card\"\n\nexport function SettingsCellSkeleton({\n    classNames\n}: {\n    classNames?: SettingsCardClassNames\n}) {\n    return (\n        <Card\n            className={cn(\n                \"flex-row items-center gap-3 px-4 py-3\",\n                classNames?.cell\n            )}\n        >\n            <div className=\"flex items-center gap-2\">\n                <Skeleton\n                    className={cn(\"size-5 rounded-full\", classNames?.skeleton)}\n                />\n\n                <div>\n                    <Skeleton\n                        className={cn(\"h-4 w-24\", classNames?.skeleton)}\n                    />\n                </div>\n            </div>\n\n            <Skeleton\n                className={cn(\"ms-auto size-8 w-12\", classNames?.skeleton)}\n            />\n        </Card>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

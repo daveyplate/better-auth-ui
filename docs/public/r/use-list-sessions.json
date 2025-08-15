@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-list-sessions",
+  "type": "registry:lib",
+  "title": "Use List Sessions",
+  "description": "",
+  "dependencies": [
+    "better-auth"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-hooks.json",
+    "http://localhost:3000/r/model-names.json",
+    "http://localhost:3000/r/use-conditional-query.json",
+    "http://localhost:3000/r/use-triplit-hooks.json",
+    "http://localhost:3000/r/use-triplit-token.json"
+  ],
+  "files": [
+    {
+      "path": "src/lib/triplit/use-list-sessions.ts",
+      "content": "import type { Session } from \"better-auth\"\nimport type { AuthHooks } from \"../../types/auth-hooks\"\nimport { getModelName } from \"./model-names\"\nimport { useConditionalQuery } from \"./use-conditional-query\"\nimport type { UseTriplitOptionsProps } from \"./use-triplit-hooks\"\nimport { useTriplitToken } from \"./use-triplit-token\"\n\nexport function useListSessions({\n    triplit,\n    modelNames,\n    usePlural,\n    isPending\n}: UseTriplitOptionsProps): ReturnType<AuthHooks[\"useListSessions\"]> {\n    const modelName = getModelName({\n        namespace: \"session\",\n        modelNames,\n        usePlural\n    })\n\n    const { payload } = useTriplitToken(triplit)\n\n    const {\n        results: sessions,\n        error,\n        fetching\n    } = useConditionalQuery(triplit, payload?.sub && triplit.query(modelName))\n\n    return {\n        data: sessions as Session[] | undefined,\n        isPending: isPending || fetching,\n        error\n    }\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

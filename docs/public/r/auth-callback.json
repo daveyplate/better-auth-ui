@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "auth-callback",
+  "type": "registry:component",
+  "title": "Auth Callback",
+  "description": "",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/use-success-transition.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/auth/auth-callback.tsx",
+      "content": "\"use client\"\n\nimport { Loader2 } from \"lucide-react\"\nimport { useContext, useEffect, useRef } from \"react\"\n\nimport { useOnSuccessTransition } from \"../../hooks/use-success-transition\"\nimport { AuthUIContext } from \"../../lib/auth-ui-provider\"\n\nexport function AuthCallback({ redirectTo }: { redirectTo?: string }) {\n    const {\n        hooks: { useIsRestoring },\n        persistClient\n    } = useContext(AuthUIContext)\n\n    const isRestoring = useIsRestoring?.()\n    const isRedirecting = useRef(false)\n\n    const { onSuccess } = useOnSuccessTransition({ redirectTo })\n\n    useEffect(() => {\n        if (isRedirecting.current) return\n\n        if (!persistClient) {\n            isRedirecting.current = true\n            onSuccess()\n            return\n        }\n\n        if (isRestoring) return\n\n        isRedirecting.current = true\n        onSuccess()\n    }, [isRestoring, persistClient, onSuccess])\n\n    return <Loader2 className=\"animate-spin\" />\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

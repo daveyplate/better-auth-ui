@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "model-names",
+  "type": "registry:lib",
+  "title": "Model Names",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/lib/triplit/model-names.ts",
+      "content": "const namespaces = [\n    \"user\",\n    \"session\",\n    \"account\",\n    \"passkey\",\n    \"twoFactor\"\n] as const\ntype Namespace = (typeof namespaces)[number]\n\nexport type ModelNames = {\n    [key in Namespace]: string\n}\n\nexport const getModelName = ({\n    namespace,\n    modelNames,\n    usePlural = false\n}: {\n    namespace: Namespace\n    modelNames?: Partial<ModelNames>\n    usePlural?: boolean\n}) => {\n    return modelNames?.[namespace] || `${namespace}${usePlural ? \"s\" : \"\"}`\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

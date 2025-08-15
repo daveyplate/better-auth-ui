@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-input-group",
+  "type": "registry:component",
+  "title": "Otp Input Group",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "input-otp"
+  ],
+  "files": [
+    {
+      "path": "src/components/auth/otp-input-group.tsx",
+      "content": "\"use client\"\n\nimport { InputOTPGroup, InputOTPSeparator, InputOTPSlot } from \"../ui/input-otp\"\n\nexport function OTPInputGroup({\n    otpSeparators = 0\n}: {\n    otpSeparators?: 0 | 1 | 2\n}) {\n    if (otpSeparators === 0) {\n        return (\n            <InputOTPGroup>\n                <InputOTPSlot index={0} />\n                <InputOTPSlot index={1} />\n                <InputOTPSlot index={2} />\n                <InputOTPSlot index={3} />\n                <InputOTPSlot index={4} />\n                <InputOTPSlot index={5} />\n            </InputOTPGroup>\n        )\n    }\n\n    if (otpSeparators === 1) {\n        return (\n            <>\n                <InputOTPGroup>\n                    <InputOTPSlot index={0} />\n                    <InputOTPSlot index={1} />\n                    <InputOTPSlot index={2} />\n                </InputOTPGroup>\n\n                <InputOTPSeparator />\n\n                <InputOTPGroup>\n                    <InputOTPSlot index={3} />\n                    <InputOTPSlot index={4} />\n                    <InputOTPSlot index={5} />\n                </InputOTPGroup>\n            </>\n        )\n    }\n\n    return (\n        <>\n            <InputOTPGroup>\n                <InputOTPSlot index={0} />\n                <InputOTPSlot index={1} />\n            </InputOTPGroup>\n\n            <InputOTPSeparator />\n\n            <InputOTPGroup>\n                <InputOTPSlot index={2} />\n                <InputOTPSlot index={3} />\n            </InputOTPGroup>\n\n            <InputOTPSeparator />\n\n            <InputOTPGroup>\n                <InputOTPSlot index={4} />\n                <InputOTPSlot index={5} />\n            </InputOTPGroup>\n        </>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

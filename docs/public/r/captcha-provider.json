@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "captcha-provider",
+  "type": "registry:file",
+  "title": "Captcha Provider",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/types/captcha-provider.ts",
+      "content": "export type CaptchaProvider =\n    | \"cloudflare-turnstile\"\n    | \"google-recaptcha-v2-checkbox\"\n    | \"google-recaptcha-v2-invisible\"\n    | \"google-recaptcha-v3\"\n    | \"hcaptcha\"\n",
+      "type": "registry:file",
+      "target": "types/captcha-provider.ts"
+    }
+  ]
+}

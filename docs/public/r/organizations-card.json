@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "organizations-card",
+  "type": "registry:component",
+  "title": "Organizations Card",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "card",
+    "http://localhost:3000/r/create-organization-dialog.json",
+    "http://localhost:3000/r/organization-cell.json",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/settings-cell-skeleton.json",
+    "http://localhost:3000/r/use-hydrated.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/organization/organizations-card.tsx",
+      "content": "\"use client\"\nimport { useContext, useMemo, useState } from \"react\"\n\nimport { useIsHydrated } from \"../../hooks/use-hydrated\"\nimport { AuthUIContext } from \"../../lib/auth-ui-provider\"\nimport { cn } from \"../../lib/utils\"\nimport type { SettingsCardProps } from \"../settings/shared/settings-card\"\nimport { SettingsCard } from \"../settings/shared/settings-card\"\nimport { SettingsCellSkeleton } from \"../settings/skeletons/settings-cell-skeleton\"\nimport { CardContent } from \"../ui/card\"\nimport { CreateOrganizationDialog } from \"./create-organization-dialog\"\nimport { OrganizationCell } from \"./organization-cell\"\n\nexport function OrganizationsCard({\n    className,\n    classNames,\n    localization,\n    ...props\n}: SettingsCardProps) {\n    const {\n        hooks: { useListOrganizations },\n        localization: contextLocalization\n    } = useContext(AuthUIContext)\n\n    localization = useMemo(\n        () => ({ ...contextLocalization, ...localization }),\n        [contextLocalization, localization]\n    )\n\n    const isHydrated = useIsHydrated()\n    const { data: organizations, isPending: organizationsPending } =\n        useListOrganizations()\n\n    const isPending = !isHydrated || organizationsPending\n\n    const [createDialogOpen, setCreateDialogOpen] = useState(false)\n\n    return (\n        <>\n            <SettingsCard\n                className={className}\n                classNames={classNames}\n                title={localization.ORGANIZATIONS}\n                description={localization.ORGANIZATIONS_DESCRIPTION}\n                instructions={localization.ORGANIZATIONS_INSTRUCTIONS}\n                actionLabel={localization.CREATE_ORGANIZATION}\n                action={() => setCreateDialogOpen(true)}\n                isPending={isPending}\n                {...props}\n            >\n                <CardContent className={cn(\"grid gap-4\", classNames?.content)}>\n                    {isPending && <SettingsCellSkeleton />}\n                    {organizations?.map((organization) => (\n                        <OrganizationCell\n                            key={organization.id}\n                            classNames={classNames}\n                            organization={organization}\n                            localization={localization}\n                        />\n                    ))}\n                </CardContent>\n            </SettingsCard>\n\n            <CreateOrganizationDialog\n                classNames={classNames}\n                localization={localization}\n                open={createDialogOpen}\n                onOpenChange={setCreateDialogOpen}\n            />\n        </>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}
