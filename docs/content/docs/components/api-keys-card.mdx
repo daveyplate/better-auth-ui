@@ -4,6 +4,31 @@ title: <APIKeysCard />
 
 The `<APIKeysCard />` component provides a complete interface for managing API keys, including creating, viewing, and deleting API keys for programmatic access to your application.
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/api-keys-card.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/api-keys-card.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/api-keys-card.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/api-keys-card.json
+  ```
+  </Tab>
+</Tabs>
+
 ## Usage
 
 ```tsx
@@ -39,7 +64,7 @@ export function APIKeysSettingsPage() {
 ### With Custom Class Names
 
 ```tsx
-<APIKeysCard 
+<APIKeysCard
   classNames={{
     base: "shadow-md",
     button: "rounded-full",
@@ -51,7 +76,7 @@ export function APIKeysSettingsPage() {
 ### With Custom Localization
 
 ```tsx
-<APIKeysCard 
+<APIKeysCard
   localization={{
     API_KEYS: "Developer Keys",
     CREATE_API_KEY: "Generate New Key",
@@ -128,4 +153,4 @@ Shows newly created key with:
 2. **Expiration Policy**: Always set expiration for production keys
 3. **Key Rotation**: Regularly rotate API keys
 4. **Access Control**: Limit who can create/delete keys
-5. **Monitoring**: Track API key usage 
+5. **Monitoring**: Track API key usage

@@ -7,6 +7,31 @@ In order to use `@daveyplate/better-auth-ui` with the [`@daveyplate/better-auth-
 
 The main difference is the `persistClient` prop which is only required if you are using a [`persistQueryClient`](https://tanstack.com/query/latest/docs/framework/react/plugins/persistQueryClient) for offline Authentication. This prop will tell the authentication methods to use the `/auth/callback` path for all authentication methods that leave the site, which will clear your query cache for you automatically.
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/auth-ui-provider-tanstack.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/auth-ui-provider-tanstack.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/auth-ui-provider-tanstack.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/auth-ui-provider-tanstack.json
+  ```
+  </Tab>
+</Tabs>
+
 ```tsx title="app/providers.tsx"
 "use client"
 

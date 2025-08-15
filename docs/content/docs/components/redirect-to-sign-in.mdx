@@ -6,6 +6,31 @@ The `<RedirectToSignIn />` component automatically redirects unauthenticated use
 
 Useful for wrapping pages or routes that require users to be signed in.
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/redirect-to-sign-in.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/redirect-to-sign-in.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/redirect-to-sign-in.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/redirect-to-sign-in.json
+  ```
+  </Tab>
+</Tabs>
+
 ## Usage
 
 ```tsx
@@ -35,7 +60,7 @@ export default function PrivateRoute({ children }: { children: React.ReactNode }
   return (
     <>
       <RedirectToSignIn />
-      
+
       <SignedIn>
         {children}
       </SignedIn>

@@ -1,6 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "local",
+  "homepage": "https://better-auth-ui.com",
   "items": [
     {
       "name": "accept-invitation-card",

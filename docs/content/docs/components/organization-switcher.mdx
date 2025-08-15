@@ -4,6 +4,32 @@ title: <OrganizationSwitcher />
 
 The `<OrganizationSwitcher />` is a comprehensive component that provides organization and personal account switching functionality. It displays the currently active organization or personal account and allows users to switch between them, create new organizations, and manage their organization settings.
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/organization-switcher.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/organization-switcher.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/organization-switcher.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/organization-switcher.json
+  ```
+  </Tab>
+</Tabs>
+
+
 ## Usage
 
 ```tsx
@@ -57,7 +83,7 @@ export function Header() {
 ```tsx
 import { Button } from '@/components/ui/button'
 
-<OrganizationSwitcher 
+<OrganizationSwitcher
   trigger={
     <Button variant="outline">
       Switch Organization
@@ -69,7 +95,7 @@ import { Button } from '@/components/ui/button'
 ### With onSetActive Callback
 
 ```tsx
-<OrganizationSwitcher 
+<OrganizationSwitcher
   onSetActive={(organizationId) => {
     console.log('Switched to:', organizationId)
   }}
@@ -79,7 +105,7 @@ import { Button } from '@/components/ui/button'
 ### With Custom Localization
 
 ```tsx
-<OrganizationSwitcher 
+<OrganizationSwitcher
   localization={{
     ORGANIZATION: "Team",
     CREATE_ORGANIZATION: "Create Team",
@@ -91,7 +117,7 @@ import { Button } from '@/components/ui/button'
 ### With Custom Class Names
 
 ```tsx
-<OrganizationSwitcher 
+<OrganizationSwitcher
   classNames={{
     trigger: {
       base: "bg-primary text-primary-foreground",
@@ -146,4 +172,4 @@ The `OrganizationSwitcher` requires the organization plugin to be configured in 
 >
   {children}
 </AuthUIProvider>
-``` 
+```

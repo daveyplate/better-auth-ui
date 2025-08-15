@@ -4,6 +4,31 @@ title: <AcceptInvitationCard />
 
 The `<AcceptInvitationCard />` component handles the organization invitation acceptance flow. It displays invitation details and allows users to accept or reject organization invitations.
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/accept-invitation-card.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/accept-invitation-card.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/accept-invitation-card.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/accept-invitation-card.json
+  ```
+  </Tab>
+</Tabs>
+
 ## Usage
 
 This component is typically used on a dedicated invitation acceptance page:
@@ -58,7 +83,7 @@ export default function AcceptInvitationPage() {
 ### With Custom Class Names
 
 ```tsx
-<AcceptInvitationCard 
+<AcceptInvitationCard
   classNames={{
     base: "max-w-md",
     header: "text-center",
@@ -70,7 +95,7 @@ export default function AcceptInvitationPage() {
 ### With Custom Localization
 
 ```tsx
-<AcceptInvitationCard 
+<AcceptInvitationCard
   localization={{
     ACCEPT_INVITATION: "Join Team",
     REJECT: "Decline",
@@ -130,4 +155,4 @@ Set up the invitation route in your auth configuration:
 2. **Expiration Time**: Set reasonable expiration (7-14 days)
 3. **Email Template**: Customize invitation email design
 4. **Success Redirect**: Configure post-acceptance redirect
-5. **Error Pages**: Handle invalid invitation gracefully 
+5. **Error Pages**: Handle invalid invitation gracefully

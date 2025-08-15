@@ -9,11 +9,36 @@ This component automatically leverages all the features you have enabled via the
 <img alt="Settings Cards" src="/screenshots/settings-cards-dark.png" className="rounded-xl hidden dark:block w-lg mt-0 mb-0" />
 <img alt="Settings Cards" src="/screenshots/settings-cards-light.png" className="rounded-xl dark:hidden w-lg mt-0 mb-0" />
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/settings-cards.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/settings-cards.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/settings-cards.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/settings-cards.json
+  ```
+  </Tab>
+</Tabs>
+
 ## Default Settings Page Behavior
 
 By default, the built-in [`<AuthView />`](/components/auth-view) component automatically displays `<SettingsCards />` when the `/auth/settings` route is accessed. If you prefer to handle user settings on a custom route or component, you can override this behavior using the `settings.url` prop.
 
-## Overriding Built-in Settings URL 
+## Overriding Built-in Settings URL
 
 To use your own custom settings route and avoid using the default included settings card, you can specify the `settings.url` prop within your [`<AuthUIProvider />`](/components/auth-ui-provider) configuration:
 
@@ -93,7 +118,7 @@ Using Tailwind utility classes, you can fully customize all card states. Here's 
 />
 ```
 
-### All available settings included in SettingsCards: 
+### All available settings included in SettingsCards:
 
 - **Avatar** (optional, requires avatar upload configured in AuthUIProvider)
 - **Name**

@@ -6,6 +6,31 @@ The `useAuthenticate()` hook automatically redirects unauthenticated users to th
 
 This is a hook alternative to the `<RedirectToSignIn />` component, useful for redirecting users programmatically.
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/use-authenticate.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/use-authenticate.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/use-authenticate.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/use-authenticate.json
+  ```
+  </Tab>
+</Tabs>
+
 ## Usage
 
 ```tsx
@@ -14,7 +39,7 @@ import { useAuthenticate } from "@daveyplate/better-auth-ui"
 export default function ProtectedPage() {
     // Will redirect to sign-in if user is not authenticated
     useAuthenticate()
-    
+
     return <div>Protected content visible only to authenticated users</div>
 }
 ```
@@ -43,7 +68,7 @@ export default function ProtectedSignUpPage() {
     useAuthenticate({
         authView: "signUp",
     })
-    
+
     return <div>Protected content</div>
 }
 ```
@@ -60,7 +85,7 @@ export default function ConditionalProtectedPage({ isProtected }: { isProtected:
     useAuthenticate({
         enabled: isProtected
     })
-    
+
     return <div>This content may or may not be protected</div>
 }
-``` 
+```

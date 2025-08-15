@@ -4,6 +4,32 @@ title: <OrganizationSettingsCards />
 
 The `<OrganizationSettingsCards />` component provides a comprehensive set of cards for managing organization settings, including organization details, logo, and deletion options.
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/organization-settings-card.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/organization-settings-card.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/organization-settings-card.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/organization-settings-card.json
+  ```
+  </Tab>
+</Tabs>
+
+
 ## Usage
 
 ```tsx
@@ -38,7 +64,7 @@ export function OrganizationSettingsPage() {
 ### With Custom Class Names
 
 ```tsx
-<OrganizationSettingsCards 
+<OrganizationSettingsCards
   classNames={{
     cards: "gap-8",
     card: {
@@ -53,7 +79,7 @@ export function OrganizationSettingsPage() {
 ### With Custom Localization
 
 ```tsx
-<OrganizationSettingsCards 
+<OrganizationSettingsCards
   localization={{
     ORGANIZATION_NAME: "Team Name",
     ORGANIZATION_SLUG: "Team URL",
@@ -116,4 +142,4 @@ The organization plugin must be enabled with proper configuration:
 - **View Settings**: All organization members
 - **Update Name/Slug**: Admin and Owner roles
 - **Upload Logo**: Admin and Owner roles
-- **Delete Organization**: Owner role only 
+- **Delete Organization**: Owner role only

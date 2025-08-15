@@ -4,6 +4,31 @@ title: <AuthLoading />
 
 The `<AuthLoading />` component renders its children only during an authentication session loading. This provides an easy way for you to insert loading states or skeleton loaders into your UI, enhancing user experience during data fetching.
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/auth-loading.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/auth-loading.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/auth-loading.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/auth-loading.json
+  ```
+  </Tab>
+</Tabs>
+
 ## Usage
 
 Wrap loading placeholders or loader components with `<AuthLoading />` to conditionally render them whenever authentication session data is being fetched.

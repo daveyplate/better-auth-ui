@@ -12,6 +12,3 @@ pnpm delete-docs-r
 
 # 5. Copy public/r to docs/public/r
 pnpm copy-public-to-docs
-
-# 6. Run lint-staged
-pnpm lint-staged
