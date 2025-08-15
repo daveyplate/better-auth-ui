@@ -6,7 +6,7 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/image.json"
+    "https://better-auth-ui.com/r/image.json"
   ],
   "files": [
     {

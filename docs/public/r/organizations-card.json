@@ -6,14 +6,14 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "card",
-    "true/create-organization-dialog.json",
-    "true/organization-cell.json",
-    "true/settings-card.json",
-    "true/settings-cell-skeleton.json",
-    "true/use-hydrated.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/create-organization-dialog.json",
+    "https://better-auth-ui.com/r/organization-cell.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/settings-cell-skeleton.json",
+    "https://better-auth-ui.com/r/use-hydrated.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

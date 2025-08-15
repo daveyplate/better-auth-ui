@@ -6,16 +6,16 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/accounts-card.json",
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
-    "true/change-email-card.json",
-    "true/settings-card.json",
-    "true/update-avatar-card.json",
-    "true/update-field-card.json",
-    "true/update-name-card.json",
-    "true/update-username-card.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/accounts-card.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/change-email-card.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/update-avatar-card.json",
+    "https://better-auth-ui.com/r/update-field-card.json",
+    "https://better-auth-ui.com/r/update-name-card.json",
+    "https://better-auth-ui.com/r/update-username-card.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

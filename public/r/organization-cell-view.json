@@ -8,11 +8,11 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
-    "true/organization-logo.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/organization-logo.json",
     "skeleton",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

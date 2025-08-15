@@ -6,15 +6,15 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "card",
-    "true/provider-cell.json",
-    "true/refetch.json",
-    "true/settings-card.json",
-    "true/settings-cell-skeleton.json",
-    "true/social-providers.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/provider-cell.json",
+    "https://better-auth-ui.com/r/refetch.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/settings-cell-skeleton.json",
+    "https://better-auth-ui.com/r/social-providers.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

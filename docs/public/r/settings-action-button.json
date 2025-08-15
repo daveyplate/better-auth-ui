@@ -10,8 +10,8 @@
   ],
   "registryDependencies": [
     "button",
-    "true/settings-card.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

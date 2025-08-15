@@ -9,17 +9,17 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "button",
     "card",
     "dropdown-menu",
-    "true/leave-organization-dialog.json",
-    "true/remove-member-dialog.json",
-    "true/settings-card.json",
-    "true/update-member-role-dialog.json",
-    "true/user-view.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/leave-organization-dialog.json",
+    "https://better-auth-ui.com/r/remove-member-dialog.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/update-member-role-dialog.json",
+    "https://better-auth-ui.com/r/user-view.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

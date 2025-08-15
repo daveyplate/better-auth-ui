@@ -8,13 +8,13 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "avatar",
-    "true/gravatar-utils.json",
-    "true/profile.json",
+    "https://better-auth-ui.com/r/gravatar-utils.json",
+    "https://better-auth-ui.com/r/profile.json",
     "skeleton",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

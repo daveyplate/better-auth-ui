@@ -11,8 +11,8 @@
     "react-google-recaptcha"
   ],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json"
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json"
   ],
   "files": [
     {

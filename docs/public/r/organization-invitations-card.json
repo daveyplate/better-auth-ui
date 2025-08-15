@@ -8,12 +8,12 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "card",
-    "true/invitation-cell.json",
-    "true/settings-card.json",
-    "true/use-current-organization.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/invitation-cell.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/use-current-organization.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

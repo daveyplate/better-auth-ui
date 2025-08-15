@@ -10,8 +10,8 @@
   ],
   "registryDependencies": [
     "alert",
-    "true/auth-form.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/auth-form.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

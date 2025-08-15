@@ -9,11 +9,11 @@
     "@marsidev/react-turnstile"
   ],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
-    "true/recaptcha-badge.json",
-    "true/recaptcha-v2.json",
-    "true/use-theme.json"
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/recaptcha-badge.json",
+    "https://better-auth-ui.com/r/recaptcha-v2.json",
+    "https://better-auth-ui.com/r/use-theme.json"
   ],
   "files": [
     {

@@ -6,8 +6,8 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
-    "true/use-tanstack-options.json"
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/use-tanstack-options.json"
   ],
   "files": [
     {

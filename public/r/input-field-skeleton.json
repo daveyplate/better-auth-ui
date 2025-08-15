@@ -6,9 +6,9 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/settings-card.json",
+    "https://better-auth-ui.com/r/settings-card.json",
     "skeleton",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

@@ -11,14 +11,14 @@
     "zod"
   ],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "card",
     "form",
     "input",
-    "true/settings-card.json",
+    "https://better-auth-ui.com/r/settings-card.json",
     "skeleton",
-    "true/use-current-organization.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/use-current-organization.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

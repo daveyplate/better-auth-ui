@@ -6,8 +6,8 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

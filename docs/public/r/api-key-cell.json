@@ -8,16 +8,16 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "true/api-key.json",
-    "true/api-key-delete-dialog.json",
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/api-key.json",
+    "https://better-auth-ui.com/r/api-key-delete-dialog.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "button",
     "card",
-    "true/refetch.json",
-    "true/settings-card.json",
-    "true/use-lang.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/refetch.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/use-lang.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

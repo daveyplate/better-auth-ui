@@ -8,23 +8,23 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "true/auth-callback.json",
-    "true/auth-form.json",
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-callback.json",
+    "https://better-auth-ui.com/r/auth-form.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "button",
     "card",
-    "true/email-otp-button.json",
-    "true/magic-link-button.json",
-    "true/one-tap.json",
-    "true/passkey-button.json",
-    "true/provider-button.json",
+    "https://better-auth-ui.com/r/email-otp-button.json",
+    "https://better-auth-ui.com/r/magic-link-button.json",
+    "https://better-auth-ui.com/r/one-tap.json",
+    "https://better-auth-ui.com/r/passkey-button.json",
+    "https://better-auth-ui.com/r/provider-button.json",
     "separator",
-    "true/sign-out.json",
-    "true/social-providers.json",
-    "true/use-hydrated.json",
-    "true/utils.json",
-    "true/view-paths.json"
+    "https://better-auth-ui.com/r/sign-out.json",
+    "https://better-auth-ui.com/r/social-providers.json",
+    "https://better-auth-ui.com/r/use-hydrated.json",
+    "https://better-auth-ui.com/r/utils.json",
+    "https://better-auth-ui.com/r/view-paths.json"
   ],
   "files": [
     {

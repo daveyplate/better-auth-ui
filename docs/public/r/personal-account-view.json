@@ -6,11 +6,11 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "skeleton",
-    "true/user-avatar.json",
-    "true/user-view.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/user-avatar.json",
+    "https://better-auth-ui.com/r/user-view.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

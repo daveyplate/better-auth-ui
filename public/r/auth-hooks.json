@@ -9,11 +9,11 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "true/any-auth-client.json",
-    "true/api-key.json",
-    "true/auth-client.json",
-    "true/invitation.json",
-    "true/refetch.json"
+    "https://better-auth-ui.com/r/any-auth-client.json",
+    "https://better-auth-ui.com/r/api-key.json",
+    "https://better-auth-ui.com/r/auth-client.json",
+    "https://better-auth-ui.com/r/invitation.json",
+    "https://better-auth-ui.com/r/refetch.json"
   ],
   "files": [
     {

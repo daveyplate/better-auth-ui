@@ -8,7 +8,7 @@
     "vaul"
   ],
   "registryDependencies": [
-    "true/utils.json"
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

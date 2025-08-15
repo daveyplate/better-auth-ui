@@ -6,14 +6,14 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
-    "true/delete-organization-card.json",
-    "true/organization-logo-card.json",
-    "true/organization-name-card.json",
-    "true/organization-slug-card.json",
-    "true/settings-card.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/delete-organization-card.json",
+    "https://better-auth-ui.com/r/organization-logo-card.json",
+    "https://better-auth-ui.com/r/organization-name-card.json",
+    "https://better-auth-ui.com/r/organization-slug-card.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

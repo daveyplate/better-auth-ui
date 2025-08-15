@@ -8,12 +8,12 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
-    "true/auth-view.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-view.json",
     "button",
-    "true/social-providers.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/social-providers.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

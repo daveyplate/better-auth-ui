@@ -9,10 +9,10 @@
     "@tanstack/react-query"
   ],
   "registryDependencies": [
-    "true/any-auth-client.json",
-    "true/auth-client.json",
-    "true/auth-hooks.json",
-    "true/auth-mutators.json"
+    "https://better-auth-ui.com/r/any-auth-client.json",
+    "https://better-auth-ui.com/r/auth-client.json",
+    "https://better-auth-ui.com/r/auth-hooks.json",
+    "https://better-auth-ui.com/r/auth-mutators.json"
   ],
   "files": [
     {

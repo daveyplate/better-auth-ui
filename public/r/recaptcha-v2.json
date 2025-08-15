@@ -8,10 +8,10 @@
     "react-google-recaptcha"
   ],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
-    "true/use-lang.json",
-    "true/use-theme.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/use-lang.json",
+    "https://better-auth-ui.com/r/use-theme.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

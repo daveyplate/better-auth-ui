@@ -8,13 +8,13 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "card",
-    "true/invite-member-dialog.json",
-    "true/member-cell.json",
-    "true/settings-card.json",
-    "true/use-current-organization.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/invite-member-dialog.json",
+    "https://better-auth-ui.com/r/member-cell.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/use-current-organization.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

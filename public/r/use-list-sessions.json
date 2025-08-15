@@ -8,11 +8,11 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "true/auth-hooks.json",
-    "true/model-names.json",
-    "true/use-conditional-query.json",
-    "true/use-triplit-hooks.json",
-    "true/use-triplit-token.json"
+    "https://better-auth-ui.com/r/auth-hooks.json",
+    "https://better-auth-ui.com/r/model-names.json",
+    "https://better-auth-ui.com/r/use-conditional-query.json",
+    "https://better-auth-ui.com/r/use-triplit-hooks.json",
+    "https://better-auth-ui.com/r/use-triplit-token.json"
   ],
   "files": [
     {

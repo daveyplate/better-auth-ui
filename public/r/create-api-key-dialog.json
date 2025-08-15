@@ -12,19 +12,19 @@
     "zod"
   ],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "button",
     "dialog",
     "form",
     "input",
-    "true/organization-cell-view.json",
-    "true/personal-account-view.json",
-    "true/refetch.json",
+    "https://better-auth-ui.com/r/organization-cell-view.json",
+    "https://better-auth-ui.com/r/personal-account-view.json",
+    "https://better-auth-ui.com/r/refetch.json",
     "select",
-    "true/settings-card.json",
-    "true/use-lang.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/use-lang.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

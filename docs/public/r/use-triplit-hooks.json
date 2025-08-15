@@ -9,12 +9,12 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "true/auth-client.json",
-    "true/auth-hooks.json",
-    "true/refetch.json",
-    "true/use-list-accounts.json",
-    "true/use-list-sessions.json",
-    "true/use-session.json"
+    "https://better-auth-ui.com/r/auth-client.json",
+    "https://better-auth-ui.com/r/auth-hooks.json",
+    "https://better-auth-ui.com/r/refetch.json",
+    "https://better-auth-ui.com/r/use-list-accounts.json",
+    "https://better-auth-ui.com/r/use-list-sessions.json",
+    "https://better-auth-ui.com/r/use-session.json"
   ],
   "files": [
     {

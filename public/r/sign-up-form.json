@@ -12,24 +12,24 @@
     "zod"
   ],
   "registryDependencies": [
-    "true/auth-form.json",
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-form.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "button",
-    "true/captcha.json",
+    "https://better-auth-ui.com/r/captcha.json",
     "checkbox",
     "dropdown-menu",
     "form",
-    "true/image-utils.json",
+    "https://better-auth-ui.com/r/image-utils.json",
     "input",
-    "true/password-input.json",
-    "true/password-validation.json",
+    "https://better-auth-ui.com/r/password-input.json",
+    "https://better-auth-ui.com/r/password-validation.json",
     "textarea",
-    "true/use-captcha.json",
-    "true/use-hydrated.json",
-    "true/use-success-transition.json",
-    "true/user-avatar.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/use-captcha.json",
+    "https://better-auth-ui.com/r/use-hydrated.json",
+    "https://better-auth-ui.com/r/use-success-transition.json",
+    "https://better-auth-ui.com/r/user-avatar.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

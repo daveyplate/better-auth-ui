@@ -6,9 +6,9 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
-    "true/settings-card.json",
-    "true/update-field-card.json"
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/update-field-card.json"
   ],
   "files": [
     {

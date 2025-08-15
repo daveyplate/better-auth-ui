@@ -6,12 +6,12 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
     "card",
-    "true/settings-card-footer.json",
-    "true/settings-card-header.json",
-    "true/user-avatar.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/settings-card-footer.json",
+    "https://better-auth-ui.com/r/settings-card-header.json",
+    "https://better-auth-ui.com/r/user-avatar.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

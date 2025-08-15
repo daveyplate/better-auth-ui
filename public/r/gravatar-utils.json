@@ -8,7 +8,7 @@
     "@noble/hashes"
   ],
   "registryDependencies": [
-    "true/gravatar-options.json"
+    "https://better-auth-ui.com/r/gravatar-options.json"
   ],
   "files": [
     {

@@ -10,8 +10,8 @@
     "zod"
   ],
   "registryDependencies": [
-    "true/auth-localization.json",
-    "true/password-validation.json"
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/password-validation.json"
   ],
   "files": [
     {

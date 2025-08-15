@@ -8,8 +8,8 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
-    "true/use-success-transition.json"
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/use-success-transition.json"
   ],
   "files": [
     {

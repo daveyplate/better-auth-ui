@@ -11,14 +11,14 @@
     "zod"
   ],
   "registryDependencies": [
-    "true/auth-form.json",
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/auth-form.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "button",
     "form",
     "input",
-    "true/use-success-transition.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/use-success-transition.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

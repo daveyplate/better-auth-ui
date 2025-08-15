@@ -8,10 +8,10 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "true/auth-ui-provider.json",
-    "true/delete-organization-dialog.json",
-    "true/settings-card.json",
-    "true/use-current-organization.json"
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/delete-organization-dialog.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/use-current-organization.json"
   ],
   "files": [
     {

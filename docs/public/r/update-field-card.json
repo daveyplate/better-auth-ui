@@ -10,17 +10,17 @@
     "zod"
   ],
   "registryDependencies": [
-    "true/additional-fields.json",
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/additional-fields.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "card",
     "checkbox",
     "form",
     "input",
-    "true/settings-card.json",
+    "https://better-auth-ui.com/r/settings-card.json",
     "skeleton",
     "textarea",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

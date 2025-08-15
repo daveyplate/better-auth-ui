@@ -8,17 +8,17 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "true/account-view.json",
-    "true/api-keys-card.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/account-view.json",
+    "https://better-auth-ui.com/r/api-keys-card.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "button",
     "drawer",
     "label",
-    "true/organization-invitations-card.json",
-    "true/organization-members-card.json",
-    "true/organization-settings-cards.json",
-    "true/use-current-organization.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/organization-invitations-card.json",
+    "https://better-auth-ui.com/r/organization-members-card.json",
+    "https://better-auth-ui.com/r/organization-settings-cards.json",
+    "https://better-auth-ui.com/r/use-current-organization.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

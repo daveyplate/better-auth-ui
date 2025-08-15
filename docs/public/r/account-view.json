@@ -8,18 +8,18 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "true/account-settings-cards.json",
-    "true/api-keys-card.json",
-    "true/auth-localization.json",
-    "true/auth-ui-provider.json",
+    "https://better-auth-ui.com/r/account-settings-cards.json",
+    "https://better-auth-ui.com/r/api-keys-card.json",
+    "https://better-auth-ui.com/r/auth-localization.json",
+    "https://better-auth-ui.com/r/auth-ui-provider.json",
     "button",
     "drawer",
     "label",
-    "true/organizations-card.json",
-    "true/security-settings-cards.json",
-    "true/settings-card.json",
-    "true/user-invitations-card.json",
-    "true/utils.json"
+    "https://better-auth-ui.com/r/organizations-card.json",
+    "https://better-auth-ui.com/r/security-settings-cards.json",
+    "https://better-auth-ui.com/r/settings-card.json",
+    "https://better-auth-ui.com/r/user-invitations-card.json",
+    "https://better-auth-ui.com/r/utils.json"
   ],
   "files": [
     {

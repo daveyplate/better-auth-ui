@@ -6,7 +6,7 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "true/provider-icons.json"
+    "https://better-auth-ui.com/r/provider-icons.json"
   ],
   "files": [
     {
