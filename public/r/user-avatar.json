@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "user-avatar",
+  "type": "registry:component",
+  "title": "User Avatar",
+  "description": "",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "avatar",
+    "http://localhost:3000/r/gravatar-utils.json",
+    "http://localhost:3000/r/profile.json",
+    "skeleton",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/user-avatar.tsx",
+      "content": "\"use client\"\n\nimport { UserRoundIcon } from \"lucide-react\"\nimport { type ComponentProps, useContext } from \"react\"\n\nimport { AuthUIContext } from \"../lib/auth-ui-provider\"\nimport { getGravatarUrl } from \"../lib/gravatar-utils\"\nimport { cn } from \"../lib/utils\"\nimport type { AuthLocalization } from \"../localization/auth-localization\"\nimport type { Profile } from \"../types/profile\"\nimport { Avatar, AvatarFallback, AvatarImage } from \"./ui/avatar\"\nimport { Skeleton } from \"./ui/skeleton\"\n\nexport interface UserAvatarClassNames {\n    base?: string\n    image?: string\n    fallback?: string\n    fallbackIcon?: string\n    skeleton?: string\n}\n\nexport interface UserAvatarProps {\n    classNames?: UserAvatarClassNames\n    isPending?: boolean\n    size?: \"sm\" | \"default\" | \"lg\" | \"xl\" | null\n    user?: Profile | null\n    /**\n     * @default authLocalization\n     * @remarks `AuthLocalization`\n     */\n    localization?: Partial<AuthLocalization>\n}\n\n/**\n * Displays a user avatar with image and fallback support\n *\n * Renders a user's avatar image when available, with appropriate fallbacks:\n * - Shows a skeleton when isPending is true\n * - Displays first two characters of user's name when no image is available\n * - Falls back to a generic user icon when neither image nor name is available\n */\nexport function UserAvatar({\n    className,\n    classNames,\n    isPending,\n    size,\n    user,\n    localization: propLocalization,\n    ...props\n}: UserAvatarProps & ComponentProps<typeof Avatar>) {\n    const {\n        localization: contextLocalization,\n        gravatar,\n        avatar\n    } = useContext(AuthUIContext)\n\n    const localization = { ...contextLocalization, ...propLocalization }\n\n    const name =\n        user?.displayName ||\n        user?.name ||\n        user?.fullName ||\n        user?.firstName ||\n        user?.displayUsername ||\n        user?.username ||\n        user?.email\n    const userImage = user?.image || user?.avatar || user?.avatarUrl\n\n    // Calculate gravatar URL synchronously\n    const gravatarUrl =\n        gravatar && user?.email\n            ? getGravatarUrl(\n                  user.email,\n                  gravatar === true ? undefined : gravatar\n              )\n            : null\n\n    const src = gravatar ? gravatarUrl : userImage\n\n    if (isPending) {\n        return (\n            <Skeleton\n                className={cn(\n                    \"shrink-0 rounded-full\",\n                    size === \"sm\"\n                        ? \"size-6\"\n                        : size === \"lg\"\n                          ? \"size-10\"\n                          : size === \"xl\"\n                            ? \"size-12\"\n                            : \"size-8\",\n                    className,\n                    classNames?.base,\n                    classNames?.skeleton\n                )}\n            />\n        )\n    }\n\n    return (\n        <Avatar\n            className={cn(\n                \"bg-muted\",\n                size === \"sm\"\n                    ? \"size-6\"\n                    : size === \"lg\"\n                      ? \"size-10\"\n                      : size === \"xl\"\n                        ? \"size-12\"\n                        : \"size-8\",\n                className,\n                classNames?.base\n            )}\n            {...props}\n        >\n            {avatar?.Image ? (\n                <avatar.Image\n                    alt={name || localization?.USER!}\n                    className={classNames?.image}\n                    src={src || \"\"}\n                />\n            ) : (\n                <AvatarImage\n                    alt={name || localization?.USER}\n                    className={classNames?.image}\n                    src={src || undefined}\n                />\n            )}\n\n            <AvatarFallback\n                className={cn(\n                    \"text-foreground uppercase\",\n                    classNames?.fallback\n                )}\n                delayMs={src ? 600 : undefined}\n            >\n                {firstTwoCharacters(name) || (\n                    <UserRoundIcon\n                        className={cn(\"size-[50%]\", classNames?.fallbackIcon)}\n                    />\n                )}\n            </AvatarFallback>\n        </Avatar>\n    )\n}\n\nconst firstTwoCharacters = (name?: string | null) => name?.slice(0, 2)\n",
+      "type": "registry:component"
+    }
+  ]
+}

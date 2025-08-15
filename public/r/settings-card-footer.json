@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "settings-card-footer",
+  "type": "registry:component",
+  "title": "Settings Card Footer",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "card",
+    "http://localhost:3000/r/settings-action-button.json",
+    "http://localhost:3000/r/settings-card.json",
+    "skeleton",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/shared/settings-card-footer.tsx",
+      "content": "\"use client\"\n\nimport type { ReactNode } from \"react\"\n\nimport { cn } from \"../../../lib/utils\"\nimport { CardDescription, CardFooter } from \"../../ui/card\"\nimport { Skeleton } from \"../../ui/skeleton\"\nimport { SettingsActionButton } from \"./settings-action-button\"\nimport type { SettingsCardClassNames } from \"./settings-card\"\n\nexport interface SettingsCardFooterProps {\n    className?: string\n    classNames?: SettingsCardClassNames\n    actionLabel?: ReactNode\n    disabled?: boolean\n    instructions?: ReactNode\n    isPending?: boolean\n    isSubmitting?: boolean\n    optimistic?: boolean\n    variant?: \"default\" | \"destructive\"\n    action?: () => Promise<unknown> | unknown\n}\n\nexport function SettingsCardFooter({\n    className,\n    classNames,\n    actionLabel,\n    disabled,\n    instructions,\n    isPending,\n    isSubmitting,\n    variant,\n    action\n}: SettingsCardFooterProps) {\n    return (\n        <CardFooter\n            className={cn(\n                \"flex flex-col justify-between gap-4 rounded-b-xl md:flex-row\",\n                (actionLabel || instructions) && \"!py-4 border-t\",\n                variant === \"destructive\"\n                    ? \"border-destructive/30 bg-destructive/15\"\n                    : \"bg-sidebar\",\n                className,\n                classNames?.footer\n            )}\n        >\n            {isPending ? (\n                <>\n                    {instructions && (\n                        <Skeleton\n                            className={cn(\n                                \"my-0.5 h-3 w-48 max-w-full md:h-4 md:w-56\",\n                                classNames?.skeleton\n                            )}\n                        />\n                    )}\n\n                    {actionLabel && (\n                        <Skeleton\n                            className={cn(\n                                \"h-8 w-14 md:ms-auto\",\n                                classNames?.skeleton\n                            )}\n                        />\n                    )}\n                </>\n            ) : (\n                <>\n                    {instructions && (\n                        <CardDescription\n                            className={cn(\n                                \"text-center text-muted-foreground text-xs md:text-start md:text-sm\",\n                                classNames?.instructions\n                            )}\n                        >\n                            {instructions}\n                        </CardDescription>\n                    )}\n\n                    {actionLabel && (\n                        <SettingsActionButton\n                            classNames={classNames}\n                            actionLabel={actionLabel}\n                            disabled={disabled}\n                            isSubmitting={isSubmitting}\n                            variant={variant}\n                            onClick={action}\n                        />\n                    )}\n                </>\n            )}\n        </CardFooter>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

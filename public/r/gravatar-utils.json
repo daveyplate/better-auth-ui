@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gravatar-utils",
+  "type": "registry:lib",
+  "title": "Gravatar Utils",
+  "description": "",
+  "dependencies": [
+    "@noble/hashes"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/gravatar-options.json"
+  ],
+  "files": [
+    {
+      "path": "src/lib/gravatar-utils.ts",
+      "content": "import { sha256 } from \"@noble/hashes/sha2\"\nimport { bytesToHex } from \"@noble/hashes/utils\"\nimport type { GravatarOptions } from \"../types/gravatar-options\"\n\n/**\n * Generate a Gravatar URL for an email address\n * @param email - Email address\n * @param options - Gravatar options\n * @returns Gravatar URL or null if email is invalid\n */\nexport function getGravatarUrl(\n    email?: string | null,\n    options?: GravatarOptions\n): string | null {\n    if (!email) return null\n\n    try {\n        // Normalize email: trim and lowercase\n        const normalizedEmail = email.trim().toLowerCase()\n        const hash = bytesToHex(sha256(normalizedEmail))\n        const extension = options?.jpg ? \".jpg\" : \"\"\n        let url = `https://gravatar.com/avatar/${hash}${extension}`\n\n        const params = new URLSearchParams()\n\n        // Add size parameter\n        if (options?.size) {\n            params.append(\n                \"s\",\n                Math.min(Math.max(options.size, 1), 2048).toString()\n            )\n        }\n\n        // Add default image parameter\n        if (options?.d) {\n            params.append(\"d\", options.d)\n        }\n\n        // Add force default parameter\n        if (options?.forceDefault) {\n            params.append(\"f\", \"y\")\n        }\n\n        // Append parameters if any\n        const queryString = params.toString()\n        if (queryString) {\n            url += `?${queryString}`\n        }\n\n        return url\n    } catch (error) {\n        console.error(\"Error generating Gravatar URL:\", error)\n        return null\n    }\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

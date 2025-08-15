@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "session-cell",
+  "type": "registry:component",
+  "title": "Session Cell",
+  "description": "",
+  "dependencies": [
+    "better-auth",
+    "lucide-react",
+    "ua-parser-js"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "button",
+    "card",
+    "http://localhost:3000/r/refetch.json",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/security/session-cell.tsx",
+      "content": "\"use client\"\n\nimport type { Session } from \"better-auth\"\nimport { LaptopIcon, Loader2, SmartphoneIcon } from \"lucide-react\"\nimport { useContext, useState } from \"react\"\nimport { UAParser } from \"ua-parser-js\"\nimport { AuthUIContext } from \"../../../lib/auth-ui-provider\"\nimport { cn, getLocalizedError } from \"../../../lib/utils\"\nimport type { AuthLocalization } from \"../../../localization/auth-localization\"\nimport type { Refetch } from \"../../../types/refetch\"\nimport { Button } from \"../../ui/button\"\nimport { Card } from \"../../ui/card\"\nimport type { SettingsCardClassNames } from \"../shared/settings-card\"\n\nexport interface SessionCellProps {\n    className?: string\n    classNames?: SettingsCardClassNames\n    localization?: Partial<AuthLocalization>\n    session: Session\n    refetch?: Refetch\n}\n\nexport function SessionCell({\n    className,\n    classNames,\n    localization,\n    session,\n    refetch\n}: SessionCellProps) {\n    const {\n        basePath,\n        hooks: { useSession },\n        localization: contextLocalization,\n        mutators: { revokeSession },\n        viewPaths,\n        navigate,\n        toast\n    } = useContext(AuthUIContext)\n\n    localization = { ...contextLocalization, ...localization }\n\n    const { data: sessionData } = useSession()\n    const isCurrentSession = session.id === sessionData?.session?.id\n\n    const [isLoading, setIsLoading] = useState(false)\n\n    const handleRevoke = async () => {\n        setIsLoading(true)\n\n        if (isCurrentSession) {\n            navigate(`${basePath}/${viewPaths.SIGN_OUT}`)\n            return\n        }\n\n        try {\n            await revokeSession({ token: session.token })\n            refetch?.()\n        } catch (error) {\n            toast({\n                variant: \"error\",\n                message: getLocalizedError({ error, localization })\n            })\n\n            setIsLoading(false)\n        }\n    }\n\n    const parser = UAParser(session.userAgent as string)\n    const isMobile = parser.device.type === \"mobile\"\n\n    return (\n        <Card\n            className={cn(\n                \"flex-row items-center gap-3 px-4 py-3\",\n                className,\n                classNames?.cell\n            )}\n        >\n            {isMobile ? (\n                <SmartphoneIcon className={cn(\"size-4\", classNames?.icon)} />\n            ) : (\n                <LaptopIcon className={cn(\"size-4\", classNames?.icon)} />\n            )}\n\n            <div className=\"flex flex-col\">\n                <span className=\"font-semibold text-sm\">\n                    {isCurrentSession\n                        ? localization.CURRENT_SESSION\n                        : session?.ipAddress}\n                </span>\n\n                <span className=\"text-muted-foreground text-xs\">\n                    {parser.os.name}, {parser.browser.name}\n                </span>\n            </div>\n\n            <Button\n                className={cn(\n                    \"relative ms-auto\",\n                    classNames?.button,\n                    classNames?.outlineButton\n                )}\n                disabled={isLoading}\n                size=\"sm\"\n                variant=\"outline\"\n                onClick={handleRevoke}\n            >\n                {isLoading && <Loader2 className=\"animate-spin\" />}\n                {isCurrentSession ? localization.SIGN_OUT : localization.REVOKE}\n            </Button>\n        </Card>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

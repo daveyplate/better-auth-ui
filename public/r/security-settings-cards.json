@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "security-settings-cards",
+  "type": "registry:component",
+  "title": "Security Settings Cards",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/change-password-card.json",
+    "http://localhost:3000/r/delete-account-card.json",
+    "http://localhost:3000/r/passkeys-card.json",
+    "http://localhost:3000/r/providers-card.json",
+    "http://localhost:3000/r/sessions-card.json",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/two-factor-card.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/security-settings-cards.tsx",
+      "content": "\"use client\"\n\nimport { useContext } from \"react\"\nimport { AuthUIContext } from \"../../lib/auth-ui-provider\"\nimport { cn } from \"../../lib/utils\"\nimport type { AuthLocalization } from \"../../localization/auth-localization\"\nimport { DeleteAccountCard } from \"./account/delete-account-card\"\nimport { PasskeysCard } from \"./passkey/passkeys-card\"\nimport { ProvidersCard } from \"./providers/providers-card\"\nimport { ChangePasswordCard } from \"./security/change-password-card\"\nimport { SessionsCard } from \"./security/sessions-card\"\nimport type { SettingsCardClassNames } from \"./shared/settings-card\"\nimport { TwoFactorCard } from \"./two-factor/two-factor-card\"\n\nexport function SecuritySettingsCards({\n    className,\n    classNames,\n    localization\n}: {\n    className?: string\n    classNames?: {\n        card?: SettingsCardClassNames\n        cards?: string\n    }\n    localization?: Partial<AuthLocalization>\n}) {\n    const {\n        credentials,\n        deleteUser,\n        hooks,\n        localization: contextLocalization,\n        passkey,\n        social,\n        genericOAuth,\n        twoFactor\n    } = useContext(AuthUIContext)\n\n    localization = { ...contextLocalization, ...localization }\n\n    const { useListAccounts } = hooks\n\n    const {\n        data: accounts,\n        isPending: accountsPending,\n        refetch: refetchAccounts\n    } = useListAccounts()\n\n    const credentialsLinked = accounts?.some(\n        (acc) => acc.provider === \"credential\"\n    )\n\n    return (\n        <div\n            className={cn(\n                \"flex w-full flex-col gap-4 md:gap-6\",\n                className,\n                classNames?.cards\n            )}\n        >\n            {credentials && (\n                <ChangePasswordCard\n                    accounts={accounts}\n                    classNames={classNames?.card}\n                    isPending={accountsPending}\n                    localization={localization}\n                    skipHook\n                />\n            )}\n\n            {(social?.providers?.length || genericOAuth?.providers?.length) && (\n                <ProvidersCard\n                    accounts={accounts}\n                    classNames={classNames?.card}\n                    isPending={accountsPending}\n                    localization={localization}\n                    refetch={refetchAccounts}\n                    skipHook\n                />\n            )}\n\n            {twoFactor && credentialsLinked && (\n                <TwoFactorCard\n                    classNames={classNames?.card}\n                    localization={localization}\n                />\n            )}\n\n            {passkey && (\n                <PasskeysCard\n                    classNames={classNames?.card}\n                    localization={localization}\n                />\n            )}\n\n            <SessionsCard\n                classNames={classNames?.card}\n                localization={localization}\n            />\n\n            {deleteUser && (\n                <DeleteAccountCard\n                    accounts={accounts}\n                    classNames={classNames?.card}\n                    isPending={accountsPending}\n                    localization={localization}\n                    skipHook\n                />\n            )}\n        </div>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

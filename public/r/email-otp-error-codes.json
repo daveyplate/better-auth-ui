@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "email-otp-error-codes",
+  "type": "registry:file",
+  "title": "Email Otp Error Codes",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/localization/email-otp-error-codes.ts",
+      "content": "export const EMAIL_OTP_ERROR_CODES = {\n    OTP_EXPIRED: \"otp expired\",\n    INVALID_OTP: \"Invalid OTP\",\n    INVALID_EMAIL: \"Invalid email\",\n    USER_NOT_FOUND: \"User not found\",\n    TOO_MANY_ATTEMPTS: \"Too many attempts\"\n}\n",
+      "type": "registry:file",
+      "target": "localization/email-otp-error-codes.ts"
+    }
+  ]
+}

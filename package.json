@@ -7,7 +7,7 @@
     "build": "tsup --clean --dts && cp src/style.css dist/style.css",
     "dev": "tsc-watch",
     "prepublishOnly": "rm -rf dist && turbo build",
-    "registry:generate": "node scripts/generate.mjs --registry-homepage=https://better-auth-ui.com",
+    "registry:generate": "node scripts/generate.mjs --registry-homepage=https://better-auth-ui.com --registry-dependency-base-url https://better-auth-ui.com/r/",
     "registry:build": "shadcn build",
     "prepare": "husky",
     "copy-registry": "cp registry/registry.json ./registry.json",

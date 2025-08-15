@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-tanstack-options",
+  "type": "registry:lib",
+  "title": "Use Tanstack Options",
+  "description": "",
+  "dependencies": [
+    "@daveyplate/better-auth-tanstack",
+    "@tanstack/react-query"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/any-auth-client.json",
+    "http://localhost:3000/r/auth-client.json",
+    "http://localhost:3000/r/auth-hooks.json",
+    "http://localhost:3000/r/auth-mutators.json"
+  ],
+  "files": [
+    {
+      "path": "src/lib/tanstack/use-tanstack-options.ts",
+      "content": "import {\n    AuthQueryContext,\n    createAuthHooks\n} from \"@daveyplate/better-auth-tanstack\"\nimport { useIsRestoring, useQueryClient } from \"@tanstack/react-query\"\nimport { useCallback, useContext, useMemo } from \"react\"\n\nimport type { AnyAuthClient } from \"../../types/any-auth-client\"\nimport type { AuthClient } from \"../../types/auth-client\"\nimport type { AuthHooks } from \"../../types/auth-hooks\"\nimport type { AuthMutators } from \"../../types/auth-mutators\"\n\nexport function useTanstackOptions({\n    authClient\n}: {\n    authClient: AnyAuthClient\n}) {\n    const {\n        useUnlinkAccount,\n        useUpdateUser,\n        useDeletePasskey,\n        useRevokeSession,\n        useRevokeDeviceSession,\n        useSetActiveSession\n    } = createAuthHooks(authClient)\n    const queryClient = useQueryClient()\n\n    const { mutateAsync: updateUserAsync } = useUpdateUser()\n    const { mutateAsync: deletePasskeyAsync } = useDeletePasskey()\n    const { mutateAsync: unlinkAccountAsync } = useUnlinkAccount()\n    const { mutateAsync: revokeSessionAsync } = useRevokeSession()\n    const { mutateAsync: revokeDeviceSessionAsync } = useRevokeDeviceSession()\n    const { setActiveSessionAsync } = useSetActiveSession()\n    const { sessionKey } = useContext(AuthQueryContext)\n\n    const hooks = useMemo(\n        () => ({\n            ...(createAuthHooks(\n                authClient as AuthClient\n            ) as Partial<AuthHooks>),\n            useIsRestoring\n        }),\n        [authClient]\n    )\n\n    const mutators = useMemo(\n        () =>\n            ({\n                updateUser: async (params) => {\n                    const { error } = await updateUserAsync({\n                        ...params,\n                        fetchOptions: { throw: false }\n                    })\n                    if (error) throw error\n                },\n                unlinkAccount: async (params) => {\n                    const { error } = await unlinkAccountAsync({\n                        ...params,\n                        fetchOptions: { throw: false }\n                    })\n                    if (error) throw error\n                },\n                deletePasskey: async (params) => {\n                    const { error } = await deletePasskeyAsync({\n                        ...params,\n                        fetchOptions: { throw: false }\n                    })\n                    if (error) throw error\n                },\n                revokeSession: async (params) => {\n                    const { error } = await revokeSessionAsync({\n                        ...params,\n                        fetchOptions: { throw: false }\n                    })\n                    if (error) throw error\n                },\n                setActiveSession: async (params) => {\n                    const { error } = await setActiveSessionAsync({\n                        ...params,\n                        fetchOptions: { throw: false }\n                    })\n                    if (error) throw error\n                },\n                revokeDeviceSession: async (params) => {\n                    const { error } = await revokeDeviceSessionAsync({\n                        ...params,\n                        fetchOptions: { throw: false }\n                    })\n                    if (error) throw error\n                }\n            }) as AuthMutators,\n        [\n            updateUserAsync,\n            deletePasskeyAsync,\n            unlinkAccountAsync,\n            revokeSessionAsync,\n            revokeDeviceSessionAsync,\n            setActiveSessionAsync\n        ]\n    )\n\n    const onSessionChange = useCallback(async () => {\n        await queryClient.refetchQueries({ queryKey: sessionKey })\n\n        queryClient.invalidateQueries({\n            predicate: (query) => query.queryKey !== sessionKey\n        })\n    }, [queryClient, sessionKey])\n\n    return {\n        hooks,\n        mutators,\n        onSessionChange,\n        optimistic: true\n    }\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

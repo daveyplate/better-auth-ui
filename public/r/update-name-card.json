@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "update-name-card",
+  "type": "registry:component",
+  "title": "Update Name Card",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/update-field-card.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/account/update-name-card.tsx",
+      "content": "\"use client\"\n\nimport { useContext } from \"react\"\nimport { AuthUIContext } from \"../../../lib/auth-ui-provider\"\nimport type { SettingsCardProps } from \"../shared/settings-card\"\nimport { UpdateFieldCard } from \"./update-field-card\"\n\nexport function UpdateNameCard({\n    className,\n    classNames,\n    localization,\n    ...props\n}: SettingsCardProps) {\n    const {\n        hooks: { useSession },\n        localization: contextLocalization,\n        nameRequired\n    } = useContext(AuthUIContext)\n\n    localization = { ...contextLocalization, ...localization }\n\n    const { data: sessionData } = useSession()\n\n    return (\n        <UpdateFieldCard\n            className={className}\n            classNames={classNames}\n            value={sessionData?.user.name}\n            description={localization.NAME_DESCRIPTION}\n            name=\"name\"\n            instructions={localization.NAME_INSTRUCTIONS}\n            label={localization.NAME}\n            localization={localization}\n            placeholder={localization.NAME_PLACEHOLDER}\n            required={nameRequired}\n            {...props}\n        />\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

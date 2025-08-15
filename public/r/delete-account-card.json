@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "delete-account-card",
+  "type": "registry:component",
+  "title": "Delete Account Card",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/delete-account-dialog.json",
+    "http://localhost:3000/r/settings-card.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/account/delete-account-card.tsx",
+      "content": "\"use client\"\n\nimport { useContext, useState } from \"react\"\n\nimport { AuthUIContext } from \"../../../lib/auth-ui-provider\"\nimport type { AuthLocalization } from \"../../../localization/auth-localization\"\nimport type { SettingsCardClassNames } from \"../shared/settings-card\"\nimport { SettingsCard } from \"../shared/settings-card\"\nimport { DeleteAccountDialog } from \"./delete-account-dialog\"\n\nexport interface DeleteAccountCardProps {\n    className?: string\n    classNames?: SettingsCardClassNames\n    accounts?: { provider: string }[] | null\n    isPending?: boolean\n    localization?: AuthLocalization\n    skipHook?: boolean\n}\n\nexport function DeleteAccountCard({\n    className,\n    classNames,\n    accounts,\n    isPending,\n    localization,\n    skipHook\n}: DeleteAccountCardProps) {\n    const {\n        hooks: { useListAccounts },\n        localization: contextLocalization\n    } = useContext(AuthUIContext)\n\n    localization = { ...contextLocalization, ...localization }\n\n    const [showDialog, setShowDialog] = useState(false)\n\n    if (!skipHook) {\n        const result = useListAccounts()\n        accounts = result.data\n        isPending = result.isPending\n    }\n\n    return (\n        <div>\n            <SettingsCard\n                className={className}\n                classNames={classNames}\n                actionLabel={localization?.DELETE_ACCOUNT}\n                description={localization?.DELETE_ACCOUNT_DESCRIPTION}\n                isPending={isPending}\n                title={localization?.DELETE_ACCOUNT}\n                variant=\"destructive\"\n                action={() => setShowDialog(true)}\n            />\n\n            <DeleteAccountDialog\n                classNames={classNames}\n                accounts={accounts}\n                localization={localization}\n                open={showDialog}\n                onOpenChange={setShowDialog}\n            />\n        </div>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

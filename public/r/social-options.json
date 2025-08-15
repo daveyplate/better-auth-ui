@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "social-options",
+  "type": "registry:file",
+  "title": "Social Options",
+  "description": "",
+  "dependencies": [
+    "better-auth"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-client.json"
+  ],
+  "files": [
+    {
+      "path": "src/types/social-options.ts",
+      "content": "import type { SocialProvider } from \"better-auth/social-providers\"\nimport type { AuthClient } from \"./auth-client\"\n\nexport type SocialOptions = {\n    /**\n     * Array of Social Providers to enable\n     * @remarks `SocialProvider[]`\n     */\n    providers: SocialProvider[]\n    /**\n     * Custom social sign in function\n     */\n    signIn?: (\n        params: Parameters<AuthClient[\"signIn\"][\"social\"]>[0]\n    ) => Promise<unknown>\n}\n",
+      "type": "registry:file",
+      "target": "types/social-options.ts"
+    }
+  ]
+}

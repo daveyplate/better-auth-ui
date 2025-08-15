@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "leave-organization-dialog",
+  "type": "registry:component",
+  "title": "Leave Organization Dialog",
+  "description": "",
+  "dependencies": [
+    "better-auth",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "button",
+    "card",
+    "dialog",
+    "http://localhost:3000/r/organization-cell-view.json",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/organization/leave-organization-dialog.tsx",
+      "content": "\"use client\"\n\nimport type { Organization } from \"better-auth/plugins/organization\"\nimport { Loader2 } from \"lucide-react\"\nimport { type ComponentProps, useContext, useMemo, useState } from \"react\"\n\nimport { AuthUIContext } from \"../../lib/auth-ui-provider\"\nimport { cn, getLocalizedError } from \"../../lib/utils\"\nimport type { AuthLocalization } from \"../../localization/auth-localization\"\nimport type { SettingsCardClassNames } from \"../settings/shared/settings-card\"\nimport { Button } from \"../ui/button\"\nimport { Card } from \"../ui/card\"\nimport {\n    Dialog,\n    DialogContent,\n    DialogDescription,\n    DialogFooter,\n    DialogHeader,\n    DialogTitle\n} from \"../ui/dialog\"\nimport { OrganizationCellView } from \"./organization-cell-view\"\n\nexport interface LeaveOrganizationDialogProps\n    extends ComponentProps<typeof Dialog> {\n    className?: string\n    classNames?: SettingsCardClassNames\n    localization?: AuthLocalization\n    organization: Organization\n}\n\nexport function LeaveOrganizationDialog({\n    organization,\n    className,\n    classNames,\n    localization: localizationProp,\n    onOpenChange,\n    ...props\n}: LeaveOrganizationDialogProps) {\n    const {\n        authClient,\n        hooks: { useListOrganizations },\n        localization: contextLocalization,\n        toast\n    } = useContext(AuthUIContext)\n\n    const localization = useMemo(\n        () => ({ ...contextLocalization, ...localizationProp }),\n        [contextLocalization, localizationProp]\n    )\n\n    const { refetch: refetchOrganizations } = useListOrganizations()\n\n    const [isLeaving, setIsLeaving] = useState(false)\n\n    const handleLeaveOrganization = async () => {\n        setIsLeaving(true)\n\n        try {\n            await authClient.organization.leave({\n                organizationId: organization.id,\n                fetchOptions: { throw: true }\n            })\n\n            await refetchOrganizations?.()\n\n            toast({\n                variant: \"success\",\n                message: localization.LEAVE_ORGANIZATION_SUCCESS\n            })\n\n            onOpenChange?.(false)\n        } catch (error) {\n            toast({\n                variant: \"error\",\n                message: getLocalizedError({ error, localization })\n            })\n        }\n\n        setIsLeaving(false)\n    }\n\n    return (\n        <Dialog onOpenChange={onOpenChange} {...props}>\n            <DialogContent\n                className={classNames?.dialog?.content}\n                onOpenAutoFocus={(e) => e.preventDefault()}\n            >\n                <DialogHeader className={classNames?.dialog?.header}>\n                    <DialogTitle\n                        className={cn(\"text-lg md:text-xl\", classNames?.title)}\n                    >\n                        {localization.LEAVE_ORGANIZATION}\n                    </DialogTitle>\n\n                    <DialogDescription\n                        className={cn(\n                            \"text-xs md:text-sm\",\n                            classNames?.description\n                        )}\n                    >\n                        {localization.LEAVE_ORGANIZATION_CONFIRM}\n                    </DialogDescription>\n                </DialogHeader>\n\n                <Card\n                    className={cn(\n                        \"my-2 flex-row p-4\",\n                        className,\n                        classNames?.cell\n                    )}\n                >\n                    <OrganizationCellView\n                        organization={organization}\n                        localization={localization}\n                    />\n                </Card>\n\n                <DialogFooter className={classNames?.dialog?.footer}>\n                    <Button\n                        type=\"button\"\n                        variant=\"outline\"\n                        onClick={() => onOpenChange?.(false)}\n                        className={cn(\n                            classNames?.button,\n                            classNames?.outlineButton\n                        )}\n                        disabled={isLeaving}\n                    >\n                        {localization.CANCEL}\n                    </Button>\n\n                    <Button\n                        type=\"button\"\n                        variant=\"destructive\"\n                        onClick={handleLeaveOrganization}\n                        className={cn(\n                            classNames?.button,\n                            classNames?.destructiveButton\n                        )}\n                        disabled={isLeaving}\n                    >\n                        {isLeaving && <Loader2 className=\"animate-spin\" />}\n\n                        {localization.LEAVE_ORGANIZATION}\n                    </Button>\n                </DialogFooter>\n            </DialogContent>\n        </Dialog>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

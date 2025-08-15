@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "update-username-card",
+  "type": "registry:component",
+  "title": "Update Username Card",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-client.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/settings-card.json",
+    "http://localhost:3000/r/update-field-card.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/account/update-username-card.tsx",
+      "content": "\"use client\"\n\nimport { useContext } from \"react\"\nimport { AuthUIContext } from \"../../../lib/auth-ui-provider\"\nimport type { User } from \"../../../types/auth-client\"\nimport type { SettingsCardProps } from \"../shared/settings-card\"\nimport { UpdateFieldCard } from \"./update-field-card\"\n\nexport function UpdateUsernameCard({\n    className,\n    classNames,\n    localization,\n    ...props\n}: SettingsCardProps) {\n    const {\n        hooks: { useSession },\n        localization: contextLocalization\n    } = useContext(AuthUIContext)\n\n    localization = { ...contextLocalization, ...localization }\n\n    const { data: sessionData } = useSession()\n    const value =\n        (sessionData?.user as User)?.displayUsername ||\n        (sessionData?.user as User)?.username\n\n    return (\n        <UpdateFieldCard\n            className={className}\n            classNames={classNames}\n            value={value}\n            description={localization.USERNAME_DESCRIPTION}\n            name=\"username\"\n            instructions={localization.USERNAME_INSTRUCTIONS}\n            label={localization.USERNAME}\n            localization={localization}\n            placeholder={localization.USERNAME_PLACEHOLDER}\n            required\n            {...props}\n        />\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

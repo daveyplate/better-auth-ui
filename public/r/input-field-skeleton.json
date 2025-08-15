@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-field-skeleton",
+  "type": "registry:component",
+  "title": "Input Field Skeleton",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/settings-card.json",
+    "skeleton",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/settings/skeletons/input-field-skeleton.tsx",
+      "content": "\"use client\"\n\nimport { cn } from \"../../../lib/utils\"\nimport { Skeleton } from \"../../ui/skeleton\"\nimport type { SettingsCardClassNames } from \"../shared/settings-card\"\n\nexport function InputFieldSkeleton({\n    classNames\n}: {\n    classNames?: SettingsCardClassNames\n}) {\n    return (\n        <div className=\"flex flex-col gap-1.5\">\n            <Skeleton className={cn(\"h-4 w-32\", classNames?.skeleton)} />\n            <Skeleton className={cn(\"h-9 w-full\", classNames?.skeleton)} />\n        </div>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

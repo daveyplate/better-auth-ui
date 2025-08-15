@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-instant-options",
+  "type": "registry:lib",
+  "title": "Use Instant Options",
+  "description": "",
+  "dependencies": [
+    "@instantdb/react",
+    "better-auth"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-client.json",
+    "http://localhost:3000/r/auth-hooks.json",
+    "http://localhost:3000/r/auth-mutators.json",
+    "http://localhost:3000/r/model-names.json",
+    "http://localhost:3000/r/refetch.json",
+    "http://localhost:3000/r/use-list-accounts.json",
+    "http://localhost:3000/r/use-list-sessions.json",
+    "http://localhost:3000/r/use-session.json"
+  ],
+  "files": [
+    {
+      "path": "src/lib/instantdb/use-instant-options.ts",
+      "content": "import type { InstantReactWebDatabase } from \"@instantdb/react\"\nimport type { User } from \"better-auth\"\nimport { useMemo } from \"react\"\n\nimport type { Session } from \"../../types/auth-client\"\nimport type { AuthHooks } from \"../../types/auth-hooks\"\nimport type { AuthMutators } from \"../../types/auth-mutators\"\nimport type { Refetch } from \"../../types/refetch\"\nimport { getModelName } from \"./model-names\"\nimport { useListAccounts } from \"./use-list-accounts\"\nimport { useListSessions } from \"./use-list-sessions\"\nimport { useSession } from \"./use-session\"\n\nconst namespaces = [\"user\", \"session\", \"account\", \"passkey\"] as const\ntype Namespace = (typeof namespaces)[number]\n\ntype ModelNames = {\n    [key in Namespace]: string\n}\n\nexport interface UseInstantOptionsProps {\n    // biome-ignore lint/suspicious/noExplicitAny: ignore\n    db: InstantReactWebDatabase<any>\n    modelNames?: Partial<ModelNames>\n    usePlural?: boolean\n    sessionData?: { user: User; session: Session }\n    refetch?: Refetch\n    user?: { id: string } | null\n    isPending: boolean\n}\n\nexport function useInstantOptions({\n    db,\n    usePlural = true,\n    modelNames,\n    sessionData,\n    isPending,\n    user\n}: UseInstantOptionsProps) {\n    const userId = user?.id || sessionData?.user.id\n\n    const hooks = useMemo(() => {\n        return {\n            useSession: () =>\n                useSession({\n                    db,\n                    modelNames,\n                    usePlural,\n                    sessionData,\n                    isPending\n                }),\n            useListAccounts: () =>\n                useListAccounts({\n                    db,\n                    modelNames,\n                    usePlural,\n                    sessionData,\n                    isPending\n                }),\n            useListSessions: () =>\n                useListSessions({\n                    db,\n                    modelNames,\n                    usePlural,\n                    sessionData,\n                    isPending\n                })\n        } as AuthHooks\n    }, [db, modelNames, usePlural, sessionData, isPending])\n\n    const mutators = useMemo(() => {\n        return {\n            updateUser: async (data) => {\n                if (!userId) {\n                    throw new Error(\"Unauthenticated\")\n                }\n\n                const modelName = getModelName({\n                    namespace: \"user\",\n                    modelNames,\n                    usePlural\n                })\n\n                db.transact([\n                    db.tx[modelName][userId].update({\n                        ...data,\n                        updatedAt: Date.now()\n                    })\n                ])\n            }\n        } as AuthMutators\n    }, [db, userId, modelNames, usePlural])\n\n    return {\n        hooks,\n        mutators\n    }\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

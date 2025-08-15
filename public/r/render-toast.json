@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "render-toast",
+  "type": "registry:file",
+  "title": "Render Toast",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/types/render-toast.ts",
+      "content": "type ToastVariant = \"default\" | \"success\" | \"error\" | \"info\" | \"warning\"\n\nexport type RenderToast = ({\n    variant,\n    message\n}: {\n    variant?: ToastVariant\n    message?: string\n}) => void\n",
+      "type": "registry:file",
+      "target": "types/render-toast.ts"
+    }
+  ]
+}

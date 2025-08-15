@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "recaptcha-badge",
+  "type": "registry:component",
+  "title": "Recaptcha Badge",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [
+    "http://localhost:3000/r/auth-localization.json",
+    "http://localhost:3000/r/auth-ui-provider.json",
+    "http://localhost:3000/r/use-hydrated.json",
+    "http://localhost:3000/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/captcha/recaptcha-badge.tsx",
+      "content": "import { useContext } from \"react\"\nimport { useIsHydrated } from \"../../hooks/use-hydrated\"\nimport { AuthUIContext } from \"../../lib/auth-ui-provider\"\nimport { cn } from \"../../lib/utils\"\nimport type { AuthLocalization } from \"../../localization/auth-localization\"\n\nexport interface RecaptchaBadgeProps {\n    className?: string\n    localization?: Partial<AuthLocalization>\n}\n\nexport function RecaptchaBadge({\n    className,\n    localization: propLocalization\n}: RecaptchaBadgeProps) {\n    const isHydrated = useIsHydrated()\n    const { captcha, localization: contextLocalization } =\n        useContext(AuthUIContext)\n    const localization = { ...contextLocalization, ...propLocalization }\n\n    if (!captcha) return null\n\n    if (!captcha.hideBadge) {\n        return isHydrated ? (\n            <style>{`\n                .grecaptcha-badge { visibility: visible !important; }\n            `}</style>\n        ) : null\n    }\n\n    return (\n        <>\n            <style>{`\n                .grecaptcha-badge { visibility: hidden; }\n            `}</style>\n\n            <p className={cn(\"text-muted-foreground text-xs\", className)}>\n                {localization.PROTECTED_BY_RECAPTCHA}{\" \"}\n                {localization.BY_CONTINUING_YOU_AGREE} Google{\" \"}\n                <a\n                    className=\"text-foreground hover:underline\"\n                    href=\"https://policies.google.com/privacy\"\n                    target=\"_blank\"\n                    rel=\"noreferrer\"\n                >\n                    {localization.PRIVACY_POLICY}\n                </a>{\" \"}\n                &{\" \"}\n                <a\n                    className=\"text-foreground hover:underline\"\n                    href=\"https://policies.google.com/terms\"\n                    target=\"_blank\"\n                    rel=\"noreferrer\"\n                >\n                    {localization.TERMS_OF_SERVICE}\n                </a>\n                .\n            </p>\n        </>\n    )\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}
