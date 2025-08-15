@@ -6,11 +6,11 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-client.json",
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/two-factor-password-dialog.json"
+    "true/auth-client.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
+    "true/settings-card.json",
+    "true/two-factor-password-dialog.json"
   ],
   "files": [
     {

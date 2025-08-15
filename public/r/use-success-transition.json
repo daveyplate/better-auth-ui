@@ -6,8 +6,8 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/utils.json"
+    "true/auth-ui-provider.json",
+    "true/utils.json"
   ],
   "files": [
     {

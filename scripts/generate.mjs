@@ -114,7 +114,6 @@ const INTERNAL_ROOTS = argv["internal-roots"]
 
 let REG_DEP_BASE =
   argv["registry-dependency-base-url"] || "http://localhost:3000/r/";
-if (!REG_DEP_BASE.endsWith("/")) REG_DEP_BASE += "/";
 
 const DEFAULT_BASIC_COMPONENTS = [
   "alert",

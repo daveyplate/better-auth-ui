@@ -9,12 +9,12 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-client.json",
-    "http://localhost:3000/r/auth-hooks.json",
-    "http://localhost:3000/r/refetch.json",
-    "http://localhost:3000/r/use-list-accounts.json",
-    "http://localhost:3000/r/use-list-sessions.json",
-    "http://localhost:3000/r/use-session.json"
+    "true/auth-client.json",
+    "true/auth-hooks.json",
+    "true/refetch.json",
+    "true/use-list-accounts.json",
+    "true/use-list-sessions.json",
+    "true/use-session.json"
   ],
   "files": [
     {

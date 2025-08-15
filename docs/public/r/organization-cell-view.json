@@ -8,11 +8,11 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/organization-logo.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
+    "true/organization-logo.json",
     "skeleton",
-    "http://localhost:3000/r/utils.json"
+    "true/utils.json"
   ],
   "files": [
     {

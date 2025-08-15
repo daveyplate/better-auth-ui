@@ -12,19 +12,19 @@
     "zod"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "button",
     "dialog",
     "form",
     "input",
-    "http://localhost:3000/r/organization-cell-view.json",
-    "http://localhost:3000/r/personal-account-view.json",
-    "http://localhost:3000/r/refetch.json",
+    "true/organization-cell-view.json",
+    "true/personal-account-view.json",
+    "true/refetch.json",
     "select",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/use-lang.json",
-    "http://localhost:3000/r/utils.json"
+    "true/settings-card.json",
+    "true/use-lang.json",
+    "true/utils.json"
   ],
   "files": [
     {

@@ -9,11 +9,11 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/any-auth-client.json",
-    "http://localhost:3000/r/api-key.json",
-    "http://localhost:3000/r/auth-client.json",
-    "http://localhost:3000/r/invitation.json",
-    "http://localhost:3000/r/refetch.json"
+    "true/any-auth-client.json",
+    "true/api-key.json",
+    "true/auth-client.json",
+    "true/invitation.json",
+    "true/refetch.json"
   ],
   "files": [
     {

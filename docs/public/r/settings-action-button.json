@@ -10,8 +10,8 @@
   ],
   "registryDependencies": [
     "button",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/utils.json"
+    "true/settings-card.json",
+    "true/utils.json"
   ],
   "files": [
     {

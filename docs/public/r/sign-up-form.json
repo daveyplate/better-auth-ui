@@ -12,24 +12,24 @@
     "zod"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-form.json",
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-form.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "button",
-    "http://localhost:3000/r/captcha.json",
+    "true/captcha.json",
     "checkbox",
     "dropdown-menu",
     "form",
-    "http://localhost:3000/r/image-utils.json",
+    "true/image-utils.json",
     "input",
-    "http://localhost:3000/r/password-input.json",
-    "http://localhost:3000/r/password-validation.json",
+    "true/password-input.json",
+    "true/password-validation.json",
     "textarea",
-    "http://localhost:3000/r/use-captcha.json",
-    "http://localhost:3000/r/use-hydrated.json",
-    "http://localhost:3000/r/use-success-transition.json",
-    "http://localhost:3000/r/user-avatar.json",
-    "http://localhost:3000/r/utils.json"
+    "true/use-captcha.json",
+    "true/use-hydrated.json",
+    "true/use-success-transition.json",
+    "true/user-avatar.json",
+    "true/utils.json"
   ],
   "files": [
     {

@@ -6,13 +6,13 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/api-key-cell.json",
-    "http://localhost:3000/r/api-key-display-dialog.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/api-key-cell.json",
+    "true/api-key-display-dialog.json",
+    "true/auth-ui-provider.json",
     "card",
-    "http://localhost:3000/r/create-api-key-dialog.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/utils.json"
+    "true/create-api-key-dialog.json",
+    "true/settings-card.json",
+    "true/utils.json"
   ],
   "files": [
     {

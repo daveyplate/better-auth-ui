@@ -6,10 +6,10 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-data-cache.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/fetch-error.json",
-    "http://localhost:3000/r/utils.json"
+    "true/auth-data-cache.json",
+    "true/auth-ui-provider.json",
+    "true/fetch-error.json",
+    "true/utils.json"
   ],
   "files": [
     {

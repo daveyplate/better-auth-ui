@@ -6,8 +6,8 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/use-tanstack-options.json"
+    "true/auth-ui-provider.json",
+    "true/use-tanstack-options.json"
   ],
   "files": [
     {

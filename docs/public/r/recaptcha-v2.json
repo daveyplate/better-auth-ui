@@ -8,10 +8,10 @@
     "react-google-recaptcha"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/use-lang.json",
-    "http://localhost:3000/r/use-theme.json",
-    "http://localhost:3000/r/utils.json"
+    "true/auth-ui-provider.json",
+    "true/use-lang.json",
+    "true/use-theme.json",
+    "true/utils.json"
   ],
   "files": [
     {

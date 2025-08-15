@@ -6,14 +6,14 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/delete-organization-card.json",
-    "http://localhost:3000/r/organization-logo-card.json",
-    "http://localhost:3000/r/organization-name-card.json",
-    "http://localhost:3000/r/organization-slug-card.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/utils.json"
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
+    "true/delete-organization-card.json",
+    "true/organization-logo-card.json",
+    "true/organization-name-card.json",
+    "true/organization-slug-card.json",
+    "true/settings-card.json",
+    "true/utils.json"
   ],
   "files": [
     {

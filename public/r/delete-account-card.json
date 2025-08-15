@@ -6,10 +6,10 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/delete-account-dialog.json",
-    "http://localhost:3000/r/settings-card.json"
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
+    "true/delete-account-dialog.json",
+    "true/settings-card.json"
   ],
   "files": [
     {

@@ -9,11 +9,11 @@
     "@marsidev/react-turnstile"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/recaptcha-badge.json",
-    "http://localhost:3000/r/recaptcha-v2.json",
-    "http://localhost:3000/r/use-theme.json"
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
+    "true/recaptcha-badge.json",
+    "true/recaptcha-v2.json",
+    "true/use-theme.json"
   ],
   "files": [
     {

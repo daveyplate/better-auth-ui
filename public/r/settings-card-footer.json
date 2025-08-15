@@ -7,10 +7,10 @@
   "dependencies": [],
   "registryDependencies": [
     "card",
-    "http://localhost:3000/r/settings-action-button.json",
-    "http://localhost:3000/r/settings-card.json",
+    "true/settings-action-button.json",
+    "true/settings-card.json",
     "skeleton",
-    "http://localhost:3000/r/utils.json"
+    "true/utils.json"
   ],
   "files": [
     {

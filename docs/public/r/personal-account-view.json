@@ -6,11 +6,11 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-ui-provider.json",
     "skeleton",
-    "http://localhost:3000/r/user-avatar.json",
-    "http://localhost:3000/r/user-view.json",
-    "http://localhost:3000/r/utils.json"
+    "true/user-avatar.json",
+    "true/user-view.json",
+    "true/utils.json"
   ],
   "files": [
     {

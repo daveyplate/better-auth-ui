@@ -8,7 +8,7 @@
     "@noble/hashes"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/gravatar-options.json"
+    "true/gravatar-options.json"
   ],
   "files": [
     {

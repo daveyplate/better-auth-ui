@@ -8,12 +8,12 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/auth-view.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
+    "true/auth-view.json",
     "button",
-    "http://localhost:3000/r/use-success-transition.json",
-    "http://localhost:3000/r/utils.json"
+    "true/use-success-transition.json",
+    "true/utils.json"
   ],
   "files": [
     {

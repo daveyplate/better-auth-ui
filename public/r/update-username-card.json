@@ -6,10 +6,10 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-client.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/update-field-card.json"
+    "true/auth-client.json",
+    "true/auth-ui-provider.json",
+    "true/settings-card.json",
+    "true/update-field-card.json"
   ],
   "files": [
     {

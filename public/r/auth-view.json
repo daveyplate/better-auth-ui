@@ -8,23 +8,23 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-callback.json",
-    "http://localhost:3000/r/auth-form.json",
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-callback.json",
+    "true/auth-form.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "button",
     "card",
-    "http://localhost:3000/r/email-otp-button.json",
-    "http://localhost:3000/r/magic-link-button.json",
-    "http://localhost:3000/r/one-tap.json",
-    "http://localhost:3000/r/passkey-button.json",
-    "http://localhost:3000/r/provider-button.json",
+    "true/email-otp-button.json",
+    "true/magic-link-button.json",
+    "true/one-tap.json",
+    "true/passkey-button.json",
+    "true/provider-button.json",
     "separator",
-    "http://localhost:3000/r/sign-out.json",
-    "http://localhost:3000/r/social-providers.json",
-    "http://localhost:3000/r/use-hydrated.json",
-    "http://localhost:3000/r/utils.json",
-    "http://localhost:3000/r/view-paths.json"
+    "true/sign-out.json",
+    "true/social-providers.json",
+    "true/use-hydrated.json",
+    "true/utils.json",
+    "true/view-paths.json"
   ],
   "files": [
     {

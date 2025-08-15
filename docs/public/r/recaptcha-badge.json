@@ -6,10 +6,10 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/use-hydrated.json",
-    "http://localhost:3000/r/utils.json"
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
+    "true/use-hydrated.json",
+    "true/utils.json"
   ],
   "files": [
     {

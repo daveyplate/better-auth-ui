@@ -8,17 +8,17 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/account-view.json",
-    "http://localhost:3000/r/api-keys-card.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/account-view.json",
+    "true/api-keys-card.json",
+    "true/auth-ui-provider.json",
     "button",
     "drawer",
     "label",
-    "http://localhost:3000/r/organization-invitations-card.json",
-    "http://localhost:3000/r/organization-members-card.json",
-    "http://localhost:3000/r/organization-settings-cards.json",
-    "http://localhost:3000/r/use-current-organization.json",
-    "http://localhost:3000/r/utils.json"
+    "true/organization-invitations-card.json",
+    "true/organization-members-card.json",
+    "true/organization-settings-cards.json",
+    "true/use-current-organization.json",
+    "true/utils.json"
   ],
   "files": [
     {

@@ -10,8 +10,8 @@
   ],
   "registryDependencies": [
     "alert",
-    "http://localhost:3000/r/auth-form.json",
-    "http://localhost:3000/r/utils.json"
+    "true/auth-form.json",
+    "true/utils.json"
   ],
   "files": [
     {

@@ -8,10 +8,10 @@
     "@wojtekmaj/react-recaptcha-v3"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/use-hydrated.json",
-    "http://localhost:3000/r/use-lang.json",
-    "http://localhost:3000/r/use-theme.json"
+    "true/auth-ui-provider.json",
+    "true/use-hydrated.json",
+    "true/use-lang.json",
+    "true/use-theme.json"
   ],
   "files": [
     {

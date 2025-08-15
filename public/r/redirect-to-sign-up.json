@@ -6,7 +6,7 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/use-authenticate.json"
+    "true/use-authenticate.json"
   ],
   "files": [
     {

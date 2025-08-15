@@ -6,14 +6,14 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-ui-provider.json",
     "card",
-    "http://localhost:3000/r/create-organization-dialog.json",
-    "http://localhost:3000/r/organization-cell.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/settings-cell-skeleton.json",
-    "http://localhost:3000/r/use-hydrated.json",
-    "http://localhost:3000/r/utils.json"
+    "true/create-organization-dialog.json",
+    "true/organization-cell.json",
+    "true/settings-card.json",
+    "true/settings-cell-skeleton.json",
+    "true/use-hydrated.json",
+    "true/utils.json"
   ],
   "files": [
     {

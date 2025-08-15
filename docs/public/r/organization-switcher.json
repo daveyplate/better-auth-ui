@@ -9,19 +9,19 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-client.json",
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-client.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "button",
-    "http://localhost:3000/r/create-organization-dialog.json",
+    "true/create-organization-dialog.json",
     "dropdown-menu",
-    "http://localhost:3000/r/organization-cell-view.json",
-    "http://localhost:3000/r/organization-logo.json",
-    "http://localhost:3000/r/personal-account-view.json",
-    "http://localhost:3000/r/use-current-organization.json",
-    "http://localhost:3000/r/user-avatar.json",
-    "http://localhost:3000/r/user-view.json",
-    "http://localhost:3000/r/utils.json"
+    "true/organization-cell-view.json",
+    "true/organization-logo.json",
+    "true/personal-account-view.json",
+    "true/use-current-organization.json",
+    "true/user-avatar.json",
+    "true/user-view.json",
+    "true/utils.json"
   ],
   "files": [
     {

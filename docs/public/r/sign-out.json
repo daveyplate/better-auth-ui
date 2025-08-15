@@ -8,8 +8,8 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/use-success-transition.json"
+    "true/auth-ui-provider.json",
+    "true/use-success-transition.json"
   ],
   "files": [
     {

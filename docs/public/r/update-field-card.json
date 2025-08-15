@@ -10,17 +10,17 @@
     "zod"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/additional-fields.json",
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/additional-fields.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "card",
     "checkbox",
     "form",
     "input",
-    "http://localhost:3000/r/settings-card.json",
+    "true/settings-card.json",
     "skeleton",
     "textarea",
-    "http://localhost:3000/r/utils.json"
+    "true/utils.json"
   ],
   "files": [
     {

@@ -8,12 +8,12 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-ui-provider.json",
     "card",
-    "http://localhost:3000/r/invitation-cell.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/use-current-organization.json",
-    "http://localhost:3000/r/utils.json"
+    "true/invitation-cell.json",
+    "true/settings-card.json",
+    "true/use-current-organization.json",
+    "true/utils.json"
   ],
   "files": [
     {

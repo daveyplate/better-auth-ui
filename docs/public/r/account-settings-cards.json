@@ -6,16 +6,16 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/accounts-card.json",
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/change-email-card.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/update-avatar-card.json",
-    "http://localhost:3000/r/update-field-card.json",
-    "http://localhost:3000/r/update-name-card.json",
-    "http://localhost:3000/r/update-username-card.json",
-    "http://localhost:3000/r/utils.json"
+    "true/accounts-card.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
+    "true/change-email-card.json",
+    "true/settings-card.json",
+    "true/update-avatar-card.json",
+    "true/update-field-card.json",
+    "true/update-name-card.json",
+    "true/update-username-card.json",
+    "true/utils.json"
   ],
   "files": [
     {

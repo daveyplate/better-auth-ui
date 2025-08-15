@@ -6,9 +6,9 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/settings-card.json",
+    "true/settings-card.json",
     "skeleton",
-    "http://localhost:3000/r/utils.json"
+    "true/utils.json"
   ],
   "files": [
     {

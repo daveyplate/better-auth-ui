@@ -6,8 +6,8 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-client.json",
-    "http://localhost:3000/r/social-providers.json"
+    "true/auth-client.json",
+    "true/social-providers.json"
   ],
   "files": [
     {

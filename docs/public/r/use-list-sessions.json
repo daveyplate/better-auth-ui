@@ -8,11 +8,11 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-hooks.json",
-    "http://localhost:3000/r/model-names.json",
-    "http://localhost:3000/r/use-conditional-query.json",
-    "http://localhost:3000/r/use-triplit-hooks.json",
-    "http://localhost:3000/r/use-triplit-token.json"
+    "true/auth-hooks.json",
+    "true/model-names.json",
+    "true/use-conditional-query.json",
+    "true/use-triplit-hooks.json",
+    "true/use-triplit-token.json"
   ],
   "files": [
     {

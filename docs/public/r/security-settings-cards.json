@@ -6,16 +6,16 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/change-password-card.json",
-    "http://localhost:3000/r/delete-account-card.json",
-    "http://localhost:3000/r/passkeys-card.json",
-    "http://localhost:3000/r/providers-card.json",
-    "http://localhost:3000/r/sessions-card.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/two-factor-card.json",
-    "http://localhost:3000/r/utils.json"
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
+    "true/change-password-card.json",
+    "true/delete-account-card.json",
+    "true/passkeys-card.json",
+    "true/providers-card.json",
+    "true/sessions-card.json",
+    "true/settings-card.json",
+    "true/two-factor-card.json",
+    "true/utils.json"
   ],
   "files": [
     {

@@ -6,12 +6,12 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
+    "true/auth-localization.json",
     "card",
-    "http://localhost:3000/r/settings-card-footer.json",
-    "http://localhost:3000/r/settings-card-header.json",
-    "http://localhost:3000/r/user-avatar.json",
-    "http://localhost:3000/r/utils.json"
+    "true/settings-card-footer.json",
+    "true/settings-card-header.json",
+    "true/user-avatar.json",
+    "true/utils.json"
   ],
   "files": [
     {

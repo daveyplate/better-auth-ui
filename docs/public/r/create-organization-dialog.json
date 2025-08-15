@@ -11,17 +11,17 @@
     "zod"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "button",
     "dialog",
     "dropdown-menu",
     "form",
-    "http://localhost:3000/r/image-utils.json",
+    "true/image-utils.json",
     "input",
-    "http://localhost:3000/r/organization-logo.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/utils.json"
+    "true/organization-logo.json",
+    "true/settings-card.json",
+    "true/utils.json"
   ],
   "files": [
     {

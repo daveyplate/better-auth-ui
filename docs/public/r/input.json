@@ -6,7 +6,7 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/utils.json"
+    "true/utils.json"
   ],
   "files": [
     {

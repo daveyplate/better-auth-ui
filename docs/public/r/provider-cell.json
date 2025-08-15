@@ -9,15 +9,15 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "button",
     "card",
-    "http://localhost:3000/r/refetch.json",
-    "http://localhost:3000/r/settings-card.json",
+    "true/refetch.json",
+    "true/settings-card.json",
     "skeleton",
-    "http://localhost:3000/r/social-providers.json",
-    "http://localhost:3000/r/utils.json"
+    "true/social-providers.json",
+    "true/utils.json"
   ],
   "files": [
     {

@@ -6,13 +6,13 @@
   "description": "",
   "dependencies": [],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "card",
-    "http://localhost:3000/r/session-cell.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/settings-cell-skeleton.json",
-    "http://localhost:3000/r/utils.json"
+    "true/session-cell.json",
+    "true/settings-card.json",
+    "true/settings-cell-skeleton.json",
+    "true/utils.json"
   ],
   "files": [
     {

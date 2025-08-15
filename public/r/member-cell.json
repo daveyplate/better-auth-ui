@@ -9,17 +9,17 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "button",
     "card",
     "dropdown-menu",
-    "http://localhost:3000/r/leave-organization-dialog.json",
-    "http://localhost:3000/r/remove-member-dialog.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/update-member-role-dialog.json",
-    "http://localhost:3000/r/user-view.json",
-    "http://localhost:3000/r/utils.json"
+    "true/leave-organization-dialog.json",
+    "true/remove-member-dialog.json",
+    "true/settings-card.json",
+    "true/update-member-role-dialog.json",
+    "true/user-view.json",
+    "true/utils.json"
   ],
   "files": [
     {

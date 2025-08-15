@@ -8,16 +8,16 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/any-auth-client.json",
-    "http://localhost:3000/r/auth-client.json",
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/any-auth-client.json",
+    "true/auth-client.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "button",
     "dropdown-menu",
-    "http://localhost:3000/r/use-hydrated.json",
-    "http://localhost:3000/r/user-avatar.json",
-    "http://localhost:3000/r/user-view.json",
-    "http://localhost:3000/r/utils.json"
+    "true/use-hydrated.json",
+    "true/user-avatar.json",
+    "true/user-view.json",
+    "true/utils.json"
   ],
   "files": [
     {

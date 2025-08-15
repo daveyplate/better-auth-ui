@@ -8,10 +8,10 @@
     "better-auth"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-ui-provider.json",
-    "http://localhost:3000/r/delete-organization-dialog.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/use-current-organization.json"
+    "true/auth-ui-provider.json",
+    "true/delete-organization-dialog.json",
+    "true/settings-card.json",
+    "true/use-current-organization.json"
   ],
   "files": [
     {

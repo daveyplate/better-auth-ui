@@ -12,15 +12,15 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
-        "http://localhost:3000/r/organization-cell-view.json",
-        "http://localhost:3000/r/settings-card.json",
+        "true/organization-cell-view.json",
+        "true/settings-card.json",
         "skeleton",
-        "http://localhost:3000/r/use-authenticate.json",
-        "http://localhost:3000/r/utils.json"
+        "true/use-authenticate.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -39,15 +39,15 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dropdown-menu",
-        "http://localhost:3000/r/refetch.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/user-view.json",
-        "http://localhost:3000/r/utils.json"
+        "true/refetch.json",
+        "true/settings-card.json",
+        "true/user-view.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -64,7 +64,7 @@
       "target": "types/account-options.ts",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/view-paths.json"
+        "true/view-paths.json"
       ],
       "files": [
         {
@@ -81,16 +81,16 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/accounts-card.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/change-email-card.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/update-avatar-card.json",
-        "http://localhost:3000/r/update-field-card.json",
-        "http://localhost:3000/r/update-name-card.json",
-        "http://localhost:3000/r/update-username-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/accounts-card.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/change-email-card.json",
+        "true/settings-card.json",
+        "true/update-avatar-card.json",
+        "true/update-field-card.json",
+        "true/update-name-card.json",
+        "true/update-username-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -108,18 +108,18 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/account-settings-cards.json",
-        "http://localhost:3000/r/api-keys-card.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/account-settings-cards.json",
+        "true/api-keys-card.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "drawer",
         "label",
-        "http://localhost:3000/r/organizations-card.json",
-        "http://localhost:3000/r/security-settings-cards.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/user-invitations-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/organizations-card.json",
+        "true/security-settings-cards.json",
+        "true/settings-card.json",
+        "true/user-invitations-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -135,12 +135,12 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/account-cell.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/account-cell.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "card",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -190,7 +190,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -258,16 +258,16 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/api-key.json",
-        "http://localhost:3000/r/api-key-delete-dialog.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/api-key.json",
+        "true/api-key-delete-dialog.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
-        "http://localhost:3000/r/refetch.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/use-lang.json",
-        "http://localhost:3000/r/utils.json"
+        "true/refetch.json",
+        "true/settings-card.json",
+        "true/use-lang.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -285,16 +285,16 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/api-key.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/api-key.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dialog",
-        "http://localhost:3000/r/refetch.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/use-lang.json",
-        "http://localhost:3000/r/utils.json"
+        "true/refetch.json",
+        "true/settings-card.json",
+        "true/use-lang.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -312,12 +312,12 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "dialog",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -349,13 +349,13 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/api-key-cell.json",
-        "http://localhost:3000/r/api-key-display-dialog.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/api-key-cell.json",
+        "true/api-key-display-dialog.json",
+        "true/auth-ui-provider.json",
         "card",
-        "http://localhost:3000/r/create-api-key-dialog.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/create-api-key-dialog.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -373,8 +373,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/use-success-transition.json"
+        "true/auth-ui-provider.json",
+        "true/use-success-transition.json"
       ],
       "files": [
         {
@@ -422,20 +422,20 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-callback.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/email-otp-form.json",
-        "http://localhost:3000/r/forgot-password-form.json",
-        "http://localhost:3000/r/magic-link-form.json",
-        "http://localhost:3000/r/recover-account-form.json",
-        "http://localhost:3000/r/reset-password-form.json",
-        "http://localhost:3000/r/sign-in-form.json",
-        "http://localhost:3000/r/sign-out.json",
-        "http://localhost:3000/r/sign-up-form.json",
-        "http://localhost:3000/r/two-factor-form.json",
-        "http://localhost:3000/r/utils.json",
-        "http://localhost:3000/r/view-paths.json"
+        "true/auth-callback.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/email-otp-form.json",
+        "true/forgot-password-form.json",
+        "true/magic-link-form.json",
+        "true/recover-account-form.json",
+        "true/reset-password-form.json",
+        "true/sign-in-form.json",
+        "true/sign-out.json",
+        "true/sign-up-form.json",
+        "true/two-factor-form.json",
+        "true/utils.json",
+        "true/view-paths.json"
       ],
       "files": [
         {
@@ -455,11 +455,11 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/any-auth-client.json",
-        "http://localhost:3000/r/api-key.json",
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/invitation.json",
-        "http://localhost:3000/r/refetch.json"
+        "true/any-auth-client.json",
+        "true/api-key.json",
+        "true/auth-client.json",
+        "true/invitation.json",
+        "true/refetch.json"
       ],
       "files": [
         {
@@ -476,7 +476,7 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json"
+        "true/auth-ui-provider.json"
       ],
       "files": [
         {
@@ -493,21 +493,21 @@
       "target": "localization/auth-localization.ts",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/admin-error-codes.json",
-        "http://localhost:3000/r/anonymous-error-codes.json",
-        "http://localhost:3000/r/api-key-error-codes.json",
-        "http://localhost:3000/r/base-error-codes.json",
-        "http://localhost:3000/r/captcha-error-codes.json",
-        "http://localhost:3000/r/email-otp-error-codes.json",
-        "http://localhost:3000/r/generic-oauth-error-codes.json",
-        "http://localhost:3000/r/haveibeenpwned-error-codes.json",
-        "http://localhost:3000/r/multi-session-error-codes.json",
-        "http://localhost:3000/r/organization-error-codes.json",
-        "http://localhost:3000/r/passkey-error-codes.json",
-        "http://localhost:3000/r/phone-number-error-codes.json",
-        "http://localhost:3000/r/stripe-localization.json",
-        "http://localhost:3000/r/two-factor-error-codes.json",
-        "http://localhost:3000/r/username-error-codes.json"
+        "true/admin-error-codes.json",
+        "true/anonymous-error-codes.json",
+        "true/api-key-error-codes.json",
+        "true/base-error-codes.json",
+        "true/captcha-error-codes.json",
+        "true/email-otp-error-codes.json",
+        "true/generic-oauth-error-codes.json",
+        "true/haveibeenpwned-error-codes.json",
+        "true/multi-session-error-codes.json",
+        "true/organization-error-codes.json",
+        "true/passkey-error-codes.json",
+        "true/phone-number-error-codes.json",
+        "true/stripe-localization.json",
+        "true/two-factor-error-codes.json",
+        "true/username-error-codes.json"
       ],
       "files": [
         {
@@ -542,28 +542,28 @@
         "sonner"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/account-options.json",
-        "http://localhost:3000/r/additional-fields.json",
-        "http://localhost:3000/r/any-auth-client.json",
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-mutators.json",
-        "http://localhost:3000/r/avatar-options.json",
-        "http://localhost:3000/r/captcha-options.json",
-        "http://localhost:3000/r/credentials-options.json",
-        "http://localhost:3000/r/delete-user-options.json",
-        "http://localhost:3000/r/generic-oauth-options.json",
-        "http://localhost:3000/r/gravatar-options.json",
-        "http://localhost:3000/r/link.json",
-        "http://localhost:3000/r/organization-options.json",
-        "http://localhost:3000/r/organization-refetcher.json",
-        "http://localhost:3000/r/recaptcha-v3.json",
-        "http://localhost:3000/r/render-toast.json",
-        "http://localhost:3000/r/sign-up-options.json",
-        "http://localhost:3000/r/social-options.json",
-        "http://localhost:3000/r/use-auth-data.json",
-        "http://localhost:3000/r/view-paths.json"
+        "true/account-options.json",
+        "true/additional-fields.json",
+        "true/any-auth-client.json",
+        "true/auth-client.json",
+        "true/auth-hooks.json",
+        "true/auth-localization.json",
+        "true/auth-mutators.json",
+        "true/avatar-options.json",
+        "true/captcha-options.json",
+        "true/credentials-options.json",
+        "true/delete-user-options.json",
+        "true/generic-oauth-options.json",
+        "true/gravatar-options.json",
+        "true/link.json",
+        "true/organization-options.json",
+        "true/organization-refetcher.json",
+        "true/recaptcha-v3.json",
+        "true/render-toast.json",
+        "true/sign-up-options.json",
+        "true/social-options.json",
+        "true/use-auth-data.json",
+        "true/view-paths.json"
       ],
       "files": [
         {
@@ -579,8 +579,8 @@
       "type": "registry:lib",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/use-tanstack-options.json"
+        "true/auth-ui-provider.json",
+        "true/use-tanstack-options.json"
       ],
       "files": [
         {
@@ -598,23 +598,23 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-callback.json",
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-callback.json",
+        "true/auth-form.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
-        "http://localhost:3000/r/email-otp-button.json",
-        "http://localhost:3000/r/magic-link-button.json",
-        "http://localhost:3000/r/one-tap.json",
-        "http://localhost:3000/r/passkey-button.json",
-        "http://localhost:3000/r/provider-button.json",
+        "true/email-otp-button.json",
+        "true/magic-link-button.json",
+        "true/one-tap.json",
+        "true/passkey-button.json",
+        "true/provider-button.json",
         "separator",
-        "http://localhost:3000/r/sign-out.json",
-        "http://localhost:3000/r/social-providers.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/utils.json",
-        "http://localhost:3000/r/view-paths.json"
+        "true/sign-out.json",
+        "true/social-providers.json",
+        "true/use-hydrated.json",
+        "true/utils.json",
+        "true/view-paths.json"
       ],
       "files": [
         {
@@ -632,7 +632,7 @@
         "@radix-ui/react-avatar"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -649,7 +649,7 @@
       "target": "types/avatar-options.ts",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/image.json"
+        "true/image.json"
       ],
       "files": [
         {
@@ -668,11 +668,11 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-ui-provider.json",
         "button",
         "dialog",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -707,7 +707,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -726,11 +726,11 @@
         "@marsidev/react-turnstile"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/recaptcha-badge.json",
-        "http://localhost:3000/r/recaptcha-v2.json",
-        "http://localhost:3000/r/use-theme.json"
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/recaptcha-badge.json",
+        "true/recaptcha-v2.json",
+        "true/use-theme.json"
       ],
       "files": [
         {
@@ -763,7 +763,7 @@
       "target": "types/captcha-options.ts",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/captcha-provider.json"
+        "true/captcha-provider.json"
       ],
       "files": [
         {
@@ -796,7 +796,7 @@
       "type": "registry:ui",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -816,13 +816,13 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-ui-provider.json",
         "card",
         "form",
         "input",
-        "http://localhost:3000/r/settings-card.json",
+        "true/settings-card.json",
         "skeleton",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -842,15 +842,15 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "card",
         "form",
-        "http://localhost:3000/r/input-field-skeleton.json",
-        "http://localhost:3000/r/password-input.json",
-        "http://localhost:3000/r/password-validation.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/input-field-skeleton.json",
+        "true/password-input.json",
+        "true/password-validation.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -869,7 +869,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -891,19 +891,19 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "dialog",
         "form",
         "input",
-        "http://localhost:3000/r/organization-cell-view.json",
-        "http://localhost:3000/r/personal-account-view.json",
-        "http://localhost:3000/r/refetch.json",
+        "true/organization-cell-view.json",
+        "true/personal-account-view.json",
+        "true/refetch.json",
         "select",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/use-lang.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/use-lang.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -924,17 +924,17 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "dialog",
         "dropdown-menu",
         "form",
-        "http://localhost:3000/r/image-utils.json",
+        "true/image-utils.json",
         "input",
-        "http://localhost:3000/r/organization-logo.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/organization-logo.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -951,7 +951,7 @@
       "target": "types/credentials-options.ts",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/password-validation.json"
+        "true/password-validation.json"
       ],
       "files": [
         {
@@ -968,10 +968,10 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/delete-account-dialog.json",
-        "http://localhost:3000/r/settings-card.json"
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/delete-account-dialog.json",
+        "true/settings-card.json"
       ],
       "files": [
         {
@@ -992,16 +992,16 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dialog",
         "form",
         "input",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/user-view.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/user-view.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1019,10 +1019,10 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/delete-organization-dialog.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/use-current-organization.json"
+        "true/auth-ui-provider.json",
+        "true/delete-organization-dialog.json",
+        "true/settings-card.json",
+        "true/use-current-organization.json"
       ],
       "files": [
         {
@@ -1044,16 +1044,16 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dialog",
         "form",
         "input",
-        "http://localhost:3000/r/organization-cell-view.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/organization-cell-view.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1088,7 +1088,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1106,7 +1106,7 @@
         "vaul"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1125,7 +1125,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1143,12 +1143,12 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/auth-view.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/auth-view.json",
         "button",
-        "http://localhost:3000/r/utils.json",
-        "http://localhost:3000/r/view-paths.json"
+        "true/utils.json",
+        "true/view-paths.json"
       ],
       "files": [
         {
@@ -1185,17 +1185,17 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-form.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "form",
         "input",
         "input-otp",
-        "http://localhost:3000/r/otp-input-group.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/use-success-transition.json",
-        "http://localhost:3000/r/utils.json"
+        "true/otp-input-group.json",
+        "true/use-hydrated.json",
+        "true/use-success-transition.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1213,7 +1213,7 @@
         "@react-email/components"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1251,16 +1251,16 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-form.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
-        "http://localhost:3000/r/captcha.json",
+        "true/captcha.json",
         "form",
         "input",
-        "http://localhost:3000/r/use-captcha.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/utils.json"
+        "true/use-captcha.json",
+        "true/use-hydrated.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1281,7 +1281,7 @@
       ],
       "registryDependencies": [
         "label",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1301,8 +1301,8 @@
       ],
       "registryDependencies": [
         "alert",
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/utils.json"
+        "true/auth-form.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1335,8 +1335,8 @@
       "target": "types/generic-oauth-options.ts",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/social-providers.json"
+        "true/auth-client.json",
+        "true/social-providers.json"
       ],
       "files": [
         {
@@ -1371,7 +1371,7 @@
         "@noble/hashes"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/gravatar-options.json"
+        "true/gravatar-options.json"
       ],
       "files": [
         {
@@ -1433,7 +1433,7 @@
       "type": "registry:ui",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1449,9 +1449,9 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/settings-card.json",
+        "true/settings-card.json",
         "skeleton",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1470,7 +1470,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1505,15 +1505,15 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dropdown-menu",
-        "http://localhost:3000/r/invitation.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/user-avatar.json",
-        "http://localhost:3000/r/utils.json"
+        "true/invitation.json",
+        "true/settings-card.json",
+        "true/user-avatar.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1535,15 +1535,15 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "dialog",
         "form",
         "input",
         "select",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1561,7 +1561,7 @@
         "@radix-ui/react-label"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1580,14 +1580,14 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dialog",
-        "http://localhost:3000/r/organization-cell-view.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/organization-cell-view.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1621,12 +1621,12 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/auth-view.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/auth-view.json",
         "button",
-        "http://localhost:3000/r/utils.json",
-        "http://localhost:3000/r/view-paths.json"
+        "true/utils.json",
+        "true/view-paths.json"
       ],
       "files": [
         {
@@ -1648,16 +1648,16 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-form.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
-        "http://localhost:3000/r/captcha.json",
+        "true/captcha.json",
         "form",
         "input",
-        "http://localhost:3000/r/use-captcha.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/utils.json"
+        "true/use-captcha.json",
+        "true/use-hydrated.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1676,17 +1676,17 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dropdown-menu",
-        "http://localhost:3000/r/leave-organization-dialog.json",
-        "http://localhost:3000/r/remove-member-dialog.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/update-member-role-dialog.json",
-        "http://localhost:3000/r/user-view.json",
-        "http://localhost:3000/r/utils.json"
+        "true/leave-organization-dialog.json",
+        "true/remove-member-dialog.json",
+        "true/settings-card.json",
+        "true/update-member-role-dialog.json",
+        "true/user-view.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1746,10 +1746,10 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/use-success-transition.json",
-        "http://localhost:3000/r/utils.json"
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/use-success-transition.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1768,15 +1768,15 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dropdown-menu",
-        "http://localhost:3000/r/leave-organization-dialog.json",
-        "http://localhost:3000/r/organization-cell-view.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/leave-organization-dialog.json",
+        "true/organization-cell-view.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1794,11 +1794,11 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/organization-logo.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/organization-logo.json",
         "skeleton",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1832,12 +1832,12 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-ui-provider.json",
         "card",
-        "http://localhost:3000/r/invitation-cell.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/use-current-organization.json",
-        "http://localhost:3000/r/utils.json"
+        "true/invitation-cell.json",
+        "true/settings-card.json",
+        "true/use-current-organization.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1856,11 +1856,11 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "avatar",
         "skeleton",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1879,18 +1879,18 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dropdown-menu",
-        "http://localhost:3000/r/image-utils.json",
-        "http://localhost:3000/r/organization-logo.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/settings-card-footer.json",
-        "http://localhost:3000/r/settings-card-header.json",
-        "http://localhost:3000/r/use-current-organization.json",
-        "http://localhost:3000/r/utils.json"
+        "true/image-utils.json",
+        "true/organization-logo.json",
+        "true/settings-card.json",
+        "true/settings-card-footer.json",
+        "true/settings-card-header.json",
+        "true/use-current-organization.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1908,13 +1908,13 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-ui-provider.json",
         "card",
-        "http://localhost:3000/r/invite-member-dialog.json",
-        "http://localhost:3000/r/member-cell.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/use-current-organization.json",
-        "http://localhost:3000/r/utils.json"
+        "true/invite-member-dialog.json",
+        "true/member-cell.json",
+        "true/settings-card.json",
+        "true/use-current-organization.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1935,14 +1935,14 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-ui-provider.json",
         "card",
         "form",
         "input",
-        "http://localhost:3000/r/settings-card.json",
+        "true/settings-card.json",
         "skeleton",
-        "http://localhost:3000/r/use-current-organization.json",
-        "http://localhost:3000/r/utils.json"
+        "true/use-current-organization.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -1959,7 +1959,7 @@
       "target": "types/organization-options.ts",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/view-paths.json"
+        "true/view-paths.json"
       ],
       "files": [
         {
@@ -1976,8 +1976,8 @@
       "type": "registry:lib",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/use-current-organization.json"
+        "true/auth-ui-provider.json",
+        "true/use-current-organization.json"
       ],
       "files": [
         {
@@ -1993,14 +1993,14 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/delete-organization-card.json",
-        "http://localhost:3000/r/organization-logo-card.json",
-        "http://localhost:3000/r/organization-name-card.json",
-        "http://localhost:3000/r/organization-slug-card.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/delete-organization-card.json",
+        "true/organization-logo-card.json",
+        "true/organization-name-card.json",
+        "true/organization-slug-card.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2021,14 +2021,14 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-ui-provider.json",
         "card",
         "form",
         "input",
-        "http://localhost:3000/r/settings-card.json",
+        "true/settings-card.json",
         "skeleton",
-        "http://localhost:3000/r/use-current-organization.json",
-        "http://localhost:3000/r/utils.json"
+        "true/use-current-organization.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2047,19 +2047,19 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-client.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
-        "http://localhost:3000/r/create-organization-dialog.json",
+        "true/create-organization-dialog.json",
         "dropdown-menu",
-        "http://localhost:3000/r/organization-cell-view.json",
-        "http://localhost:3000/r/organization-logo.json",
-        "http://localhost:3000/r/personal-account-view.json",
-        "http://localhost:3000/r/use-current-organization.json",
-        "http://localhost:3000/r/user-avatar.json",
-        "http://localhost:3000/r/user-view.json",
-        "http://localhost:3000/r/utils.json"
+        "true/organization-cell-view.json",
+        "true/organization-logo.json",
+        "true/personal-account-view.json",
+        "true/use-current-organization.json",
+        "true/user-avatar.json",
+        "true/user-view.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2077,17 +2077,17 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/account-view.json",
-        "http://localhost:3000/r/api-keys-card.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/account-view.json",
+        "true/api-keys-card.json",
+        "true/auth-ui-provider.json",
         "button",
         "drawer",
         "label",
-        "http://localhost:3000/r/organization-invitations-card.json",
-        "http://localhost:3000/r/organization-members-card.json",
-        "http://localhost:3000/r/organization-settings-cards.json",
-        "http://localhost:3000/r/use-current-organization.json",
-        "http://localhost:3000/r/utils.json"
+        "true/organization-invitations-card.json",
+        "true/organization-members-card.json",
+        "true/organization-settings-cards.json",
+        "true/use-current-organization.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2103,14 +2103,14 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-ui-provider.json",
         "card",
-        "http://localhost:3000/r/create-organization-dialog.json",
-        "http://localhost:3000/r/organization-cell.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/settings-cell-skeleton.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/utils.json"
+        "true/create-organization-dialog.json",
+        "true/organization-cell.json",
+        "true/settings-card.json",
+        "true/settings-cell-skeleton.json",
+        "true/use-hydrated.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2144,12 +2144,12 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/auth-view.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/auth-view.json",
         "button",
-        "http://localhost:3000/r/use-success-transition.json",
-        "http://localhost:3000/r/utils.json"
+        "true/use-success-transition.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2167,13 +2167,13 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
-        "http://localhost:3000/r/session-freshness-dialog.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/session-freshness-dialog.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2207,14 +2207,14 @@
         "react-hook-form"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "card",
         "form",
-        "http://localhost:3000/r/passkey-cell.json",
-        "http://localhost:3000/r/session-freshness-dialog.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/passkey-cell.json",
+        "true/session-freshness-dialog.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2234,7 +2234,7 @@
       "registryDependencies": [
         "button",
         "input",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2266,11 +2266,11 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-ui-provider.json",
         "skeleton",
-        "http://localhost:3000/r/user-avatar.json",
-        "http://localhost:3000/r/user-view.json",
-        "http://localhost:3000/r/utils.json"
+        "true/user-avatar.json",
+        "true/user-view.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2320,12 +2320,12 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/auth-view.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/auth-view.json",
         "button",
-        "http://localhost:3000/r/social-providers.json",
-        "http://localhost:3000/r/utils.json"
+        "true/social-providers.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2344,15 +2344,15 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
-        "http://localhost:3000/r/refetch.json",
-        "http://localhost:3000/r/settings-card.json",
+        "true/refetch.json",
+        "true/settings-card.json",
         "skeleton",
-        "http://localhost:3000/r/social-providers.json",
-        "http://localhost:3000/r/utils.json"
+        "true/social-providers.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2382,15 +2382,15 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "card",
-        "http://localhost:3000/r/provider-cell.json",
-        "http://localhost:3000/r/refetch.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/settings-cell-skeleton.json",
-        "http://localhost:3000/r/social-providers.json",
-        "http://localhost:3000/r/utils.json"
+        "true/provider-cell.json",
+        "true/refetch.json",
+        "true/settings-card.json",
+        "true/settings-cell-skeleton.json",
+        "true/social-providers.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2406,10 +2406,10 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/utils.json"
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/use-hydrated.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2427,10 +2427,10 @@
         "react-google-recaptcha"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/use-lang.json",
-        "http://localhost:3000/r/use-theme.json",
-        "http://localhost:3000/r/utils.json"
+        "true/auth-ui-provider.json",
+        "true/use-lang.json",
+        "true/use-theme.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2448,10 +2448,10 @@
         "@wojtekmaj/react-recaptcha-v3"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/use-lang.json",
-        "http://localhost:3000/r/use-theme.json"
+        "true/auth-ui-provider.json",
+        "true/use-hydrated.json",
+        "true/use-lang.json",
+        "true/use-theme.json"
       ],
       "files": [
         {
@@ -2472,14 +2472,14 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-form.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "form",
         "input",
-        "http://localhost:3000/r/use-success-transition.json",
-        "http://localhost:3000/r/utils.json"
+        "true/use-success-transition.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2495,7 +2495,7 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/use-authenticate.json"
+        "true/use-authenticate.json"
       ],
       "files": [
         {
@@ -2511,7 +2511,7 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/use-authenticate.json"
+        "true/use-authenticate.json"
       ],
       "files": [
         {
@@ -2546,13 +2546,13 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "dialog",
-        "http://localhost:3000/r/member-cell.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/member-cell.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2589,14 +2589,14 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-form.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "form",
-        "http://localhost:3000/r/password-input.json",
-        "http://localhost:3000/r/password-validation.json",
-        "http://localhost:3000/r/utils.json"
+        "true/password-input.json",
+        "true/password-validation.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2612,16 +2612,16 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/change-password-card.json",
-        "http://localhost:3000/r/delete-account-card.json",
-        "http://localhost:3000/r/passkeys-card.json",
-        "http://localhost:3000/r/providers-card.json",
-        "http://localhost:3000/r/sessions-card.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/two-factor-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/change-password-card.json",
+        "true/delete-account-card.json",
+        "true/passkeys-card.json",
+        "true/providers-card.json",
+        "true/sessions-card.json",
+        "true/settings-card.json",
+        "true/two-factor-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2640,7 +2640,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2658,7 +2658,7 @@
         "@radix-ui/react-separator"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2678,13 +2678,13 @@
         "ua-parser-js"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
-        "http://localhost:3000/r/refetch.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/refetch.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2700,12 +2700,12 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "dialog",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2721,13 +2721,13 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "card",
-        "http://localhost:3000/r/session-cell.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/settings-cell-skeleton.json",
-        "http://localhost:3000/r/utils.json"
+        "true/session-cell.json",
+        "true/settings-card.json",
+        "true/settings-cell-skeleton.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2747,8 +2747,8 @@
       ],
       "registryDependencies": [
         "button",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2764,12 +2764,12 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
+        "true/auth-localization.json",
         "card",
-        "http://localhost:3000/r/settings-card-footer.json",
-        "http://localhost:3000/r/settings-card-header.json",
-        "http://localhost:3000/r/user-avatar.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card-footer.json",
+        "true/settings-card-header.json",
+        "true/user-avatar.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2786,10 +2786,10 @@
       "dependencies": [],
       "registryDependencies": [
         "card",
-        "http://localhost:3000/r/settings-action-button.json",
-        "http://localhost:3000/r/settings-card.json",
+        "true/settings-action-button.json",
+        "true/settings-card.json",
         "skeleton",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2806,9 +2806,9 @@
       "dependencies": [],
       "registryDependencies": [
         "card",
-        "http://localhost:3000/r/settings-card.json",
+        "true/settings-card.json",
         "skeleton",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2825,9 +2825,9 @@
       "dependencies": [],
       "registryDependencies": [
         "card",
-        "http://localhost:3000/r/settings-card.json",
+        "true/settings-card.json",
         "skeleton",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2849,20 +2849,20 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-form.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
-        "http://localhost:3000/r/captcha.json",
+        "true/captcha.json",
         "checkbox",
         "form",
         "input",
-        "http://localhost:3000/r/password-input.json",
-        "http://localhost:3000/r/password-validation.json",
-        "http://localhost:3000/r/use-captcha.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/use-success-transition.json",
-        "http://localhost:3000/r/utils.json"
+        "true/password-input.json",
+        "true/password-validation.json",
+        "true/use-captcha.json",
+        "true/use-hydrated.json",
+        "true/use-success-transition.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2880,8 +2880,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/use-success-transition.json"
+        "true/auth-ui-provider.json",
+        "true/use-success-transition.json"
       ],
       "files": [
         {
@@ -2903,24 +2903,24 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-form.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
-        "http://localhost:3000/r/captcha.json",
+        "true/captcha.json",
         "checkbox",
         "dropdown-menu",
         "form",
-        "http://localhost:3000/r/image-utils.json",
+        "true/image-utils.json",
         "input",
-        "http://localhost:3000/r/password-input.json",
-        "http://localhost:3000/r/password-validation.json",
+        "true/password-input.json",
+        "true/password-validation.json",
         "textarea",
-        "http://localhost:3000/r/use-captcha.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/use-success-transition.json",
-        "http://localhost:3000/r/user-avatar.json",
-        "http://localhost:3000/r/utils.json"
+        "true/use-captcha.json",
+        "true/use-hydrated.json",
+        "true/use-success-transition.json",
+        "true/user-avatar.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -2952,7 +2952,7 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json"
+        "true/auth-ui-provider.json"
       ],
       "files": [
         {
@@ -2968,7 +2968,7 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json"
+        "true/auth-ui-provider.json"
       ],
       "files": [
         {
@@ -2984,7 +2984,7 @@
       "type": "registry:ui",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3003,7 +3003,7 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json"
+        "true/auth-client.json"
       ],
       "files": [
         {
@@ -3020,7 +3020,7 @@
       "type": "registry:lib",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/provider-icons.json"
+        "true/provider-icons.json"
       ],
       "files": [
         {
@@ -3054,7 +3054,7 @@
         "@radix-ui/react-tabs"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3070,7 +3070,7 @@
       "type": "registry:ui",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3086,11 +3086,11 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/two-factor-password-dialog.json"
+        "true/auth-client.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/settings-card.json",
+        "true/two-factor-password-dialog.json"
       ],
       "files": [
         {
@@ -3129,19 +3129,19 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-form.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-client.json",
+        "true/auth-form.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "checkbox",
         "form",
         "input-otp",
         "label",
-        "http://localhost:3000/r/otp-input-group.json",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/use-success-transition.json",
-        "http://localhost:3000/r/utils.json"
+        "true/otp-input-group.json",
+        "true/use-hydrated.json",
+        "true/use-success-transition.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3162,14 +3162,14 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/backup-codes-dialog.json",
+        "true/auth-ui-provider.json",
+        "true/backup-codes-dialog.json",
         "button",
         "dialog",
         "form",
-        "http://localhost:3000/r/password-input.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/password-input.json",
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3187,17 +3187,17 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dropdown-menu",
-        "http://localhost:3000/r/image-utils.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/settings-card-footer.json",
-        "http://localhost:3000/r/settings-card-header.json",
-        "http://localhost:3000/r/user-avatar.json",
-        "http://localhost:3000/r/utils.json"
+        "true/image-utils.json",
+        "true/settings-card.json",
+        "true/settings-card-footer.json",
+        "true/settings-card-header.json",
+        "true/user-avatar.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3217,17 +3217,17 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/additional-fields.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/additional-fields.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "card",
         "checkbox",
         "form",
         "input",
-        "http://localhost:3000/r/settings-card.json",
+        "true/settings-card.json",
         "skeleton",
         "textarea",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3246,14 +3246,14 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "dialog",
-        "http://localhost:3000/r/member-cell.json",
+        "true/member-cell.json",
         "select",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3269,9 +3269,9 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/update-field-card.json"
+        "true/auth-ui-provider.json",
+        "true/settings-card.json",
+        "true/update-field-card.json"
       ],
       "files": [
         {
@@ -3287,10 +3287,10 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/update-field-card.json"
+        "true/auth-client.json",
+        "true/auth-ui-provider.json",
+        "true/settings-card.json",
+        "true/update-field-card.json"
       ],
       "files": [
         {
@@ -3306,10 +3306,10 @@
       "type": "registry:hook",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-data-cache.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/fetch-error.json",
-        "http://localhost:3000/r/utils.json"
+        "true/auth-data-cache.json",
+        "true/auth-ui-provider.json",
+        "true/fetch-error.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3325,8 +3325,8 @@
       "type": "registry:hook",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/any-auth-client.json",
-        "http://localhost:3000/r/auth-ui-provider.json"
+        "true/any-auth-client.json",
+        "true/auth-ui-provider.json"
       ],
       "files": [
         {
@@ -3347,8 +3347,8 @@
         "react-google-recaptcha"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json"
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json"
       ],
       "files": [
         {
@@ -3383,7 +3383,7 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json"
+        "true/auth-ui-provider.json"
       ],
       "files": [
         {
@@ -3416,14 +3416,14 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/auth-mutators.json",
-        "http://localhost:3000/r/model-names.json",
-        "http://localhost:3000/r/refetch.json",
-        "http://localhost:3000/r/use-list-accounts.json",
-        "http://localhost:3000/r/use-list-sessions.json",
-        "http://localhost:3000/r/use-session.json"
+        "true/auth-client.json",
+        "true/auth-hooks.json",
+        "true/auth-mutators.json",
+        "true/model-names.json",
+        "true/refetch.json",
+        "true/use-list-accounts.json",
+        "true/use-list-sessions.json",
+        "true/use-session.json"
       ],
       "files": [
         {
@@ -3455,9 +3455,9 @@
         "@better-fetch/fetch"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/model-names.json",
-        "http://localhost:3000/r/use-instant-options.json"
+        "true/auth-hooks.json",
+        "true/model-names.json",
+        "true/use-instant-options.json"
       ],
       "files": [
         {
@@ -3473,11 +3473,11 @@
       "type": "registry:lib",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/model-names.json",
-        "http://localhost:3000/r/use-conditional-query.json",
-        "http://localhost:3000/r/use-triplit-hooks.json",
-        "http://localhost:3000/r/use-triplit-token.json"
+        "true/auth-hooks.json",
+        "true/model-names.json",
+        "true/use-conditional-query.json",
+        "true/use-triplit-hooks.json",
+        "true/use-triplit-token.json"
       ],
       "files": [
         {
@@ -3495,9 +3495,9 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/model-names.json",
-        "http://localhost:3000/r/use-instant-options.json"
+        "true/auth-hooks.json",
+        "true/model-names.json",
+        "true/use-instant-options.json"
       ],
       "files": [
         {
@@ -3515,11 +3515,11 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/model-names.json",
-        "http://localhost:3000/r/use-conditional-query.json",
-        "http://localhost:3000/r/use-triplit-hooks.json",
-        "http://localhost:3000/r/use-triplit-token.json"
+        "true/auth-hooks.json",
+        "true/model-names.json",
+        "true/use-conditional-query.json",
+        "true/use-triplit-hooks.json",
+        "true/use-triplit-token.json"
       ],
       "files": [
         {
@@ -3537,10 +3537,10 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/model-names.json",
-        "http://localhost:3000/r/use-instant-options.json"
+        "true/auth-client.json",
+        "true/auth-hooks.json",
+        "true/model-names.json",
+        "true/use-instant-options.json"
       ],
       "files": [
         {
@@ -3556,12 +3556,12 @@
       "type": "registry:lib",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/model-names.json",
-        "http://localhost:3000/r/use-conditional-query.json",
-        "http://localhost:3000/r/use-triplit-hooks.json",
-        "http://localhost:3000/r/use-triplit-token.json"
+        "true/auth-client.json",
+        "true/auth-hooks.json",
+        "true/model-names.json",
+        "true/use-conditional-query.json",
+        "true/use-triplit-hooks.json",
+        "true/use-triplit-token.json"
       ],
       "files": [
         {
@@ -3577,8 +3577,8 @@
       "type": "registry:hook",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/utils.json"
+        "true/auth-ui-provider.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3597,10 +3597,10 @@
         "@tanstack/react-query"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/any-auth-client.json",
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/auth-mutators.json"
+        "true/any-auth-client.json",
+        "true/auth-client.json",
+        "true/auth-hooks.json",
+        "true/auth-mutators.json"
       ],
       "files": [
         {
@@ -3633,12 +3633,12 @@
         "better-auth"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-hooks.json",
-        "http://localhost:3000/r/refetch.json",
-        "http://localhost:3000/r/use-list-accounts.json",
-        "http://localhost:3000/r/use-list-sessions.json",
-        "http://localhost:3000/r/use-session.json"
+        "true/auth-client.json",
+        "true/auth-hooks.json",
+        "true/refetch.json",
+        "true/use-list-accounts.json",
+        "true/use-list-sessions.json",
+        "true/use-session.json"
       ],
       "files": [
         {
@@ -3673,13 +3673,13 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "avatar",
-        "http://localhost:3000/r/gravatar-utils.json",
-        "http://localhost:3000/r/profile.json",
+        "true/gravatar-utils.json",
+        "true/profile.json",
         "skeleton",
-        "http://localhost:3000/r/utils.json"
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3697,16 +3697,16 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/any-auth-client.json",
-        "http://localhost:3000/r/auth-client.json",
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/any-auth-client.json",
+        "true/auth-client.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
         "button",
         "dropdown-menu",
-        "http://localhost:3000/r/use-hydrated.json",
-        "http://localhost:3000/r/user-avatar.json",
-        "http://localhost:3000/r/user-view.json",
-        "http://localhost:3000/r/utils.json"
+        "true/use-hydrated.json",
+        "true/user-avatar.json",
+        "true/user-view.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3724,13 +3724,13 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-ui-provider.json",
+        "true/auth-ui-provider.json",
         "button",
         "card",
         "dropdown-menu",
-        "http://localhost:3000/r/settings-card.json",
-        "http://localhost:3000/r/user-avatar.json",
-        "http://localhost:3000/r/utils.json"
+        "true/settings-card.json",
+        "true/user-avatar.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3746,12 +3746,12 @@
       "type": "registry:component",
       "dependencies": [],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/auth-ui-provider.json",
-        "http://localhost:3000/r/profile.json",
+        "true/auth-localization.json",
+        "true/auth-ui-provider.json",
+        "true/profile.json",
         "skeleton",
-        "http://localhost:3000/r/user-avatar.json",
-        "http://localhost:3000/r/utils.json"
+        "true/user-avatar.json",
+        "true/utils.json"
       ],
       "files": [
         {
@@ -3787,8 +3787,8 @@
         "zod"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/auth-localization.json",
-        "http://localhost:3000/r/password-validation.json"
+        "true/auth-localization.json",
+        "true/password-validation.json"
       ],
       "files": [
         {

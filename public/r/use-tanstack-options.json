@@ -9,10 +9,10 @@
     "@tanstack/react-query"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/any-auth-client.json",
-    "http://localhost:3000/r/auth-client.json",
-    "http://localhost:3000/r/auth-hooks.json",
-    "http://localhost:3000/r/auth-mutators.json"
+    "true/any-auth-client.json",
+    "true/auth-client.json",
+    "true/auth-hooks.json",
+    "true/auth-mutators.json"
   ],
   "files": [
     {

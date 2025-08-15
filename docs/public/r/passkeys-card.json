@@ -8,14 +8,14 @@
     "react-hook-form"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "card",
     "form",
-    "http://localhost:3000/r/passkey-cell.json",
-    "http://localhost:3000/r/session-freshness-dialog.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/utils.json"
+    "true/passkey-cell.json",
+    "true/session-freshness-dialog.json",
+    "true/settings-card.json",
+    "true/utils.json"
   ],
   "files": [
     {

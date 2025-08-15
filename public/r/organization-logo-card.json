@@ -9,18 +9,18 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/auth-localization.json",
-    "http://localhost:3000/r/auth-ui-provider.json",
+    "true/auth-localization.json",
+    "true/auth-ui-provider.json",
     "button",
     "card",
     "dropdown-menu",
-    "http://localhost:3000/r/image-utils.json",
-    "http://localhost:3000/r/organization-logo.json",
-    "http://localhost:3000/r/settings-card.json",
-    "http://localhost:3000/r/settings-card-footer.json",
-    "http://localhost:3000/r/settings-card-header.json",
-    "http://localhost:3000/r/use-current-organization.json",
-    "http://localhost:3000/r/utils.json"
+    "true/image-utils.json",
+    "true/organization-logo.json",
+    "true/settings-card.json",
+    "true/settings-card-footer.json",
+    "true/settings-card-header.json",
+    "true/use-current-organization.json",
+    "true/utils.json"
   ],
   "files": [
     {
