@@ -9,6 +9,31 @@ The `<ProvidersCard />` component provides a simple interface for managing linke
 <img alt="Providers Card" src="/screenshots/providers-card-dark.png" className="rounded-xl hidden dark:block w-lg mt-0 mb-0" />
 <img alt="Providers Card" src="/screenshots/providers-card-light.png" className="rounded-xl dark:hidden w-lg mt-0 mb-0" />
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/providers-card.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/providers-card.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/providers-card.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/providers-card.json
+  ```
+  </Tab>
+</Tabs>
+
 ## Usage
 
 Here's how you can include `<ProvidersCard />` on your user settings or account management page:
@@ -72,7 +97,7 @@ You usually integrate the `<ProvidersCard />` with other settings components. He
 
 ```tsx title="app/dashboard/settings/page.tsx"
 import {
-    ProvidersCard,  
+    ProvidersCard,
     ChangeEmailCard,
     SettingsCards,
 } from "@daveyplate/better-auth-ui";

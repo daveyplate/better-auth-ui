@@ -3,6 +3,31 @@ title: <UpdateFieldCard />
 description: Generic settings card for updating custom user fields
 ---
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/update-field-card.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/update-field-card.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/update-field-card.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/update-field-card.json
+  ```
+  </Tab>
+</Tabs>
+
 ## Import
 
 ```tsx
@@ -12,7 +37,7 @@ import { UpdateFieldCard } from "@better-auth/ui-react/components"
 ## Usage
 
 ```tsx
-<UpdateFieldCard 
+<UpdateFieldCard
     name="phoneNumber"
     label="Phone Number"
     type="text"
@@ -42,7 +67,7 @@ import { UpdateFieldCard } from "@better-auth/ui-react/components"
 ### Text Field
 
 ```tsx
-<UpdateFieldCard 
+<UpdateFieldCard
     name="bio"
     label="Bio"
     type="text"
@@ -54,7 +79,7 @@ import { UpdateFieldCard } from "@better-auth/ui-react/components"
 ### Number Field
 
 ```tsx
-<UpdateFieldCard 
+<UpdateFieldCard
     name="age"
     label="Age"
     type="number"
@@ -66,7 +91,7 @@ import { UpdateFieldCard } from "@better-auth/ui-react/components"
 ### Boolean Field
 
 ```tsx
-<UpdateFieldCard 
+<UpdateFieldCard
     name="newsletter"
     label="Subscribe to newsletter"
     type="boolean"
@@ -82,4 +107,4 @@ import { UpdateFieldCard } from "@better-auth/ui-react/components"
 - Success/error feedback
 - Loading states during update
 - Checkbox UI for boolean fields
-- Integrated with Better Auth additional fields 
+- Integrated with Better Auth additional fields

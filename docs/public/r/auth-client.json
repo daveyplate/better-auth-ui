@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "auth-client",
+  "type": "registry:file",
+  "title": "Auth Client",
+  "description": "",
+  "dependencies": [
+    "better-auth"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/types/auth-client.ts",
+      "content": "import {\n    anonymousClient,\n    apiKeyClient,\n    emailOTPClient,\n    genericOAuthClient,\n    magicLinkClient,\n    multiSessionClient,\n    oneTapClient,\n    organizationClient,\n    passkeyClient,\n    twoFactorClient,\n    usernameClient\n} from \"better-auth/client/plugins\"\nimport { createAuthClient } from \"better-auth/react\"\n\nexport const authClient = createAuthClient({\n    plugins: [\n        apiKeyClient(),\n        multiSessionClient(),\n        passkeyClient(),\n        oneTapClient({\n            clientId: \"\"\n        }),\n        genericOAuthClient(),\n        anonymousClient(),\n        usernameClient(),\n        magicLinkClient(),\n        emailOTPClient(),\n        twoFactorClient(),\n        organizationClient()\n    ]\n})\n\nexport type AuthClient = typeof authClient\n\nexport type Session = AuthClient[\"$Infer\"][\"Session\"][\"session\"]\nexport type User = AuthClient[\"$Infer\"][\"Session\"][\"user\"]\n",
+      "type": "registry:file",
+      "target": "types/auth-client.ts"
+    }
+  ]
+}

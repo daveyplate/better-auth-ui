@@ -135,3 +135,6 @@ dist
 
 # Webstorm project files
 .idea
+
+public/r
+registry/

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gravatar-options",
+  "type": "registry:file",
+  "title": "Gravatar Options",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/types/gravatar-options.ts",
+      "content": "export type GravatarOptions = {\n    /**\n     * Default image type or URL\n     * Options: '404', 'mp', 'identicon', 'monsterid', 'wavatar', 'retro', 'robohash', 'blank', or custom URL\n     */\n    d?: string\n    /**\n     * Image size in pixels (1-2048)\n     */\n    size?: number\n    /**\n     * Whether to append .jpg extension to the hash\n     * @default false\n     */\n    jpg?: boolean\n    /**\n     * Force default image even if user has Gravatar\n     * @default false\n     */\n    forceDefault?: boolean\n}\n",
+      "type": "registry:file",
+      "target": "types/gravatar-options.ts"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "multi-session-error-codes",
+  "type": "registry:file",
+  "title": "Multi Session Error Codes",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/localization/multi-session-error-codes.ts",
+      "content": "export const MULTI_SESSION_ERROR_CODES = {\n    INVALID_SESSION_TOKEN: \"Invalid session token\"\n}\n",
+      "type": "registry:file",
+      "target": "localization/multi-session-error-codes.ts"
+    }
+  ]
+}

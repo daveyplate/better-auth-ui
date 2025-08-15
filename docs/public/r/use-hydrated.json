@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-hydrated",
+  "type": "registry:hook",
+  "title": "Use Hydrated",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/hooks/use-hydrated.ts",
+      "content": "import { useSyncExternalStore } from \"react\"\n\nfunction subscribe() {\n    return () => {}\n}\n\nexport function useIsHydrated() {\n    return useSyncExternalStore(\n        subscribe,\n        () => true,\n        () => false\n    )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

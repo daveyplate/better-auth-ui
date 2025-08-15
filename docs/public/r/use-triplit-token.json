@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-triplit-token",
+  "type": "registry:lib",
+  "title": "Use Triplit Token",
+  "description": "",
+  "dependencies": [
+    "@triplit/client",
+    "@triplit/react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/lib/triplit/use-triplit-token.ts",
+      "content": "import type { TriplitClient } from \"@triplit/client\"\nimport { useConnectionStatus } from \"@triplit/react\"\nimport { useMemo } from \"react\"\n\nexport function useTriplitToken(triplit: TriplitClient) {\n    const connectionStatus = useConnectionStatus(triplit)\n\n    // biome-ignore lint/correctness/useExhaustiveDependencies: update when connection status changes\n    const payload = useMemo(\n        () =>\n            triplit.token\n                ? (decodeJWT(triplit.token) as Record<string, unknown> & {\n                      exp: number\n                      iat: number\n                      sub?: string\n                      email?: string\n                      name?: string\n                  })\n                : undefined,\n        [connectionStatus]\n    )\n\n    return { token: payload && triplit.token, payload }\n}\n\nfunction decodeJWT(token: string) {\n    try {\n        const base64Url = token.split(\".\")[1]\n        const base64 = base64Url.replace(/-/g, \"+\").replace(/_/g, \"/\")\n        const jsonPayload = decodeURIComponent(\n            atob(base64)\n                .split(\"\")\n                .map((char) => {\n                    return `%${(`00${char.charCodeAt(0).toString(16)}`).slice(-2)}`\n                })\n                .join(\"\")\n        )\n\n        return JSON.parse(jsonPayload)\n    } catch (error) {\n        console.error(\"Failed to decode JWT:\", error)\n        return null\n    }\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image-utils",
+  "type": "registry:lib",
+  "title": "Image Utils",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/lib/image-utils.ts",
+      "content": "export async function resizeAndCropImage(\n    file: File,\n    name: string,\n    size: number,\n    extension: string\n): Promise<File> {\n    const image = await loadImage(file)\n\n    const canvas = document.createElement(\"canvas\")\n    canvas.width = canvas.height = size\n\n    const ctx = canvas.getContext(\"2d\")\n\n    const minEdge = Math.min(image.width, image.height)\n\n    const sx = (image.width - minEdge) / 2\n    const sy = (image.height - minEdge) / 2\n    const sWidth = minEdge\n    const sHeight = minEdge\n\n    ctx?.drawImage(image, sx, sy, sWidth, sHeight, 0, 0, size, size)\n\n    const resizedImageBlob = await new Promise<Blob | null>((resolve) =>\n        canvas.toBlob(resolve, `image/${extension}`)\n    )\n\n    return new File([resizedImageBlob as BlobPart], `${name}.${extension}`, {\n        type: `image/${extension}`\n    })\n}\n\nasync function loadImage(file: File): Promise<HTMLImageElement> {\n    return new Promise((resolve, reject) => {\n        const image = new Image()\n        const reader = new FileReader()\n\n        reader.onload = (e) => {\n            image.src = e.target?.result as string\n        }\n\n        image.onload = () => resolve(image)\n        image.onerror = (err) => reject(err)\n\n        reader.readAsDataURL(file)\n    })\n}\n\nexport async function fileToBase64(file: File): Promise<string> {\n    return new Promise((resolve, reject) => {\n        const reader = new FileReader()\n        reader.onloadend = () => resolve(reader.result as string)\n        reader.onerror = reject\n        reader.readAsDataURL(file)\n    })\n}\n",
+      "type": "registry:lib"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "haveibeenpwned-error-codes",
+  "type": "registry:file",
+  "title": "Haveibeenpwned Error Codes",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/localization/haveibeenpwned-error-codes.ts",
+      "content": "export const HAVEIBEENPWNED_ERROR_CODES = {\n    PASSWORD_COMPROMISED:\n        \"The password you entered has been compromised. Please choose a different password.\"\n}\n",
+      "type": "registry:file",
+      "target": "localization/haveibeenpwned-error-codes.ts"
+    }
+  ]
+}

@@ -4,6 +4,31 @@ title: <OrganizationMembersCard />
 
 The `<OrganizationMembersCard />` component provides a comprehensive interface for managing organization members, including inviting new members, updating roles, and removing members.
 
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+  ```shell
+  npx shadcn@latest add https://better-auth-ui.com/r/organization-members-card.json
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```shell
+  pnpx shadcn@latest add https://better-auth-ui.com/r/organization-members-card.json
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```shell
+  yarn shadcn add https://better-auth-ui.com/r/organization-members-card.json
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```shell
+  bunx shadcn@latest add https://better-auth-ui.com/r/organization-members-card.json
+  ```
+  </Tab>
+</Tabs>
+
 ## Usage
 
 ```tsx
@@ -39,7 +64,7 @@ export function OrganizationMembersPage() {
 ### With Custom Class Names
 
 ```tsx
-<OrganizationMembersCard 
+<OrganizationMembersCard
   classNames={{
     base: "shadow-lg",
     cell: "hover:bg-accent",
@@ -51,7 +76,7 @@ export function OrganizationMembersPage() {
 ### With Custom Localization
 
 ```tsx
-<OrganizationMembersCard 
+<OrganizationMembersCard
   localization={{
     MEMBERS: "Team Members",
     INVITE_MEMBER: "Add Team Member",
@@ -136,4 +161,4 @@ Enable organization plugin with proper configuration:
 2. **Regular Audits**: Review member list periodically
 3. **Invitation Expiry**: Set reasonable expiration for invites
 4. **Owner Protection**: Prevent accidental owner removal
-5. **Clear Labels**: Use descriptive role names 
+5. **Clear Labels**: Use descriptive role names

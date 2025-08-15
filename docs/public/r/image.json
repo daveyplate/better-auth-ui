@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image",
+  "type": "registry:file",
+  "title": "Image",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/types/image.ts",
+      "content": "import type { ComponentType } from \"react\"\n\nexport type Image = ComponentType<{\n    src: string\n    alt: string\n    className?: string\n}>\n",
+      "type": "registry:file",
+      "target": "types/image.ts"
+    }
+  ]
+}

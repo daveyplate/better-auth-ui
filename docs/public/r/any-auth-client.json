@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "any-auth-client",
+  "type": "registry:file",
+  "title": "Any Auth Client",
+  "description": "",
+  "dependencies": [
+    "better-auth"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/types/any-auth-client.ts",
+      "content": "import type { createAuthClient } from \"better-auth/react\"\n\nexport type AnyAuthClient = Omit<\n    ReturnType<typeof createAuthClient>,\n    \"signUp\" | \"getSession\"\n>\n",
+      "type": "registry:file",
+      "target": "types/any-auth-client.ts"
+    }
+  ]
+}

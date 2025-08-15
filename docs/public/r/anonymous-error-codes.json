@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "anonymous-error-codes",
+  "type": "registry:file",
+  "title": "Anonymous Error Codes",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/localization/anonymous-error-codes.ts",
+      "content": "export const ANONYMOUS_ERROR_CODES = {\n    FAILED_TO_CREATE_USER: \"Failed to create user\",\n    COULD_NOT_CREATE_SESSION: \"Could not create session\",\n    ANONYMOUS_USERS_CANNOT_SIGN_IN_AGAIN_ANONYMOUSLY:\n        \"Anonymous users cannot sign in again anonymously\"\n}\n",
+      "type": "registry:file",
+      "target": "localization/anonymous-error-codes.ts"
+    }
+  ]
+}

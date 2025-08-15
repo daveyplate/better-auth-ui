@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "auth-data-cache",
+  "type": "registry:lib",
+  "title": "Auth Data Cache",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/lib/auth-data-cache.ts",
+      "content": "type CacheEntry<T> = {\n    data: T | null\n    timestamp: number\n    isRefetching: boolean\n}\n\nclass AuthDataCache {\n    private cache = new Map<string, CacheEntry<unknown>>()\n    private listeners = new Map<string, Set<() => void>>()\n    private inFlightRequests = new Map<string, Promise<unknown>>()\n\n    get<T>(key: string): CacheEntry<T> | undefined {\n        return this.cache.get(key) as CacheEntry<T> | undefined\n    }\n\n    set<T>(key: string, data: T | null) {\n        const entry: CacheEntry<T> = {\n            data,\n            timestamp: Date.now(),\n            isRefetching: false\n        }\n        this.cache.set(key, entry)\n        this.notify(key)\n    }\n\n    setRefetching(key: string, isRefetching: boolean) {\n        const entry = this.cache.get(key)\n        if (entry) {\n            entry.isRefetching = isRefetching\n            this.notify(key)\n        }\n    }\n\n    clear(key?: string) {\n        if (key) {\n            this.cache.delete(key)\n            this.inFlightRequests.delete(key)\n            this.notify(key)\n        } else {\n            this.cache.clear()\n            this.inFlightRequests.clear()\n            const keys = Array.from(this.listeners.keys())\n            for (const key of keys) {\n                this.notify(key)\n            }\n        }\n    }\n\n    getInFlightRequest<T>(key: string): Promise<T> | undefined {\n        return this.inFlightRequests.get(key) as Promise<T> | undefined\n    }\n\n    setInFlightRequest<T>(key: string, promise: Promise<T>) {\n        this.inFlightRequests.set(key, promise)\n    }\n\n    removeInFlightRequest(key: string) {\n        this.inFlightRequests.delete(key)\n    }\n\n    subscribe(key: string, callback: () => void) {\n        if (!this.listeners.has(key)) {\n            this.listeners.set(key, new Set())\n        }\n        this.listeners.get(key)!.add(callback)\n\n        return () => {\n            const callbacks = this.listeners.get(key)\n            if (callbacks) {\n                callbacks.delete(callback)\n                if (callbacks.size === 0) {\n                    this.listeners.delete(key)\n                }\n            }\n        }\n    }\n\n    private notify(key: string) {\n        const callbacks = this.listeners.get(key)\n        if (callbacks) {\n            const callbackArray = Array.from(callbacks)\n            for (const callback of callbackArray) {\n                callback()\n            }\n        }\n    }\n}\n\n// Global singleton instance\nexport const authDataCache = new AuthDataCache()\n",
+      "type": "registry:lib"
+    }
+  ]
+}

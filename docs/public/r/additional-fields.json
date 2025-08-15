@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "additional-fields",
+  "type": "registry:file",
+  "title": "Additional Fields",
+  "description": "",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/types/additional-fields.ts",
+      "content": "import type { ReactNode } from \"react\"\n\nexport type FieldType = \"string\" | \"number\" | \"boolean\"\n\nexport interface AdditionalField {\n    description?: ReactNode\n    instructions?: ReactNode\n    label: ReactNode\n    placeholder?: string\n    required?: boolean\n    type: FieldType\n    /**\n     * Render a multi-line textarea for string fields\n     */\n    multiline?: boolean\n    validate?: (value: string) => Promise<boolean>\n}\n\nexport interface AdditionalFields {\n    [key: string]: AdditionalField\n}\n",
+      "type": "registry:file",
+      "target": "types/additional-fields.ts"
+    }
+  ]
+}
