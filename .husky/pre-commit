@@ -1,0 +1,17 @@
+# 1. Generate the registry
+pnpm registry:generate
+
+# 2. Copy registry.json to root
+pnpm copy-registry
+
+# 3. Build the registry
+pnpm registry:build
+
+# 4. Delete docs/public/r
+pnpm delete-docs-r
+
+# 5. Copy public/r to docs/public/r
+pnpm copy-public-to-docs
+
+# 6. Run lint-staged
+pnpm lint-staged

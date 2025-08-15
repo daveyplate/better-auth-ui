@@ -1,14 +1,15 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "local",
-  "homepage": "https://better-auth-ui.com",
   "items": [
     {
       "name": "accept-invitation-card",
       "title": "Accept Invitation Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -32,7 +33,10 @@
       "title": "Account Cell",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -58,7 +62,9 @@
       "type": "registry:file",
       "target": "types/account-options.ts",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/view-paths.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/view-paths.json"
+      ],
       "files": [
         {
           "path": "src/types/account-options.ts",
@@ -97,7 +103,9 @@
       "title": "Account View",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/account-settings-cards.json",
         "http://localhost:3000/r/api-keys-card.json",
@@ -177,8 +185,12 @@
       "title": "Alert",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/alert.tsx",
@@ -208,7 +220,9 @@
       "description": "",
       "type": "registry:file",
       "target": "types/any-auth-client.ts",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -239,7 +253,9 @@
       "title": "Api Key Cell",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/api-key.json",
         "http://localhost:3000/r/api-key-delete-dialog.json",
@@ -264,7 +280,9 @@
       "title": "Api Key Delete Dialog",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/api-key.json",
         "http://localhost:3000/r/auth-localization.json",
@@ -289,7 +307,9 @@
       "title": "Api Key Display Dialog",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -348,7 +368,9 @@
       "title": "Auth Callback",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "http://localhost:3000/r/use-success-transition.json"
@@ -366,7 +388,9 @@
       "description": "",
       "type": "registry:file",
       "target": "types/auth-client.ts",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -425,7 +449,10 @@
       "description": "",
       "type": "registry:file",
       "target": "types/auth-hooks.ts",
-      "dependencies": ["@better-fetch/fetch", "better-auth"],
+      "dependencies": [
+        "@better-fetch/fetch",
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/any-auth-client.json",
         "http://localhost:3000/r/api-key.json",
@@ -447,7 +474,9 @@
       "description": "",
       "type": "registry:component",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/auth-ui-provider.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json"
+      ],
       "files": [
         {
           "path": "src/components/auth-loading.tsx",
@@ -508,7 +537,9 @@
       "title": "Auth Ui Provider",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["sonner"],
+      "dependencies": [
+        "sonner"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/account-options.json",
         "http://localhost:3000/r/additional-fields.json",
@@ -562,7 +593,9 @@
       "title": "Auth View",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-callback.json",
         "http://localhost:3000/r/auth-form.json",
@@ -594,8 +627,12 @@
       "title": "Avatar",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-avatar"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@radix-ui/react-avatar"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/avatar.tsx",
@@ -610,7 +647,9 @@
       "type": "registry:file",
       "target": "types/avatar-options.ts",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/image.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/image.json"
+      ],
       "files": [
         {
           "path": "src/types/avatar-options.ts",
@@ -624,7 +663,9 @@
       "title": "Backup Codes Dialog",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "button",
@@ -660,8 +701,13 @@
       "title": "Button",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/button.tsx",
@@ -674,7 +720,10 @@
       "title": "Captcha",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["@hcaptcha/react-hcaptcha", "@marsidev/react-turnstile"],
+      "dependencies": [
+        "@hcaptcha/react-hcaptcha",
+        "@marsidev/react-turnstile"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -712,7 +761,9 @@
       "type": "registry:file",
       "target": "types/captcha-options.ts",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/captcha-provider.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/captcha-provider.json"
+      ],
       "files": [
         {
           "path": "src/types/captcha-options.ts",
@@ -743,7 +794,9 @@
       "description": "",
       "type": "registry:ui",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/card.tsx",
@@ -756,7 +809,11 @@
       "title": "Change Email Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["@hookform/resolvers", "react-hook-form", "zod"],
+      "dependencies": [
+        "@hookform/resolvers",
+        "react-hook-form",
+        "zod"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "card",
@@ -778,7 +835,11 @@
       "title": "Change Password Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["@hookform/resolvers", "react-hook-form", "zod"],
+      "dependencies": [
+        "@hookform/resolvers",
+        "react-hook-form",
+        "zod"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -802,8 +863,13 @@
       "title": "Checkbox",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-checkbox", "lucide-react"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@radix-ui/react-checkbox",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/checkbox.tsx",
@@ -948,7 +1014,9 @@
       "title": "Delete Organization Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "http://localhost:3000/r/delete-organization-dialog.json",
@@ -1014,8 +1082,13 @@
       "title": "Dialog",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-dialog", "lucide-react"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/dialog.tsx",
@@ -1028,8 +1101,12 @@
       "title": "Drawer",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["vaul"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "vaul"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/drawer.tsx",
@@ -1042,8 +1119,13 @@
       "title": "Dropdown Menu",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-dropdown-menu", "lucide-react"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@radix-ui/react-dropdown-menu",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/dropdown-menu.tsx",
@@ -1056,7 +1138,9 @@
       "title": "Email Otp Button",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -1124,8 +1208,12 @@
       "title": "Email Template",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["@react-email/components"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@react-email/components"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/email/email-template.tsx",
@@ -1190,7 +1278,10 @@
         "@radix-ui/react-slot",
         "react-hook-form"
       ],
-      "registryDependencies": ["label", "http://localhost:3000/r/utils.json"],
+      "registryDependencies": [
+        "label",
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/form.tsx",
@@ -1203,7 +1294,10 @@
       "title": "Form Error",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react", "react-hook-form"],
+      "dependencies": [
+        "lucide-react",
+        "react-hook-form"
+      ],
       "registryDependencies": [
         "alert",
         "http://localhost:3000/r/auth-form.json",
@@ -1272,8 +1366,12 @@
       "title": "Gravatar Utils",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["@noble/hashes"],
-      "registryDependencies": ["http://localhost:3000/r/gravatar-options.json"],
+      "dependencies": [
+        "@noble/hashes"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/gravatar-options.json"
+      ],
       "files": [
         {
           "path": "src/lib/gravatar-utils.ts",
@@ -1333,7 +1431,9 @@
       "description": "",
       "type": "registry:ui",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/input.tsx",
@@ -1364,8 +1464,13 @@
       "title": "Input Otp",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["input-otp", "lucide-react"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "input-otp",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/input-otp.tsx",
@@ -1394,7 +1499,10 @@
       "title": "Invitation Cell",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -1448,8 +1556,12 @@
       "title": "Label",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-label"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@radix-ui/react-label"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/label.tsx",
@@ -1462,7 +1574,10 @@
       "title": "Leave Organization Dialog",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -1501,7 +1616,9 @@
       "title": "Magic Link Button",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -1553,7 +1670,10 @@
       "title": "Member Cell",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -1642,7 +1762,10 @@
       "title": "Organization Cell",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -1666,7 +1789,9 @@
       "title": "Organization Cell View",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -1702,7 +1827,9 @@
       "title": "Organization Invitations Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "card",
@@ -1723,7 +1850,10 @@
       "title": "Organization Logo",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -1743,7 +1873,10 @@
       "title": "Organization Logo Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -1770,7 +1903,9 @@
       "title": "Organization Members Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "card",
@@ -1822,7 +1957,9 @@
       "type": "registry:file",
       "target": "types/organization-options.ts",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/view-paths.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/view-paths.json"
+      ],
       "files": [
         {
           "path": "src/types/organization-options.ts",
@@ -1904,7 +2041,10 @@
       "title": "Organization Switcher",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-client.json",
         "http://localhost:3000/r/auth-localization.json",
@@ -1932,7 +2072,9 @@
       "title": "Organization View",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/account-view.json",
         "http://localhost:3000/r/api-keys-card.json",
@@ -1982,7 +2124,9 @@
       "description": "",
       "type": "registry:component",
       "dependencies": [],
-      "registryDependencies": ["input-otp"],
+      "registryDependencies": [
+        "input-otp"
+      ],
       "files": [
         {
           "path": "src/components/auth/otp-input-group.tsx",
@@ -1995,7 +2139,9 @@
       "title": "Passkey Button",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -2016,7 +2162,9 @@
       "title": "Passkey Cell",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -2054,7 +2202,9 @@
       "title": "Passkeys Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["react-hook-form"],
+      "dependencies": [
+        "react-hook-form"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -2077,7 +2227,9 @@
       "title": "Password Input",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "button",
         "input",
@@ -2163,7 +2315,9 @@
       "title": "Provider Button",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -2184,7 +2338,10 @@
       "title": "Provider Cell",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -2265,7 +2422,9 @@
       "title": "Recaptcha V2",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["react-google-recaptcha"],
+      "dependencies": [
+        "react-google-recaptcha"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "http://localhost:3000/r/use-lang.json",
@@ -2284,7 +2443,9 @@
       "title": "Recaptcha V3",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["@wojtekmaj/react-recaptcha-v3"],
+      "dependencies": [
+        "@wojtekmaj/react-recaptcha-v3"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "http://localhost:3000/r/use-hydrated.json",
@@ -2332,7 +2493,9 @@
       "description": "",
       "type": "registry:component",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/use-authenticate.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/use-authenticate.json"
+      ],
       "files": [
         {
           "path": "src/components/redirect-to-sign-in.tsx",
@@ -2346,7 +2509,9 @@
       "description": "",
       "type": "registry:component",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/use-authenticate.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/use-authenticate.json"
+      ],
       "files": [
         {
           "path": "src/components/redirect-to-sign-up.tsx",
@@ -2375,7 +2540,10 @@
       "title": "Remove Member Dialog",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -2466,8 +2634,13 @@
       "title": "Select",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-select", "lucide-react"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@radix-ui/react-select",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/select.tsx",
@@ -2480,8 +2653,12 @@
       "title": "Separator",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-separator"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@radix-ui/react-separator"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/separator.tsx",
@@ -2494,7 +2671,11 @@
       "title": "Session Cell",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react", "ua-parser-js"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react",
+        "ua-parser-js"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -2559,7 +2740,10 @@
       "title": "Settings Action Button",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react", "react-hook-form"],
+      "dependencies": [
+        "lucide-react",
+        "react-hook-form"
+      ],
       "registryDependencies": [
         "button",
         "http://localhost:3000/r/settings-card.json",
@@ -2691,7 +2875,9 @@
       "title": "Sign Out",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "http://localhost:3000/r/use-success-transition.json"
@@ -2764,7 +2950,9 @@
       "description": "",
       "type": "registry:component",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/auth-ui-provider.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json"
+      ],
       "files": [
         {
           "path": "src/components/signed-in.tsx",
@@ -2778,7 +2966,9 @@
       "description": "",
       "type": "registry:component",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/auth-ui-provider.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json"
+      ],
       "files": [
         {
           "path": "src/components/signed-out.tsx",
@@ -2792,7 +2982,9 @@
       "description": "",
       "type": "registry:ui",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/skeleton.tsx",
@@ -2806,8 +2998,12 @@
       "description": "",
       "type": "registry:file",
       "target": "types/social-options.ts",
-      "dependencies": ["better-auth"],
-      "registryDependencies": ["http://localhost:3000/r/auth-client.json"],
+      "dependencies": [
+        "better-auth"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-client.json"
+      ],
       "files": [
         {
           "path": "src/types/social-options.ts",
@@ -2822,7 +3018,9 @@
       "description": "",
       "type": "registry:lib",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/provider-icons.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/provider-icons.json"
+      ],
       "files": [
         {
           "path": "src/lib/social-providers.ts",
@@ -2851,8 +3049,12 @@
       "title": "Tabs",
       "description": "",
       "type": "registry:ui",
-      "dependencies": ["@radix-ui/react-tabs"],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "dependencies": [
+        "@radix-ui/react-tabs"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/tabs.tsx",
@@ -2866,7 +3068,9 @@
       "description": "",
       "type": "registry:ui",
       "dependencies": [],
-      "registryDependencies": ["http://localhost:3000/r/utils.json"],
+      "registryDependencies": [
+        "http://localhost:3000/r/utils.json"
+      ],
       "files": [
         {
           "path": "src/components/ui/textarea.tsx",
@@ -2978,7 +3182,9 @@
       "title": "Update Avatar Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -3004,7 +3210,11 @@
       "title": "Update Field Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["@hookform/resolvers", "react-hook-form", "zod"],
+      "dependencies": [
+        "@hookform/resolvers",
+        "react-hook-form",
+        "zod"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/additional-fields.json",
         "http://localhost:3000/r/auth-localization.json",
@@ -3030,7 +3240,10 @@
       "title": "Update Member Role Dialog",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["better-auth", "lucide-react"],
+      "dependencies": [
+        "better-auth",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -3148,7 +3361,10 @@
       "title": "Use Conditional Query",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["@triplit/client", "@triplit/react"],
+      "dependencies": [
+        "@triplit/client",
+        "@triplit/react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -3162,8 +3378,12 @@
       "title": "Use Current Organization",
       "description": "",
       "type": "registry:hook",
-      "dependencies": ["better-auth"],
-      "registryDependencies": ["http://localhost:3000/r/auth-ui-provider.json"],
+      "dependencies": [
+        "better-auth"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/auth-ui-provider.json"
+      ],
       "files": [
         {
           "path": "src/hooks/use-current-organization.ts",
@@ -3190,7 +3410,10 @@
       "title": "Use Instant Options",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["@instantdb/react", "better-auth"],
+      "dependencies": [
+        "@instantdb/react",
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-client.json",
         "http://localhost:3000/r/auth-hooks.json",
@@ -3227,7 +3450,9 @@
       "title": "Use List Accounts",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["@better-fetch/fetch"],
+      "dependencies": [
+        "@better-fetch/fetch"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-hooks.json",
         "http://localhost:3000/r/model-names.json",
@@ -3265,7 +3490,9 @@
       "title": "Use List Sessions",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-hooks.json",
         "http://localhost:3000/r/model-names.json",
@@ -3283,7 +3510,9 @@
       "title": "Use List Sessions",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-hooks.json",
         "http://localhost:3000/r/model-names.json",
@@ -3303,7 +3532,9 @@
       "title": "Use Session",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["better-auth"],
+      "dependencies": [
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-client.json",
         "http://localhost:3000/r/auth-hooks.json",
@@ -3396,7 +3627,10 @@
       "title": "Use Triplit Hooks",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["@triplit/client", "better-auth"],
+      "dependencies": [
+        "@triplit/client",
+        "better-auth"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-client.json",
         "http://localhost:3000/r/auth-hooks.json",
@@ -3417,7 +3651,10 @@
       "title": "Use Triplit Token",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["@triplit/client", "@triplit/react"],
+      "dependencies": [
+        "@triplit/client",
+        "@triplit/react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -3431,7 +3668,9 @@
       "title": "User Avatar",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/auth-ui-provider.json",
@@ -3453,7 +3692,9 @@
       "title": "User Button",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/any-auth-client.json",
         "http://localhost:3000/r/auth-client.json",
@@ -3478,7 +3719,9 @@
       "title": "User Invitations Card",
       "description": "",
       "type": "registry:component",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-ui-provider.json",
         "button",
@@ -3537,7 +3780,11 @@
       "title": "Utils",
       "description": "",
       "type": "registry:lib",
-      "dependencies": ["clsx", "tailwind-merge", "zod"],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "zod"
+      ],
       "registryDependencies": [
         "http://localhost:3000/r/auth-localization.json",
         "http://localhost:3000/r/password-validation.json"

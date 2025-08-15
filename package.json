@@ -7,9 +7,12 @@
     "build": "tsup --clean --dts && cp src/style.css dist/style.css",
     "dev": "tsc-watch",
     "prepublishOnly": "rm -rf dist && turbo build",
-    "generate:registry": "node scripts/generate.mjs",
-    "registry:generate": "node scripts/generate.mjs",
-    "registry:build": "shadcn build"
+    "registry:generate": "node scripts/generate.mjs --registry-homepage=https://better-auth-ui.com",
+    "registry:build": "shadcn build",
+    "prepare": "husky",
+    "copy-registry": "cp registry/registry.json ./registry.json",
+    "delete-docs-r": "rm -rf docs/public/r",
+    "copy-public-to-docs": "cp -R ./public/r docs/public/r"
   },
   "type": "module",
   "main": "./dist/index.cjs",
@@ -102,6 +105,7 @@
     "clsx": "^2.1.1",
     "esbuild-plugin-preserve-directives": "^0.0.11",
     "glob": "^11.0.3",
+    "husky": "^9.1.7",
     "lucide-react": "^0.536.0",
     "react-router": "^7.7.1",
     "tailwind-merge": "^3.3.1",
@@ -159,7 +163,10 @@
     "vaul": "^1.1.2"
   },
   "pnpm": {
-    "overrides": {}
+    "overrides": {},
+    "onlyBuiltDependencies": [
+      "msw"
+    ]
   },
   "packageManager": "pnpm@10.14.0"
 }
