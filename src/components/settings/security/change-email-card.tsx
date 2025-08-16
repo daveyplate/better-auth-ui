@@ -23,6 +23,7 @@ export function ChangeEmailCard({
     className,
     classNames,
     localization,
+    onSave,
     ...props
 }: SettingsCardProps) {
     const {
@@ -91,6 +92,7 @@ export function ChangeEmailCard({
                 message: getLocalizedError({ error, localization })
             })
         }
+        onSave?.()
     }
 
     const resendVerification = async () => {
@@ -117,8 +119,9 @@ export function ChangeEmailCard({
             setResendDisabled(false)
             throw error
         }
+        onSave?.()
     }
-
+    
     return (
         <>
             <Form {...form}>
