@@ -58,6 +58,9 @@ export interface UserButtonProps {
     className?: string
     classNames?: UserButtonClassNames
     align?: "center" | "start" | "end"
+    alignOffset?: number
+    side?: "top" | "right" | "bottom" | "left"
+    sideOffset?: number
     additionalLinks?: {
         href: string
         icon?: ReactNode
@@ -88,6 +91,9 @@ export function UserButton({
     className,
     classNames,
     align,
+    alignOffset,
+    side,
+    sideOffset,
     trigger,
     additionalLinks,
     disableDefaultLinks,
@@ -228,6 +234,9 @@ export function UserButton({
                     classNames?.content?.base
                 )}
                 align={align}
+                alignOffset={alignOffset}
+                side={side}
+                sideOffset={sideOffset}
                 onCloseAutoFocus={(e) => e.preventDefault()}
             >
                 <div className={cn("p-2", classNames?.content?.menuItem)}>
