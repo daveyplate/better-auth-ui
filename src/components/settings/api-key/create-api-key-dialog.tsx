@@ -209,7 +209,7 @@ export function CreateApiKeyDialog({
                                                 </SelectTrigger>
                                             </FormControl>
 
-                                            <SelectContent className="w-[--radix-select-trigger-width]">
+                                            <SelectContent className="w-(--radix-select-trigger-width)">
                                                 <SelectItem
                                                     value="personal"
                                                     className="p-2"

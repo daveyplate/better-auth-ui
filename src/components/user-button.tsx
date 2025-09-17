@@ -230,7 +230,7 @@ export function UserButton({
 
             <DropdownMenuContent
                 className={cn(
-                    "w-[--radix-dropdown-menu-trigger-width] min-w-56 max-w-64",
+                    "w-(--radix-dropdown-menu-trigger-width) min-w-56 max-w-64",
                     classNames?.content?.base
                 )}
                 align={align}
