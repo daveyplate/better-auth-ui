@@ -40,7 +40,8 @@ export interface UpdateFieldCardProps {
     type?: FieldType
     multiline?: boolean
     value?: unknown
-    validate?: (value: string) => boolean | Promise<boolean>
+    validate?: (value: string) => boolean | Promise<boolean>,
+    onSave?: () => void
 }
 
 export function UpdateFieldCard({
@@ -56,7 +57,8 @@ export function UpdateFieldCard({
     type,
     multiline,
     value,
-    validate
+    validate,
+    onSave
 }: UpdateFieldCardProps) {
     const {
         hooks: { useSession },
@@ -151,6 +153,8 @@ export function UpdateFieldCard({
                 message: getLocalizedError({ error, localization })
             })
         }
+
+        onSave?.()
     }
 
     return (
