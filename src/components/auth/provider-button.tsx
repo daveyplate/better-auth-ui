@@ -56,7 +56,7 @@ export function ProviderButton({
             `${baseURL}${
                 callbackURLProp ||
                 (persistClient
-                    ? `${basePath}/${viewPaths.CALLBACK}?redirectTo=${getRedirectTo()}`
+                    ? `${basePath}/${viewPaths.CALLBACK}?redirectTo=${encodeURIComponent(getRedirectTo())}`
                     : getRedirectTo())
             }`,
         [

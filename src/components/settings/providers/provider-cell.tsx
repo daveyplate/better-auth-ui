@@ -50,7 +50,7 @@ export function ProviderCell({
 
     const handleLink = async () => {
         setIsLoading(true)
-        const callbackURL = `${baseURL}${basePath}/${viewPaths.CALLBACK}?redirectTo=${window.location.pathname}`
+        const callbackURL = `${baseURL}${basePath}/${viewPaths.CALLBACK}?redirectTo=${encodeURIComponent(window.location.pathname)}`
 
         try {
             if (other) {
