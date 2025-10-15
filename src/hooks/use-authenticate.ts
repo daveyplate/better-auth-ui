@@ -41,7 +41,9 @@ export function useAuthenticate<TAuthClient extends AnyAuthClient>(
             currentUrl.searchParams.get("redirectTo") ||
             window.location.href.replace(window.location.origin, "")
 
-        replace(`${basePath}/${viewPaths[authView]}?redirectTo=${redirectTo}`)
+        replace(
+            `${basePath}/${viewPaths[authView]}?redirectTo=${encodeURIComponent(redirectTo)}`
+        )
     }, [
         isPending,
         sessionData,

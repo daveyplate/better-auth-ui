@@ -109,7 +109,7 @@ export function SignUpForm({
             `${baseURL}${
                 callbackURL ||
                 (persistClient
-                    ? `${basePath}/${viewPaths.CALLBACK}?redirectTo=${getRedirectTo()}`
+                    ? `${basePath}/${viewPaths.CALLBACK}?redirectTo=${encodeURIComponent(getRedirectTo())}`
                     : getRedirectTo())
             }`,
         [
