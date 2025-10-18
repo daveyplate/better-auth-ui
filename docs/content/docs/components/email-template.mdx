@@ -11,7 +11,7 @@ The `<EmailTemplate />` component lets you easily build responsive HTML emails w
 
 This example demonstrates implementing the email verification notification with the `<EmailTemplate />`:
 
-```tsx title="lib/auth.ts"
+```tsx title="lib/auth.tsx"
 import { Resend } from "resend"
 import { EmailTemplate } from "@daveyplate/better-auth-ui/server"
 
@@ -45,7 +45,7 @@ export const auth = betterAuth({
                     ),
                     heading: "Verify Email",
                     siteName: "NEW-TECH",
-                    baseUrl: "https://newtech.dev"
+                    baseUrl: "https://newtech.dev",
                     url
                 })
             })
