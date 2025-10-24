@@ -42,8 +42,6 @@ export interface EmailTemplateProps {
     /** @default process.env.SITE_NAME || process.env.NEXT_PUBLIC_SITE_NAME */
     siteName?: string
     url?: string
-    /** @default "vercel" */
-    variant?: "vercel"
 }
 
 export const EmailTemplate = ({
@@ -55,7 +53,6 @@ export const EmailTemplate = ({
     imageUrl,
     preview,
     siteName,
-    variant = "vercel",
     url
 }: EmailTemplateProps) => {
     baseUrl =
