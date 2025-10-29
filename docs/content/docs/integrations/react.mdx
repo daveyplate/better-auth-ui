@@ -53,20 +53,20 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 <Step>
 ## Creating Auth Pages
 
-Configure routes to render [`<AuthCard>`](/components/auth-ui-provider) for authentication views using React Router.
+Configure routes to render [`<AuthView>`](/components/auth-ui-provider) for authentication views using React Router.
 
 Create a dynamic authentication route such as `auth/[pathname].tsx` inside your `src` directory. Here's a recommended setup:
 
 ```tsx title="src/pages/auth/AuthPage.tsx"
 import { useParams } from "react-router-dom"
-import { AuthCard } from "@daveyplate/better-auth-ui"
+import { AuthView } from "@daveyplate/better-auth-ui"
 
 export default function AuthPage() {
   const { pathname } = useParams()
 
   return (
     <main className="container mx-auto flex grow flex-col items-center justify-center gap-3 self-center p-4 md:p-6">
-      <AuthCard pathname={pathname} />
+      <AuthView pathname={pathname} />
     </main>
   )
 }
