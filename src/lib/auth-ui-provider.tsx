@@ -349,7 +349,8 @@ export const AuthUIProvider = ({
             upload: avatarProp.upload,
             delete: avatarProp.delete,
             extension: avatarProp.extension || "png",
-            size: avatarProp.size || (avatarProp.upload ? 256 : 128)
+            size: avatarProp.size || (avatarProp.upload ? 256 : 128),
+            Image: avatarProp.Image
         }
     }, [avatarProp])
 
