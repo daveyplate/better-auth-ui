@@ -165,7 +165,7 @@ function RouteComponent() {
     const { authView } = Route.useParams()
 
     return (
-        <main className="container flex grow flex-col items-center justify-center gap-3 self-center p-4 md:p-6">
+        <main className="container mx-auto flex grow flex-col items-center justify-center gap-3 self-center p-4 md:p-6">
             <AuthView pathname={authView} />
 
             <p className={cn(["callback", "sign-out"].includes(authView) && "hidden", "text-muted-foreground text-xs")}>
@@ -198,7 +198,7 @@ export const Route = createFileRoute("/account/$accountView")({
 function RouteComponent() {
     const { accountView } = Route.useParams()
     return (
-        <main className="container p-4 md:p-6">
+        <main className="container mx-auto p-4 md:p-6">
             <AccountView pathname={accountView} />
         </main>
     )
@@ -224,7 +224,7 @@ export const Route = createFileRoute("/organization/$organizationView")({
 function RouteComponent() {
     const { organizationView } = Route.useParams()
     return (
-        <main className="container p-4 md:p-6">
+        <main className="container mx-auto p-4 md:p-6">
             <OrganizationView pathname={organizationView} />
         </main>
     )
@@ -244,7 +244,7 @@ export const Route = createFileRoute("/organization/$slug/$organizationView")({
 function RouteComponent() {
     const { organizationView } = Route.useParams()
     return (
-        <main className="container p-4 md:p-6">
+        <main className="container mx-auto p-4 md:p-6">
             <OrganizationView pathname={organizationView} />
         </main>
     )
