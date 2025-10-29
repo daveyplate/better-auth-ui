@@ -4,22 +4,30 @@ title: <ChangeEmailCard />
 
 The `<ChangeEmailCard />` component provides a simple and secure UI that allows users to change their account email address, including verification emails sent to the updated address, if email verification is enabled.
 
-<img alt="Change Email Card" src="/screenshots/change-email-card-dark.png" className="rounded-xl hidden dark:block w-lg mt-0 mb-0" />
-<img alt="Change Email Card" src="/screenshots/change-email-card-light.png" className="rounded-xl dark:hidden w-lg mt-0 mb-0" />
+<img
+  alt="Change Email Card"
+  src="/screenshots/change-email-card-dark.png"
+  className="rounded-xl hidden dark:block w-lg mt-0 mb-0"
+/>
+<img
+  alt="Change Email Card"
+  src="/screenshots/change-email-card-light.png"
+  className="rounded-xl dark:hidden w-lg mt-0 mb-0"
+/>
 
 ## Usage
 
 Here's how to implement `<ChangeEmailCard />` on your custom settings page:
 
 ```tsx
-import { ChangeEmailCard } from "@daveyplate/better-auth-ui"
+import { ChangeEmailCard } from "@daveyplate/better-auth-ui";
 
 export default function SettingsPage() {
-    return (
-        <div className="flex flex-col gap-6">
-            <ChangeEmailCard />
-        </div>
-    )
+  return (
+    <div className="flex flex-col gap-6">
+      <ChangeEmailCard />
+    </div>
+  );
 }
 ```
 
@@ -37,15 +45,15 @@ You can customize the styles using the provided `classNames` prop:
 
 ```tsx
 <ChangeEmailCard
-    classNames={{
-        base: "border-primary shadow",
-        header: "bg-primary-foreground text-primary",
-        title: "text-xl font-semibold",
-        description: "text-muted-foreground",
-        content: "bg-background",
-        footer: "bg-muted",
-        input: "bg-transparent border-primary placeholder:text-muted-foreground"
-    }}
+  classNames={{
+    base: "border-primary shadow",
+    header: "bg-primary-foreground text-primary",
+    title: "text-xl font-semibold",
+    description: "text-muted-foreground",
+    content: "bg-background",
+    footer: "bg-muted",
+    input: "bg-transparent border-primary placeholder:text-muted-foreground",
+  }}
 />
 ```
 
@@ -55,12 +63,41 @@ You can pass custom text via the `localization` prop:
 
 ```tsx
 <ChangeEmailCard
-    localization={{
-        EMAIL: "Your Email",
-        EMAIL_DESCRIPTION: "You can update your email here.",
-        EMAIL_INSTRUCTIONS: "We'll send you a verification link to your new email address.",
-        EMAIL_PLACEHOLDER: "you@example.com",
-        EMAIL_VERIFY_CHANGE: "Check your inbox for the verification link!"
-    }}
+  localization={{
+    EMAIL: "Your Email",
+    EMAIL_DESCRIPTION: "You can update your email here.",
+    EMAIL_INSTRUCTIONS: "We'll send you a verification link to your new email address.",
+    EMAIL_PLACEHOLDER: "you@example.com",
+    EMAIL_VERIFY_CHANGE: "Check your inbox for the verification link!",
+  }}
 />
+```
+
+## Callbacks
+
+The `onSave` prop allows you to execute custom logic after a successful email change or verification email resend:
+
+```tsx
+// Basic usage
+<ChangeEmailCard
+  onSave={() => {
+    console.log("Email updated successfully");
+  }}
+/>;
+
+// Using with a dialog
+function EmailChangeDialog({ open, onOpenChange }) {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <ChangeEmailCard
+          onSave={() => {
+            // Close the dialog after successful update
+            onOpenChange(false);
+          }}
+        />
+      </DialogContent>
+    </Dialog>
+  );
+}
 ```
