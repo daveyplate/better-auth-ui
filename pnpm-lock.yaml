@@ -11,9 +11,12 @@ importers:
       '@better-fetch/fetch':
         specifier: ^1.1.18
         version: 1.1.18
+      '@captchafox/react':
+        specifier: ^1.10.0
+        version: 1.10.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@daveyplate/better-auth-tanstack':
         specifier: ^1.3.6
-        version: 1.3.6(@tanstack/query-core@5.89.0)(@tanstack/react-query@5.89.0(react@19.1.0))(better-auth@1.3.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 1.3.6(@tanstack/query-core@5.90.2)(@tanstack/react-query@5.90.2(react@19.1.0))(better-auth@1.3.14(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@hcaptcha/react-hcaptcha':
         specifier: ^1.12.1
         version: 1.12.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -149,7 +152,7 @@ importers:
         version: 3.3.1
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7
+        version: 1.0.7(tailwindcss@4.1.7)
       tsc-watch:
         specifier: ^7.1.1
         version: 7.1.1(typescript@5.9.2)
@@ -233,6 +236,15 @@ packages:
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
+
+  '@captchafox/react@1.10.0':
+    resolution: {integrity: sha512-GRGdqZnz2KsJUXj17abe+V1kL1GhE3JsFgD0IkhZ6XVlr7IGJrnGWco1aID2jhFPunAtcdNuY+YuIEidtNNEpQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
+  '@captchafox/types@1.4.0':
+    resolution: {integrity: sha512-4xnPMICLinsXghw6zWEF436lhMsBmLxui2QmU7xAEz/+572BRdvc518Sz5OoofbJ7GZG6QPz/wOtJoN8BfKyCg==}
 
   '@daveyplate/better-auth-tanstack@1.3.6':
     resolution: {integrity: sha512-GvIGdbjRMZCEfAffU7LeWpGpie4vSli8V9jmNFCQOziZZMEFbO4cd53HBFmAushC9oEYIyhSNZBgV2ADzW94Ww==}
@@ -465,16 +477,8 @@ packages:
       react: ^17.0.2 || ^18.0.0 || ^19.0
       react-dom: ^17.0.2 || ^18.0.0 || ^19.0
 
-  '@noble/ciphers@2.0.0':
-    resolution: {integrity: sha512-j/l6jpnpaIBM87cAYPJzi/6TgqmBv9spkqPyCXvRYsu5uxqh6tPJZDnD85yo8VWqzTuTQPgfv7NgT63u7kbwAQ==}
-    engines: {node: '>= 20.19.0'}
-
   '@noble/ciphers@2.0.1':
     resolution: {integrity: sha512-xHK3XHPUW8DTAobU+G0XT+/w+JLM7/8k1UFdB5xg/zTFPnFCobhftzw8wl4Lw2aq/Rvir5pxfZV5fEazmeCJ2g==}
-    engines: {node: '>= 20.19.0'}
-
-  '@noble/hashes@2.0.0':
-    resolution: {integrity: sha512-h8VUBlE8R42+XIDO229cgisD287im3kdY6nbNZJFjc6ZvKIXPYXe6Vc/t+kyjFdMFyt5JpapzTsEg8n63w5/lw==}
     engines: {node: '>= 20.19.0'}
 
   '@noble/hashes@2.0.1':
@@ -1272,16 +1276,8 @@ packages:
   '@standard-schema/utils@0.3.0':
     resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
-  '@tanstack/query-core@5.89.0':
-    resolution: {integrity: sha512-joFV1MuPhSLsKfTzwjmPDrp8ENfZ9N23ymFu07nLfn3JCkSHy0CFgsyhHTJOmWaumC/WiNIKM0EJyduCF/Ih/Q==}
-
   '@tanstack/query-core@5.90.2':
     resolution: {integrity: sha512-k/TcR3YalnzibscALLwxeiLUub6jN5EDLwKDiO7q5f4ICEoptJ+n9+7vcEFy5/x/i6Q+Lb/tXrsKCggf5uQJXQ==}
-
-  '@tanstack/react-query@5.89.0':
-    resolution: {integrity: sha512-SXbtWSTSRXyBOe80mszPxpEbaN4XPRUp/i0EfQK1uyj3KCk/c8FuPJNIRwzOVe/OU3rzxrYtiNabsAmk1l714A==}
-    peerDependencies:
-      react: ^18 || ^19
 
   '@tanstack/react-query@5.90.2':
     resolution: {integrity: sha512-CLABiR+h5PYfOWr/z+vWFt5VsOA2ekQeRQBFSKlcoW6Ndx/f8rfyVmq4LbgOM4GG2qtxAxjLYLOpCNTYm4uKzw==}
@@ -1381,35 +1377,6 @@ packages:
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
-
-  better-auth@1.3.13:
-    resolution: {integrity: sha512-vNIVExB87JTM19+1+p6SZ6xbzZFLw4ug8ir61qCArE8UbIN3SZQi0T3/PjubpWPwsLjINBsVizeHxPf5S7Ss0A==}
-    peerDependencies:
-      '@lynx-js/react': '*'
-      '@sveltejs/kit': ^2.0.0
-      next: ^14.0.0 || ^15.0.0
-      react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
-      solid-js: ^1.0.0
-      svelte: ^4.0.0 || ^5.0.0
-      vue: ^3.0.0
-    peerDependenciesMeta:
-      '@lynx-js/react':
-        optional: true
-      '@sveltejs/kit':
-        optional: true
-      next:
-        optional: true
-      react:
-        optional: true
-      react-dom:
-        optional: true
-      solid-js:
-        optional: true
-      svelte:
-        optional: true
-      vue:
-        optional: true
 
   better-auth@1.3.14:
     resolution: {integrity: sha512-2U2TKO4CmFFNxBagrRsgptdhZO9wpjhrSkEwsiB/DUnuFRxueY1pcBJA8xCrq1WnbqL/ktHh7UAEKb20Gb0FhA==}
@@ -2248,11 +2215,19 @@ snapshots:
   '@biomejs/cli-win32-x64@2.2.4':
     optional: true
 
-  '@daveyplate/better-auth-tanstack@1.3.6(@tanstack/query-core@5.89.0)(@tanstack/react-query@5.89.0(react@19.1.0))(better-auth@1.3.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@captchafox/react@1.10.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@tanstack/query-core': 5.89.0
-      '@tanstack/react-query': 5.89.0(react@19.1.0)
-      better-auth: 1.3.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@captchafox/types': 1.4.0
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@captchafox/types@1.4.0': {}
+
+  '@daveyplate/better-auth-tanstack@1.3.6(@tanstack/query-core@5.90.2)(@tanstack/react-query@5.90.2(react@19.1.0))(better-auth@1.3.14(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@tanstack/query-core': 5.90.2
+      '@tanstack/react-query': 5.90.2(react@19.1.0)
+      better-auth: 1.3.14(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
@@ -2407,11 +2382,7 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@noble/ciphers@2.0.0': {}
-
   '@noble/ciphers@2.0.1': {}
-
-  '@noble/hashes@2.0.0': {}
 
   '@noble/hashes@2.0.1': {}
 
@@ -3187,14 +3158,7 @@ snapshots:
 
   '@standard-schema/utils@0.3.0': {}
 
-  '@tanstack/query-core@5.89.0': {}
-
   '@tanstack/query-core@5.90.2': {}
-
-  '@tanstack/react-query@5.89.0(react@19.1.0)':
-    dependencies:
-      '@tanstack/query-core': 5.89.0
-      react: 19.1.0
 
   '@tanstack/react-query@5.90.2(react@19.1.0)':
     dependencies:
@@ -3293,24 +3257,6 @@ snapshots:
       tslib: 2.8.1
 
   balanced-match@1.0.2: {}
-
-  better-auth@1.3.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
-    dependencies:
-      '@better-auth/utils': 0.3.0
-      '@better-fetch/fetch': 1.1.18
-      '@noble/ciphers': 2.0.0
-      '@noble/hashes': 2.0.0
-      '@simplewebauthn/browser': 13.2.0
-      '@simplewebauthn/server': 13.2.1
-      better-call: 1.0.19
-      defu: 6.1.4
-      jose: 6.1.0
-      kysely: 0.28.7
-      nanostores: 1.0.1
-      zod: 4.1.11
-    optionalDependencies:
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
 
   better-auth@1.3.14(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
@@ -3881,7 +3827,9 @@ snapshots:
 
   tailwind-merge@3.3.1: {}
 
-  tailwindcss-animate@1.0.7: {}
+  tailwindcss-animate@1.0.7(tailwindcss@4.1.7):
+    dependencies:
+      tailwindcss: 4.1.7
 
   tailwindcss@4.1.7: {}
 
