@@ -48,7 +48,7 @@ export function AccountsCard({
             isPending={isPending}
             action={() => navigate(`${basePath}/${viewPaths.SIGN_IN}`)}
         >
-            {deviceSessions?.length && (
+            {deviceSessions?.length ? (
                 <CardContent className={cn("grid gap-4", classNames?.content)}>
                     {sessionData && (
                         <AccountCell
@@ -69,7 +69,7 @@ export function AccountsCard({
                         />
                     ))}
                 </CardContent>
-            )}
+            ) : null}
         </SettingsCard>
     )
 }
