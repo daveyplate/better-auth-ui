@@ -33,6 +33,7 @@ export interface ChangePasswordCardProps {
     localization?: AuthLocalization
     skipHook?: boolean
     passwordValidation?: PasswordValidation
+    onSave?: () => void
 }
 
 export function ChangePasswordCard({
@@ -42,7 +43,8 @@ export function ChangePasswordCard({
     isPending,
     localization,
     skipHook,
-    passwordValidation
+    passwordValidation,
+    onSave
 }: ChangePasswordCardProps) {
     const {
         authClient,
@@ -134,6 +136,7 @@ export function ChangePasswordCard({
                 message: getLocalizedError({ error, localization })
             })
         }
+        onSave?.()
     }
 
     const changePassword = async ({
@@ -160,11 +163,14 @@ export function ChangePasswordCard({
         }
 
         form.reset()
+
+        onSave?.()
     }
 
     const credentialsLinked = accounts?.some(
         (acc) => acc.providerId === "credential"
     )
+
 
     if (!isPending && !credentialsLinked) {
         return (
