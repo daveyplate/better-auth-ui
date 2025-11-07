@@ -10,11 +10,14 @@ import { AuthUIContext } from "../lib/auth-ui-provider"
  * state is not pending. If a session exists or is being loaded, nothing is rendered.
  * Useful for displaying sign-in prompts or content exclusive to guests.
  */
-export function SignedOut({ children }: { children: ReactNode }) {
+export function SignedOut({ children, treatPendingAsSignedOut=false }: { children: ReactNode, treatPendingAsSignedOut: boolean }) {
     const {
         hooks: { useSession }
     } = useContext(AuthUIContext)
-    const { data, isPending } = useSession()
+    const { data, isPending } = useSession();
+
+    if(treatPendingAsSignedOut)
+        return !data || isPending ? children : null
 
     return !data && !isPending ? children : null
 }
