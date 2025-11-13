@@ -511,6 +511,7 @@ export function SignUpForm({
 
                                 <FormControl>
                                     <Input
+                                        autoComplete="name"
                                         className={classNames?.input}
                                         placeholder={
                                             localization.NAME_PLACEHOLDER
@@ -539,6 +540,7 @@ export function SignUpForm({
 
                                 <FormControl>
                                     <Input
+                                        autoComplete="username"
                                         className={classNames?.input}
                                         placeholder={
                                             localization.USERNAME_PLACEHOLDER
@@ -566,6 +568,7 @@ export function SignUpForm({
 
                             <FormControl>
                                 <Input
+                                    autoComplete="email"
                                     className={classNames?.input}
                                     type="email"
                                     placeholder={localization.EMAIL_PLACEHOLDER}
@@ -695,6 +698,8 @@ export function SignUpForm({
                                             {additionalField.type ===
                                             "number" ? (
                                                 <Input
+
+                                                    autoComplete={field}
                                                     className={
                                                         classNames?.input
                                                     }
@@ -732,6 +737,8 @@ export function SignUpForm({
                                                 />
                                             ) : (
                                                 <Input
+
+                                                    autoComplete={field}
                                                     className={
                                                         classNames?.input
                                                     }
