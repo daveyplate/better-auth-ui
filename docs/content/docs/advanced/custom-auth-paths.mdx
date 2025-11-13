@@ -7,7 +7,7 @@ Here's a complete guide on how to customize view paths using the `AuthUIProvider
 
 ### Step 1: Customize Auth View Paths
 
-First, customize the default built-in paths by providing your custom routes through the `viewPaths` prop on the `<AuthUIProvider />` component.
+First, customize the default built-in auth paths by providing your custom routes through the `viewPaths` prop on the `<AuthUIProvider />` component. The `viewPaths` prop controls authentication pages like sign-in, sign-up, forgot password, etc.
 
 ```tsx
 "use client"
@@ -33,8 +33,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
                 SIGN_UP: "register",
                 FORGOT_PASSWORD: "forgot",
                 RESET_PASSWORD: "reset",
-                MAGIC_LINK: "magic",
-                SETTINGS: "config"
+                MAGIC_LINK: "magic"
             }}
         >
             {children}
@@ -53,7 +52,28 @@ Now your newly configured `viewPaths` object is as follows:
 | `/auth/forgot-password` | `/auth/forgot`    |
 | `/auth/reset-password`  | `/auth/reset`     |
 | `/auth/magic-link`     | `/auth/magic`     |
-| `/auth/settings`     | `/auth/config`     |
+
+### Customizing Account View Paths
+
+Account settings paths (like settings, security, api-keys) are configured separately using the `account.viewPaths` prop:
+
+```tsx
+<AuthUIProvider
+    authClient={authClient}
+    account={{
+        viewPaths: {
+            SETTINGS: "profile",
+            SECURITY: "password",
+            API_KEYS: "keys",
+            ORGANIZATIONS: "orgs"
+        }
+    }}
+>
+    {children}
+</AuthUIProvider>
+```
+
+This would change the paths from `/account/settings` to `/account/profile`, etc.
 
 ## Adjusting Dynamic Auth Route
 
@@ -62,8 +82,8 @@ Next, your authentication page route can dynamically handle these paths. Set up 
 Using Next.js App Router (`app` router):
 
 ```tsx
-import { AuthCard } from "@daveyplate/better-auth-ui"
-import { authViewPaths } from "@daveyplate/better-auth-ui/server"
+import { AuthView } from "@daveyplate/better-auth-ui"
+import { authViewPaths } from "@daveyplate/better-auth-ui"
 
 export function generateStaticParams() {
     return Object.values({
@@ -73,8 +93,7 @@ export function generateStaticParams() {
         SIGN_UP: "register",
         FORGOT_PASSWORD: "forgot",
         RESET_PASSWORD: "reset",
-        MAGIC_LINK: "magic",
-        SETTINGS: "config"
+        MAGIC_LINK: "magic"
     }).map((pathname) => ({ pathname }))
 }
 
@@ -83,11 +102,13 @@ export default async function AuthPage({ params }: { params: Promise<{ pathname:
 
     return (
         <div className="flex flex-col grow size-full items-center justify-center gap-3">
-            <AuthCard pathname={pathname} />
+            <AuthView pathname={pathname} />
         </div>
     )
 }
 ```
+
+> **Note**: The `authViewPaths` object only includes authentication pages, not account settings pages. Account pages are handled separately via the `account` prop configuration.
 
 ### Example usage across your app:
 
@@ -102,7 +123,6 @@ export default function Navbar() {
             <Link href="/auth/login">Login</Link>
             <Link href="/auth/register">Register</Link>
             <Link href="/auth/forgot">Forgot Password</Link>
-            <Link href="/auth/config">Config</Link>
         </nav>
     )
 }
@@ -110,8 +130,9 @@ export default function Navbar() {
 
 ### Summary of Steps (Recap):
 
-- Defined custom view paths within `AuthUIProvider`.
-- Updated dynamic auth page to handle correct paths within `generateStaticParams`.
-- Revised links/apps accordingly to use your newly specified paths.
+- Defined custom auth view paths within `AuthUIProvider` using the `viewPaths` prop
+- Optionally defined custom account view paths using `account.viewPaths`
+- Updated dynamic auth page to handle correct paths within `generateStaticParams`
+- Revised links throughout your app to use the newly specified paths
 
-You have now successfully customized all your authentication URLs using the shipped customization options while preserving all the other features and integrations seamlessly.
+You have now successfully customized your authentication and account URLs using the available customization options while preserving all the other features and integrations seamlessly.

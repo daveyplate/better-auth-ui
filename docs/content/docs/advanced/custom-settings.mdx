@@ -1,34 +1,34 @@
 ---
-title: Custom Settings
+title: Custom Account Settings
 icon: Cog
 ---
 
-The default authentication components provided by `@daveyplate/better-auth-ui` include built-in settings pages accessible under the same base path as your auth views (e.g., `/auth/settings`, `/auth/security`, etc.).
+The `@daveyplate/better-auth-ui` library provides built-in account settings views accessible through the `account` configuration. By default, these views are located at `/account/settings`, `/account/security`, `/account/api-keys`, and `/account/organizations`.
 
 However, for advanced use cases, you may want to:
-1. Move the built-in settings views to a different base path (using `settings.basePath`)
-2. Replace the settings with a completely custom implementation (using `settings.url`)
-3. Build your own settings page using individual components
+1. Move the built-in account views to a different base path (using `account.basePath`)
+2. Build your own account page layout using `<AccountView />` component
+3. Build completely custom settings using individual components
 
 ## Overview
 
-You have three primary ways to customize the settings experience:
+You have three primary ways to customize the account settings experience:
 
-1. **Move settings to a different path**: Use `settings.basePath` to relocate all built-in settings views while keeping their functionality
-2. **Replace with custom settings**: Use `settings.url` to redirect to your completely custom settings implementation
-3. **Build custom layouts**: Import individual settings components to create your own layouts
+1. **Move account views to a different path**: Use `account.basePath` to relocate all built-in account views while keeping their functionality
+2. **Use AccountView component**: Use `<AccountView />` to render the full account management UI with navigation
+3. **Build custom layouts**: Import individual settings components (`AccountSettingsCards`, `SecuritySettingsCards`, etc.) to create your own layouts
 
 ### Quick Comparison
 
 | Option | Use Case | Configuration | Result |
 |--------|----------|---------------|---------|
-| `settings.basePath` | Keep built-in settings but move to different path | `settings: { basePath: "/dashboard" }` | Settings at `/dashboard/settings`, `/dashboard/security`, etc. |
-| `settings.url` | Replace with completely custom settings | `settings: { url: "/my-settings" }` | All settings routes redirect to `/my-settings` |
+| `account.basePath` | Keep built-in account views but move to different path | `account: { basePath: "/dashboard" }` | Account views at `/dashboard/settings`, `/dashboard/security`, etc. |
+| `<AccountView />` | Use the full account UI with navigation | Import and use component | Renders complete account management with sidebar navigation |
 | Individual components | Build custom layouts with specific components | Import components directly | Full control over layout and functionality |
 
-## Option 1: Moving Settings to a Different Base Path
+## Option 1: Moving Account Views to a Different Base Path
 
-If you want to keep the built-in settings functionality but move it to a different location (e.g., from `/auth/settings` to `/dashboard/settings`), use the `settings.basePath` option:
+If you want to keep the built-in account functionality but move it to a different location (e.g., from `/account/settings` to `/dashboard/settings`), use the `account.basePath` option:
 
 ```tsx title="app/providers.tsx"
 "use client"
@@ -47,8 +47,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
             navigate={router.push}
             replace={router.replace}
             onSessionChange={() => router.refresh()}
-            settings={{
-                basePath: "/dashboard" // Settings views will be at /dashboard/settings, /dashboard/security, etc.
+            account={{
+                basePath: "/dashboard" // Account views will be at /dashboard/settings, /dashboard/security, etc.
             }}
             Link={Link}
         >
@@ -60,97 +60,90 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
 With this configuration:
 - Auth views remain at: `/auth/sign-in`, `/auth/sign-up`, etc.
-- Settings views move to: `/dashboard/settings`, `/dashboard/security`, `/dashboard/api-keys`, `/dashboard/organization`, etc.
-- The `<UserButton />` and `<SettingsCards />` components automatically use the new base path
+- Account views move to: `/dashboard/settings`, `/dashboard/security`, `/dashboard/api-keys`, `/dashboard/organizations`
+- The `<UserButton />` component automatically uses the new base path for the settings link
 
-You can combine `basePath` with other settings options:
+You can combine `basePath` with other account options:
 
 ```tsx
-settings={{
+account={{
     basePath: "/dashboard",
-    fields: ["image", "name", "age"] // Specify which fields to show
+    fields: ["image", "name", "age"] // Specify which fields to show in account settings
 }}
 ```
-### Using SettingsCards with pathname
 
-When using `settings.basePath`, you can pass the `pathname` prop to `<SettingsCards />` to automatically determine the current view:
+### Using AccountView with pathname
 
-```tsx title="app/dashboard/[...settings]/page.tsx"
-import { SettingsCards } from "@daveyplate/better-auth-ui"
+When using `account.basePath`, you can pass the `pathname` prop to `<AccountView />` to automatically determine the current view:
 
-export default function SettingsPage({ 
-    params 
-}: { 
-    params: { settings: string[] } 
+```tsx title="app/dashboard/[...account]/page.tsx"
+import { AccountView } from "@daveyplate/better-auth-ui"
+
+export default function AccountPage({
+    params
+}: {
+    params: { account: string[] }
 }) {
-    const pathname = `/dashboard/${params.settings?.join("/") || "settings"}`
-    
+    const pathname = `/dashboard/${params.account?.join("/") || "settings"}`
+
     return (
         <div className="mx-auto max-w-4xl py-12 px-4">
-            <SettingsCards pathname={pathname} />
+            <AccountView pathname={pathname} />
         </div>
     )
 }
 ```
 
-## Option 2: Completely Custom Settings Page
+## Option 2: Using the AccountView Component
 
-To replace the built-in settings with your own custom implementation, use `settings.url`:
+The `<AccountView />` component provides the complete account management UI with sidebar navigation. You can use it on any custom route:
 
-```tsx title="app/providers.tsx"
-"use client"
+```tsx title="app/dashboard/account/page.tsx"
+import { AccountView } from "@daveyplate/better-auth-ui"
 
-import { AuthUIProvider } from "@daveyplate/better-auth-ui"
-import { authClient } from "@/lib/auth-client"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-
-export function Providers({ children }: { children: React.ReactNode }) {
-    const router = useRouter()
-
+export default function CustomAccountPage() {
     return (
-        <AuthUIProvider
-            authClient={authClient}
-            navigate={router.push}
-            replace={router.replace}
-            onSessionChange={() => router.refresh()}
-            settings={{
-                url: "/my-custom-settings" // Redirects to your custom settings page
-            }}
-            Link={Link}
-        >
-            {children}
-        </AuthUIProvider>
+        <div className="container mx-auto py-12 px-4">
+            <AccountView />
+        </div>
     )
 }
 ```
 
-> **Important**: When `settings.url` is set, all built-in settings routes will redirect to your custom URL. You're responsible for implementing the entire settings functionality.
+The `<AccountView />` component automatically:
+- Renders a sidebar navigation for switching between Settings, Security, API Keys, and Organizations
+- Displays the appropriate content based on the current view
+- Handles responsive layouts (drawer menu on mobile, sidebar on desktop)
+- Protects the page (redirects to sign-in if not authenticated)
 
 ## Option 3: Building Custom Settings Layouts
 
 For maximum control, you can build your own settings page layouts using individual components.
 
-### Using Individual Settings Components
+### Using Settings Card Components
 
-The easiest way to get started is using the `<SettingsCards />` component, which automatically handles displaying all enabled settings. This includes avatar, email, username, password, linked social providers, session management, delete account, and custom additional fields you've provided.
+You can use the pre-built card components to compose your own settings layouts:
+
+- **`<AccountSettingsCards />`** - Displays all account-related settings (avatar, name, username, email, additional fields)
+- **`<SecuritySettingsCards />`** - Displays security settings (password, sessions, two-factor, passkeys, delete account)
 
 ```tsx title="app/dashboard/settings/page.tsx"
-import { SettingsCards } from "@daveyplate/better-auth-ui"
+import { AccountSettingsCards, SecuritySettingsCards } from "@daveyplate/better-auth-ui"
 
 export default function UserSettingsPage() {
     return (
-        <div className="mx-auto max-w-xl py-12 px-4">
-            <SettingsCards />
+        <div className="mx-auto max-w-xl py-12 px-4 space-y-6">
+            <AccountSettingsCards />
+            <SecuritySettingsCards />
         </div>
     )
 }
 ```
 
-You can customize the appearance using TailwindCSS classes through `classNames` props as documented in [SettingsCards](../components/settings-cards) documentation:
+You can customize the appearance using TailwindCSS classes through `classNames` props:
 
 ```tsx
-<SettingsCards 
+<AccountSettingsCards
     className="mx-auto max-w-xl"
     classNames={{
         card: {
@@ -241,18 +234,17 @@ This example assumes `additionalFields` are configured via your `<AuthUIProvider
             type: "number"
         }
     }}
-    settings={{
-        fields: ["age"],
-        url: "/dashboard/settings"
+    account={{
+        fields: ["image", "name", "age"] // Include custom fields in account settings
     }}
 >
     {children}
 </AuthUIProvider>
 ```
 
-## Handling Authentication for Settings Page
+## Handling Authentication for Account Pages
 
-It's essential that your custom settings page is protected and accessible only by authenticated users. There's a built-in helper `useAuthenticate` to ensure your settings pages are secured:
+It's essential that your custom account/settings pages are protected and accessible only by authenticated users. You can use the `<RedirectToSignIn />` and `<SignedIn>` components to ensure your pages are secured:
 
 ### Example:
 
@@ -260,18 +252,22 @@ It's essential that your custom settings page is protected and accessible only b
 import {
     RedirectToSignIn,
     SignedIn,
-    SettingsCards
+    AccountSettingsCards
 } from "@daveyplate/better-auth-ui"
 
 export default function CustomSettingsPage() {
     return (
         <>
             <RedirectToSignIn />
-            
+
             <SignedIn>
-                <SettingsCards />
+                <div className="container mx-auto py-12 px-4">
+                    <AccountSettingsCards />
+                </div>
             </SignedIn>
         </>
     )
 }
 ```
+
+Note: The `<AccountView />` component already includes authentication protection, so you don't need to add `<RedirectToSignIn />` when using it.
