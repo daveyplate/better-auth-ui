@@ -92,8 +92,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             provider: "google-recaptcha-v3",
             siteKey: "your-site-key",
           }}
-          settings={{
-            url: "/dashboard/settings"
+          account={{
+            basePath: "/dashboard",
+            fields: ["image", "name"]
           }}
           twoFactor={["otp", "totp"]}
           Link={Link}
