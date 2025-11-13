@@ -18,6 +18,7 @@ import {
     DropdownMenuTrigger
 } from "../ui/dropdown-menu"
 import { UserAvatar } from "../user-avatar"
+import { useLang } from "../../hooks/use-lang"
 
 export interface InvitationCellProps {
     className?: string
@@ -46,6 +47,7 @@ export function InvitationCell({
         () => ({ ...contextLocalization, ...localizationProp }),
         [contextLocalization, localizationProp]
     )
+    const { lang } = useLang()
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -109,7 +111,7 @@ export function InvitationCell({
 
                     <span className="truncate text-muted-foreground text-xs">
                         {localization.EXPIRES}{" "}
-                        {invitation.expiresAt.toLocaleDateString()}
+                        {invitation.expiresAt.toLocaleDateString(lang ?? "en")}
                     </span>
                 </div>
             </div>

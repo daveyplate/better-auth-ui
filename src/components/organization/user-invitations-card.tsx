@@ -16,6 +16,7 @@ import {
     DropdownMenuTrigger
 } from "../ui/dropdown-menu"
 import { UserAvatar } from "../user-avatar"
+import { useLang } from "../../hooks/use-lang"
 
 export function UserInvitationsCard({
     className,
@@ -102,6 +103,7 @@ function UserInvitationRow({
     } = useContext(AuthUIContext)
 
     const localization = contextLocalization
+    const { lang } = useLang()
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -180,7 +182,7 @@ function UserInvitationRow({
 
                     <span className="truncate text-muted-foreground text-xs">
                         {localization.EXPIRES}{" "}
-                        {invitation.expiresAt.toLocaleDateString()}
+                        {invitation.expiresAt.toLocaleDateString(lang ?? "en")}
                     </span>
                 </div>
             </div>
