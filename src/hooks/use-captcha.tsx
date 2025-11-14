@@ -3,6 +3,7 @@ import type { TurnstileInstance } from "@marsidev/react-turnstile"
 import { useGoogleReCaptcha } from "@wojtekmaj/react-recaptcha-v3"
 import { type RefObject, useContext, useRef } from "react"
 import type ReCAPTCHA from "react-google-recaptcha"
+import type { CaptchaFoxInstance } from "@captchafox/react"
 
 import { AuthUIContext } from "../lib/auth-ui-provider"
 import type { AuthLocalization } from "../localization/auth-localization"
@@ -77,6 +78,12 @@ export function useCaptcha({
                 response = hcaptchaRef.current.getResponse()
                 break
             }
+            case "captchafox": {
+                const captchafoxRef =
+                    captchaRef as RefObject<CaptchaFoxInstance>
+                response = captchafoxRef.current.getResponse()
+                break
+            }
         }
 
         if (!response) {
@@ -125,6 +132,12 @@ export function useCaptcha({
                 const hcaptchaRef = captchaRef as RefObject<HCaptcha>
                 // HCaptcha uses resetCaptcha()
                 hcaptchaRef.current?.resetCaptcha?.()
+                break
+            }
+            case "captchafox": {
+                const captchafoxRef =
+                    captchaRef as RefObject<CaptchaFoxInstance>
+                captchafoxRef.current?.reset?.()
                 break
             }
         }
