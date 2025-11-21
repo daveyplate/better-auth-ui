@@ -404,13 +404,15 @@ export const AuthUIProvider = ({
 
         if (credentialsProp === true) {
             return {
-                forgotPassword: true
+                forgotPassword: true,
+                usernameRequired: true
             }
         }
 
         return {
             ...credentialsProp,
-            forgotPassword: credentialsProp?.forgotPassword ?? true
+            forgotPassword: credentialsProp?.forgotPassword ?? true,
+            usernameRequired: credentialsProp?.usernameRequired ?? true
         }
     }, [credentialsProp])
 

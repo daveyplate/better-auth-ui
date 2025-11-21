@@ -2,7 +2,7 @@
 
 import { CheckIcon, EllipsisIcon, Loader2, XIcon } from "lucide-react"
 import { useContext, useMemo, useState } from "react"
-
+import { useLang } from "../../hooks/use-lang"
 import { AuthUIContext } from "../../lib/auth-ui-provider"
 import { cn, getLocalizedError } from "../../lib/utils"
 import type { SettingsCardProps } from "../settings/shared/settings-card"
@@ -16,7 +16,6 @@ import {
     DropdownMenuTrigger
 } from "../ui/dropdown-menu"
 import { UserAvatar } from "../user-avatar"
-import { useLang } from "../../hooks/use-lang"
 
 export function UserInvitationsCard({
     className,

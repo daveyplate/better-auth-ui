@@ -6,7 +6,6 @@ import { Loader2, Trash2Icon, UploadCloudIcon } from "lucide-react"
 import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-
 import { useCaptcha } from "../../../hooks/use-captcha"
 import { useIsHydrated } from "../../../hooks/use-hydrated"
 import { useOnSuccessTransition } from "../../../hooks/use-success-transition"
@@ -88,6 +87,7 @@ export function SignUpForm({
 
     const confirmPasswordEnabled = credentials?.confirmPassword
     const usernameEnabled = credentials?.username
+    const usernameRequired = credentials?.usernameRequired ?? true
     const contextPasswordValidation = credentials?.passwordValidation
     const signUpFields = signUpOptions?.fields
 
@@ -140,9 +140,11 @@ export function SignUpForm({
                 : z.string().optional(),
         image: z.string().optional(),
         username: usernameEnabled
-            ? z.string().min(1, {
-                  message: `${localization.USERNAME} ${localization.IS_REQUIRED}`
-              })
+            ? usernameRequired
+                ? z.string().min(1, {
+                      message: `${localization.USERNAME} ${localization.IS_REQUIRED}`
+                  })
+                : z.string().optional()
             : z.string().optional(),
         confirmPassword: confirmPasswordEnabled
             ? getPasswordSchema(passwordValidation, {
@@ -342,10 +344,21 @@ export function SignUpForm({
             const additionalParams: Record<string, unknown> = {}
 
             if (username !== undefined) {
-                additionalParams.username = username
+                // Only skip empty usernames if username is optional
+                if (
+                    !usernameRequired &&
+                    (username === null ||
+                        username === "" ||
+                        (typeof username === "string" &&
+                            username.trim() === ""))
+                ) {
+                    // Skip empty username when optional
+                } else {
+                    additionalParams.username = username
+                }
             }
 
-            if (image !== undefined) {
+            if (image !== undefined && image !== null && image !== "") {
                 additionalParams.image = image
             }
 
@@ -535,6 +548,11 @@ export function SignUpForm({
                             <FormItem>
                                 <FormLabel className={classNames?.label}>
                                     {localization.USERNAME}
+                                    {!usernameRequired && (
+                                        <span className="ml-1 text-muted-foreground">
+                                            {localization.OPTIONAL_BRACKETS}
+                                        </span>
+                                    )}
                                 </FormLabel>
 
                                 <FormControl>
