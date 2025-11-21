@@ -2,7 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "isolatedModules": true,
-    "lib": ["esnext", "dom"],
+    "lib": ["esnext", "dom", "dom.iterable"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "skipLibCheck": true,

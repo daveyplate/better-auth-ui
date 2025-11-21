@@ -1,0 +1,29 @@
+{
+  "name": "@better-auth-ui/heroui",
+  "version": "4.0.0-alpha.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "devDependencies": {
+    "@types/react": "^19.2.6",
+    "better-auth": "^1.4.0-beta.25",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "dependencies": {
+    "@better-auth-ui/core": "workspace:*",
+    "@better-auth-ui/react": "workspace:*",
+    "@heroui/react": "^3.0.0-beta.2",
+    "@heroui/styles": "^3.0.0-beta.2",
+    "sonner": "^2.0.7"
+  },
+  "peerDependencies": {
+    "better-auth": ">=1.3.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  }
+}
