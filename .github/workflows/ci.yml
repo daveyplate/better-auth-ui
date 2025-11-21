@@ -38,12 +38,11 @@ jobs:
       # - run: bun nx-cloud record -- echo Hello World
 
       # Check code formatting and linting
-      - run: bun biome check
-      # - run: bun nx-cloud record -- biome check
+      - run: bun nx-cloud record -- biome check
 
       # Run tests and build the project
       - run: bun nx affected -t test build
 
       # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
-      # - run: bun nx fix-ci
+      - run: bun nx fix-ci
         if: always()
