@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "emitDeclarationOnly": true,
+    "declaration": true,
     "isolatedModules": true,
     "lib": ["esnext", "dom"],
     "module": "esnext",
