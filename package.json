@@ -2,7 +2,7 @@
   "author": "daveycodez",
   "license": "MIT",
   "homepage": "https://better-auth-ui.com",
-  "description": "Plug & play UI components for better-auth",
+  "description": "Plug & play UI components for Better Auth",
   "scripts": {
     "dev": "nx run-many -t dev",
     "build": "nx run-many -t build"
