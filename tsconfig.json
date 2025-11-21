@@ -1,23 +1,13 @@
 {
-    "compilerOptions": {
-        "jsx": "react-jsx",
-        "declaration": true,
-        "outDir": "dist",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "resolveJsonModule": true,
-        "allowJs": true,
-        "incremental": false,
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
-        "module": "esnext",
-        "moduleResolution": "bundler"
-    },
-    "include": [
-        "src"
-    ]
+  "compilerOptions": {
+    "composite": true,
+    "emitDeclarationOnly": true,
+    "isolatedModules": true,
+    "lib": ["esnext", "dom"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext"
+  }
 }

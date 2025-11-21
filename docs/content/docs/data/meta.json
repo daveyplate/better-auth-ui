@@ -1,9 +1,0 @@
-{
-    "icon": "Database",
-    "defaultOpen": true,
-    "pages": [
-        "tanstack-query",
-        "triplit",
-        "instantdb"
-    ]
-}

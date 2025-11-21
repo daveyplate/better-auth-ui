@@ -1,9 +1,0 @@
-{
-    "icon": "LayoutGrid",
-    "defaultOpen": true,
-    "pages": [
-        "next-js",
-        "tanstack-start",
-        "react"
-    ]
-}

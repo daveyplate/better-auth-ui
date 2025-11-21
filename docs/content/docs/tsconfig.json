@@ -1,9 +1,0 @@
-{
-    "compilerOptions": {
-        "noCheck": true
-    },
-    "include": [
-        "**/*.ts",
-        "**/*.tsx"
-    ]
-}

@@ -1,0 +1,11 @@
+{
+  "name": "@better-auth-ui/core",
+  "version": "4.0.0-alpha.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts"
+}
