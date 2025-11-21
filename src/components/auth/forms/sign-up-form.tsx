@@ -6,6 +6,7 @@ import { Loader2, Trash2Icon, UploadCloudIcon } from "lucide-react"
 import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+
 import { useCaptcha } from "../../../hooks/use-captcha"
 import { useIsHydrated } from "../../../hooks/use-hydrated"
 import { useOnSuccessTransition } from "../../../hooks/use-success-transition"
@@ -344,7 +345,6 @@ export function SignUpForm({
             const additionalParams: Record<string, unknown> = {}
 
             if (username !== undefined) {
-                // Only skip empty usernames if username is optional
                 if (
                     !usernameRequired &&
                     (username === null ||
@@ -352,13 +352,12 @@ export function SignUpForm({
                         (typeof username === "string" &&
                             username.trim() === ""))
                 ) {
-                    // Skip empty username when optional
                 } else {
                     additionalParams.username = username
                 }
             }
 
-            if (image !== undefined && image !== null && image !== "") {
+            if (image !== undefined) {
                 additionalParams.image = image
             }
 
@@ -400,7 +399,7 @@ export function SignUpForm({
             <form
                 onSubmit={form.handleSubmit(signUp)}
                 noValidate={isHydrated}
-                className={cn("grid w-full gap-6", className, classNames?.base)}
+                className={cn("gap-6 grid w-full", className, classNames?.base)}
             >
                 {signUpFields?.includes("image") && avatar && (
                     <>
@@ -428,7 +427,7 @@ export function SignUpForm({
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button
-                                                    className="size-fit rounded-full"
+                                                    className="rounded-full size-fit"
                                                     size="icon"
                                                     variant="ghost"
                                                     type="button"
