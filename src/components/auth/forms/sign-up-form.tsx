@@ -88,6 +88,7 @@ export function SignUpForm({
 
     const confirmPasswordEnabled = credentials?.confirmPassword
     const usernameEnabled = credentials?.username
+    const usernameRequired = credentials?.usernameRequired ?? true
     const contextPasswordValidation = credentials?.passwordValidation
     const signUpFields = signUpOptions?.fields
 
@@ -140,9 +141,11 @@ export function SignUpForm({
                 : z.string().optional(),
         image: z.string().optional(),
         username: usernameEnabled
-            ? z.string().min(1, {
-                  message: `${localization.USERNAME} ${localization.IS_REQUIRED}`
-              })
+            ? usernameRequired
+                ? z.string().min(1, {
+                      message: `${localization.USERNAME} ${localization.IS_REQUIRED}`
+                  })
+                : z.string().optional()
             : z.string().optional(),
         confirmPassword: confirmPasswordEnabled
             ? getPasswordSchema(passwordValidation, {
@@ -342,7 +345,16 @@ export function SignUpForm({
             const additionalParams: Record<string, unknown> = {}
 
             if (username !== undefined) {
-                additionalParams.username = username
+                if (
+                    !usernameRequired &&
+                    (username === null ||
+                        username === "" ||
+                        (typeof username === "string" &&
+                            username.trim() === ""))
+                ) {
+                } else {
+                    additionalParams.username = username
+                }
             }
 
             if (image !== undefined) {
@@ -387,7 +399,7 @@ export function SignUpForm({
             <form
                 onSubmit={form.handleSubmit(signUp)}
                 noValidate={isHydrated}
-                className={cn("grid w-full gap-6", className, classNames?.base)}
+                className={cn("gap-6 grid w-full", className, classNames?.base)}
             >
                 {signUpFields?.includes("image") && avatar && (
                     <>
@@ -415,7 +427,7 @@ export function SignUpForm({
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button
-                                                    className="size-fit rounded-full"
+                                                    className="rounded-full size-fit"
                                                     size="icon"
                                                     variant="ghost"
                                                     type="button"
@@ -507,6 +519,11 @@ export function SignUpForm({
                             <FormItem>
                                 <FormLabel className={classNames?.label}>
                                     {localization.NAME}
+                                       {!nameRequired && (
+                                        <span className="ml-1 text-muted-foreground">
+                                            {localization.OPTIONAL_BRACKETS}
+                                        </span>
+                                    )}
                                 </FormLabel>
 
                                 <FormControl>
@@ -535,6 +552,11 @@ export function SignUpForm({
                             <FormItem>
                                 <FormLabel className={classNames?.label}>
                                     {localization.USERNAME}
+                                    {!usernameRequired && (
+                                        <span className="ml-1 text-muted-foreground">
+                                            {localization.OPTIONAL_BRACKETS}
+                                        </span>
+                                    )}
                                 </FormLabel>
 
                                 <FormControl>

@@ -46,6 +46,7 @@ export interface AuthViewProps {
     classNames?: AuthViewClassNames
     callbackURL?: string
     cardHeader?: ReactNode
+    cardFooter?: ReactNode
     localization?: AuthLocalization
     path?: string
     pathname?: string
@@ -60,6 +61,7 @@ export function AuthView({
     classNames,
     callbackURL,
     cardHeader,
+    cardFooter,
     localization,
     path: pathProp,
     pathname,
@@ -323,6 +325,12 @@ export function AuthView({
                         </>
                     )}
             </CardContent>
+
+            {cardFooter && (
+                <CardFooter className={classNames?.footer}>
+                    {cardFooter}
+                </CardFooter>
+            )}
 
             {credentials && signUp && (
                 <CardFooter

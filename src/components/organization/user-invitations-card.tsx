@@ -2,7 +2,6 @@
 
 import { CheckIcon, EllipsisIcon, Loader2, XIcon } from "lucide-react"
 import { useContext, useMemo, useState } from "react"
-
 import { AuthUIContext } from "../../lib/auth-ui-provider"
 import { cn, getLocalizedError } from "../../lib/utils"
 import type { SettingsCardProps } from "../settings/shared/settings-card"
@@ -60,7 +59,7 @@ export function UserInvitationsCard({
             }
             {...props}
         >
-            <CardContent className={cn("grid gap-4", classNames?.content)}>
+            <CardContent className={cn("gap-4 grid", classNames?.content)}>
                 {pendingInvitations.map((invitation) => (
                     <UserInvitationRow
                         key={invitation.id}
@@ -175,19 +174,19 @@ function UserInvitationRow({
                     localization={localization}
                 />
 
-                <div className="grid flex-1 text-left leading-tight">
-                    <span className="truncate font-semibold text-sm">
+                <div className="flex-1 grid text-left leading-tight">
+                    <span className="font-semibold text-sm truncate">
                         {invitation.email}
                     </span>
 
-                    <span className="truncate text-muted-foreground text-xs">
+                    <span className="text-muted-foreground text-xs truncate">
                         {localization.EXPIRES}{" "}
                         {invitation.expiresAt.toLocaleDateString(lang ?? "en")}
                     </span>
                 </div>
             </div>
 
-            <span className="truncate text-sm opacity-70">{role?.label}</span>
+            <span className="opacity-70 text-sm truncate">{role?.label}</span>
 
             <div className="flex items-center gap-2">
                 <DropdownMenu>

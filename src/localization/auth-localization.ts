@@ -523,6 +523,9 @@ export const authLocalization = {
     /** @default "Username" */
     USERNAME_PLACEHOLDER: "Username",
 
+    /** @default "(Optional)" */
+    OPTIONAL_BRACKETS: "(Optional)",
+
     /** @default "Username or email" */
     SIGN_IN_USERNAME_PLACEHOLDER: "Username or email",
 
