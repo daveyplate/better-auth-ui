@@ -17,15 +17,15 @@ import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 import type { AuthProps } from "./auth"
 
-export type SignInProps<TAuthClient extends AuthClient> = Omit<
+export type SignUpProps<TAuthClient extends AuthClient> = Omit<
   AuthProps<TAuthClient>,
   "view"
 >
 
-export function SignIn<TAuthClient extends AuthClient>({
+export function SignUp<TAuthClient extends AuthClient>({
   className,
   ...props
-}: SignInProps<TAuthClient>) {
+}: SignUpProps<TAuthClient>) {
   const { authClient, navigate, Link } = useAuthConfig(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
@@ -35,11 +35,12 @@ export function SignIn<TAuthClient extends AuthClient>({
     e.preventDefault()
     setIsPending(true)
 
-    const { email } = Object.fromEntries(new FormData(e.currentTarget))
+    const { name, email } = Object.fromEntries(new FormData(e.currentTarget))
 
-    const { error } = await authClient.$fetch("/sign-in/email", {
+    const { error } = await authClient.$fetch("/sign-up/email", {
       method: "POST",
       body: {
+        name: name,
         email: email,
         password
       }
@@ -60,11 +61,23 @@ export function SignIn<TAuthClient extends AuthClient>({
 
   return (
     <Card className="w-full max-w-sm md:p-6 gap-6" {...props}>
-      <Card.Header className="text-xl font-medium">Sign In</Card.Header>
+      <Card.Header className="text-xl font-medium">Sign Up</Card.Header>
 
       <Card.Content>
         <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
           <div className="flex flex-col gap-4">
+            <TextField name="name" type="text" autoComplete="name">
+              <Label>Name</Label>
+
+              <Input
+                placeholder="Enter your name"
+                required
+                disabled={isPending}
+              />
+
+              <FieldError />
+            </TextField>
+
             <TextField name="email" type="email" autoComplete="email">
               <Label>Email</Label>
 
@@ -81,7 +94,7 @@ export function SignIn<TAuthClient extends AuthClient>({
               minLength={8}
               name="password"
               type="password"
-              autoComplete="current-password"
+              autoComplete="new-password"
             >
               <Label>Password</Label>
 
@@ -113,7 +126,7 @@ export function SignIn<TAuthClient extends AuthClient>({
 
           <Button type="submit" className="w-full" isPending={isPending}>
             {isPending && <Spinner color="current" size="sm" />}
-            Sign In
+            Sign Up
           </Button>
 
           <div className="flex items-center gap-4">
@@ -132,19 +145,15 @@ export function SignIn<TAuthClient extends AuthClient>({
             <Button variant="tertiary" className="w-full" onClick={() => {}}>
               Continue with Github
             </Button>
-
-            <Link href="/" className="link link--underline-hover mx-auto">
-              Forgot password?
-            </Link>
           </div>
 
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
-            Need to create an account?
+            Already have an account?
             <Link
-              href="/auth/sign-up"
+              href="/auth/sign-in"
               className="link link--underline-always text-accent"
             >
-              Sign Up
+              Sign In
             </Link>
           </p>
         </Form>

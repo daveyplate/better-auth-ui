@@ -1,27 +1,34 @@
 "use client"
 
-import type { AuthConfig } from "@better-auth-ui/core"
+import type { AuthConfig, LinkComponent } from "@better-auth-ui/core"
 import {
   type Context,
   createContext,
   type PropsWithChildren,
+  type ReactNode,
   useContext
 } from "react"
 
 import { receiveConfig } from "./lib/receive-config"
 import type { AuthClient } from "./types/auth-client"
 
-export type AuthConfigWithClient<TAuthClient extends AuthClient> =
-  AuthConfig & {
-    authClient: TAuthClient
-  }
+export type AuthConfigWithClient<TAuthClient extends AuthClient> = Omit<
+  AuthConfig,
+  "Link"
+> & {
+  authClient: TAuthClient
+  Link: LinkComponent<ReactNode>
+}
 
 export const AuthContext: Context<
   AuthConfigWithClient<AuthClient> | undefined
 > = createContext<AuthConfigWithClient<AuthClient> | undefined>(undefined)
 
 export type AuthProviderProps<TAuthClient extends AuthClient> =
-  PropsWithChildren & AuthConfigWithClient<TAuthClient>
+  PropsWithChildren &
+    Omit<Partial<AuthConfigWithClient<TAuthClient>>, "authClient"> & {
+      authClient: TAuthClient
+    }
 
 export function AuthProvider<TAuthClient extends AuthClient>({
   children,

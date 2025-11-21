@@ -1,16 +1,24 @@
 "use client"
 
+import type { AuthView } from "@better-auth-ui/core"
+import type { AuthClient, AuthConfigWithClient } from "@better-auth-ui/react"
 import type { CardProps } from "@heroui/react"
 import { SignIn } from "./sign-in"
+import { SignUp } from "./sign-up"
 
-export const authViews = ["sign-in", "sign-up"] as const
-export type AuthView = (typeof authViews)[number]
+export type AuthProps<TAuthClient extends AuthClient> = CardProps &
+  Partial<AuthConfigWithClient<TAuthClient>> & {
+    view: AuthView
+  }
 
-export function Auth({ view, ...props }: CardProps & { view: AuthView }) {
+export function Auth<TAuthClient extends AuthClient>({
+  view,
+  ...props
+}: AuthProps<TAuthClient>) {
   switch (view) {
     case "sign-in":
       return <SignIn {...props} />
     case "sign-up":
-      return <SignIn {...props} />
+      return <SignUp {...props} />
   }
 }
