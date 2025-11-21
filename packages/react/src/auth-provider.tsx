@@ -50,8 +50,9 @@ export function useAuthConfig(
   const context = useContext(AuthContext)
 
   const merged = {
-    ...(context ?? {}),
-    ...(config ? receiveConfig(config) : {})
+    ...(config ? receiveConfig(config) : {}),
+    ...context,
+    ...config
   }
 
   const { authClient, ...configWithoutClient } = merged
