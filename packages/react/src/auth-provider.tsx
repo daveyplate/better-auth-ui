@@ -51,7 +51,7 @@ export function useAuthConfig(
 
   const merged = {
     ...(context ?? {}),
-    ...(config ?? {})
+    ...(config ? receiveConfig(config) : {})
   }
 
   const { authClient, ...configWithoutClient } = merged
@@ -65,7 +65,7 @@ export function useAuthConfig(
   }
 
   return {
-    ...receiveConfig(configWithoutClient),
+    ...configWithoutClient,
     authClient
-  }
+  } as AuthConfigWithClient<AuthClient>
 }

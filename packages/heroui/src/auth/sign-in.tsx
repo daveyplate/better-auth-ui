@@ -35,12 +35,13 @@ export function SignIn<TAuthClient extends AuthClient>({
     e.preventDefault()
     setIsPending(true)
 
-    const { email } = Object.fromEntries(new FormData(e.currentTarget))
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get("email") as string
 
     const { error } = await authClient.$fetch("/sign-in/email", {
       method: "POST",
       body: {
-        email: email,
+        email,
         password
       }
     })

@@ -35,13 +35,15 @@ export function SignUp<TAuthClient extends AuthClient>({
     e.preventDefault()
     setIsPending(true)
 
-    const { name, email } = Object.fromEntries(new FormData(e.currentTarget))
+    const formData = new FormData(e.currentTarget)
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
 
     const { error } = await authClient.$fetch("/sign-up/email", {
       method: "POST",
       body: {
-        name: name,
-        email: email,
+        name,
+        email,
         password
       }
     })
