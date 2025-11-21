@@ -519,6 +519,11 @@ export function SignUpForm({
                             <FormItem>
                                 <FormLabel className={classNames?.label}>
                                     {localization.NAME}
+                                       {!nameRequired && (
+                                        <span className="ml-1 text-muted-foreground">
+                                            {localization.OPTIONAL_BRACKETS}
+                                        </span>
+                                    )}
                                 </FormLabel>
 
                                 <FormControl>
