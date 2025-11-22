@@ -54,6 +54,19 @@ export interface SignUpFormProps {
     passwordValidation?: PasswordValidation
 }
 
+/**
+ * Render a configurable sign-up form that validates input, handles avatar uploads, runs captcha, and submits to the authentication client.
+ *
+ * @param className - Optional container CSS class applied to the form element.
+ * @param classNames - Optional object of className overrides for internal form parts (labels, inputs, buttons, errors, etc.).
+ * @param callbackURL - Optional explicit callback URL to include with the sign-up request.
+ * @param isSubmitting - External submitting flag used to disable inputs and show loading state.
+ * @param localization - Localization strings used for labels, placeholders, validation messages, and toasts.
+ * @param redirectTo - Optional redirect target used when building the callback URL and post-success navigation.
+ * @param setIsSubmitting - Optional setter called when the form's submitting state changes.
+ * @param passwordValidation - Optional password validation configuration that overrides context defaults.
+ * @returns A JSX element containing the complete sign-up form UI wired to validation, captcha, avatar handling, and the auth client.
+ */
 export function SignUpForm({
     className,
     classNames,
@@ -399,7 +412,7 @@ export function SignUpForm({
             <form
                 onSubmit={form.handleSubmit(signUp)}
                 noValidate={isHydrated}
-                className={cn("gap-6 grid w-full", className, classNames?.base)}
+                className={cn("grid w-full gap-6", className, classNames?.base)}
             >
                 {signUpFields?.includes("image") && avatar && (
                     <>
@@ -427,7 +440,7 @@ export function SignUpForm({
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button
-                                                    className="rounded-full size-fit"
+                                                    className="size-fit rounded-full"
                                                     size="icon"
                                                     variant="ghost"
                                                     type="button"
@@ -519,7 +532,7 @@ export function SignUpForm({
                             <FormItem>
                                 <FormLabel className={classNames?.label}>
                                     {localization.NAME}
-                                       {!nameRequired && (
+                                    {!nameRequired && (
                                         <span className="ml-1 text-muted-foreground">
                                             {localization.OPTIONAL_BRACKETS}
                                         </span>

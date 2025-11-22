@@ -49,6 +49,18 @@ export interface AuthFormProps {
     setIsSubmitting?: (isSubmitting: boolean) => void
 }
 
+/**
+ * Render the appropriate authentication UI for the resolved auth view.
+ *
+ * Resolves the active view from the explicit `view` prop or `pathname`, validates it against enabled features from AuthUIContext, may redirect to sign-in for invalid views, and renders the matching auth form component (or null if no suitable view is available).
+ *
+ * @param callbackURL - Optional URL used by flows that perform an external callback (magic link / email OTP / sign-up).
+ * @param localization - Partial localization strings that override context localization.
+ * @param pathname - Optional pathname used to resolve the auth view via configured view paths.
+ * @param view - Optional explicit auth view to render; if omitted, the view is derived from `pathname` or defaults to "SIGN_IN".
+ * @param otpSeparators - Number of separators to show in OTP input rendering (0, 1, or 2).
+ * @param setIsSubmitting - Optional setter invoked to update external submitting state during form actions.
+ * @returns The rendered JSX element for the resolved auth view, or `null` when no view can be rendered.
 export function AuthForm({
     className,
     classNames,
@@ -146,7 +158,7 @@ export function AuthForm({
         twoFactorEnabled
     ])
 
-    if (view === "SIGN_OUT") return <SignOut redirectTo={redirectTo}/>
+    if (view === "SIGN_OUT") return <SignOut redirectTo={redirectTo} />
     if (view === "CALLBACK") return <AuthCallback redirectTo={redirectTo} />
 
     if (view === "SIGN_IN") {
