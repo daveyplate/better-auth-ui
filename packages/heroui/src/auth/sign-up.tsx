@@ -1,6 +1,6 @@
 "use client"
 
-import { type AuthClient, useAuthConfig } from "@better-auth-ui/react"
+import { type AuthClient, cn, useAuthConfig } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -67,7 +67,7 @@ export function SignUp<TAuthClient extends AuthClient>({
   }
 
   return (
-    <Card className="w-full max-w-sm md:p-6 gap-6" {...props}>
+    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)} {...props}>
       <Card.Header className="text-xl font-medium">Sign Up</Card.Header>
 
       <Card.Content>
