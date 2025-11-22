@@ -10,7 +10,7 @@
   "types": "./dist/index.d.ts",
   "devDependencies": {
     "@types/react": "^19.2.6",
-    "better-auth": "^1.4.0-beta.25",
+    "better-auth": "^1.4.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
