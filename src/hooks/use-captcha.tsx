@@ -1,9 +1,9 @@
+import type { CaptchaFoxInstance } from "@captchafox/react"
 import type HCaptcha from "@hcaptcha/react-hcaptcha"
 import type { TurnstileInstance } from "@marsidev/react-turnstile"
 import { useGoogleReCaptcha } from "@wojtekmaj/react-recaptcha-v3"
 import { type RefObject, useContext, useRef } from "react"
 import type ReCAPTCHA from "react-google-recaptcha"
-import type { CaptchaFoxInstance } from "@captchafox/react"
 
 import { AuthUIContext } from "../lib/auth-ui-provider"
 import type { AuthLocalization } from "../localization/auth-localization"

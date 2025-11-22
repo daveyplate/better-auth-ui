@@ -1,6 +1,6 @@
+import { CaptchaFox } from "@captchafox/react"
 import HCaptcha from "@hcaptcha/react-hcaptcha"
 import { Turnstile } from "@marsidev/react-turnstile"
-import { CaptchaFox } from "@captchafox/react"
 import { type RefObject, useContext } from "react"
 
 import { useTheme } from "../../hooks/use-theme"
