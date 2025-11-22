@@ -30,10 +30,9 @@ import {
 import { Input } from "../ui/input"
 
 export interface CreateTeamDialogProps extends ComponentProps<typeof Dialog> {
-    className?: string
     classNames?: SettingsCardClassNames
     localization?: AuthLocalization
-    organizationId?: string
+    organizationId: string
 }
 
 export function CreateTeamDialog({
@@ -75,34 +74,36 @@ export function CreateTeamDialog({
 
     const isSubmitting = form.formState.isSubmitting
 
-	async function onSubmit({ name }: z.infer<typeof formSchema>) {
-		try {
-			await authClient.$fetch("/organization/create-team", {
-				method: "POST",
-				body: {
-					name,
-					organizationId
-				},
-				throw: true
-			})
+    async function onSubmit({ name }: z.infer<typeof formSchema>) {
+        if (!organizationId) return
 
-			onOpenChange?.(false)
-			form.reset()
+        try {
+            await authClient.$fetch("/organization/create-team", {
+                method: "POST",
+                body: {
+                    name,
+                    organizationId
+                },
+                throw: true
+            })
 
-			toast({
-				variant: "success",
-				message: localization.CREATE_TEAM_SUCCESS
-			})
-		} catch (error) {
-			toast({
-				variant: "error",
-				message: getLocalizedError({ error, localization })
-			})
-		}
-	}
+            onOpenChange?.(false)
+            form.reset()
+
+            toast({
+                variant: "success",
+                message: localization.CREATE_TEAM_SUCCESS
+            })
+        } catch (error) {
+            toast({
+                variant: "error",
+                message: getLocalizedError({ error, localization })
+            })
+        }
+    }
 
     return (
-        <Dialog onOpenChange={onOpenChange} {...props}>
+        <Dialog onOpenChange={onOpenChange} className={className} {...props}>
             <DialogContent className={classNames?.dialog?.content}>
                 <DialogHeader className={classNames?.dialog?.header}>
                     <DialogTitle
@@ -168,7 +169,7 @@ export function CreateTeamDialog({
                                     classNames?.button,
                                     classNames?.primaryButton
                                 )}
-                                disabled={isSubmitting}
+                                disabled={isSubmitting || !organizationId}
                             >
                                 {isSubmitting && (
                                     <Loader2 className="animate-spin" />

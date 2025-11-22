@@ -613,7 +613,9 @@ export const AuthUIProvider = ({
                 useAuthData({
                     queryFn: () =>
                         authClient.$fetch(
-                            `/organization/list-invitations?organizationId=${params?.query?.organizationId || ""}`
+                            `/organization/list-invitations?organizationId=${
+                                params?.query?.organizationId || ""
+                            }`
                         ),
                     cacheKey: `listInvitations:${JSON.stringify(params)}`
                 }),
@@ -629,7 +631,9 @@ export const AuthUIProvider = ({
                 useAuthData({
                     queryFn: () =>
                         authClient.$fetch(
-                            `/organization/list-members?organizationId=${params?.query?.organizationId || ""}`
+                            `/organization/list-members?organizationId=${
+                                params?.query?.organizationId || ""
+                            }`
                         ),
                     cacheKey: `listMembers:${JSON.stringify(params)}`
                 }),
@@ -637,16 +641,24 @@ export const AuthUIProvider = ({
                 useAuthData({
                     queryFn: () =>
                         authClient.$fetch(
-                            `/organization/list-teams?organizationId=${params?.organizationId || ""}`
+                            `/organization/list-teams?organizationId=${
+                                params?.organizationId || ""
+                            }`
                         ),
                     cacheKey: `listTeams:${JSON.stringify(params)}`
                 }),
             useListTeamMembers: (params) =>
                 useAuthData({
                     queryFn: () =>
-                        authClient.$fetch(
-                            `/organization/list-team-members?teamId=${params?.teamId || ""}`
-                        ),
+                        authClient.$fetch("/organization/list-team-members", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: params?.teamId
+                                ? JSON.stringify({ teamId: params.teamId })
+                                : undefined
+                        }),
                     cacheKey: `listTeamMembers:${JSON.stringify(params)}`
                 }),
             useListUserTeams: () =>

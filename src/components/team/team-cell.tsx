@@ -18,13 +18,17 @@ export interface TeamCellProps {
 export function TeamCell({ classNames, team, localization }: TeamCellProps) {
     const { teams } = useContext(AuthUIContext)
 
+    const colorCount = Math.max(1, teams?.colors.count || 5)
+
     const getTeamColor = (index: number) => {
-        const colorIndex = (index % (teams?.colors.count || 5)) + 1
+        const colorIndex = (index % colorCount) + 1
         return `hsl(var(--team-${colorIndex}))`
     }
 
-    // Simple color hash based on team ID
-    const teamIndex = parseInt(team.id.slice(0, 8), 16) % 5
+    // Stable color hash based on team ID (sum of char codes)
+    const teamIndex =
+        team.id.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0) %
+        colorCount
 
     return (
         <div
