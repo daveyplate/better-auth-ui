@@ -1,3 +1,5 @@
+import type { SocialProvider } from "better-auth/social-providers"
+
 type EmailAndPasswordConfig = {
   enabled?: boolean
   rememberMe?: boolean
@@ -10,8 +12,8 @@ export type LinkComponent<T = unknown> = (props: {
 }) => T
 
 export interface AuthConfig {
-  emailAndPassword?: EmailAndPasswordConfig | boolean
-  socialProviders?: string[]
+  emailAndPassword?: EmailAndPasswordConfig
+  socialProviders?: SocialProvider[]
   navigate: (path: string) => void
   replace: (path: string) => void
   Link: LinkComponent

@@ -9,8 +9,8 @@ import {
   useContext
 } from "react"
 
-import { receiveConfig } from "./lib/receive-config"
-import type { AuthClient } from "./types/auth-client"
+import { receiveConfig } from "../lib/receive-config"
+import type { AuthClient } from "../types/auth-client"
 
 export type AuthConfigWithClient<TAuthClient extends AuthClient> = Omit<
   AuthConfig,

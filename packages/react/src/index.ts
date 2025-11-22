@@ -1,2 +1,5 @@
-export * from "./auth-provider"
+export * from "./components/auth-provider"
+export * from "./components/icons"
+export * from "./lib/provider-icons"
+export * from "./lib/utils"
 export * from "./types/auth-client"

@@ -16,6 +16,7 @@ import {
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 import type { AuthProps } from "./auth"
+import { ProviderButtons } from "./provider-buttons"
 
 export type SignInProps<TAuthClient extends AuthClient> = Omit<
   AuthProps<TAuthClient>,
@@ -26,7 +27,8 @@ export function SignIn<TAuthClient extends AuthClient>({
   className,
   ...props
 }: SignInProps<TAuthClient>) {
-  const { authClient, navigate, Link } = useAuthConfig(props)
+  const { emailAndPassword, authClient, navigate, Link, socialProviders } =
+    useAuthConfig(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
   const [password, setPassword] = useState("")
@@ -37,14 +39,16 @@ export function SignIn<TAuthClient extends AuthClient>({
 
     const formData = new FormData(e.currentTarget)
     const email = formData.get("email") as string
+    const rememberMe = formData.get("rememberMe") === "on"
 
-    const { error } = await authClient.$fetch("/sign-in/email", {
-      method: "POST",
-      body: {
+    const { error } = await authClient.signIn.email(
+      {
         email,
-        password
-      }
-    })
+        password,
+        rememberMe
+      },
+      { disableSignal: true }
+    )
 
     if (error) {
       toast.error(error.message)
@@ -54,7 +58,7 @@ export function SignIn<TAuthClient extends AuthClient>({
       return
     }
 
-    refetch()
+    await refetch()
     navigate?.("/dashboard")
     setIsPending(false)
   }
@@ -98,46 +102,50 @@ export function SignIn<TAuthClient extends AuthClient>({
             </TextField>
           </div>
 
-          <div className="hidden w-full items-center justify-between px-1">
-            <div className="hidden items-center gap-2">
-              <Checkbox id="remember-me">
+          {emailAndPassword?.rememberMe && (
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="rememberMe"
+                name="rememberMe"
+                isDisabled={isPending}
+              >
                 <Checkbox.Control>
                   <Checkbox.Indicator />
                 </Checkbox.Control>
               </Checkbox>
 
-              <Label htmlFor="remember-me" className="cursor-pointer">
+              <Label htmlFor="rememberMe" className="cursor-pointer">
                 Remember me
               </Label>
             </div>
-          </div>
+          )}
 
           <Button type="submit" className="w-full" isPending={isPending}>
             {isPending && <Spinner color="current" size="sm" />}
             Sign In
           </Button>
 
-          <div className="flex items-center gap-4">
-            <Separator className="flex-1 bg-surface-quaternary" />
+          {socialProviders && socialProviders.length > 0 && (
+            <>
+              <div className="flex items-center gap-4">
+                <Separator className="flex-1 bg-surface-quaternary" />
 
-            <p className="text-xs text-muted shrink-0">OR</p>
+                <p className="text-xs text-muted shrink-0">OR</p>
 
-            <Separator className="flex-1 bg-surface-quaternary" />
-          </div>
+                <Separator className="flex-1 bg-surface-quaternary" />
+              </div>
 
-          <div className="flex flex-col gap-4">
-            <Button variant="tertiary" className="w-full" onClick={() => {}}>
-              Continue with Google
-            </Button>
+              <ProviderButtons
+                providers={socialProviders}
+                isPending={isPending}
+                setIsPending={setIsPending}
+              />
+            </>
+          )}
 
-            <Button variant="tertiary" className="w-full" onClick={() => {}}>
-              Continue with Github
-            </Button>
-
-            <Link href="/" className="link link--underline-hover mx-auto">
-              Forgot password?
-            </Link>
-          </div>
+          <Link href="/" className="link link--underline-hover mx-auto">
+            Forgot password?
+          </Link>
 
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
             Need to create an account?

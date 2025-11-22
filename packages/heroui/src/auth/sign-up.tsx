@@ -16,6 +16,7 @@ import {
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 import type { AuthProps } from "./auth"
+import { ProviderButtons } from "./provider-buttons"
 
 export type SignUpProps<TAuthClient extends AuthClient> = Omit<
   AuthProps<TAuthClient>,
@@ -26,7 +27,7 @@ export function SignUp<TAuthClient extends AuthClient>({
   className,
   ...props
 }: SignUpProps<TAuthClient>) {
-  const { authClient, navigate, Link } = useAuthConfig(props)
+  const { authClient, navigate, Link, socialProviders } = useAuthConfig(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
   const [password, setPassword] = useState("")
@@ -131,23 +132,23 @@ export function SignUp<TAuthClient extends AuthClient>({
             Sign Up
           </Button>
 
-          <div className="flex items-center gap-4">
-            <Separator className="flex-1 bg-surface-quaternary" />
+          {socialProviders && socialProviders.length > 0 && (
+            <>
+              <div className="flex items-center gap-4">
+                <Separator className="flex-1 bg-surface-quaternary" />
 
-            <p className="text-xs text-muted shrink-0">OR</p>
+                <p className="text-xs text-muted shrink-0">OR</p>
 
-            <Separator className="flex-1 bg-surface-quaternary" />
-          </div>
+                <Separator className="flex-1 bg-surface-quaternary" />
+              </div>
 
-          <div className="flex flex-col gap-4">
-            <Button variant="tertiary" className="w-full" onClick={() => {}}>
-              Continue with Google
-            </Button>
-
-            <Button variant="tertiary" className="w-full" onClick={() => {}}>
-              Continue with Github
-            </Button>
-          </div>
+              <ProviderButtons
+                providers={socialProviders}
+                isPending={isPending}
+                setIsPending={setIsPending}
+              />
+            </>
+          )}
 
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
             Already have an account?

@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react"
-import type { AuthConfigWithClient } from "../auth-provider"
+import type { AuthConfigWithClient } from "../components/auth-provider"
 import type { AuthClient } from "../types/auth-client"
 
 const DefaultLink = (props: ComponentProps<"a">) => <a {...props} />
