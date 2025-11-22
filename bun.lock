@@ -24,6 +24,7 @@
       "dependencies": {
         "@better-auth-ui/core": "workspace:*",
         "@better-auth-ui/react": "workspace:*",
+        "@heroicons/react": "^2.2.0",
       },
       "devDependencies": {
         "@heroui/react": "^3.0.0-beta.2",
@@ -306,6 +307,8 @@
     "@formatjs/icu-skeleton-parser": ["@formatjs/icu-skeleton-parser@1.8.16", "", { "dependencies": { "@formatjs/ecma402-abstract": "2.3.6", "tslib": "^2.8.0" } }, "sha512-H13E9Xl+PxBd8D5/6TVUluSpxGNvFSlN/b3coUp0e0JpuWXXnQDiavIpY3NnvSp4xhEMoXyyBvVfdFX8jglOHQ=="],
 
     "@formatjs/intl-localematcher": ["@formatjs/intl-localematcher@0.6.2", "", { "dependencies": { "tslib": "^2.8.0" } }, "sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA=="],
+
+    "@heroicons/react": ["@heroicons/react@2.2.0", "", { "peerDependencies": { "react": ">= 16 || ^19.0.0-rc" } }, "sha512-LMcepvRaS9LYHJGsF0zzmgKCUim/X3N/DQKc4jepAXJ7l8QxJ1PmxJzqplF2Z3FE4PqBAIGyJAQ/w4B5dsqbtQ=="],
 
     "@heroui/react": ["@heroui/react@3.0.0-beta.2", "", { "dependencies": { "@internationalized/date": "3.10.0", "@radix-ui/react-avatar": "1.1.10", "@radix-ui/react-slot": "1.2.3", "@react-aria/ssr": "3.9.10", "@react-aria/utils": "3.31.0", "@react-types/shared": "3.32.1", "clsx": "2.1.1", "input-otp": "1.4.2", "react-aria-components": "1.13.0", "tailwind-merge": "3.3.1", "tailwind-variants": "3.1.1" }, "peerDependencies": { "react": ">=19.0.0", "react-dom": ">=19.0.0", "tailwindcss": ">=4.0.0" } }, "sha512-6LVtMZJIJ+1A27XilLPbKIdX/UUAj2pvjOCn0twrZiZOyRcEeDjHfjCTVuBNLjxERiLEbq6keTfMIdqZfjkfxQ=="],
 

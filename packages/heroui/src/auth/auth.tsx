@@ -3,6 +3,7 @@
 import type { AuthView } from "@better-auth-ui/core"
 import type { AuthClient, AuthConfigWithClient } from "@better-auth-ui/react"
 import type { CardProps } from "@heroui/react"
+import { MagicLink } from "./magic-link"
 import { SignIn } from "./sign-in"
 import { SignUp } from "./sign-up"
 
@@ -20,5 +21,7 @@ export function Auth<TAuthClient extends AuthClient>({
       return <SignIn {...props} />
     case "sign-up":
       return <SignUp {...props} />
+    case "magic-link":
+      return <MagicLink {...props} />
   }
 }

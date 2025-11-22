@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "@better-auth-ui/core": "workspace:*",
-    "@better-auth-ui/react": "workspace:*"
+    "@better-auth-ui/react": "workspace:*",
+    "@heroicons/react": "^2.2.0"
   },
   "peerDependencies": {
     "@heroui/react": ">=3.0.0",

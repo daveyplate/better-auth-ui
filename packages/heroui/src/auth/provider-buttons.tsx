@@ -32,7 +32,7 @@ export function ProviderButtons({
             key={provider}
             type="button"
             variant="tertiary"
-            className="w-full gap-3"
+            className="w-full"
             isDisabled={isPending}
             onClick={() => handleClick(provider)}
           >

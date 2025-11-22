@@ -4,7 +4,6 @@ import { type AuthClient, useAuthConfig } from "@better-auth-ui/react"
 import {
   Button,
   Card,
-  Checkbox,
   FieldError,
   Form,
   Input,
@@ -19,26 +18,17 @@ import type { AuthProps } from "./auth"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons } from "./provider-buttons"
 
-export type SignInProps<TAuthClient extends AuthClient> = Omit<
+export type MagicLinkProps<TAuthClient extends AuthClient> = Omit<
   AuthProps<TAuthClient>,
   "view"
 >
 
-export function SignIn<TAuthClient extends AuthClient>({
+export function MagicLink<TAuthClient extends AuthClient>({
   className,
   ...props
-}: SignInProps<TAuthClient>) {
-  const {
-    emailAndPassword,
-    authClient,
-    navigate,
-    Link,
-    socialProviders,
-    magicLink
-  } = useAuthConfig(props)
-  const { refetch } = authClient.useSession()
+}: MagicLinkProps<TAuthClient>) {
+  const { authClient, Link, socialProviders, magicLink } = useAuthConfig(props)
   const [isPending, setIsPending] = useState(false)
-  const [password, setPassword] = useState("")
 
   const showSeparator =
     (socialProviders && socialProviders.length > 0) || magicLink
@@ -49,36 +39,27 @@ export function SignIn<TAuthClient extends AuthClient>({
 
     const formData = new FormData(e.currentTarget)
     const email = formData.get("email") as string
-    const rememberMe = formData.get("rememberMe") === "on"
 
-    const { error } = await authClient.signIn.email(
-      {
-        email,
-        password,
-        rememberMe
-      },
-      { disableSignal: true }
-    )
+    const { error } = await authClient.$fetch("/sign-in/magic-link", {
+      method: "POST",
+      body: {
+        email
+      }
+    })
 
     if (error) {
       toast.error(error.message)
-      setPassword("")
       setIsPending(false)
 
       return
     }
 
-    await refetch()
-    navigate?.("/dashboard")
+    toast.success("Magic link sent to your email!")
     setIsPending(false)
   }
 
   return (
-    <Card
-      key="auth-card"
-      className="transition-all w-full max-w-sm md:p-6 gap-6"
-      {...props}
-    >
+    <Card className="w-full max-w-sm md:p-6 gap-6" {...props}>
       <Card.Header className="text-xl font-medium">Sign In</Card.Header>
 
       <Card.Content>
@@ -95,53 +76,16 @@ export function SignIn<TAuthClient extends AuthClient>({
 
               <FieldError />
             </TextField>
-
-            <TextField
-              minLength={8}
-              name="password"
-              type="password"
-              autoComplete="current-password"
-            >
-              <Label>Password</Label>
-
-              <Input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                required
-                disabled={isPending}
-              />
-
-              <FieldError />
-            </TextField>
           </div>
-
-          {emailAndPassword?.rememberMe && (
-            <div className="flex items-center gap-2">
-              <Checkbox
-                id="rememberMe"
-                name="rememberMe"
-                isDisabled={isPending}
-              >
-                <Checkbox.Control>
-                  <Checkbox.Indicator />
-                </Checkbox.Control>
-              </Checkbox>
-
-              <Label htmlFor="rememberMe" className="cursor-pointer">
-                Remember me
-              </Label>
-            </div>
-          )}
 
           <div className="flex flex-col gap-4">
             <Button type="submit" className="w-full" isPending={isPending}>
               {isPending && <Spinner color="current" size="sm" />}
-              Sign In
+              Send Magic Link
             </Button>
 
             {magicLink && (
-              <MagicLinkButton view="sign-in" isPending={isPending} />
+              <MagicLinkButton view="magic-link" isPending={isPending} />
             )}
           </div>
 
@@ -166,10 +110,6 @@ export function SignIn<TAuthClient extends AuthClient>({
               </div>
             </>
           )}
-
-          <Link href="/" className="link link--underline-hover mx-auto">
-            Forgot password?
-          </Link>
 
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
             Need to create an account?

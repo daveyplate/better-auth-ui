@@ -16,6 +16,7 @@ import {
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 import type { AuthProps } from "./auth"
+import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons } from "./provider-buttons"
 
 export type SignUpProps<TAuthClient extends AuthClient> = Omit<
@@ -27,10 +28,13 @@ export function SignUp<TAuthClient extends AuthClient>({
   className,
   ...props
 }: SignUpProps<TAuthClient>) {
-  const { authClient, navigate, Link, socialProviders } = useAuthConfig(props)
+  const { authClient, navigate, Link, socialProviders, magicLink } =
+    useAuthConfig(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
   const [password, setPassword] = useState("")
+
+  const showSeparator = socialProviders?.length
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -127,12 +131,18 @@ export function SignUp<TAuthClient extends AuthClient>({
             </div>
           </div>
 
-          <Button type="submit" className="w-full" isPending={isPending}>
-            {isPending && <Spinner color="current" size="sm" />}
-            Sign Up
-          </Button>
+          <div className="flex flex-col gap-4">
+            <Button type="submit" className="w-full" isPending={isPending}>
+              {isPending && <Spinner color="current" size="sm" />}
+              Sign Up
+            </Button>
 
-          {socialProviders && socialProviders.length > 0 && (
+            {magicLink && (
+              <MagicLinkButton view="sign-up" isPending={isPending} />
+            )}
+          </div>
+
+          {showSeparator && (
             <>
               <div className="flex items-center gap-4">
                 <Separator className="flex-1 bg-surface-quaternary" />
@@ -142,11 +152,15 @@ export function SignUp<TAuthClient extends AuthClient>({
                 <Separator className="flex-1 bg-surface-quaternary" />
               </div>
 
-              <ProviderButtons
-                providers={socialProviders}
-                isPending={isPending}
-                setIsPending={setIsPending}
-              />
+              <div className="flex flex-col gap-4">
+                {socialProviders && socialProviders.length > 0 && (
+                  <ProviderButtons
+                    providers={socialProviders}
+                    isPending={isPending}
+                    setIsPending={setIsPending}
+                  />
+                )}
+              </div>
             </>
           )}
 
