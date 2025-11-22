@@ -41,7 +41,8 @@ export function SignIn<TAuthClient extends AuthClient>({
   const [password, setPassword] = useState("")
 
   const showSeparator =
-    (socialProviders && socialProviders.length > 0) || magicLink
+    emailAndPassword?.enabled &&
+    ((socialProviders && socialProviders.length > 0) || magicLink)
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -55,7 +56,7 @@ export function SignIn<TAuthClient extends AuthClient>({
       {
         email,
         password,
-        rememberMe
+        ...(emailAndPassword?.rememberMe && { rememberMe })
       },
       { disableSignal: true }
     )
@@ -79,103 +80,111 @@ export function SignIn<TAuthClient extends AuthClient>({
 
       <Card.Content>
         <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
-          <div className="flex flex-col gap-4">
-            <TextField name="email" type="email" autoComplete="email">
-              <Label>Email</Label>
-
-              <Input
-                placeholder="Enter your email"
-                required
-                disabled={isPending}
-              />
-
-              <FieldError />
-            </TextField>
-
-            <TextField
-              minLength={8}
-              name="password"
-              type="password"
-              autoComplete="current-password"
-            >
-              <Label>Password</Label>
-
-              <Input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                required
-                disabled={isPending}
-              />
-
-              <FieldError />
-            </TextField>
-          </div>
-
-          {emailAndPassword?.rememberMe && (
-            <div className="flex items-center gap-2">
-              <Checkbox
-                id="rememberMe"
-                name="rememberMe"
-                isDisabled={isPending}
-              >
-                <Checkbox.Control>
-                  <Checkbox.Indicator />
-                </Checkbox.Control>
-              </Checkbox>
-
-              <Label htmlFor="rememberMe" className="cursor-pointer">
-                Remember me
-              </Label>
-            </div>
-          )}
-
-          <div className="flex flex-col gap-4">
-            <Button type="submit" className="w-full" isPending={isPending}>
-              {isPending && <Spinner color="current" size="sm" />}
-              Sign In
-            </Button>
-
-            {magicLink && (
-              <MagicLinkButton view="sign-in" isPending={isPending} />
-            )}
-          </div>
-
-          {showSeparator && (
+          {emailAndPassword?.enabled && (
             <>
-              <div className="flex items-center gap-4">
-                <Separator className="flex-1 bg-surface-quaternary" />
-
-                <p className="text-xs text-muted shrink-0">OR</p>
-
-                <Separator className="flex-1 bg-surface-quaternary" />
-              </div>
-
               <div className="flex flex-col gap-4">
-                {socialProviders && socialProviders.length > 0 && (
-                  <ProviderButtons
-                    providers={socialProviders}
-                    isPending={isPending}
-                    setIsPending={setIsPending}
+                <TextField name="email" type="email" autoComplete="email">
+                  <Label>Email</Label>
+
+                  <Input
+                    placeholder="Enter your email"
+                    required
+                    disabled={isPending}
                   />
-                )}
+
+                  <FieldError />
+                </TextField>
+
+                <TextField
+                  minLength={8}
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                >
+                  <Label>Password</Label>
+
+                  <Input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    required
+                    disabled={isPending}
+                  />
+
+                  <FieldError />
+                </TextField>
               </div>
+
+              {emailAndPassword.rememberMe && (
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="rememberMe"
+                    name="rememberMe"
+                    isDisabled={isPending}
+                  >
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                  </Checkbox>
+
+                  <Label htmlFor="rememberMe" className="cursor-pointer">
+                    Remember me
+                  </Label>
+                </div>
+              )}
             </>
           )}
 
-          <Link href="/" className="link link--underline-hover mx-auto">
-            Forgot password?
-          </Link>
+          {emailAndPassword?.enabled && (
+            <div className="flex flex-col gap-4">
+              <Button type="submit" className="w-full" isPending={isPending}>
+                {isPending && <Spinner color="current" size="sm" />}
+                Sign In
+              </Button>
 
-          <p className="text-sm justify-center flex gap-2 items-center mb-1">
-            Need to create an account?
-            <Link
-              href="/auth/sign-up"
-              className="link link--underline-always text-accent"
-            >
-              Sign Up
-            </Link>
-          </p>
+              {magicLink && (
+                <MagicLinkButton view="sign-in" isPending={isPending} />
+              )}
+            </div>
+          )}
+
+          {showSeparator && (
+            <div className="flex items-center gap-4">
+              <Separator className="flex-1 bg-surface-quaternary" />
+
+              <p className="text-xs text-muted shrink-0">OR</p>
+
+              <Separator className="flex-1 bg-surface-quaternary" />
+            </div>
+          )}
+
+          {socialProviders && socialProviders.length > 0 && (
+            <div className="flex flex-col gap-4">
+              <ProviderButtons
+                providers={socialProviders}
+                isPending={isPending}
+                setIsPending={setIsPending}
+              />
+            </div>
+          )}
+
+          {emailAndPassword?.enabled && (
+            <>
+              <Link href="/" className="link link--underline-hover mx-auto">
+                Forgot password?
+              </Link>
+
+              <p className="text-sm justify-center flex gap-2 items-center mb-1">
+                Need to create an account?
+                <Link
+                  href="/auth/sign-up"
+                  className="link link--underline-always text-accent"
+                >
+                  Sign Up
+                </Link>
+              </p>
+            </>
+          )}
         </Form>
       </Card.Content>
     </Card>

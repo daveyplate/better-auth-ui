@@ -8,6 +8,9 @@ export function receiveConfig<TAuthClient extends AuthClient>(
   config: Partial<AuthConfigWithClient<TAuthClient>>
 ) {
   return {
+    emailAndPassword: {
+      enabled: true
+    },
     navigate: (path: string) => {
       window.location.href = path
     },
