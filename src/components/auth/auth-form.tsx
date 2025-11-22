@@ -146,7 +146,7 @@ export function AuthForm({
         twoFactorEnabled
     ])
 
-    if (view === "SIGN_OUT") return <SignOut />
+    if (view === "SIGN_OUT") return <SignOut redirectTo={redirectTo}/>
     if (view === "CALLBACK") return <AuthCallback redirectTo={redirectTo} />
 
     if (view === "SIGN_IN") {

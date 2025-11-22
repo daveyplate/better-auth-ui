@@ -113,7 +113,7 @@ export function AuthView({
     }, [])
 
     if (view === "CALLBACK") return <AuthCallback redirectTo={redirectTo} />
-    if (view === "SIGN_OUT") return <SignOut />
+    if (view === "SIGN_OUT") return <SignOut redirectTo={redirectTo} />
     if (view === "ACCEPT_INVITATION") return <AcceptInvitationCard />
 
     const description =
