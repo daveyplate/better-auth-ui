@@ -17,7 +17,6 @@
     "@types/react": "^19.2.6",
     "@heroui/react": "^3.0.0-beta.2",
     "@heroui/styles": "^3.0.0-beta.2",
-    "better-auth": "^1.4.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "sonner": "^2.0.7"

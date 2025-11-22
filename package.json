@@ -13,6 +13,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.7",
     "@nx/js": "22.1.1",
+    "better-auth": "^1.4.0",
     "nx": "22.1.1",
     "typescript": "^5.9.3"
   }
