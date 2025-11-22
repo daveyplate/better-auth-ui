@@ -3,6 +3,7 @@
 import type { Organization } from "better-auth/plugins/organization"
 import { EllipsisIcon, Loader2, XIcon } from "lucide-react"
 import { useContext, useMemo, useState } from "react"
+import { useLang } from "../../hooks/use-lang"
 import { AuthUIContext } from "../../lib/auth-ui-provider"
 import { cn, getLocalizedError } from "../../lib/utils"
 import type { AuthLocalization } from "../../localization/auth-localization"
@@ -17,7 +18,6 @@ import {
     DropdownMenuTrigger
 } from "../ui/dropdown-menu"
 import { UserAvatar } from "../user-avatar"
-import { useLang } from "../../hooks/use-lang"
 
 export interface InvitationCellProps {
     className?: string
@@ -27,6 +27,16 @@ export interface InvitationCellProps {
     organization: Organization
 }
 
+/**
+ * Renders a card representing a pending organization invitation with its email, expiration date, role, and a menu action to cancel the invitation.
+ *
+ * @param props.className - Optional additional container class name
+ * @param props.classNames - Optional object of className overrides for internal parts (cell, button, icon, outlineButton)
+ * @param props.invitation - The invitation to display
+ * @param props.localization - Optional localization overrides merged with context localization
+ * @param props.organization - The organization the invitation belongs to
+ * @returns The rendered invitation card element
+ */
 export function InvitationCell({
     className,
     classNames,
@@ -103,19 +113,19 @@ export function InvitationCell({
                     localization={localization}
                 />
 
-                <div className="flex-1 grid text-left leading-tight">
-                    <span className="font-semibold text-sm truncate">
+                <div className="grid flex-1 text-left leading-tight">
+                    <span className="truncate font-semibold text-sm">
                         {invitation.email}
                     </span>
 
-                    <span className="text-muted-foreground text-xs truncate">
+                    <span className="truncate text-muted-foreground text-xs">
                         {localization.EXPIRES}{" "}
                         {invitation.expiresAt.toLocaleDateString(lang ?? "en")}
                     </span>
                 </div>
             </div>
 
-            <span className="opacity-70 text-sm truncate">{role?.label}</span>
+            <span className="truncate text-sm opacity-70">{role?.label}</span>
 
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>

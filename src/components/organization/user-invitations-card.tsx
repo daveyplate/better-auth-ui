@@ -2,6 +2,7 @@
 
 import { CheckIcon, EllipsisIcon, Loader2, XIcon } from "lucide-react"
 import { useContext, useMemo, useState } from "react"
+import { useLang } from "../../hooks/use-lang"
 import { AuthUIContext } from "../../lib/auth-ui-provider"
 import { cn, getLocalizedError } from "../../lib/utils"
 import type { SettingsCardProps } from "../settings/shared/settings-card"
@@ -15,8 +16,15 @@ import {
     DropdownMenuTrigger
 } from "../ui/dropdown-menu"
 import { UserAvatar } from "../user-avatar"
-import { useLang } from "../../hooks/use-lang"
 
+/**
+ * Render a settings card that displays rows for all pending user invitations.
+ *
+ * Renders a SettingsCard containing a UserInvitationRow for each invitation with status "pending"; returns `null` when there are no pending invitations. When invitation state changes, the component triggers a refresh of invitations and organizations.
+ *
+ * @param localization - Optional localization overrides merged with context localization
+ * @returns The SettingsCard element showing pending invitations, or `null` if there are none.
+ */
 export function UserInvitationsCard({
     className,
     classNames,
@@ -59,7 +67,7 @@ export function UserInvitationsCard({
             }
             {...props}
         >
-            <CardContent className={cn("gap-4 grid", classNames?.content)}>
+            <CardContent className={cn("grid gap-4", classNames?.content)}>
                 {pendingInvitations.map((invitation) => (
                     <UserInvitationRow
                         key={invitation.id}
@@ -79,6 +87,13 @@ export function UserInvitationsCard({
     )
 }
 
+/**
+ * Renders a single user invitation row with avatar, email, expiration, role, and accept/reject actions.
+ *
+ * @param invitation - Invitation data including `id`, `email`, `role`, `status`, and `expiresAt`
+ * @param onChanged - Optional callback invoked after the invitation is accepted or rejected
+ * @returns The rendered invitation row element
+ */
 function UserInvitationRow({
     classNames,
     invitation,
@@ -174,19 +189,19 @@ function UserInvitationRow({
                     localization={localization}
                 />
 
-                <div className="flex-1 grid text-left leading-tight">
-                    <span className="font-semibold text-sm truncate">
+                <div className="grid flex-1 text-left leading-tight">
+                    <span className="truncate font-semibold text-sm">
                         {invitation.email}
                     </span>
 
-                    <span className="text-muted-foreground text-xs truncate">
+                    <span className="truncate text-muted-foreground text-xs">
                         {localization.EXPIRES}{" "}
                         {invitation.expiresAt.toLocaleDateString(lang ?? "en")}
                     </span>
                 </div>
             </div>
 
-            <span className="opacity-70 text-sm truncate">{role?.label}</span>
+            <span className="truncate text-sm opacity-70">{role?.label}</span>
 
             <div className="flex items-center gap-2">
                 <DropdownMenu>
