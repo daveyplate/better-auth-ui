@@ -81,11 +81,11 @@ The [`<AuthUIProvider />`](/components/auth-ui-provider) can be fully customized
 <Step>
 ### Auth Pages
 
-Create a dynamic route segment for authentication views in `app/auth/[authView]/page.tsx`.
+Create a dynamic route segment for authentication views in `app/auth/[page]/page.tsx`.
 
-```tsx title="app/auth/[path]/page.tsx"
+```tsx title="app/auth/[page]/page.tsx"
 import { AuthView } from "@daveyplate/better-auth-ui"
-import { authViewPaths } from "@daveyplate/better-auth-ui/server"
+import { authViewPaths } from "@daveyplate/better-auth-ui"
 
 export const dynamicParams = false
 
@@ -124,7 +124,7 @@ Ensure that any links to the authentication process utilize these routes accordi
 <Step>
 ### Account Pages
 
-```tsx title="app/account/[path]/page.tsx"
+```tsx title="app/account/[page]/page.tsx"
 import { AccountView } from "@daveyplate/better-auth-ui"
 import { accountViewPaths } from "@daveyplate/better-auth-ui/server"
 
@@ -148,9 +148,9 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 <Step>
 ### Organization Pages
 
-```tsx title="app/organization/[path]/page.tsx"
+```tsx title="app/organization/[page]/page.tsx"
 import { OrganizationView } from "@daveyplate/better-auth-ui"
-import { organizationViewPaths } from "@daveyplate/better-auth-ui/server"
+import { organizationViewPaths } from "@daveyplate/better-auth-ui"
 
 export const dynamicParams = false
 
@@ -171,9 +171,9 @@ export default async function OrganizationPage({ params }: { params: Promise<{ p
 
 If you prefer slug-based org URLs, set `organization={{ pathMode: "slug", basePath: "/organization", slug: currentSlug }}` in the `AuthUIProvider` and structure your routes accordingly:
 
-```tsx title="app/organization/[slug]/[path]/page.tsx"
+```tsx title="app/organization/[slug]/[page]/page.tsx"
 import { OrganizationView } from "@daveyplate/better-auth-ui"
-import { organizationViewPaths } from "@daveyplate/better-auth-ui/server"
+import { organizationViewPaths } from "@daveyplate/better-auth-ui"
 
 export default async function OrganizationPage({ params }: { params: Promise<{ path: string }> }) {
     const { path } = await params
