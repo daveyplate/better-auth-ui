@@ -1,5 +1,6 @@
 import {
   Body,
+  Button,
   Container,
   Font,
   Head,
@@ -23,11 +24,12 @@ import {
   EmailStyles
 } from "./email-styles"
 
-interface OtpEmailProps {
-  verificationCode?: string
-  email?: string
+interface PasswordChangedEmailProps {
+  userEmail?: string
+  timestamp?: string
+  secureAccountLink?: string
   appName?: string
-  expirationMinutes?: number
+  supportEmail?: string
   logoURL?: string | { light: string; dark: string }
   classNames?: EmailClassNames
   colors?: EmailColors
@@ -37,11 +39,12 @@ interface OtpEmailProps {
   font?: Partial<ComponentProps<typeof Font>>
 }
 
-export const OtpEmail = ({
-  verificationCode = "920441",
-  email,
+export const PasswordChangedEmail = ({
+  userEmail,
+  timestamp,
+  secureAccountLink,
   appName,
-  expirationMinutes = 10,
+  supportEmail,
   logoURL = "https://better-auth.com/logo.png",
   colors,
   classNames,
@@ -49,8 +52,8 @@ export const OtpEmail = ({
   poweredBy = true,
   head,
   font
-}: OtpEmailProps) => {
-  const previewText = `Your verification code is ${verificationCode}`
+}: PasswordChangedEmailProps) => {
+  const previewText = "Your password has been changed"
 
   return (
     <Html>
@@ -115,66 +118,113 @@ export const OtpEmail = ({
               )}
 
               <Heading
-                className={cn("mb-5 text-2xl font-semibold", classNames?.title)}
+                className={cn(
+                  "m-0 mb-5 text-2xl font-semibold",
+                  classNames?.title
+                )}
               >
-                Verify your email
+                Password changed successfully
               </Heading>
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
-                We need to verify your email address
-                {email && (
+                The password for your {appName || ""} account
+                {userEmail && (
                   <>
                     {" "}
                     <Link
-                      href={`mailto:${email}`}
+                      href={`mailto:${userEmail}`}
                       className="text-primary font-medium"
                     >
-                      {email}
+                      {userEmail}
                     </Link>
                   </>
                 )}{" "}
-                before you can access your account. Enter the code below in your
-                open browser window.
+                has been changed successfully.
               </Text>
 
-              <Section className="my-6 border border-border bg-muted p-6">
-                <Text
+              {timestamp && (
+                <Section
                   className={cn(
-                    "m-0 text-center text-4xl font-semibold tracking-widest",
-                    classNames?.title
+                    "my-6 border border-border p-4 bg-muted",
+                    classNames?.card
                   )}
                 >
-                  {verificationCode}
+                  <Text
+                    className={cn(
+                      "m-0 mb-2 text-xs text-muted-foreground",
+                      classNames?.description
+                    )}
+                  >
+                    Changed at:
+                  </Text>
+                  <Text
+                    className={cn(
+                      "m-0 text-sm font-semibold",
+                      classNames?.content
+                    )}
+                  >
+                    {timestamp}
+                  </Text>
+                </Section>
+              )}
+
+              <Text className={cn("text-sm font-normal", classNames?.content)}>
+                If you made this change, you can safely ignore this email. Your
+                account is secure.
+              </Text>
+
+              {secureAccountLink && (
+                <Section className="mt-6">
+                  <Button
+                    href={secureAccountLink}
+                    className={cn(
+                      "inline-flex items-center justify-center whitespace-nowrap rounded-none text-sm font-medium h-10 px-6 bg-primary text-primary-foreground no-underline",
+                      classNames?.button
+                    )}
+                  >
+                    I didn't make this change
+                  </Button>
+                </Section>
+              )}
+
+              {(appName || poweredBy || supportEmail) && (
+                <Hr
+                  className={cn(
+                    "my-6 w-full border border-solid border-border",
+                    classNames?.separator
+                  )}
+                />
+              )}
+
+              {appName && (
+                <Text
+                  className={cn(
+                    "mb-3 text-xs text-muted-foreground",
+                    classNames?.description
+                  )}
+                >
+                  Email sent by {appName}.
                 </Text>
-              </Section>
+              )}
 
-              <Hr
-                className={cn(
-                  "my-6 w-full border border-solid border-border",
-                  classNames?.separator
-                )}
-              />
-
-              <Text
-                className={cn(
-                  "mb-3 text-xs text-muted-foreground",
-                  classNames?.description
-                )}
-              >
-                This code expires in {expirationMinutes} minutes.
-                {appName && <> Email sent by {appName}.</>}
-              </Text>
-
-              <Text
-                className={cn(
-                  "mt-3 text-xs text-muted-foreground",
-                  classNames?.description
-                )}
-              >
-                If you didn't sign up for {appName || "this service"}, you can
-                safely ignore this email. Someone else might have typed your
-                email address by mistake.
-              </Text>
+              {supportEmail && (
+                <Text
+                  className={cn(
+                    "mt-3 text-xs text-muted-foreground",
+                    classNames?.description
+                  )}
+                >
+                  If you didn't authorize this change, please contact support
+                  immediately at{" "}
+                  <Link
+                    href={`mailto:${supportEmail}`}
+                    className={cn("text-primary underline", classNames?.link)}
+                  >
+                    {supportEmail}
+                  </Link>{" "}
+                  to secure your account.
+                </Text>
+              )}
 
               {poweredBy && (
                 <Text
@@ -200,11 +250,13 @@ export const OtpEmail = ({
   )
 }
 
-OtpEmail.PreviewProps = {
-  verificationCode: "069420",
-  email: "m@example.com",
+PasswordChangedEmail.PreviewProps = {
+  userEmail: "m@example.com",
+  timestamp: "April 20, 1969 at 4:20 PM UTC",
+  secureAccountLink: "https://better-auth-ui.com/auth/secure-account",
   appName: "Better Auth",
+  supportEmail: "support@example.com",
   darkMode: true
-} as OtpEmailProps
+} as PasswordChangedEmailProps
 
-export default OtpEmail
+export default PasswordChangedEmail

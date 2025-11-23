@@ -221,7 +221,7 @@ export const VerifyEmailEmail = ({
 
 VerifyEmailEmail.PreviewProps = {
   url: "https://better-auth-ui.com/auth/verify-email?token=abc123def456",
-  email: "daveycodez@gmail.com",
+  email: "m@example.com",
   appName: "Better Auth",
   darkMode: true
 } as VerifyEmailEmailProps

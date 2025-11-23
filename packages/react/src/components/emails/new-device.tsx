@@ -24,10 +24,18 @@ import {
   EmailStyles
 } from "./email-styles"
 
-interface EmailChangedEmailProps {
-  oldEmail?: string
-  newEmail?: string
-  revertURL?: string
+interface DeviceInfo {
+  browser?: string
+  os?: string
+  location?: string
+  ipAddress?: string
+  timestamp?: string
+}
+
+interface NewDeviceEmailProps {
+  userEmail?: string
+  deviceInfo?: DeviceInfo
+  secureAccountLink?: string
   appName?: string
   supportEmail?: string
   logoURL?: string | { light: string; dark: string }
@@ -39,10 +47,10 @@ interface EmailChangedEmailProps {
   font?: Partial<ComponentProps<typeof Font>>
 }
 
-export const EmailChangedEmail = ({
-  oldEmail,
-  newEmail,
-  revertURL,
+export const NewDeviceEmail = ({
+  userEmail,
+  deviceInfo,
+  secureAccountLink,
   appName,
   supportEmail,
   logoURL = "https://better-auth.com/logo.png",
@@ -52,8 +60,8 @@ export const EmailChangedEmail = ({
   poweredBy = true,
   head,
   font
-}: EmailChangedEmailProps) => {
-  const previewText = "Your email address has been changed"
+}: NewDeviceEmailProps) => {
+  const previewText = "New sign-in detected"
 
   return (
     <Html>
@@ -80,13 +88,13 @@ export const EmailChangedEmail = ({
         <Body className={cn("bg-background font-sans", classNames?.body)}>
           <Container
             className={cn(
-              "mx-auto my-auto max-w-xl w-xl px-2 py-10",
+              "mx-auto my-auto max-w-xl px-2 py-10",
               classNames?.container
             )}
           >
             <Section
               className={cn(
-                "bg-card text-card-foreground rounded-none border border-border p-8",
+                "bg-card text-card-foreground flex flex-col rounded-none border border-border p-8",
                 classNames?.card
               )}
             >
@@ -123,70 +131,101 @@ export const EmailChangedEmail = ({
                   classNames?.title
                 )}
               >
-                Email address changed
+                New sign-in detected
               </Heading>
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
-                {`The email address for your ${appName || ""} account has been changed.`}
+                We detected a new sign-in to your {appName || ""} account
+                {userEmail && (
+                  <>
+                    {" "}
+                    <Link
+                      href={`mailto:${userEmail}`}
+                      className="text-primary font-medium"
+                    >
+                      {userEmail}
+                    </Link>
+                  </>
+                )}{" "}
+                from a device we don't recognize.
               </Text>
 
-              <Section
-                className={cn(
-                  "my-6 border border-border p-4 bg-background",
-                  classNames?.card
-                )}
-              >
-                <Text
+              {deviceInfo && (
+                <Section
                   className={cn(
-                    "m-0 mb-2 text-xs text-muted-foreground",
-                    classNames?.description
+                    "my-6 border border-border p-4 bg-muted",
+                    classNames?.card
                   )}
                 >
-                  Previous email:
-                </Text>
+                  <Text
+                    className={cn(
+                      "m-0 mb-3 text-xs text-muted-foreground",
+                      classNames?.description
+                    )}
+                  >
+                    Device details:
+                  </Text>
 
-                <Text
-                  className={cn(
-                    "m-0 mb-4 text-sm font-semibold",
-                    classNames?.content
+                  {deviceInfo.browser && (
+                    <Text
+                      className={cn("m-0 mb-2 text-sm", classNames?.content)}
+                    >
+                      <span className="font-semibold">Browser:</span>{" "}
+                      {deviceInfo.browser}
+                    </Text>
                   )}
-                >
-                  {oldEmail || "old@example.com"}
-                </Text>
 
-                <Text
-                  className={cn(
-                    "m-0 mb-2 text-xs text-muted-foreground",
-                    classNames?.description
+                  {deviceInfo.os && (
+                    <Text
+                      className={cn("m-0 mb-2 text-sm", classNames?.content)}
+                    >
+                      <span className="font-semibold">Operating System:</span>{" "}
+                      {deviceInfo.os}
+                    </Text>
                   )}
-                >
-                  New email:
-                </Text>
 
-                <Text
-                  className={cn(
-                    "m-0 text-sm font-semibold text-primary",
-                    classNames?.content
+                  {deviceInfo.location && (
+                    <Text
+                      className={cn("m-0 mb-2 text-sm", classNames?.content)}
+                    >
+                      <span className="font-semibold">Location:</span>{" "}
+                      {deviceInfo.location}
+                    </Text>
                   )}
-                >
-                  {newEmail || "new@example.com"}
-                </Text>
-              </Section>
+
+                  {deviceInfo.ipAddress && (
+                    <Text
+                      className={cn("m-0 mb-2 text-sm", classNames?.content)}
+                    >
+                      <span className="font-semibold">IP Address:</span>{" "}
+                      {deviceInfo.ipAddress}
+                    </Text>
+                  )}
+
+                  {deviceInfo.timestamp && (
+                    <Text className={cn("m-0 text-sm", classNames?.content)}>
+                      <span className="font-semibold">Time:</span>{" "}
+                      {deviceInfo.timestamp}
+                    </Text>
+                  )}
+                </Section>
+              )}
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
-                If you made this change, you can safely ignore this email.
+                If this was you, you can safely ignore this email. If you don't
+                recognize this activity, please secure your account immediately.
               </Text>
 
-              {revertURL && (
+              {secureAccountLink && (
                 <Section className="mt-6">
                   <Button
-                    href={revertURL}
+                    href={secureAccountLink}
                     className={cn(
                       "inline-flex items-center justify-center whitespace-nowrap rounded-none text-sm font-medium h-10 px-6 bg-primary text-primary-foreground no-underline",
                       classNames?.button
                     )}
                   >
-                    I didn't make this change
+                    Secure my account
                   </Button>
                 </Section>
               )}
@@ -218,8 +257,7 @@ export const EmailChangedEmail = ({
                     classNames?.description
                   )}
                 >
-                  If you didn't authorize this change, please contact support
-                  immediately at{" "}
+                  If you didn't sign in, please contact support immediately at{" "}
                   <Link
                     href={`mailto:${supportEmail}`}
                     className={cn("text-primary underline", classNames?.link)}
@@ -254,13 +292,19 @@ export const EmailChangedEmail = ({
   )
 }
 
-EmailChangedEmail.PreviewProps = {
-  oldEmail: "old@example.com",
-  newEmail: "new@example.com",
+NewDeviceEmail.PreviewProps = {
+  userEmail: "m@example.com",
+  deviceInfo: {
+    browser: "Chrome on macOS",
+    os: "macOS 26.2",
+    location: "San Francisco, CA, United States",
+    ipAddress: "127.0.0.1",
+    timestamp: "April 20, 1969 at 4:20 PM UTC"
+  },
+  secureAccountLink: "https://better-auth-ui.com/auth/secure-account",
+  appName: "Better Auth",
   supportEmail: "support@example.com",
-  revertURL: "https://better-auth-ui.com/auth/revert-email?token=abc123def456",
-  poweredBy: true,
   darkMode: true
-} as EmailChangedEmailProps
+} as NewDeviceEmailProps
 
-export default EmailChangedEmail
+export default NewDeviceEmail

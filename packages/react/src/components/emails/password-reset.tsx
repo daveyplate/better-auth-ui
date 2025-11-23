@@ -224,7 +224,7 @@ export const PasswordResetEmail = ({
 
 PasswordResetEmail.PreviewProps = {
   url: "https://better-auth-ui.com/auth/reset-password?token=abc123def456",
-  email: "daveycodez@gmail.com",
+  email: "m@example.com",
   appName: "Better Auth",
   darkMode: true
 } as PasswordResetEmailProps
