@@ -5,17 +5,27 @@ import { providerIcons } from "@better-auth-ui/react"
 import { Button } from "@heroui/react"
 import type { SocialProvider } from "better-auth/social-providers"
 
+export const providerButtonsLocalization = {
+  CONTINUE_WITH_PROVIDER: "Continue with {provider}"
+}
+
+export type ProviderButtonsLocalization = typeof providerButtonsLocalization
+
 export type ProviderButtonsProps = {
   providers: SocialProvider[]
   isPending: boolean
   setIsPending: (pending: boolean) => void
+  localization?: Partial<ProviderButtonsLocalization>
 }
 
 export function ProviderButtons({
   providers,
   isPending,
-  setIsPending
+  setIsPending,
+  localization
 }: ProviderButtonsProps) {
+  localization = { ...providerButtonsLocalization, ...localization }
+
   const handleClick = async (provider: SocialProvider) => {
     setIsPending(true)
     console.log("clicked", provider)
@@ -37,7 +47,10 @@ export function ProviderButtons({
             onClick={() => handleClick(provider)}
           >
             {Icon && <Icon />}
-            Continue with {getProviderName(provider)}
+            {localization.CONTINUE_WITH_PROVIDER?.replace(
+              "{provider}",
+              getProviderName(provider)
+            )}
           </Button>
         )
       })}
