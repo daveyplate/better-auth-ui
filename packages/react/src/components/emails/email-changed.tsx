@@ -80,13 +80,13 @@ export const EmailChangedEmail = ({
         <Body className={cn("bg-background font-sans", classNames?.body)}>
           <Container
             className={cn(
-              "mx-auto my-auto max-w-xl px-2 py-10",
+              "mx-auto my-auto max-w-xl w-xl px-2 py-10",
               classNames?.container
             )}
           >
             <Section
               className={cn(
-                "bg-card text-card-foreground flex flex-col rounded-none border border-border p-8",
+                "bg-card text-card-foreground rounded-none border border-border p-8",
                 classNames?.card
               )}
             >
@@ -127,7 +127,7 @@ export const EmailChangedEmail = ({
               </Heading>
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
-                The email address for your {appName} account has been changed.
+                {`The email address for your ${appName || ""} account has been changed.`}
               </Text>
 
               <Section
@@ -178,7 +178,7 @@ export const EmailChangedEmail = ({
               </Text>
 
               {revertURL && (
-                <Section className="my-6">
+                <Section className="mt-6">
                   <Button
                     href={revertURL}
                     className={cn(
@@ -191,21 +191,25 @@ export const EmailChangedEmail = ({
                 </Section>
               )}
 
-              <Hr
-                className={cn(
-                  "my-6 w-full border border-solid border-border",
-                  classNames?.separator
-                )}
-              />
+              {(appName || poweredBy || supportEmail) && (
+                <Hr
+                  className={cn(
+                    "my-6 w-full border border-solid border-border",
+                    classNames?.separator
+                  )}
+                />
+              )}
 
-              <Text
-                className={cn(
-                  "mb-3 text-xs text-muted-foreground",
-                  classNames?.description
-                )}
-              >
-                {appName && <>Email sent by {appName}.</>}
-              </Text>
+              {appName && (
+                <Text
+                  className={cn(
+                    "mb-3 text-xs text-muted-foreground",
+                    classNames?.description
+                  )}
+                >
+                  Email sent by {appName}.
+                </Text>
+              )}
 
               {supportEmail && (
                 <Text
@@ -253,9 +257,9 @@ export const EmailChangedEmail = ({
 EmailChangedEmail.PreviewProps = {
   oldEmail: "old@example.com",
   newEmail: "new@example.com",
-  revertURL: "https://app.slackbound.com/auth/revert-email?token=abc123def456",
-  appName: "Better Auth",
-  supportEmail: "support@example.com",
+  supportEmail: "support@better-auth.com",
+  revertURL: "https://better-auth-ui.com/auth/revert-email?token=abc123def456",
+  poweredBy: true,
   darkMode: true
 } as EmailChangedEmailProps
 

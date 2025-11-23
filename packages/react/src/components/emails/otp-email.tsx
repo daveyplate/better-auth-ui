@@ -201,20 +201,10 @@ export const OtpEmail = ({
 }
 
 OtpEmail.PreviewProps = {
-  verificationCode: "920441",
+  verificationCode: "069420",
   email: "daveycodez@gmail.com",
   appName: "Better Auth",
-  expirationMinutes: 10,
-  darkMode: true,
-  font: {
-    fontFamily: "Ubuntu",
-    webFont: {
-      url: "https://cdn.jsdelivr.net/fontsource/fonts/ubuntu-sans:vf@latest/latin-wght-normal.woff2",
-      format: "woff2"
-    },
-    fontWeight: "100 800"
-  }
+  darkMode: true
 } as OtpEmailProps
 
 export default OtpEmail
-

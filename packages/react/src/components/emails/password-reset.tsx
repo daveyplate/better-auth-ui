@@ -24,7 +24,7 @@ import {
   EmailStyles
 } from "./email-styles"
 
-interface MagicLinkEmailProps {
+interface PasswordResetEmailProps {
   url?: string
   email?: string
   appName?: string
@@ -38,11 +38,11 @@ interface MagicLinkEmailProps {
   font?: Partial<ComponentProps<typeof Font>>
 }
 
-export const MagicLinkEmail = ({
+export const PasswordResetEmail = ({
   url,
   email,
   appName,
-  expirationMinutes = 15,
+  expirationMinutes = 60,
   logoURL = "https://better-auth.com/logo.png",
   colors,
   classNames,
@@ -50,8 +50,8 @@ export const MagicLinkEmail = ({
   poweredBy = true,
   head,
   font
-}: MagicLinkEmailProps) => {
-  const previewText = `Sign in to ${appName || "your account"}`
+}: PasswordResetEmailProps) => {
+  const previewText = "Reset your password"
 
   return (
     <Html>
@@ -121,13 +121,11 @@ export const MagicLinkEmail = ({
                   classNames?.title
                 )}
               >
-                Sign in to {appName || "your account"}
+                Reset your password
               </Heading>
 
-              <Text
-                className={cn("m-0 text-sm font-normal", classNames?.content)}
-              >
-                Click the button below to sign in to your account
+              <Text className={cn("text-sm font-normal", classNames?.content)}>
+                We received a request to reset the password for your account
                 {email && (
                   <>
                     {" "}
@@ -150,7 +148,7 @@ export const MagicLinkEmail = ({
                     classNames?.button
                   )}
                 >
-                  Sign in to {appName || "your account"}
+                  Reset password
                 </Button>
               </Section>
 
@@ -196,8 +194,8 @@ export const MagicLinkEmail = ({
                   classNames?.description
                 )}
               >
-                If you didn't request this email, you can safely ignore it.
-                Someone else might have typed your email address by mistake.
+                If you didn't request a password reset, you can safely ignore
+                this email. Your password will remain unchanged.
               </Text>
 
               {poweredBy && (
@@ -224,11 +222,11 @@ export const MagicLinkEmail = ({
   )
 }
 
-MagicLinkEmail.PreviewProps = {
-  url: "https://better-auth-ui.com/auth/verify?token=abc123def456",
+PasswordResetEmail.PreviewProps = {
+  url: "https://better-auth-ui.com/auth/reset-password?token=abc123def456",
   email: "daveycodez@gmail.com",
   appName: "Better Auth",
   darkMode: true
-} as MagicLinkEmailProps
+} as PasswordResetEmailProps
 
-export default MagicLinkEmail
+export default PasswordResetEmail

@@ -134,3 +134,5 @@ export const EmailStyles = ({ colors, darkMode = true }: EmailStylesProps) => {
     `}</style>
   )
 }
+
+export default EmailStyles
