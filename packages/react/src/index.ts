@@ -1,4 +1,5 @@
 export * from "./components/auth-provider"
+export * from "./components/emails"
 export * from "./components/icons"
 export * from "./lib/provider-icons"
 export * from "./lib/utils"

@@ -4,25 +4,31 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch & email dev --dir src/components/emails -p 9000"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "devDependencies": {
+    "@react-email/components": "^1.0.1",
+    "@react-email/preview-server": "^5.0.5",
     "@types/react": "^19.2.6",
     "clsx": "^2.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "tailwind-merge": "^3.4.0"
+    "react-email": "^5.0.5",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^4.1.17"
   },
   "dependencies": {
     "@better-auth-ui/core": "workspace:*"
   },
   "peerDependencies": {
+    "@react-email/components": ">=1.0.0",
     "better-auth": ">=1.4.0",
     "clsx": ">=2.1.0",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "tailwind-merge": ">=3.4.0"
+    "tailwind-merge": ">=3.4.0",
+    "tailwindcss": ">=4.1.0"
   }
 }
