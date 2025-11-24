@@ -80,9 +80,9 @@
       "dependencies": {
         "@better-auth-ui/core": "workspace:*",
         "@better-auth-ui/react": "workspace:*",
-        "@heroicons/react": "^2.2.0",
       },
       "devDependencies": {
+        "@heroicons/react": "^2.2.0",
         "@heroui/react": "^3.0.0-beta.2",
         "@heroui/styles": "^3.0.0-beta.2",
         "@types/react": "^19.2.7",
@@ -93,6 +93,7 @@
         "sonner": "^2.0.7",
       },
       "peerDependencies": {
+        "@heroicons/react": ">=2.2.0",
         "@heroui/react": ">=3.0.0",
         "@heroui/styles": ">=3.0.0",
         "better-auth": ">=1.4.0",
