@@ -22,7 +22,7 @@ import { toast } from "sonner"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons } from "./provider-buttons"
 
-const magicLinkLocalization = {
+const localization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
   EMAIL: "Email",
@@ -35,7 +35,7 @@ const magicLinkLocalization = {
   SIGN_UP: "Sign Up"
 }
 
-export type MagicLinkLocalization = typeof magicLinkLocalization
+export type MagicLinkLocalization = typeof localization
 
 export type MagicLinkProps<TAuthClient extends AnyAuthClient> = Partial<
   AuthConfig<TAuthClient>
@@ -48,7 +48,7 @@ export function MagicLink<TAuthClient extends AnyAuthClient>({
   className,
   ...props
 }: MagicLinkProps<TAuthClient>) {
-  const localization = { ...magicLinkLocalization, ...props.localization }
+  const localization = { ...MagicLink.localization, ...props.localization }
 
   const { authClient, Link, socialProviders, magicLink } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
@@ -154,4 +154,4 @@ export function MagicLink<TAuthClient extends AnyAuthClient>({
   )
 }
 
-MagicLink.localization = magicLinkLocalization
+MagicLink.localization = localization

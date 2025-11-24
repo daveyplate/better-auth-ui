@@ -6,11 +6,11 @@ import { Button } from "@heroui/react"
 import type { SocialProvider } from "better-auth/social-providers"
 import { toast } from "sonner"
 
-const providerButtonsLocalization = {
+const localization = {
   CONTINUE_WITH_PROVIDER: "Continue with {provider}"
 }
 
-export type ProviderButtonsLocalization = typeof providerButtonsLocalization
+export type ProviderButtonsLocalization = typeof localization
 
 export type ProviderButtonsProps = {
   providers: SocialProvider[]
@@ -28,7 +28,7 @@ export function ProviderButtons({
   ...props
 }: ProviderButtonsProps) {
   const localization = {
-    ...providerButtonsLocalization,
+    ...ProviderButtons.localization,
     ...props.localization
   }
 
@@ -71,4 +71,4 @@ export function ProviderButtons({
   )
 }
 
-ProviderButtons.localization = providerButtonsLocalization
+ProviderButtons.localization = localization

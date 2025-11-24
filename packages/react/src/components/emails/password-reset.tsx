@@ -2,7 +2,6 @@ import {
   Body,
   Button,
   Container,
-  Font,
   Head,
   Heading,
   Hr,
@@ -15,7 +14,7 @@ import {
   Tailwind,
   Text
 } from "@react-email/components"
-import type { ComponentProps, ReactNode } from "react"
+import type { ReactNode } from "react"
 
 import { cn } from "../../lib/utils"
 import {
@@ -23,6 +22,23 @@ import {
   type EmailColors,
   EmailStyles
 } from "./email-styles"
+
+const localization = {
+  RESET_YOUR_PASSWORD: "Reset your password",
+  LOGO: "Logo",
+  WE_RECEIVED_REQUEST_TO_RESET_PASSWORD:
+    "We received a request to reset the password for your {appName} account {email}.",
+  RESET_PASSWORD: "Reset password",
+  OR_COPY_AND_PASTE_URL: "Or copy and paste this URL into your browser:",
+  THIS_LINK_EXPIRES_IN_MINUTES:
+    "This link expires in {expirationMinutes} minutes.",
+  EMAIL_SENT_BY: "Email sent by {appName}.",
+  IF_YOU_DIDNT_REQUEST_PASSWORD_RESET:
+    "If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.",
+  POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
+}
+
+export type PasswordResetEmailLocalization = typeof localization
 
 interface PasswordResetEmailProps {
   url: string
@@ -35,9 +51,7 @@ interface PasswordResetEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  font?: Omit<ComponentProps<typeof Font>, "fallbackFontFamily"> & {
-    fallbackFontFamily?: ComponentProps<typeof Font>["fallbackFontFamily"]
-  }
+  localization?: Partial<PasswordResetEmailLocalization>
 }
 
 export const PasswordResetEmail = ({
@@ -49,11 +63,16 @@ export const PasswordResetEmail = ({
   colors,
   classNames,
   darkMode = true,
-  poweredBy = true,
+  poweredBy,
   head,
-  font
+  ...props
 }: PasswordResetEmailProps) => {
-  const previewText = "Reset your password"
+  const localization = {
+    ...PasswordResetEmail.localization,
+    ...props.localization
+  }
+
+  const previewText = localization.RESET_YOUR_PASSWORD
 
   return (
     <Html>
@@ -62,13 +81,6 @@ export const PasswordResetEmail = ({
         <meta content="light dark" name="supported-color-schemes" />
 
         <EmailStyles colors={colors} darkMode={darkMode} />
-
-        {font && (
-          <Font
-            {...font}
-            fallbackFontFamily={font.fallbackFontFamily || "sans-serif"}
-          />
-        )}
 
         {head}
       </Head>
@@ -94,7 +106,7 @@ export const PasswordResetEmail = ({
                   src={logoURL}
                   width={48}
                   height={48}
-                  alt={appName || "Logo"}
+                  alt={appName || localization.LOGO}
                   className={cn("mx-auto mb-8", classNames?.logo)}
                 />
               ) : (
@@ -103,14 +115,14 @@ export const PasswordResetEmail = ({
                     src={logoURL.light}
                     width={48}
                     height={48}
-                    alt={appName || "Logo"}
+                    alt={appName || localization.LOGO}
                     className={cn("mx-auto mb-8 logo-light", classNames?.logo)}
                   />
                   <Img
                     src={logoURL.dark}
                     width={48}
                     height={48}
-                    alt={appName || "Logo"}
+                    alt={appName || localization.LOGO}
                     className={cn(
                       "hidden mx-auto mb-8 logo-dark",
                       classNames?.logo
@@ -125,23 +137,34 @@ export const PasswordResetEmail = ({
                   classNames?.title
                 )}
               >
-                Reset your password
+                {localization.RESET_YOUR_PASSWORD}
               </Heading>
 
-              <Text className={cn("text-sm font-normal", classNames?.content)}>
-                We received a request to reset the password for your account
-                {email && (
-                  <>
-                    {" "}
-                    <Link
-                      href={`mailto:${email}`}
-                      className="text-primary font-medium"
-                    >
-                      {email}
-                    </Link>
-                  </>
-                )}
-                .
+              <Text className={cn("text-sm", classNames?.content)}>
+                {(() => {
+                  const textWithAppName =
+                    localization.WE_RECEIVED_REQUEST_TO_RESET_PASSWORD.replace(
+                      "{appName}",
+                      appName || ""
+                    ).replace(" .", ".")
+
+                  return email ? (
+                    <>
+                      {textWithAppName.split("{email}")[0]}
+
+                      <Link
+                        href={`mailto:${email}`}
+                        className="text-primary font-medium"
+                      >
+                        {email}
+                      </Link>
+
+                      {textWithAppName.split("{email}")[1]}
+                    </>
+                  ) : (
+                    textWithAppName.replace("{email}", "").replace(" .", ".")
+                  )
+                })()}
               </Text>
 
               <Section className="my-6">
@@ -152,7 +175,7 @@ export const PasswordResetEmail = ({
                     classNames?.button
                   )}
                 >
-                  Reset password
+                  {localization.RESET_PASSWORD}
                 </Button>
               </Section>
 
@@ -162,7 +185,7 @@ export const PasswordResetEmail = ({
                   classNames?.description
                 )}
               >
-                Or copy and paste this URL into your browser:
+                {localization.OR_COPY_AND_PASTE_URL}
               </Text>
 
               <Link
@@ -182,15 +205,28 @@ export const PasswordResetEmail = ({
                 )}
               />
 
-              <Text
-                className={cn(
-                  "m-0 mb-3 text-xs text-muted-foreground",
-                  classNames?.description
-                )}
-              >
-                This link expires in {expirationMinutes} minutes.
-                {appName && <> Email sent by {appName}.</>}
-              </Text>
+              {expirationMinutes || appName ? (
+                <Text
+                  className={cn(
+                    "m-0 mb-3 text-xs text-muted-foreground",
+                    classNames?.description
+                  )}
+                >
+                  {expirationMinutes
+                    ? localization.THIS_LINK_EXPIRES_IN_MINUTES.replace(
+                        "{expirationMinutes}",
+                        expirationMinutes.toString()
+                      )
+                    : null}
+
+                  {appName && (
+                    <>
+                      {" "}
+                      {localization.EMAIL_SENT_BY.replace("{appName}", appName)}
+                    </>
+                  )}
+                </Text>
+              ) : null}
 
               <Text
                 className={cn(
@@ -198,8 +234,7 @@ export const PasswordResetEmail = ({
                   classNames?.description
                 )}
               >
-                If you didn't request a password reset, you can safely ignore
-                this email. Your password will remain unchanged.
+                {localization.IF_YOU_DIDNT_REQUEST_PASSWORD_RESET}
               </Text>
 
               {poweredBy && (
@@ -209,13 +244,14 @@ export const PasswordResetEmail = ({
                     classNames?.poweredBy
                   )}
                 >
-                  Powered by{" "}
+                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[0]}
                   <Link
                     href="https://better-auth.com"
                     className={cn("text-primary underline", classNames?.link)}
                   >
                     better-auth
                   </Link>
+                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[1]}
                 </Text>
               )}
             </Section>
@@ -225,6 +261,8 @@ export const PasswordResetEmail = ({
     </Html>
   )
 }
+
+PasswordResetEmail.localization = localization
 
 PasswordResetEmail.PreviewProps = {
   url: "https://better-auth-ui.com/auth/reset-password?token=example-token",

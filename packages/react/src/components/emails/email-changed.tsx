@@ -2,7 +2,6 @@ import {
   Body,
   Button,
   Container,
-  Font,
   Head,
   Heading,
   Hr,
@@ -15,7 +14,7 @@ import {
   Tailwind,
   Text
 } from "@react-email/components"
-import type { ComponentProps, ReactNode } from "react"
+import type { ReactNode } from "react"
 
 import { cn } from "../../lib/utils"
 import {
@@ -23,6 +22,25 @@ import {
   type EmailColors,
   EmailStyles
 } from "./email-styles"
+
+const localization = {
+  YOUR_EMAIL_ADDRESS_HAS_BEEN_CHANGED: "Your email address has been changed",
+  LOGO: "Logo",
+  EMAIL_ADDRESS_CHANGED: "Email address changed",
+  EMAIL_ADDRESS_FOR_YOUR_ACCOUNT_CHANGED:
+    "The email address for your {appName} account has been changed.",
+  PREVIOUS_EMAIL: "Previous email:",
+  NEW_EMAIL: "New email:",
+  IF_YOU_MADE_THIS_CHANGE:
+    "If you made this change, you can safely ignore this email.",
+  I_DIDNT_MAKE_THIS_CHANGE: "I didn't make this change",
+  EMAIL_SENT_BY: "Email sent by {appName}.",
+  IF_YOU_DIDNT_AUTHORIZE_THIS_CHANGE:
+    "If you didn't authorize this change, please contact support immediately {supportEmail} to secure your account.",
+  POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
+}
+
+export type EmailChangedEmailLocalization = typeof localization
 
 interface EmailChangedEmailProps {
   oldEmail?: string
@@ -36,9 +54,7 @@ interface EmailChangedEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  font?: Omit<ComponentProps<typeof Font>, "fallbackFontFamily"> & {
-    fallbackFontFamily?: ComponentProps<typeof Font>["fallbackFontFamily"]
-  }
+  localization?: Partial<EmailChangedEmailLocalization>
 }
 
 export const EmailChangedEmail = ({
@@ -51,11 +67,16 @@ export const EmailChangedEmail = ({
   colors,
   classNames,
   darkMode = true,
-  poweredBy = true,
+  poweredBy,
   head,
-  font
+  ...props
 }: EmailChangedEmailProps) => {
-  const previewText = "Your email address has been changed"
+  const localization = {
+    ...EmailChangedEmail.localization,
+    ...props.localization
+  }
+
+  const previewText = localization.YOUR_EMAIL_ADDRESS_HAS_BEEN_CHANGED
 
   return (
     <Html>
@@ -64,13 +85,6 @@ export const EmailChangedEmail = ({
         <meta content="light dark" name="supported-color-schemes" />
 
         <EmailStyles colors={colors} darkMode={darkMode} />
-
-        {font && (
-          <Font
-            {...font}
-            fallbackFontFamily={font.fallbackFontFamily || "sans-serif"}
-          />
-        )}
 
         {head}
       </Head>
@@ -87,39 +101,43 @@ export const EmailChangedEmail = ({
           >
             <Section
               className={cn(
-                "bg-card text-card-foreground flex flex-col rounded-none border border-border p-8",
+                "bg-card text-card-foreground rounded-none border border-border p-8",
                 classNames?.card
               )}
             >
-              {typeof logoURL === "string" ? (
-                <Img
-                  src={logoURL}
-                  width={48}
-                  height={48}
-                  alt={appName || "Logo"}
-                  className={cn("mx-auto mb-8", classNames?.logo)}
-                />
-              ) : (
-                <>
+              {logoURL &&
+                (typeof logoURL === "string" ? (
                   <Img
-                    src={logoURL.light}
+                    src={logoURL}
                     width={48}
                     height={48}
-                    alt={appName || "Logo"}
-                    className={cn("mx-auto mb-8 logo-light", classNames?.logo)}
+                    alt={appName || localization.LOGO}
+                    className={cn("mx-auto mb-8", classNames?.logo)}
                   />
-                  <Img
-                    src={logoURL.dark}
-                    width={48}
-                    height={48}
-                    alt={appName || "Logo"}
-                    className={cn(
-                      "hidden mx-auto mb-8 logo-dark",
-                      classNames?.logo
-                    )}
-                  />
-                </>
-              )}
+                ) : (
+                  <>
+                    <Img
+                      src={logoURL.light}
+                      width={48}
+                      height={48}
+                      alt={appName || localization.LOGO}
+                      className={cn(
+                        "mx-auto mb-8 logo-light",
+                        classNames?.logo
+                      )}
+                    />
+                    <Img
+                      src={logoURL.dark}
+                      width={48}
+                      height={48}
+                      alt={appName || localization.LOGO}
+                      className={cn(
+                        "hidden mx-auto mb-8 logo-dark",
+                        classNames?.logo
+                      )}
+                    />
+                  </>
+                ))}
 
               <Heading
                 className={cn(
@@ -127,11 +145,14 @@ export const EmailChangedEmail = ({
                   classNames?.title
                 )}
               >
-                Email address changed
+                {localization.EMAIL_ADDRESS_CHANGED}
               </Heading>
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
-                {`The email address for your ${appName || ""} account has been changed.`}
+                {localization.EMAIL_ADDRESS_FOR_YOUR_ACCOUNT_CHANGED.replace(
+                  "{appName}",
+                  appName || ""
+                ).replace(" .", ".")}
               </Text>
 
               {(oldEmail || newEmail) && (
@@ -149,7 +170,7 @@ export const EmailChangedEmail = ({
                           classNames?.description
                         )}
                       >
-                        Previous email:
+                        {localization.PREVIOUS_EMAIL}
                       </Text>
 
                       <Text
@@ -171,7 +192,7 @@ export const EmailChangedEmail = ({
                           classNames?.description
                         )}
                       >
-                        New email:
+                        {localization.NEW_EMAIL}
                       </Text>
 
                       <Text
@@ -188,11 +209,11 @@ export const EmailChangedEmail = ({
               )}
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
-                If you made this change, you can safely ignore this email.
+                {localization.IF_YOU_MADE_THIS_CHANGE}
               </Text>
 
               {revertURL && (
-                <Section className="mt-6">
+                <Section className="my-6">
                   <Button
                     href={revertURL}
                     className={cn(
@@ -200,19 +221,17 @@ export const EmailChangedEmail = ({
                       classNames?.button
                     )}
                   >
-                    I didn't make this change
+                    {localization.I_DIDNT_MAKE_THIS_CHANGE}
                   </Button>
                 </Section>
               )}
 
-              {(appName || poweredBy || supportEmail) && (
-                <Hr
-                  className={cn(
-                    "my-6 w-full border border-solid border-border",
-                    classNames?.separator
-                  )}
-                />
-              )}
+              <Hr
+                className={cn(
+                  "my-6 w-full border border-solid border-border",
+                  classNames?.separator
+                )}
+              />
 
               {appName && (
                 <Text
@@ -221,28 +240,42 @@ export const EmailChangedEmail = ({
                     classNames?.description
                   )}
                 >
-                  Email sent by {appName}.
+                  {localization.EMAIL_SENT_BY.replace("{appName}", appName)}
                 </Text>
               )}
 
-              {supportEmail && (
-                <Text
-                  className={cn(
-                    "mt-3 text-xs text-muted-foreground",
-                    classNames?.description
-                  )}
-                >
-                  If you didn't authorize this change, please contact support
-                  immediately at{" "}
-                  <Link
-                    href={`mailto:${supportEmail}`}
-                    className={cn("text-primary underline", classNames?.link)}
-                  >
-                    {supportEmail}
-                  </Link>
-                  .
-                </Text>
-              )}
+              <Text
+                className={cn(
+                  "mt-3 text-xs text-muted-foreground",
+                  classNames?.description
+                )}
+              >
+                {supportEmail ? (
+                  <>
+                    {
+                      localization.IF_YOU_DIDNT_AUTHORIZE_THIS_CHANGE.split(
+                        "{supportEmail}"
+                      )[0]
+                    }
+                    <Link
+                      href={`mailto:${supportEmail}`}
+                      className={cn("text-primary underline", classNames?.link)}
+                    >
+                      {supportEmail}
+                    </Link>
+                    {
+                      localization.IF_YOU_DIDNT_AUTHORIZE_THIS_CHANGE.split(
+                        "{supportEmail}"
+                      )[1]
+                    }
+                  </>
+                ) : (
+                  localization.IF_YOU_DIDNT_AUTHORIZE_THIS_CHANGE.replace(
+                    "{supportEmail}",
+                    ""
+                  ).replace(" .", ".")
+                )}
+              </Text>
 
               {poweredBy && (
                 <Text
@@ -251,13 +284,14 @@ export const EmailChangedEmail = ({
                     classNames?.poweredBy
                   )}
                 >
-                  Powered by{" "}
+                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[0]}
                   <Link
                     href="https://better-auth.com"
                     className={cn("text-primary underline", classNames?.link)}
                   >
                     better-auth
                   </Link>
+                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[1]}
                 </Text>
               )}
             </Section>
@@ -268,11 +302,14 @@ export const EmailChangedEmail = ({
   )
 }
 
+EmailChangedEmail.localization = localization
+
 EmailChangedEmail.PreviewProps = {
   oldEmail: "old@example.com",
   newEmail: "new@example.com",
   supportEmail: "support@example.com",
   revertURL: "https://better-auth-ui.com/auth/revert-email?token=example-token",
+  appName: "Better Auth",
   poweredBy: true,
   darkMode: true
 } as EmailChangedEmailProps

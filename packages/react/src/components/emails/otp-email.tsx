@@ -1,7 +1,6 @@
 import {
   Body,
   Container,
-  Font,
   Head,
   Heading,
   Hr,
@@ -14,7 +13,7 @@ import {
   Tailwind,
   Text
 } from "@react-email/components"
-import type { ComponentProps, ReactNode } from "react"
+import type { ReactNode } from "react"
 
 import { cn } from "../../lib/utils"
 import {
@@ -22,6 +21,23 @@ import {
   type EmailColors,
   EmailStyles
 } from "./email-styles"
+
+const localization = {
+  YOUR_VERIFICATION_CODE_IS_CODE:
+    "Your verification code is {verificationCode}",
+  LOGO: "Logo",
+  VERIFY_YOUR_EMAIL: "Verify your email",
+  WE_NEED_TO_VERIFY_YOUR_EMAIL_ADDRESS:
+    "We need to verify your email address {email} before you can access your {appName} account. Enter the code below in your open browser window.",
+  THIS_CODE_EXPIRES_IN_MINUTES:
+    "This code expires in {expirationMinutes} minutes.",
+  EMAIL_SENT_BY: "Email sent by {appName}.",
+  IF_YOU_DIDNT_REQUEST_THIS_EMAIL:
+    "If you didn't request this email, you can safely ignore it. Someone else might have typed your email address by mistake.",
+  POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
+}
+
+export type OtpEmailEmailLocalization = typeof localization
 
 interface OtpEmailProps {
   verificationCode: string
@@ -34,9 +50,7 @@ interface OtpEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  font?: Omit<ComponentProps<typeof Font>, "fallbackFontFamily"> & {
-    fallbackFontFamily?: ComponentProps<typeof Font>["fallbackFontFamily"]
-  }
+  localization?: Partial<OtpEmailEmailLocalization>
 }
 
 export const OtpEmail = ({
@@ -48,11 +62,19 @@ export const OtpEmail = ({
   colors,
   classNames,
   darkMode = true,
-  poweredBy = true,
+  poweredBy,
   head,
-  font
+  ...props
 }: OtpEmailProps) => {
-  const previewText = `Your verification code is ${verificationCode}`
+  const localization = {
+    ...OtpEmail.localization,
+    ...props.localization
+  }
+
+  const previewText = localization.YOUR_VERIFICATION_CODE_IS_CODE.replace(
+    "{verificationCode}",
+    verificationCode
+  )
 
   return (
     <Html>
@@ -61,13 +83,6 @@ export const OtpEmail = ({
         <meta content="light dark" name="supported-color-schemes" />
 
         <EmailStyles colors={colors} darkMode={darkMode} />
-
-        {font && (
-          <Font
-            {...font}
-            fallbackFontFamily={font.fallbackFontFamily || "sans-serif"}
-          />
-        )}
 
         {head}
       </Head>
@@ -88,57 +103,71 @@ export const OtpEmail = ({
                 classNames?.card
               )}
             >
-              {typeof logoURL === "string" ? (
-                <Img
-                  src={logoURL}
-                  width={48}
-                  height={48}
-                  alt={appName || "Logo"}
-                  className={cn("mx-auto mb-8", classNames?.logo)}
-                />
-              ) : (
-                <>
+              {logoURL &&
+                (typeof logoURL === "string" ? (
                   <Img
-                    src={logoURL.light}
+                    src={logoURL}
                     width={48}
                     height={48}
-                    alt={appName || "Logo"}
-                    className={cn("mx-auto mb-8 logo-light", classNames?.logo)}
+                    alt={appName || localization.LOGO}
+                    className={cn("mx-auto mb-8", classNames?.logo)}
                   />
-                  <Img
-                    src={logoURL.dark}
-                    width={48}
-                    height={48}
-                    alt={appName || "Logo"}
-                    className={cn(
-                      "hidden mx-auto mb-8 logo-dark",
-                      classNames?.logo
-                    )}
-                  />
-                </>
-              )}
+                ) : (
+                  <>
+                    <Img
+                      src={logoURL.light}
+                      width={48}
+                      height={48}
+                      alt={appName || localization.LOGO}
+                      className={cn(
+                        "mx-auto mb-8 logo-light",
+                        classNames?.logo
+                      )}
+                    />
+                    <Img
+                      src={logoURL.dark}
+                      width={48}
+                      height={48}
+                      alt={appName || localization.LOGO}
+                      className={cn(
+                        "hidden mx-auto mb-8 logo-dark",
+                        classNames?.logo
+                      )}
+                    />
+                  </>
+                ))}
 
               <Heading
                 className={cn("mb-5 text-2xl font-semibold", classNames?.title)}
               >
-                Verify your email
+                {localization.VERIFY_YOUR_EMAIL}
               </Heading>
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
-                We need to verify your email address
-                {email && (
-                  <>
-                    {" "}
-                    <Link
-                      href={`mailto:${email}`}
-                      className="text-primary font-medium"
-                    >
-                      {email}
-                    </Link>
-                  </>
-                )}{" "}
-                before you can access your account. Enter the code below in your
-                open browser window.
+                {(() => {
+                  const textWithAppName =
+                    localization.WE_NEED_TO_VERIFY_YOUR_EMAIL_ADDRESS.replace(
+                      "{appName}",
+                      appName || ""
+                    ).replace(" .", ".")
+
+                  return email ? (
+                    <>
+                      {textWithAppName.split("{email}")[0]}
+
+                      <Link
+                        href={`mailto:${email}`}
+                        className="text-primary font-medium"
+                      >
+                        {email}
+                      </Link>
+
+                      {textWithAppName.split("{email}")[1]}
+                    </>
+                  ) : (
+                    textWithAppName.replace("{email}", "").replace(" .", ".")
+                  )
+                })()}
               </Text>
 
               <Section
@@ -170,8 +199,16 @@ export const OtpEmail = ({
                   classNames?.description
                 )}
               >
-                This code expires in {expirationMinutes} minutes.
-                {appName && <> Email sent by {appName}.</>}
+                {localization.THIS_CODE_EXPIRES_IN_MINUTES.replace(
+                  "{expirationMinutes}",
+                  expirationMinutes.toString()
+                )}
+                {appName && (
+                  <>
+                    {" "}
+                    {localization.EMAIL_SENT_BY.replace("{appName}", appName)}
+                  </>
+                )}
               </Text>
 
               <Text
@@ -180,9 +217,7 @@ export const OtpEmail = ({
                   classNames?.description
                 )}
               >
-                If you didn't sign up for {appName || "this service"}, you can
-                safely ignore this email. Someone else might have typed your
-                email address by mistake.
+                {localization.IF_YOU_DIDNT_REQUEST_THIS_EMAIL}
               </Text>
 
               {poweredBy && (
@@ -192,13 +227,14 @@ export const OtpEmail = ({
                     classNames?.poweredBy
                   )}
                 >
-                  Powered by{" "}
+                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[0]}
                   <Link
                     href="https://better-auth.com"
                     className={cn("text-primary underline", classNames?.link)}
                   >
                     better-auth
                   </Link>
+                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[1]}
                 </Text>
               )}
             </Section>
@@ -208,6 +244,8 @@ export const OtpEmail = ({
     </Html>
   )
 }
+
+OtpEmail.localization = localization
 
 OtpEmail.PreviewProps = {
   verificationCode: "069420",

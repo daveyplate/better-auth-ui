@@ -23,7 +23,7 @@ import { toast } from "sonner"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons } from "./provider-buttons"
 
-const signUpLocalization = {
+const localization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
   ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
@@ -38,7 +38,7 @@ const signUpLocalization = {
   SIGN_UP: "Sign Up"
 }
 
-export type SignUpLocalization = typeof signUpLocalization
+export type SignUpLocalization = typeof localization
 
 export type SignUpProps<TAuthClient extends AnyAuthClient> = Partial<
   AuthConfig<TAuthClient>
@@ -51,7 +51,7 @@ export function SignUp<TAuthClient extends AnyAuthClient>({
   className,
   ...props
 }: SignUpProps<TAuthClient>) {
-  const localization = { ...signUpLocalization, ...props.localization }
+  const localization = { ...SignUp.localization, ...props.localization }
 
   const { authClient, navigate, Link, socialProviders, magicLink } =
     useAuth(props)
@@ -198,4 +198,4 @@ export function SignUp<TAuthClient extends AnyAuthClient>({
   )
 }
 
-SignUp.localization = signUpLocalization
+SignUp.localization = localization

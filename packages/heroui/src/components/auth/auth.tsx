@@ -7,13 +7,13 @@ import { SignIn } from "./sign-in"
 import { SignOut } from "./sign-out"
 import { SignUp } from "./sign-up"
 
-const authLocalization = {
+const localization = {
   ...SignIn.localization,
   ...SignUp.localization,
   ...MagicLink.localization
 }
 
-export type AuthLocalization = typeof authLocalization
+export type AuthLocalization = typeof localization
 
 export type AuthProps<TAuthClient extends AnyAuthClient> = Partial<
   AuthConfig<TAuthClient>
@@ -43,4 +43,4 @@ export function Auth<TAuthClient extends AnyAuthClient>({
   }
 }
 
-Auth.localization = authLocalization
+Auth.localization = localization

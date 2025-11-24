@@ -24,12 +24,11 @@ import {
 } from "./email-styles"
 
 const localization = {
-  SIGN_IN_TO_APP_NAME: "Sign in to {appName}",
-  SIGN_IN_TO_YOUR_ACCOUNT: "Sign in to your account",
-  YOUR_ACCOUNT: "your account",
+  VERIFY_YOUR_EMAIL: "Verify your email",
   LOGO: "Logo",
-  CLICK_BUTTON_TO_SIGN_IN:
-    "Click the button below to sign in to your account {emailAddress}.",
+  CLICK_BUTTON_TO_VERIFY_EMAIL:
+    "Click the button below to verify your email address {emailAddress} for your {appName} account.",
+  VERIFY_EMAIL: "Verify email",
   OR_COPY_AND_PASTE_URL: "Or copy and paste this URL into your browser:",
   THIS_LINK_EXPIRES_IN_MINUTES:
     "This link expires in {expirationMinutes} minutes.",
@@ -39,9 +38,9 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type MagicLinkEmailLocalization = typeof localization
+export type EmailVerificationEmailLocalization = typeof localization
 
-interface MagicLinkEmailProps {
+interface EmailVerificationEmailProps {
   url: string
   email?: string
   appName?: string
@@ -52,14 +51,14 @@ interface MagicLinkEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  localization?: Partial<MagicLinkEmailLocalization>
+  localization?: Partial<EmailVerificationEmailLocalization>
 }
 
-export const MagicLinkEmail = ({
+export const EmailVerificationEmail = ({
   url,
   email,
   appName,
-  expirationMinutes = 15,
+  expirationMinutes = 60,
   logoURL = "https://better-auth.com/logo.png",
   colors,
   classNames,
@@ -67,15 +66,13 @@ export const MagicLinkEmail = ({
   poweredBy,
   head,
   ...props
-}: MagicLinkEmailProps) => {
+}: EmailVerificationEmailProps) => {
   const localization = {
-    ...MagicLinkEmail.localization,
+    ...EmailVerificationEmail.localization,
     ...props.localization
   }
 
-  const previewText = appName
-    ? localization.SIGN_IN_TO_APP_NAME.replace("{appName}", appName)
-    : localization.SIGN_IN_TO_YOUR_ACCOUNT
+  const previewText = localization.VERIFY_YOUR_EMAIL
 
   return (
     <Html>
@@ -144,42 +141,36 @@ export const MagicLinkEmail = ({
                   classNames?.title
                 )}
               >
-                {appName
-                  ? localization.SIGN_IN_TO_APP_NAME.replace(
-                      "{appName}",
-                      appName
-                    )
-                  : localization.SIGN_IN_TO_YOUR_ACCOUNT}
+                {localization.VERIFY_YOUR_EMAIL}
               </Heading>
 
-              <Text
-                className={cn("m-0 text-sm font-normal", classNames?.content)}
-              >
-                {email ? (
-                  <>
-                    {
-                      localization.CLICK_BUTTON_TO_SIGN_IN.split(
-                        "{emailAddress}"
-                      )[0]
-                    }
-                    <Link
-                      href={`mailto:${email}`}
-                      className="text-primary font-medium"
-                    >
-                      {email}
-                    </Link>
-                    {
-                      localization.CLICK_BUTTON_TO_SIGN_IN.split(
-                        "{emailAddress}"
-                      )[1]
-                    }
-                  </>
-                ) : (
-                  localization.CLICK_BUTTON_TO_SIGN_IN.replace(
-                    "{emailAddress}",
-                    ""
-                  ).replace(" .", ".")
-                )}
+              <Text className={cn("text-sm font-normal", classNames?.content)}>
+                {(() => {
+                  const textWithAppName =
+                    localization.CLICK_BUTTON_TO_VERIFY_EMAIL.replace(
+                      "{appName}",
+                      appName || ""
+                    ).replace(" .", ".")
+
+                  return email ? (
+                    <>
+                      {textWithAppName.split("{emailAddress}")[0]}
+
+                      <Link
+                        href={`mailto:${email}`}
+                        className="text-primary font-medium"
+                      >
+                        {email}
+                      </Link>
+
+                      {textWithAppName.split("{emailAddress}")[1]}
+                    </>
+                  ) : (
+                    textWithAppName
+                      .replace("{emailAddress}", "")
+                      .replace(" .", ".")
+                  )
+                })()}
               </Text>
 
               <Section className="my-6">
@@ -190,18 +181,13 @@ export const MagicLinkEmail = ({
                     classNames?.button
                   )}
                 >
-                  {appName
-                    ? localization.SIGN_IN_TO_APP_NAME.replace(
-                        "{appName}",
-                        appName
-                      )
-                    : localization.SIGN_IN_TO_YOUR_ACCOUNT}
+                  {localization.VERIFY_EMAIL}
                 </Button>
               </Section>
 
               <Text
                 className={cn(
-                  "m-0 mb-3 text-xs text-muted-foreground",
+                  "mb-3 text-xs text-muted-foreground",
                   classNames?.description
                 )}
               >
@@ -228,7 +214,7 @@ export const MagicLinkEmail = ({
               {expirationMinutes || appName ? (
                 <Text
                   className={cn(
-                    "m-0 mb-3 text-xs text-muted-foreground",
+                    "mb-3 text-xs text-muted-foreground",
                     classNames?.description
                   )}
                 >
@@ -238,6 +224,7 @@ export const MagicLinkEmail = ({
                         expirationMinutes.toString()
                       )
                     : null}
+
                   {appName && (
                     <>
                       {" "}
@@ -249,7 +236,7 @@ export const MagicLinkEmail = ({
 
               <Text
                 className={cn(
-                  "m-0 text-xs text-muted-foreground",
+                  "mt-3 text-xs text-muted-foreground",
                   classNames?.description
                 )}
               >
@@ -259,7 +246,7 @@ export const MagicLinkEmail = ({
               {poweredBy && (
                 <Text
                   className={cn(
-                    "m-0 mt-4 text-center text-[11px] text-muted-foreground",
+                    "mt-4 mb-0 text-center text-[11px] text-muted-foreground",
                     classNames?.poweredBy
                   )}
                 >
@@ -281,13 +268,13 @@ export const MagicLinkEmail = ({
   )
 }
 
-MagicLinkEmail.localization = localization
+EmailVerificationEmail.localization = localization
 
-MagicLinkEmail.PreviewProps = {
-  url: "https://better-auth-ui.com/auth/verify?token=example-token",
-  email: "m@example.com",
+EmailVerificationEmail.PreviewProps = {
+  url: "https://better-auth-ui.com/auth/verify-email?token=example-token",
   appName: "Better Auth",
+  email: "m@example.com",
   darkMode: true
-} as MagicLinkEmailProps
+} as EmailVerificationEmailProps
 
-export default MagicLinkEmail
+export default EmailVerificationEmail

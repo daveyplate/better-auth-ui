@@ -2,7 +2,6 @@ import {
   Body,
   Button,
   Container,
-  Font,
   Head,
   Heading,
   Hr,
@@ -15,7 +14,7 @@ import {
   Tailwind,
   Text
 } from "@react-email/components"
-import type { ComponentProps, ReactNode } from "react"
+import type { ReactNode } from "react"
 
 import { cn } from "../../lib/utils"
 import {
@@ -32,6 +31,28 @@ interface DeviceInfo {
   timestamp?: string
 }
 
+const localization = {
+  NEW_SIGN_IN_DETECTED: "New sign-in detected",
+  LOGO: "Logo",
+  NEW_SIGN_IN_TO_YOUR_ACCOUNT:
+    "We detected a new sign-in to your {appName} account {userEmail} from a device we don't recognize.",
+  DEVICE_DETAILS: "Device details",
+  BROWSER: "Browser",
+  OPERATING_SYSTEM: "Operating System",
+  LOCATION: "Location",
+  IP_ADDRESS: "IP Address",
+  TIME: "Time",
+  IF_THIS_WAS_YOU:
+    "If this was you, you can safely ignore this email. If you don't recognize this activity, please secure your account immediately.",
+  SECURE_MY_ACCOUNT: "Secure my account",
+  EMAIL_SENT_BY: "Email sent by {appName}.",
+  IF_YOU_DIDNT_SIGN_IN:
+    "If you didn't sign in, please contact support immediately {supportEmail} to secure your account.",
+  POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
+}
+
+export type NewDeviceEmailLocalization = typeof localization
+
 interface NewDeviceEmailProps {
   userEmail?: string
   deviceInfo?: DeviceInfo
@@ -44,9 +65,7 @@ interface NewDeviceEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  font?: Omit<ComponentProps<typeof Font>, "fallbackFontFamily"> & {
-    fallbackFontFamily?: ComponentProps<typeof Font>["fallbackFontFamily"]
-  }
+  localization?: Partial<NewDeviceEmailLocalization>
 }
 
 export const NewDeviceEmail = ({
@@ -59,11 +78,16 @@ export const NewDeviceEmail = ({
   colors,
   classNames,
   darkMode = true,
-  poweredBy = true,
+  poweredBy,
   head,
-  font
+  ...props
 }: NewDeviceEmailProps) => {
-  const previewText = "New sign-in detected"
+  const localization = {
+    ...NewDeviceEmail.localization,
+    ...props.localization
+  }
+
+  const previewText = localization.NEW_SIGN_IN_DETECTED
 
   return (
     <Html>
@@ -72,13 +96,6 @@ export const NewDeviceEmail = ({
         <meta content="light dark" name="supported-color-schemes" />
 
         <EmailStyles colors={colors} darkMode={darkMode} />
-
-        {font && (
-          <Font
-            {...font}
-            fallbackFontFamily={font.fallbackFontFamily || "sans-serif"}
-          />
-        )}
 
         {head}
       </Head>
@@ -99,35 +116,39 @@ export const NewDeviceEmail = ({
                 classNames?.card
               )}
             >
-              {typeof logoURL === "string" ? (
-                <Img
-                  src={logoURL}
-                  width={48}
-                  height={48}
-                  alt={appName || "Logo"}
-                  className={cn("mx-auto mb-8", classNames?.logo)}
-                />
-              ) : (
-                <>
+              {logoURL &&
+                (typeof logoURL === "string" ? (
                   <Img
-                    src={logoURL.light}
+                    src={logoURL}
                     width={48}
                     height={48}
-                    alt={appName || "Logo"}
-                    className={cn("mx-auto mb-8 logo-light", classNames?.logo)}
+                    alt={appName || localization.LOGO}
+                    className={cn("mx-auto mb-8", classNames?.logo)}
                   />
-                  <Img
-                    src={logoURL.dark}
-                    width={48}
-                    height={48}
-                    alt={appName || "Logo"}
-                    className={cn(
-                      "hidden mx-auto mb-8 logo-dark",
-                      classNames?.logo
-                    )}
-                  />
-                </>
-              )}
+                ) : (
+                  <>
+                    <Img
+                      src={logoURL.light}
+                      width={48}
+                      height={48}
+                      alt={appName || localization.LOGO}
+                      className={cn(
+                        "mx-auto mb-8 logo-light",
+                        classNames?.logo
+                      )}
+                    />
+                    <Img
+                      src={logoURL.dark}
+                      width={48}
+                      height={48}
+                      alt={appName || localization.LOGO}
+                      className={cn(
+                        "hidden mx-auto mb-8 logo-dark",
+                        classNames?.logo
+                      )}
+                    />
+                  </>
+                ))}
 
               <Heading
                 className={cn(
@@ -135,23 +156,36 @@ export const NewDeviceEmail = ({
                   classNames?.title
                 )}
               >
-                New sign-in detected
+                {localization.NEW_SIGN_IN_DETECTED}
               </Heading>
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
-                We detected a new sign-in to your {appName || ""} account
-                {userEmail && (
-                  <>
-                    {" "}
-                    <Link
-                      href={`mailto:${userEmail}`}
-                      className="text-primary font-medium"
-                    >
-                      {userEmail}
-                    </Link>
-                  </>
-                )}{" "}
-                from a device we don't recognize.
+                {(() => {
+                  const textWithAppName =
+                    localization.NEW_SIGN_IN_TO_YOUR_ACCOUNT.replace(
+                      "{appName}",
+                      appName || ""
+                    ).replace(" .", ".")
+
+                  return userEmail ? (
+                    <>
+                      {textWithAppName.split("{userEmail}")[0]}
+
+                      <Link
+                        href={`mailto:${userEmail}`}
+                        className="text-primary font-medium"
+                      >
+                        {userEmail}
+                      </Link>
+
+                      {textWithAppName.split("{userEmail}")[1]}
+                    </>
+                  ) : (
+                    textWithAppName
+                      .replace("{userEmail}", "")
+                      .replace(" .", ".")
+                  )
+                })()}
               </Text>
 
               {deviceInfo && (
@@ -167,14 +201,16 @@ export const NewDeviceEmail = ({
                       classNames?.description
                     )}
                   >
-                    Device details:
+                    {localization.DEVICE_DETAILS}:
                   </Text>
 
                   {deviceInfo.browser && (
                     <Text
                       className={cn("m-0 mb-2 text-sm", classNames?.content)}
                     >
-                      <span className="font-semibold">Browser:</span>{" "}
+                      <span className="font-semibold">
+                        {localization.BROWSER}:
+                      </span>{" "}
                       {deviceInfo.browser}
                     </Text>
                   )}
@@ -183,7 +219,9 @@ export const NewDeviceEmail = ({
                     <Text
                       className={cn("m-0 mb-2 text-sm", classNames?.content)}
                     >
-                      <span className="font-semibold">Operating System:</span>{" "}
+                      <span className="font-semibold">
+                        {localization.OPERATING_SYSTEM}:
+                      </span>{" "}
                       {deviceInfo.os}
                     </Text>
                   )}
@@ -192,7 +230,9 @@ export const NewDeviceEmail = ({
                     <Text
                       className={cn("m-0 mb-2 text-sm", classNames?.content)}
                     >
-                      <span className="font-semibold">Location:</span>{" "}
+                      <span className="font-semibold">
+                        {localization.LOCATION}:
+                      </span>{" "}
                       {deviceInfo.location}
                     </Text>
                   )}
@@ -201,14 +241,18 @@ export const NewDeviceEmail = ({
                     <Text
                       className={cn("m-0 mb-2 text-sm", classNames?.content)}
                     >
-                      <span className="font-semibold">IP Address:</span>{" "}
+                      <span className="font-semibold">
+                        {localization.IP_ADDRESS}:
+                      </span>{" "}
                       {deviceInfo.ipAddress}
                     </Text>
                   )}
 
                   {deviceInfo.timestamp && (
                     <Text className={cn("m-0 text-sm", classNames?.content)}>
-                      <span className="font-semibold">Time:</span>{" "}
+                      <span className="font-semibold">
+                        {localization.TIME}:
+                      </span>{" "}
                       {deviceInfo.timestamp}
                     </Text>
                   )}
@@ -216,8 +260,7 @@ export const NewDeviceEmail = ({
               )}
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
-                If this was you, you can safely ignore this email. If you don't
-                recognize this activity, please secure your account immediately.
+                {localization.IF_THIS_WAS_YOU}
               </Text>
 
               {secureAccountLink && (
@@ -229,7 +272,7 @@ export const NewDeviceEmail = ({
                       classNames?.button
                     )}
                   >
-                    Secure my account
+                    {localization.SECURE_MY_ACCOUNT}
                   </Button>
                 </Section>
               )}
@@ -250,27 +293,42 @@ export const NewDeviceEmail = ({
                     classNames?.description
                   )}
                 >
-                  Email sent by {appName}.
+                  {localization.EMAIL_SENT_BY.replace("{appName}", appName)}
                 </Text>
               )}
 
-              {supportEmail && (
-                <Text
-                  className={cn(
-                    "mt-3 text-xs text-muted-foreground",
-                    classNames?.description
-                  )}
-                >
-                  If you didn't sign in, please contact support immediately at{" "}
-                  <Link
-                    href={`mailto:${supportEmail}`}
-                    className={cn("text-primary underline", classNames?.link)}
-                  >
-                    {supportEmail}
-                  </Link>
-                  .
-                </Text>
-              )}
+              <Text
+                className={cn(
+                  "mt-3 text-xs text-muted-foreground",
+                  classNames?.description
+                )}
+              >
+                {supportEmail ? (
+                  <>
+                    {
+                      localization.IF_YOU_DIDNT_SIGN_IN.split(
+                        "{supportEmail}"
+                      )[0]
+                    }
+                    <Link
+                      href={`mailto:${supportEmail}`}
+                      className={cn("text-primary underline", classNames?.link)}
+                    >
+                      {supportEmail}
+                    </Link>
+                    {
+                      localization.IF_YOU_DIDNT_SIGN_IN.split(
+                        "{supportEmail}"
+                      )[1]
+                    }
+                  </>
+                ) : (
+                  localization.IF_YOU_DIDNT_SIGN_IN.replace(
+                    "{supportEmail}",
+                    ""
+                  ).replace(" .", ".")
+                )}
+              </Text>
 
               {poweredBy && (
                 <Text
@@ -279,13 +337,14 @@ export const NewDeviceEmail = ({
                     classNames?.poweredBy
                   )}
                 >
-                  Powered by{" "}
+                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[0]}
                   <Link
                     href="https://better-auth.com"
                     className={cn("text-primary underline", classNames?.link)}
                   >
                     better-auth
                   </Link>
+                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[1]}
                 </Text>
               )}
             </Section>
@@ -295,6 +354,8 @@ export const NewDeviceEmail = ({
     </Html>
   )
 }
+
+NewDeviceEmail.localization = localization
 
 NewDeviceEmail.PreviewProps = {
   userEmail: "m@example.com",
