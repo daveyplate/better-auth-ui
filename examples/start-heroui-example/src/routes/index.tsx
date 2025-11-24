@@ -1,11 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, Link } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/")({ component: App })
 
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-svh flex items-center justify-center flex-col gap-4">
       <h1 className="text-4xl font-bold">Hello World</h1>
+      <Link
+        to="/auth/$view"
+        params={{ view: "sign-in" }}
+        className="text-blue-600 hover:text-blue-800 underline"
+      >
+        Sign In
+      </Link>
     </div>
   )
 }
