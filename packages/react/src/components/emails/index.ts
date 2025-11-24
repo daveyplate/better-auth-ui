@@ -1,4 +1,5 @@
 export * from "./email-changed"
+export * from "./email-localization"
 export * from "./email-styles"
 export * from "./email-verification"
 export * from "./magic-link"
