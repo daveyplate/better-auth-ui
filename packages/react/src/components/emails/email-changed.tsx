@@ -134,56 +134,58 @@ export const EmailChangedEmail = ({
                 {`The email address for your ${appName || ""} account has been changed.`}
               </Text>
 
-              <Section
-                className={cn(
-                  "my-6 border border-border bg-muted p-4",
-                  classNames?.codeBlock
-                )}
-              >
-                {oldEmail && (
-                  <>
-                    <Text
-                      className={cn(
-                        "m-0 mb-2 text-xs text-muted-foreground",
-                        classNames?.description
-                      )}
-                    >
-                      Previous email:
-                    </Text>
+              {(oldEmail || newEmail) && (
+                <Section
+                  className={cn(
+                    "my-6 border border-border bg-muted p-4",
+                    classNames?.codeBlock
+                  )}
+                >
+                  {oldEmail && (
+                    <>
+                      <Text
+                        className={cn(
+                          "m-0 mb-2 text-xs text-muted-foreground",
+                          classNames?.description
+                        )}
+                      >
+                        Previous email:
+                      </Text>
 
-                    <Text
-                      className={cn(
-                        "m-0 mb-4 text-sm font-semibold",
-                        classNames?.content
-                      )}
-                    >
-                      {oldEmail}
-                    </Text>
-                  </>
-                )}
+                      <Text
+                        className={cn(
+                          "m-0 mb-4 text-sm font-semibold",
+                          classNames?.content
+                        )}
+                      >
+                        {oldEmail}
+                      </Text>
+                    </>
+                  )}
 
-                {newEmail && (
-                  <>
-                    <Text
-                      className={cn(
-                        "m-0 mb-2 text-xs text-muted-foreground",
-                        classNames?.description
-                      )}
-                    >
-                      New email:
-                    </Text>
+                  {newEmail && (
+                    <>
+                      <Text
+                        className={cn(
+                          "m-0 mb-2 text-xs text-muted-foreground",
+                          classNames?.description
+                        )}
+                      >
+                        New email:
+                      </Text>
 
-                    <Text
-                      className={cn(
-                        "m-0 text-sm font-semibold text-primary",
-                        classNames?.content
-                      )}
-                    >
-                      {newEmail}
-                    </Text>
-                  </>
-                )}
-              </Section>
+                      <Text
+                        className={cn(
+                          "m-0 text-sm font-semibold text-primary",
+                          classNames?.content
+                        )}
+                      >
+                        {newEmail}
+                      </Text>
+                    </>
+                  )}
+                </Section>
+              )}
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
                 If you made this change, you can safely ignore this email.
