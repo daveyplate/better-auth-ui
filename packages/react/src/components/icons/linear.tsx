@@ -1,9 +1,6 @@
 import type { ComponentPropsWithRef } from "react"
 
-export function Linear({
-  className,
-  ...props
-}: ComponentPropsWithRef<"svg">) {
+export function Linear({ className, ...props }: ComponentPropsWithRef<"svg">) {
   return (
     <svg
       className={className}
@@ -19,4 +16,3 @@ export function Linear({
     </svg>
   )
 }
-

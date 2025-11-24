@@ -1,9 +1,6 @@
 import type { ComponentPropsWithRef } from "react"
 
-export function GitLab({
-  className,
-  ...props
-}: ComponentPropsWithRef<"svg">) {
+export function GitLab({ className, ...props }: ComponentPropsWithRef<"svg">) {
   return (
     <svg
       className={className}
@@ -34,4 +31,3 @@ export function GitLab({
     </svg>
   )
 }
-

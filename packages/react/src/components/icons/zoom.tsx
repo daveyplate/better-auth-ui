@@ -1,9 +1,6 @@
 import type { ComponentPropsWithRef } from "react"
 
-export function Zoom({
-  className,
-  ...props
-}: ComponentPropsWithRef<"svg">) {
+export function Zoom({ className, ...props }: ComponentPropsWithRef<"svg">) {
   return (
     <svg
       className={className}
@@ -21,4 +18,3 @@ export function Zoom({
     </svg>
   )
 }
-

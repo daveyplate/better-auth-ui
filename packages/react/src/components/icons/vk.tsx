@@ -16,4 +16,3 @@ export function VK({ className, ...props }: ComponentPropsWithRef<"svg">) {
     </svg>
   )
 }
-

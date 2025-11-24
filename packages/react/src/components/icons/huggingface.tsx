@@ -19,4 +19,3 @@ export function HuggingFace({
     </svg>
   )
 }
-

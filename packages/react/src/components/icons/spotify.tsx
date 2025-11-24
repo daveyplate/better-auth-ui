@@ -1,9 +1,6 @@
 import type { ComponentPropsWithRef } from "react"
 
-export function Spotify({
-  className,
-  ...props
-}: ComponentPropsWithRef<"svg">) {
+export function Spotify({ className, ...props }: ComponentPropsWithRef<"svg">) {
   return (
     <svg
       className={className}
@@ -19,4 +16,3 @@ export function Spotify({
     </svg>
   )
 }
-
