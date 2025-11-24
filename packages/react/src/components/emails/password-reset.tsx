@@ -101,35 +101,39 @@ export const PasswordResetEmail = ({
                 classNames?.card
               )}
             >
-              {typeof logoURL === "string" ? (
-                <Img
-                  src={logoURL}
-                  width={48}
-                  height={48}
-                  alt={appName || localization.LOGO}
-                  className={cn("mx-auto mb-8", classNames?.logo)}
-                />
-              ) : (
-                <>
+              {logoURL &&
+                (typeof logoURL === "string" ? (
                   <Img
-                    src={logoURL.light}
+                    src={logoURL}
                     width={48}
                     height={48}
                     alt={appName || localization.LOGO}
-                    className={cn("mx-auto mb-8 logo-light", classNames?.logo)}
+                    className={cn("mx-auto mb-8", classNames?.logo)}
                   />
-                  <Img
-                    src={logoURL.dark}
-                    width={48}
-                    height={48}
-                    alt={appName || localization.LOGO}
-                    className={cn(
-                      "hidden mx-auto mb-8 logo-dark",
-                      classNames?.logo
-                    )}
-                  />
-                </>
-              )}
+                ) : (
+                  <>
+                    <Img
+                      src={logoURL.light}
+                      width={48}
+                      height={48}
+                      alt={appName || localization.LOGO}
+                      className={cn(
+                        "mx-auto mb-8 logo-light",
+                        classNames?.logo
+                      )}
+                    />
+                    <Img
+                      src={logoURL.dark}
+                      width={48}
+                      height={48}
+                      alt={appName || localization.LOGO}
+                      className={cn(
+                        "hidden mx-auto mb-8 logo-dark",
+                        classNames?.logo
+                      )}
+                    />
+                  </>
+                ))}
 
               <Heading
                 className={cn(
