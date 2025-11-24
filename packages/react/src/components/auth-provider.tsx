@@ -8,8 +8,7 @@ import {
   type Context,
   createContext,
   type PropsWithChildren,
-  type ReactNode,
-  useContext
+  type ReactNode
 } from "react"
 
 import { receiveConfig } from "../lib/receive-config"
@@ -44,31 +43,4 @@ export function AuthProvider<TAuthClient extends AuthClient>({
       {children}
     </AuthContext.Provider>
   )
-}
-
-export function useAuthConfig(
-  config?: Partial<AuthConfig<AuthClient>>
-): AuthConfig<AuthClient> {
-  const context = useContext(AuthContext)
-
-  const merged = {
-    ...(config ? receiveConfig(config) : {}),
-    ...context,
-    ...config
-  }
-
-  const { authClient, ...configWithoutClient } = merged
-
-  if (authClient === undefined) {
-    if (context) {
-      throw new Error("AuthProvider: authClient is required")
-    } else {
-      throw new Error("useAuthConfig: authClient is required")
-    }
-  }
-
-  return {
-    ...configWithoutClient,
-    authClient
-  } as AuthConfig<AuthClient>
 }

@@ -1,10 +1,10 @@
 "use client"
 
 import type { AuthView } from "@better-auth-ui/core"
-import { cn, useAuthConfig } from "@better-auth-ui/react"
+import { cn, useAuth } from "@better-auth-ui/react"
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline"
 
-export const magicLinkButtonLocalization = {
+const magicLinkButtonLocalization = {
   CONTINUE_WITH_MAGIC_LINK: "Continue with Magic Link",
   CONTINUE_WITH_PASSWORD: "Continue with Password"
 }
@@ -20,11 +20,11 @@ export type MagicLinkButtonProps = {
 export function MagicLinkButton({
   view,
   isPending,
-  localization
+  ...props
 }: MagicLinkButtonProps) {
-  localization = { ...magicLinkButtonLocalization, ...localization }
+  const localization = { ...magicLinkButtonLocalization, ...props.localization }
 
-  const { Link } = useAuthConfig()
+  const { Link } = useAuth()
 
   const isMagicLinkView = view === "magic-link"
   const Icon = isMagicLinkView ? LockClosedIcon : EnvelopeIcon
@@ -45,3 +45,5 @@ export function MagicLinkButton({
     </Link>
   )
 }
+
+MagicLinkButton.localization = magicLinkButtonLocalization

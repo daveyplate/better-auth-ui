@@ -1,10 +1,10 @@
-import { cn, useAuthConfig } from "@better-auth-ui/react"
+import { cn, useAuth } from "@better-auth-ui/react"
 import { Card, type CardProps, Spinner } from "@heroui/react"
 import { useEffect, useRef } from "react"
 import { toast } from "sonner"
 
 export function SignOut({ className, ...props }: CardProps) {
-  const { authClient, navigate } = useAuthConfig()
+  const { authClient, navigate } = useAuth()
   const { refetch } = authClient.useSession()
   const hasSignedOut = useRef(false)
 

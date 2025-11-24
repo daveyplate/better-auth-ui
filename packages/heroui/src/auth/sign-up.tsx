@@ -4,7 +4,7 @@ import {
   type AuthClient,
   type AuthConfig,
   cn,
-  useAuthConfig
+  useAuth
 } from "@better-auth-ui/react"
 import {
   Button,
@@ -21,19 +21,13 @@ import {
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
-import {
-  MagicLinkButton,
-  magicLinkButtonLocalization
-} from "./magic-link-button"
-import {
-  ProviderButtons,
-  providerButtonsLocalization
-} from "./provider-buttons"
+import { MagicLinkButton } from "./magic-link-button"
+import { ProviderButtons } from "./provider-buttons"
 
-export const signUpLocalization = {
-  ...magicLinkButtonLocalization,
-  ...providerButtonsLocalization,
-  ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
+const signUpLocalization = {
+  ...MagicLinkButton.localization,
+  ...ProviderButtons.localization,
+  ALREADY_HAVE_AN_ACCOUNT: "Already have an account????",
   EMAIL: "Email",
   ENTER_YOUR_EMAIL: "Enter your email",
   ENTER_YOUR_NAME: "Enter your name",
@@ -53,13 +47,12 @@ export type SignUpProps<TAuthClient extends AuthClient> = CardProps &
 
 export function SignUp<TAuthClient extends AuthClient>({
   className,
-  localization,
   ...props
 }: SignUpProps<TAuthClient>) {
-  localization = { ...signUpLocalization, ...localization }
+  const localization = { ...signUpLocalization, ...props.localization }
 
   const { authClient, navigate, Link, socialProviders, magicLink } =
-    useAuthConfig(props)
+    useAuth(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
   const [password, setPassword] = useState("")
@@ -201,3 +194,5 @@ export function SignUp<TAuthClient extends AuthClient>({
     </Card>
   )
 }
+
+SignUp.localization = signUpLocalization

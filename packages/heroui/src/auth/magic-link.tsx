@@ -4,7 +4,7 @@ import {
   type AuthClient,
   type AuthConfig,
   cn,
-  useAuthConfig
+  useAuth
 } from "@better-auth-ui/react"
 import {
   Button,
@@ -20,18 +20,12 @@ import {
 } from "@heroui/react"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
-import {
-  MagicLinkButton,
-  magicLinkButtonLocalization
-} from "./magic-link-button"
-import {
-  ProviderButtons,
-  providerButtonsLocalization
-} from "./provider-buttons"
+import { MagicLinkButton } from "./magic-link-button"
+import { ProviderButtons } from "./provider-buttons"
 
-export const magicLinkLocalization = {
-  ...magicLinkButtonLocalization,
-  ...providerButtonsLocalization,
+const magicLinkLocalization = {
+  ...MagicLinkButton.localization,
+  ...ProviderButtons.localization,
   EMAIL: "Email",
   ENTER_YOUR_EMAIL: "Enter your email",
   NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
@@ -49,12 +43,11 @@ export type MagicLinkProps<TAuthClient extends AuthClient> = CardProps &
 
 export function MagicLink<TAuthClient extends AuthClient>({
   className,
-  localization,
   ...props
 }: MagicLinkProps<TAuthClient>) {
-  localization = { ...magicLinkLocalization, ...localization }
+  const localization = { ...magicLinkLocalization, ...props.localization }
 
-  const { authClient, Link, socialProviders, magicLink } = useAuthConfig(props)
+  const { authClient, Link, socialProviders, magicLink } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
   const showSeparator =
@@ -163,3 +156,5 @@ export function MagicLink<TAuthClient extends AuthClient>({
     </Card>
   )
 }
+
+MagicLink.localization = magicLinkLocalization

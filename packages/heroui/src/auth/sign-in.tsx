@@ -4,7 +4,7 @@ import {
   type AuthClient,
   type AuthConfig,
   cn,
-  useAuthConfig
+  useAuth
 } from "@better-auth-ui/react"
 import {
   Button,
@@ -21,18 +21,12 @@ import {
 } from "@heroui/react"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
-import {
-  MagicLinkButton,
-  magicLinkButtonLocalization
-} from "./magic-link-button"
-import {
-  ProviderButtons,
-  providerButtonsLocalization
-} from "./provider-buttons"
+import { MagicLinkButton } from "./magic-link-button"
+import { ProviderButtons } from "./provider-buttons"
 
-export const signInLocalization = {
-  ...magicLinkButtonLocalization,
-  ...providerButtonsLocalization,
+const signInLocalization = {
+  ...MagicLinkButton.localization,
+  ...ProviderButtons.localization,
   EMAIL: "Email",
   ENTER_YOUR_EMAIL: "Enter your email",
   ENTER_YOUR_PASSWORD: "Enter your password",
@@ -53,10 +47,9 @@ export type SignInProps<TAuthClient extends AuthClient> = CardProps &
 
 export function SignIn<TAuthClient extends AuthClient>({
   className,
-  localization,
   ...props
 }: SignInProps<TAuthClient>) {
-  localization = { ...signInLocalization, ...localization }
+  const localization = { ...signInLocalization, ...props.localization }
 
   const {
     emailAndPassword,
@@ -65,7 +58,7 @@ export function SignIn<TAuthClient extends AuthClient>({
     Link,
     socialProviders,
     magicLink
-  } = useAuthConfig(props)
+  } = useAuth(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
   const [password, setPassword] = useState("")
@@ -227,3 +220,5 @@ export function SignIn<TAuthClient extends AuthClient>({
     </Card>
   )
 }
+
+SignIn.localization = signInLocalization
