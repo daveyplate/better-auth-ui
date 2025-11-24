@@ -1,11 +1,16 @@
-import { Auth } from "@better-auth-ui/heroui"
-import { createFileRoute } from "@tanstack/react-router"
+import { Auth, type AuthView, authViews } from "@better-auth-ui/heroui"
+import { createFileRoute, redirect } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/auth/$view")({
-  component: AuthView
+  beforeLoad({ params: { view } }) {
+    if (!authViews.includes(view as AuthView)) {
+      throw redirect({ to: "/" })
+    }
+  },
+  component: AuthPage
 })
 
-function AuthView() {
+function AuthPage() {
   const { view } = Route.useParams()
 
   return (

@@ -22,7 +22,10 @@ export function MagicLinkButton({
   isPending,
   ...props
 }: MagicLinkButtonProps) {
-  const localization = { ...magicLinkButtonLocalization, ...props.localization }
+  const localization = {
+    ...magicLinkButtonLocalization,
+    ...props.localization
+  }
 
   const { Link } = useAuth()
 

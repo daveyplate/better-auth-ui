@@ -27,7 +27,10 @@ export function ProviderButtons({
   authClient,
   ...props
 }: ProviderButtonsProps) {
-  const localization = { ...providerButtonsLocalization, ...props.localization }
+  const localization = {
+    ...providerButtonsLocalization,
+    ...props.localization
+  }
 
   const handleClick = async (provider: SocialProvider) => {
     setIsPending(true)
