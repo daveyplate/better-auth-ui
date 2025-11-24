@@ -3,7 +3,7 @@ import type { ReactNode } from "react"
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
       {children}
     </ThemeProvider>
   )

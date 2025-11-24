@@ -1,8 +1,10 @@
 import { TanStackDevtools } from "@tanstack/react-devtools"
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
+import type { ReactNode } from "react"
 
-import appCss from "../styles/app.css?url"
+import { Providers } from "@/components/providers"
+import appCss from "@/styles/app.css?url"
 
 export const Route = createRootRoute({
   head: () => ({
@@ -25,11 +27,10 @@ export const Route = createRootRoute({
       }
     ]
   }),
-
   shellComponent: RootDocument
 })
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -37,7 +38,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
 
       <body>
-        {children}
+        <Providers>{children}</Providers>
 
         <TanStackDevtools
           config={{
@@ -45,7 +46,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           }}
           plugins={[
             {
-              name: "Tanstack Router",
+              name: "TanStack Router",
               render: <TanStackRouterDevtoolsPanel />
             }
           ]}
