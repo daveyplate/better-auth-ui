@@ -8,6 +8,9 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "dependencies": {
+    "better-auth": "^1.4.1"
+  },
   "peerDependencies": {
     "better-auth": ">=1.4.0"
   }
