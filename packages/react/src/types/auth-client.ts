@@ -1,3 +1,10 @@
-import type { createAuthClient } from "better-auth/react"
+import { magicLinkClient } from "better-auth/client/plugins"
+import { createAuthClient } from "better-auth/react"
 
-export type AuthClient = ReturnType<typeof createAuthClient>
+export type AnyAuthClient = ReturnType<typeof createAuthClient>
+
+const authClient = createAuthClient({
+  plugins: [magicLinkClient()]
+})
+
+export type AuthClient = typeof authClient

@@ -1,7 +1,7 @@
 "use client"
 
 import {
-  type AuthClient,
+  type AnyAuthClient,
   type AuthConfig,
   cn,
   useAuth
@@ -9,7 +9,6 @@ import {
 import {
   Button,
   Card,
-  type CardProps,
   FieldError,
   Form,
   Input,
@@ -28,7 +27,9 @@ const magicLinkLocalization = {
   ...ProviderButtons.localization,
   EMAIL: "Email",
   ENTER_YOUR_EMAIL: "Enter your email",
+  MAGIC_LINK_SENT: "Magic link sent to your email",
   NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
+  OR: "OR",
   SEND_MAGIC_LINK: "Send Magic Link",
   SIGN_IN: "Sign In",
   SIGN_UP: "Sign Up"
@@ -36,12 +37,14 @@ const magicLinkLocalization = {
 
 export type MagicLinkLocalization = typeof magicLinkLocalization
 
-export type MagicLinkProps<TAuthClient extends AuthClient> = CardProps &
-  Partial<AuthConfig<TAuthClient>> & {
-    localization?: Partial<MagicLinkLocalization>
-  }
+export type MagicLinkProps<TAuthClient extends AnyAuthClient> = Partial<
+  AuthConfig<TAuthClient>
+> & {
+  className?: string
+  localization?: Partial<MagicLinkLocalization>
+}
 
-export function MagicLink<TAuthClient extends AuthClient>({
+export function MagicLink<TAuthClient extends AnyAuthClient>({
   className,
   ...props
 }: MagicLinkProps<TAuthClient>) {
@@ -50,8 +53,7 @@ export function MagicLink<TAuthClient extends AuthClient>({
   const { authClient, Link, socialProviders, magicLink } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
-  const showSeparator =
-    (socialProviders && socialProviders.length > 0) || magicLink
+  const showSeparator = socialProviders && socialProviders.length > 0
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -60,21 +62,16 @@ export function MagicLink<TAuthClient extends AuthClient>({
     const formData = new FormData(e.currentTarget)
     const email = formData.get("email") as string
 
-    const { error } = await authClient.$fetch("/sign-in/magic-link", {
-      method: "POST",
-      body: {
-        email
-      }
-    })
+    const { error } = await authClient.signIn.magicLink({ email })
 
     if (error) {
-      toast.error(error.message)
+      toast.error(error.message || error.status)
       setIsPending(false)
 
       return
     }
 
-    toast.success("Magic link sent to your email!")
+    toast.success(localization.MAGIC_LINK_SENT)
     setIsPending(false)
   }
 
@@ -82,7 +79,6 @@ export function MagicLink<TAuthClient extends AuthClient>({
     <Card
       key="auth-card"
       className={cn("w-full max-w-sm md:p-6 gap-6", className)}
-      {...props}
     >
       <Card.Header className="text-xl font-medium">
         {localization.SIGN_IN}
@@ -124,7 +120,7 @@ export function MagicLink<TAuthClient extends AuthClient>({
               <div className="flex items-center gap-4">
                 <Separator className="flex-1 bg-surface-quaternary" />
 
-                <p className="text-xs text-muted shrink-0">OR</p>
+                <p className="text-xs text-muted shrink-0">{localization.OR}</p>
 
                 <Separator className="flex-1 bg-surface-quaternary" />
               </div>
@@ -135,6 +131,7 @@ export function MagicLink<TAuthClient extends AuthClient>({
                     providers={socialProviders}
                     isPending={isPending}
                     setIsPending={setIsPending}
+                    authClient={authClient}
                     localization={localization}
                   />
                 )}

@@ -3,12 +3,26 @@
 import { useContext } from "react"
 import type { AuthConfig } from "../components/auth-provider"
 import { AuthContext } from "../components/auth-provider"
-import { receiveConfig } from "../lib/receive-config"
-import type { AuthClient } from "../types/auth-client"
+import type { AnyAuthClient, AuthClient } from "../types/auth-client"
 
-export function useAuth(
-  config?: Partial<AuthConfig<AuthClient>>
-): AuthConfig<AuthClient> {
+export function receiveConfig<
+  TAuthClient extends AnyAuthClient,
+  TConfig extends AuthConfig<TAuthClient>
+>(config: Partial<TConfig>) {
+  return {
+    emailAndPassword: {
+      enabled: true
+    },
+    navigate: (path: string) => {
+      window.location.href = path
+    },
+    replace: (path: string) => window.location.replace(path),
+    Link: (props) => <a {...props} />,
+    ...config
+  } as TConfig
+}
+
+export function useAuth(config?: Partial<AuthConfig<AnyAuthClient>>) {
   const context = useContext(AuthContext)
 
   const merged = {
@@ -29,6 +43,6 @@ export function useAuth(
 
   return {
     ...configWithoutClient,
-    authClient
+    authClient: authClient as AuthClient
   } as AuthConfig<AuthClient>
 }

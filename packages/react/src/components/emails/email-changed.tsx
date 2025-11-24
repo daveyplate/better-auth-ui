@@ -36,7 +36,9 @@ interface EmailChangedEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  font?: Partial<ComponentProps<typeof Font>>
+  font?: Omit<ComponentProps<typeof Font>, "fallbackFontFamily"> & {
+    fallbackFontFamily?: ComponentProps<typeof Font>["fallbackFontFamily"]
+  }
 }
 
 export const EmailChangedEmail = ({
@@ -66,7 +68,6 @@ export const EmailChangedEmail = ({
         {font && (
           <Font
             {...font}
-            fontFamily={font.fontFamily || "Unknown"}
             fallbackFontFamily={font.fallbackFontFamily || "sans-serif"}
           />
         )}
@@ -258,7 +259,7 @@ EmailChangedEmail.PreviewProps = {
   oldEmail: "old@example.com",
   newEmail: "new@example.com",
   supportEmail: "support@example.com",
-  revertURL: "https://better-auth-ui.com/auth/revert-email?token=abc123def456",
+  revertURL: "https://better-auth-ui.com/auth/revert-email?token=example-token",
   poweredBy: true,
   darkMode: true
 } as EmailChangedEmailProps

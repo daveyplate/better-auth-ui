@@ -45,10 +45,7 @@ export type EmailColors = {
 }
 
 interface EmailStylesProps {
-  colors?: {
-    light?: Partial<typeof defaultColors.light>
-    dark?: Partial<typeof defaultColors.dark>
-  }
+  colors?: EmailColors
   darkMode?: boolean
 }
 

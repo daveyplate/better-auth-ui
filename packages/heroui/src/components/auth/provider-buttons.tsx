@@ -1,9 +1,10 @@
 "use client"
 
 import { getProviderName } from "@better-auth-ui/core"
-import { providerIcons } from "@better-auth-ui/react"
+import { type AuthClient, providerIcons } from "@better-auth-ui/react"
 import { Button } from "@heroui/react"
 import type { SocialProvider } from "better-auth/social-providers"
+import { toast } from "sonner"
 
 const providerButtonsLocalization = {
   CONTINUE_WITH_PROVIDER: "Continue with {provider}"
@@ -15,6 +16,7 @@ export type ProviderButtonsProps = {
   providers: SocialProvider[]
   isPending: boolean
   setIsPending: (pending: boolean) => void
+  authClient: AuthClient
   localization?: Partial<ProviderButtonsLocalization>
 }
 
@@ -22,15 +24,23 @@ export function ProviderButtons({
   providers,
   isPending,
   setIsPending,
+  authClient,
   ...props
 }: ProviderButtonsProps) {
   const localization = { ...providerButtonsLocalization, ...props.localization }
 
   const handleClick = async (provider: SocialProvider) => {
     setIsPending(true)
-    console.log("clicked", provider)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsPending(false)
+
+    const { error } = await authClient.signIn.social({
+      provider
+    })
+
+    if (error) {
+      toast.error(error.message || error.status)
+      setIsPending(false)
+      return
+    }
   }
 
   return (

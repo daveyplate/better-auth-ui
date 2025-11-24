@@ -1,7 +1,7 @@
 "use client"
 
 import {
-  type AuthClient,
+  type AnyAuthClient,
   type AuthConfig,
   cn,
   useAuth
@@ -9,7 +9,6 @@ import {
 import {
   Button,
   Card,
-  type CardProps,
   FieldError,
   Form,
   Input,
@@ -33,6 +32,7 @@ const signUpLocalization = {
   ENTER_YOUR_NAME: "Enter your name",
   ENTER_YOUR_PASSWORD: "Enter your password",
   NAME: "Name",
+  OR: "OR",
   PASSWORD: "Password",
   SIGN_IN: "Sign In",
   SIGN_UP: "Sign Up"
@@ -40,12 +40,14 @@ const signUpLocalization = {
 
 export type SignUpLocalization = typeof signUpLocalization
 
-export type SignUpProps<TAuthClient extends AuthClient> = CardProps &
-  Partial<AuthConfig<TAuthClient>> & {
-    localization?: Partial<SignUpLocalization>
-  }
+export type SignUpProps<TAuthClient extends AnyAuthClient> = Partial<
+  AuthConfig<TAuthClient>
+> & {
+  className?: string
+  localization?: Partial<SignUpLocalization>
+}
 
-export function SignUp<TAuthClient extends AuthClient>({
+export function SignUp<TAuthClient extends AnyAuthClient>({
   className,
   ...props
 }: SignUpProps<TAuthClient>) {
@@ -57,7 +59,7 @@ export function SignUp<TAuthClient extends AuthClient>({
   const [isPending, setIsPending] = useState(false)
   const [password, setPassword] = useState("")
 
-  const showSeparator = socialProviders?.length
+  const showSeparator = socialProviders && socialProviders.length > 0
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -77,7 +79,7 @@ export function SignUp<TAuthClient extends AuthClient>({
     })
 
     if (error) {
-      toast.error(error.message)
+      toast.error(error.message || error.status)
       setPassword("")
       setIsPending(false)
 
@@ -90,7 +92,7 @@ export function SignUp<TAuthClient extends AuthClient>({
   }
 
   return (
-    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)} {...props}>
+    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)}>
       <Card.Header className="text-xl font-medium">
         {localization.SIGN_UP}
       </Card.Header>
@@ -162,7 +164,7 @@ export function SignUp<TAuthClient extends AuthClient>({
               <div className="flex items-center gap-4">
                 <Separator className="flex-1 bg-surface-quaternary" />
 
-                <p className="text-xs text-muted shrink-0">OR</p>
+                <p className="text-xs text-muted shrink-0">{localization.OR}</p>
 
                 <Separator className="flex-1 bg-surface-quaternary" />
               </div>
@@ -173,6 +175,7 @@ export function SignUp<TAuthClient extends AuthClient>({
                     providers={socialProviders}
                     isPending={isPending}
                     setIsPending={setIsPending}
+                    authClient={authClient}
                     localization={localization}
                   />
                 )}

@@ -1,9 +1,9 @@
 import { cn, useAuth } from "@better-auth-ui/react"
-import { Card, type CardProps, Spinner } from "@heroui/react"
+import { Card, Spinner } from "@heroui/react"
 import { useEffect, useRef } from "react"
 import { toast } from "sonner"
 
-export function SignOut({ className, ...props }: CardProps) {
+export function SignOut({ className }: { className?: string }) {
   const { authClient, navigate } = useAuth()
   const { refetch } = authClient.useSession()
   const hasSignedOut = useRef(false)
@@ -19,7 +19,7 @@ export function SignOut({ className, ...props }: CardProps) {
       })
 
       if (error) {
-        toast.error(error.message)
+        toast.error(error.message || error.status)
       }
 
       // Invalidate session state on client side before redirecting
@@ -35,7 +35,6 @@ export function SignOut({ className, ...props }: CardProps) {
     <Card
       variant="transparent"
       className={cn("w-full max-w-sm md:p-6 gap-6", className)}
-      {...props}
     >
       <Spinner className="mx-auto my-auto" color="current" />
     </Card>

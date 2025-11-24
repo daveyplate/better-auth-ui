@@ -11,10 +11,10 @@ import {
   type ReactNode
 } from "react"
 
-import { receiveConfig } from "../lib/receive-config"
-import type { AuthClient } from "../types/auth-client"
+import { receiveConfig } from "../hooks/use-auth"
+import type { AnyAuthClient } from "../types/auth-client"
 
-export type AuthConfig<TAuthClient extends AuthClient> = Omit<
+export type AuthConfig<TAuthClient extends AnyAuthClient> = Omit<
   BaseAuthConfig,
   "Link"
 > & {
@@ -22,24 +22,23 @@ export type AuthConfig<TAuthClient extends AuthClient> = Omit<
   authClient: TAuthClient
 }
 
-export const AuthContext: Context<AuthConfig<AuthClient> | undefined> =
-  createContext<AuthConfig<AuthClient> | undefined>(undefined)
+export const AuthContext: Context<AuthConfig<AnyAuthClient> | undefined> =
+  createContext<AuthConfig<AnyAuthClient> | undefined>(undefined)
 
-export type AuthProviderProps<TAuthClient extends AuthClient> =
+export type AuthProviderProps<TAuthClient extends AnyAuthClient> =
   PropsWithChildren &
     Omit<Partial<AuthConfig<TAuthClient>>, "authClient"> & {
       authClient: TAuthClient
     }
 
-export function AuthProvider<TAuthClient extends AuthClient>({
+export function AuthProvider<TAuthClient extends AnyAuthClient>({
   children,
-  authClient,
   ...config
 }: AuthProviderProps<TAuthClient>) {
   const authConfig = receiveConfig(config)
 
   return (
-    <AuthContext.Provider value={{ ...authConfig, authClient }}>
+    <AuthContext.Provider value={{ ...authConfig }}>
       {children}
     </AuthContext.Provider>
   )

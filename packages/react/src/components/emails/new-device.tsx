@@ -44,7 +44,9 @@ interface NewDeviceEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  font?: Partial<ComponentProps<typeof Font>>
+  font?: Omit<ComponentProps<typeof Font>, "fallbackFontFamily"> & {
+    fallbackFontFamily?: ComponentProps<typeof Font>["fallbackFontFamily"]
+  }
 }
 
 export const NewDeviceEmail = ({
@@ -74,7 +76,6 @@ export const NewDeviceEmail = ({
         {font && (
           <Font
             {...font}
-            fontFamily={font.fontFamily || "Unknown"}
             fallbackFontFamily={font.fallbackFontFamily || "sans-serif"}
           />
         )}
@@ -299,7 +300,7 @@ NewDeviceEmail.PreviewProps = {
     os: "macOS 26.2",
     location: "San Francisco, CA, United States",
     ipAddress: "127.0.0.1",
-    timestamp: "April 20, 1969 at 4:20 PM UTC"
+    timestamp: "February 10, 2026 at 4:20 PM UTC"
   },
   secureAccountLink: "https://better-auth-ui.com/auth/secure-account",
   appName: "Better Auth",

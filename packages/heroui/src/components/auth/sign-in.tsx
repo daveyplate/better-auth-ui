@@ -1,7 +1,7 @@
 "use client"
 
 import {
-  type AuthClient,
+  type AnyAuthClient,
   type AuthConfig,
   cn,
   useAuth
@@ -9,7 +9,6 @@ import {
 import {
   Button,
   Card,
-  type CardProps,
   Checkbox,
   FieldError,
   Form,
@@ -32,6 +31,7 @@ const signInLocalization = {
   ENTER_YOUR_PASSWORD: "Enter your password",
   FORGOT_PASSWORD: "Forgot password?",
   NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
+  OR: "OR",
   PASSWORD: "Password",
   REMEMBER_ME: "Remember me",
   SIGN_IN: "Sign In",
@@ -40,12 +40,14 @@ const signInLocalization = {
 
 export type SignInLocalization = typeof signInLocalization
 
-export type SignInProps<TAuthClient extends AuthClient> = CardProps &
-  Partial<AuthConfig<TAuthClient>> & {
-    localization?: Partial<SignInLocalization>
-  }
+export type SignInProps<TAuthClient extends AnyAuthClient> = Partial<
+  AuthConfig<TAuthClient>
+> & {
+  className?: string
+  localization?: Partial<SignInLocalization>
+}
 
-export function SignIn<TAuthClient extends AuthClient>({
+export function SignIn<TAuthClient extends AnyAuthClient>({
   className,
   ...props
 }: SignInProps<TAuthClient>) {
@@ -64,8 +66,7 @@ export function SignIn<TAuthClient extends AuthClient>({
   const [password, setPassword] = useState("")
 
   const showSeparator =
-    emailAndPassword?.enabled &&
-    ((socialProviders && socialProviders.length > 0) || magicLink)
+    emailAndPassword?.enabled && socialProviders && socialProviders.length > 0
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -85,7 +86,7 @@ export function SignIn<TAuthClient extends AuthClient>({
     )
 
     if (error) {
-      toast.error(error.message)
+      toast.error(error.message || error.status)
       setPassword("")
       setIsPending(false)
 
@@ -98,7 +99,7 @@ export function SignIn<TAuthClient extends AuthClient>({
   }
 
   return (
-    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)} {...props}>
+    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)}>
       <Card.Header className="text-xl font-medium">
         {localization.SIGN_IN}
       </Card.Header>
@@ -157,31 +158,29 @@ export function SignIn<TAuthClient extends AuthClient>({
                   </Label>
                 </div>
               )}
+
+              <div className="flex flex-col gap-4">
+                <Button type="submit" className="w-full" isPending={isPending}>
+                  {isPending && <Spinner color="current" size="sm" />}
+                  {localization.SIGN_IN}
+                </Button>
+
+                {magicLink && (
+                  <MagicLinkButton
+                    view="sign-in"
+                    isPending={isPending}
+                    localization={localization}
+                  />
+                )}
+              </div>
             </>
-          )}
-
-          {emailAndPassword?.enabled && (
-            <div className="flex flex-col gap-4">
-              <Button type="submit" className="w-full" isPending={isPending}>
-                {isPending && <Spinner color="current" size="sm" />}
-                {localization.SIGN_IN}
-              </Button>
-
-              {magicLink && (
-                <MagicLinkButton
-                  view="sign-in"
-                  isPending={isPending}
-                  localization={localization}
-                />
-              )}
-            </div>
           )}
 
           {showSeparator && (
             <div className="flex items-center gap-4">
               <Separator className="flex-1 bg-surface-quaternary" />
 
-              <p className="text-xs text-muted shrink-0">OR</p>
+              <p className="text-xs text-muted shrink-0">{localization.OR}</p>
 
               <Separator className="flex-1 bg-surface-quaternary" />
             </div>
@@ -193,6 +192,7 @@ export function SignIn<TAuthClient extends AuthClient>({
                 providers={socialProviders}
                 isPending={isPending}
                 setIsPending={setIsPending}
+                authClient={authClient}
                 localization={localization}
               />
             </div>

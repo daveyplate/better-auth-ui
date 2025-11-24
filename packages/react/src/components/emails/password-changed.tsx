@@ -36,7 +36,9 @@ interface PasswordChangedEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  font?: Partial<ComponentProps<typeof Font>>
+  font?: Omit<ComponentProps<typeof Font>, "fallbackFontFamily"> & {
+    fallbackFontFamily?: ComponentProps<typeof Font>["fallbackFontFamily"]
+  }
 }
 
 export const PasswordChangedEmail = ({
@@ -66,7 +68,6 @@ export const PasswordChangedEmail = ({
         {font && (
           <Font
             {...font}
-            fontFamily={font.fontFamily || "Unknown"}
             fallbackFontFamily={font.fallbackFontFamily || "sans-serif"}
           />
         )}
@@ -252,7 +253,7 @@ export const PasswordChangedEmail = ({
 
 PasswordChangedEmail.PreviewProps = {
   userEmail: "m@example.com",
-  timestamp: "April 20, 1969 at 4:20 PM UTC",
+  timestamp: "February 10, 2026 at 4:20 PM UTC",
   secureAccountLink: "https://better-auth-ui.com/auth/secure-account",
   appName: "Better Auth",
   supportEmail: "support@example.com",

@@ -24,7 +24,7 @@ import {
 } from "./email-styles"
 
 interface OtpEmailProps {
-  verificationCode?: string
+  verificationCode: string
   email?: string
   appName?: string
   expirationMinutes?: number
@@ -34,11 +34,13 @@ interface OtpEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  font?: Partial<ComponentProps<typeof Font>>
+  font?: Omit<ComponentProps<typeof Font>, "fallbackFontFamily"> & {
+    fallbackFontFamily?: ComponentProps<typeof Font>["fallbackFontFamily"]
+  }
 }
 
 export const OtpEmail = ({
-  verificationCode = "920441",
+  verificationCode,
   email,
   appName,
   expirationMinutes = 10,
@@ -63,7 +65,6 @@ export const OtpEmail = ({
         {font && (
           <Font
             {...font}
-            fontFamily={font.fontFamily || "Unknown"}
             fallbackFontFamily={font.fallbackFontFamily || "sans-serif"}
           />
         )}

@@ -25,7 +25,7 @@ import {
 } from "./email-styles"
 
 interface MagicLinkEmailProps {
-  url?: string
+  url: string
   email?: string
   appName?: string
   expirationMinutes?: number
@@ -35,7 +35,9 @@ interface MagicLinkEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  font?: Partial<ComponentProps<typeof Font>>
+  font?: Omit<ComponentProps<typeof Font>, "fallbackFontFamily"> & {
+    fallbackFontFamily?: ComponentProps<typeof Font>["fallbackFontFamily"]
+  }
 }
 
 export const MagicLinkEmail = ({
@@ -64,7 +66,6 @@ export const MagicLinkEmail = ({
         {font && (
           <Font
             {...font}
-            fontFamily={font.fontFamily || "Unknown"}
             fallbackFontFamily={font.fallbackFontFamily || "sans-serif"}
           />
         )}
@@ -225,7 +226,7 @@ export const MagicLinkEmail = ({
 }
 
 MagicLinkEmail.PreviewProps = {
-  url: "https://better-auth-ui.com/auth/verify?token=abc123def456",
+  url: "https://better-auth-ui.com/auth/verify?token=example-token",
   email: "m@example.com",
   appName: "Better Auth",
   darkMode: true
