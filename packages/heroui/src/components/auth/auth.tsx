@@ -1,6 +1,6 @@
 "use client"
 
-import type { AuthView } from "@better-auth-ui/core"
+import { type AuthView, authViews } from "@better-auth-ui/core"
 import type { AnyAuthClient, AuthConfig } from "@better-auth-ui/react"
 import { MagicLink } from "./magic-link"
 import { SignIn } from "./sign-in"
@@ -36,6 +36,10 @@ export function Auth<TAuthClient extends AnyAuthClient>({
       return <MagicLink {...props} />
     case "sign-out":
       return <SignOut {...props} />
+    default:
+      throw new Error(
+        `Invalid auth view: "${view}". Valid views are: ${authViews.join(", ")}`
+      )
   }
 }
 
