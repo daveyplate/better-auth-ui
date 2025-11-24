@@ -84,7 +84,7 @@ export const OtpEmail = ({
           >
             <Section
               className={cn(
-                "bg-card text-card-foreground flex flex-col rounded-none border border-border p-8",
+                "bg-card text-card-foreground rounded-none border border-border p-8",
                 classNames?.card
               )}
             >
@@ -110,7 +110,10 @@ export const OtpEmail = ({
                     width={48}
                     height={48}
                     alt={appName || "Logo"}
-                    className={cn("mx-auto mb-8 logo-dark", classNames?.logo)}
+                    className={cn(
+                      "hidden mx-auto mb-8 logo-dark",
+                      classNames?.logo
+                    )}
                   />
                 </>
               )}
@@ -138,7 +141,12 @@ export const OtpEmail = ({
                 open browser window.
               </Text>
 
-              <Section className="my-6 border border-border bg-muted p-6">
+              <Section
+                className={cn(
+                  "my-6 border border-border bg-muted p-6",
+                  classNames?.codeBlock
+                )}
+              >
                 <Text
                   className={cn(
                     "m-0 text-center text-4xl font-semibold tracking-widest",

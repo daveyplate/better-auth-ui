@@ -87,7 +87,7 @@ export const PasswordChangedEmail = ({
           >
             <Section
               className={cn(
-                "bg-card text-card-foreground flex flex-col rounded-none border border-border p-8",
+                "bg-card text-card-foreground rounded-none border border-border p-8",
                 classNames?.card
               )}
             >
@@ -113,7 +113,10 @@ export const PasswordChangedEmail = ({
                     width={48}
                     height={48}
                     alt={appName || "Logo"}
-                    className={cn("mx-auto mb-8 logo-dark", classNames?.logo)}
+                    className={cn(
+                      "hidden mx-auto mb-8 logo-dark",
+                      classNames?.logo
+                    )}
                   />
                 </>
               )}
@@ -146,8 +149,8 @@ export const PasswordChangedEmail = ({
               {timestamp && (
                 <Section
                   className={cn(
-                    "my-6 border border-border p-4 bg-muted",
-                    classNames?.card
+                    "my-6 border border-border bg-muted p-4",
+                    classNames?.codeBlock
                   )}
                 >
                   <Text
@@ -179,7 +182,7 @@ export const PasswordChangedEmail = ({
                   <Button
                     href={secureAccountLink}
                     className={cn(
-                      "inline-flex items-center justify-center whitespace-nowrap rounded-none text-sm font-medium h-10 px-6 bg-primary text-primary-foreground no-underline",
+                      "inline-block whitespace-nowrap rounded-none text-sm font-medium py-2.5 px-6 bg-primary text-primary-foreground no-underline",
                       classNames?.button
                     )}
                   >

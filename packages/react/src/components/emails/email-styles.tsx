@@ -1,27 +1,25 @@
-import colors from "tailwindcss/colors"
-
 export const defaultColors = {
   light: {
-    background: colors.neutral[100],
-    border: colors.neutral[200],
-    card: colors.white,
-    cardForeground: colors.neutral[950],
-    foreground: colors.neutral[950],
-    muted: colors.neutral[100],
-    mutedForeground: colors.neutral[500],
-    primary: colors.neutral[900],
-    primaryForeground: colors.white
+    background: "#F5F5F5",
+    border: "#E5E5E5",
+    card: "#FFFFFF",
+    cardForeground: "#0A0A0A",
+    foreground: "#262626",
+    muted: "#F5F5F5",
+    mutedForeground: "#737373",
+    primary: "#171717",
+    primaryForeground: "#FAFAFA"
   },
   dark: {
-    background: colors.neutral[950],
-    border: colors.neutral[800],
-    card: colors.neutral[900],
-    cardForeground: colors.neutral[50],
-    foreground: colors.neutral[50],
-    muted: colors.neutral[800],
-    mutedForeground: colors.neutral[400],
-    primary: colors.neutral[100],
-    primaryForeground: colors.black
+    background: "#0A0A0A",
+    border: "#2E2E2E",
+    card: "#171717",
+    cardForeground: "#FAFAFA",
+    foreground: "#D4D4D4",
+    muted: "#212121",
+    mutedForeground: "#A1A1A1",
+    primary: "#E5E5E5",
+    primaryForeground: "#171717"
   }
 }
 
@@ -37,6 +35,7 @@ export type EmailClassNames = {
   separator?: string
   link?: string
   poweredBy?: string
+  codeBlock?: string
 }
 
 export type EmailColors = {

@@ -81,13 +81,13 @@ export const EmailChangedEmail = ({
         <Body className={cn("bg-background font-sans", classNames?.body)}>
           <Container
             className={cn(
-              "mx-auto my-auto max-w-xl w-xl px-2 py-10",
+              "mx-auto my-auto max-w-xl px-2 py-10",
               classNames?.container
             )}
           >
             <Section
               className={cn(
-                "bg-card text-card-foreground rounded-none border border-border p-8",
+                "bg-card text-card-foreground flex flex-col rounded-none border border-border p-8",
                 classNames?.card
               )}
             >
@@ -113,7 +113,10 @@ export const EmailChangedEmail = ({
                     width={48}
                     height={48}
                     alt={appName || "Logo"}
-                    className={cn("mx-auto mb-8 logo-dark", classNames?.logo)}
+                    className={cn(
+                      "hidden mx-auto mb-8 logo-dark",
+                      classNames?.logo
+                    )}
                   />
                 </>
               )}
@@ -133,45 +136,53 @@ export const EmailChangedEmail = ({
 
               <Section
                 className={cn(
-                  "my-6 border border-border p-4 bg-background",
-                  classNames?.card
+                  "my-6 border border-border bg-muted p-4",
+                  classNames?.codeBlock
                 )}
               >
-                <Text
-                  className={cn(
-                    "m-0 mb-2 text-xs text-muted-foreground",
-                    classNames?.description
-                  )}
-                >
-                  Previous email:
-                </Text>
+                {oldEmail && (
+                  <>
+                    <Text
+                      className={cn(
+                        "m-0 mb-2 text-xs text-muted-foreground",
+                        classNames?.description
+                      )}
+                    >
+                      Previous email:
+                    </Text>
 
-                <Text
-                  className={cn(
-                    "m-0 mb-4 text-sm font-semibold",
-                    classNames?.content
-                  )}
-                >
-                  {oldEmail || "old@example.com"}
-                </Text>
+                    <Text
+                      className={cn(
+                        "m-0 mb-4 text-sm font-semibold",
+                        classNames?.content
+                      )}
+                    >
+                      {oldEmail}
+                    </Text>
+                  </>
+                )}
 
-                <Text
-                  className={cn(
-                    "m-0 mb-2 text-xs text-muted-foreground",
-                    classNames?.description
-                  )}
-                >
-                  New email:
-                </Text>
+                {newEmail && (
+                  <>
+                    <Text
+                      className={cn(
+                        "m-0 mb-2 text-xs text-muted-foreground",
+                        classNames?.description
+                      )}
+                    >
+                      New email:
+                    </Text>
 
-                <Text
-                  className={cn(
-                    "m-0 text-sm font-semibold text-primary",
-                    classNames?.content
-                  )}
-                >
-                  {newEmail || "new@example.com"}
-                </Text>
+                    <Text
+                      className={cn(
+                        "m-0 text-sm font-semibold text-primary",
+                        classNames?.content
+                      )}
+                    >
+                      {newEmail}
+                    </Text>
+                  </>
+                )}
               </Section>
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
@@ -183,7 +194,7 @@ export const EmailChangedEmail = ({
                   <Button
                     href={revertURL}
                     className={cn(
-                      "inline-flex items-center justify-center whitespace-nowrap rounded-none text-sm font-medium h-10 px-6 bg-primary text-primary-foreground no-underline",
+                      "inline-block whitespace-nowrap rounded-none text-sm font-medium py-2.5 px-6 bg-primary text-primary-foreground no-underline",
                       classNames?.button
                     )}
                   >
