@@ -60,7 +60,8 @@ export function TwoFactorForm({
         twoFactor,
         viewPaths,
         toast,
-        Link
+        Link,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
@@ -138,7 +139,7 @@ export function TwoFactorForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
 
             if (
@@ -180,7 +181,7 @@ export function TwoFactorForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
 
             form.reset()

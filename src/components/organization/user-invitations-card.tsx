@@ -98,7 +98,8 @@ function UserInvitationRow({
         authClient,
         organization: organizationOptions,
         localization: contextLocalization,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const localization = contextLocalization
@@ -133,7 +134,7 @@ function UserInvitationRow({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
         }
 
@@ -158,7 +159,7 @@ function UserInvitationRow({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
         }
 

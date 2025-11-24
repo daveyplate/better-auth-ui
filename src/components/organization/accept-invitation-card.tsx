@@ -93,7 +93,8 @@ function AcceptInvitationContent({
         organization,
         redirectTo,
         replace,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const localization = useMemo(
@@ -172,7 +173,7 @@ function AcceptInvitationContent({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
 
             setIsAccepting(false)
@@ -197,7 +198,7 @@ function AcceptInvitationContent({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
 
             setIsRejecting(false)

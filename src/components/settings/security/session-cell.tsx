@@ -34,7 +34,8 @@ export function SessionCell({
         mutators: { revokeSession },
         viewPaths,
         navigate,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
@@ -58,7 +59,7 @@ export function SessionCell({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
 
             setIsLoading(false)

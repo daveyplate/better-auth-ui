@@ -119,7 +119,8 @@ function OrganizationLogoForm({
         localization: authLocalization,
         organization: organizationOptions,
         mutators: { updateOrganization },
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const localization = useMemo(
@@ -179,7 +180,7 @@ function OrganizationLogoForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
         }
 
@@ -205,7 +206,7 @@ function OrganizationLogoForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
         }
 

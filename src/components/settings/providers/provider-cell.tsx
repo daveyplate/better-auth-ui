@@ -41,7 +41,8 @@ export function ProviderCell({
         localization: contextLocalization,
         mutators: { unlinkAccount },
         viewPaths,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
@@ -69,7 +70,7 @@ export function ProviderCell({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
 
             setIsLoading(false)
@@ -89,7 +90,7 @@ export function ProviderCell({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
         }
 

@@ -61,7 +61,8 @@ function EmailForm({
     const {
         authClient,
         localization: contextLocalization,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
@@ -102,7 +103,7 @@ function EmailForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
         }
     }
@@ -173,7 +174,8 @@ export function OTPForm({
     const {
         authClient,
         localization: contextLocalization,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
@@ -219,7 +221,7 @@ export function OTPForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
 
             form.reset()

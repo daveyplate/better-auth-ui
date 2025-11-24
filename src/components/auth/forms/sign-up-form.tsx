@@ -83,7 +83,8 @@ export function SignUpForm({
         viewPaths,
         navigate,
         toast,
-        avatar
+        avatar,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const confirmPasswordEnabled = credentials?.confirmPassword
@@ -295,7 +296,7 @@ export function SignUpForm({
             console.error(error)
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
         }
 
@@ -385,7 +386,7 @@ export function SignUpForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
 
             form.resetField("password")
