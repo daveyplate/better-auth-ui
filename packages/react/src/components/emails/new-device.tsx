@@ -167,9 +167,12 @@ export const NewDeviceEmail = ({
                       appName || ""
                     ).replace(" .", ".")
 
+                  const [beforeUserEmail, afterUserEmail] =
+                    textWithAppName.split("{userEmail}")
+
                   return userEmail ? (
                     <>
-                      {textWithAppName.split("{userEmail}")[0]}
+                      {beforeUserEmail}
 
                       <Link
                         href={`mailto:${userEmail}`}
@@ -178,7 +181,7 @@ export const NewDeviceEmail = ({
                         {userEmail}
                       </Link>
 
-                      {textWithAppName.split("{userEmail}")[1]}
+                      {afterUserEmail}
                     </>
                   ) : (
                     textWithAppName
@@ -301,31 +304,31 @@ export const NewDeviceEmail = ({
                   classNames?.description
                 )}
               >
-                {supportEmail ? (
-                  <>
-                    {
-                      localization.IF_YOU_DIDNT_SIGN_IN.split(
-                        "{supportEmail}"
-                      )[0]
-                    }
-                    <Link
-                      href={`mailto:${supportEmail}`}
-                      className={cn("text-primary underline", classNames?.link)}
-                    >
-                      {supportEmail}
-                    </Link>
-                    {
-                      localization.IF_YOU_DIDNT_SIGN_IN.split(
-                        "{supportEmail}"
-                      )[1]
-                    }
-                  </>
-                ) : (
-                  localization.IF_YOU_DIDNT_SIGN_IN.replace(
-                    "{supportEmail}",
-                    ""
-                  ).replace(" .", ".")
-                )}
+                {(() => {
+                  const [beforeSupportEmail, afterSupportEmail] =
+                    localization.IF_YOU_DIDNT_SIGN_IN.split("{supportEmail}")
+
+                  return supportEmail ? (
+                    <>
+                      {beforeSupportEmail}
+                      <Link
+                        href={`mailto:${supportEmail}`}
+                        className={cn(
+                          "text-primary underline",
+                          classNames?.link
+                        )}
+                      >
+                        {supportEmail}
+                      </Link>
+                      {afterSupportEmail}
+                    </>
+                  ) : (
+                    localization.IF_YOU_DIDNT_SIGN_IN.replace(
+                      "{supportEmail}",
+                      ""
+                    ).replace(" .", ".")
+                  )
+                })()}
               </Text>
 
               {poweredBy && (
@@ -335,14 +338,26 @@ export const NewDeviceEmail = ({
                     classNames?.poweredBy
                   )}
                 >
-                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[0]}
-                  <Link
-                    href="https://better-auth.com"
-                    className={cn("text-primary underline", classNames?.link)}
-                  >
-                    better-auth
-                  </Link>
-                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[1]}
+                  {(() => {
+                    const [beforeBetterAuth, afterBetterAuth] =
+                      localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")
+
+                    return (
+                      <>
+                        {beforeBetterAuth}
+                        <Link
+                          href="https://better-auth.com"
+                          className={cn(
+                            "text-primary underline",
+                            classNames?.link
+                          )}
+                        >
+                          better-auth
+                        </Link>
+                        {afterBetterAuth}
+                      </>
+                    )
+                  })()}
                 </Text>
               )}
             </Section>

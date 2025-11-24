@@ -151,9 +151,12 @@ export const OtpEmail = ({
                       appName || ""
                     ).replace(" .", ".")
 
+                  const [beforeEmail, afterEmail] =
+                    textWithAppName.split("{email}")
+
                   return email ? (
                     <>
-                      {textWithAppName.split("{email}")[0]}
+                      {beforeEmail}
 
                       <Link
                         href={`mailto:${email}`}
@@ -162,7 +165,7 @@ export const OtpEmail = ({
                         {email}
                       </Link>
 
-                      {textWithAppName.split("{email}")[1]}
+                      {afterEmail}
                     </>
                   ) : (
                     textWithAppName.replace("{email}", "").replace(" .", ".")
@@ -227,14 +230,26 @@ export const OtpEmail = ({
                     classNames?.poweredBy
                   )}
                 >
-                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[0]}
-                  <Link
-                    href="https://better-auth.com"
-                    className={cn("text-primary underline", classNames?.link)}
-                  >
-                    better-auth
-                  </Link>
-                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[1]}
+                  {(() => {
+                    const [beforeBetterAuth, afterBetterAuth] =
+                      localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")
+
+                    return (
+                      <>
+                        {beforeBetterAuth}
+                        <Link
+                          href="https://better-auth.com"
+                          className={cn(
+                            "text-primary underline",
+                            classNames?.link
+                          )}
+                        >
+                          better-auth
+                        </Link>
+                        {afterBetterAuth}
+                      </>
+                    )
+                  })()}
                 </Text>
               )}
             </Section>

@@ -152,9 +152,12 @@ export const EmailVerificationEmail = ({
                       appName || ""
                     ).replace(" .", ".")
 
+                  const [beforeEmailAddress, afterEmailAddress] =
+                    textWithAppName.split("{emailAddress}")
+
                   return email ? (
                     <>
-                      {textWithAppName.split("{emailAddress}")[0]}
+                      {beforeEmailAddress}
 
                       <Link
                         href={`mailto:${email}`}
@@ -163,7 +166,7 @@ export const EmailVerificationEmail = ({
                         {email}
                       </Link>
 
-                      {textWithAppName.split("{emailAddress}")[1]}
+                      {afterEmailAddress}
                     </>
                   ) : (
                     textWithAppName
@@ -250,14 +253,26 @@ export const EmailVerificationEmail = ({
                     classNames?.poweredBy
                   )}
                 >
-                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[0]}
-                  <Link
-                    href="https://better-auth.com"
-                    className={cn("text-primary underline", classNames?.link)}
-                  >
-                    better-auth
-                  </Link>
-                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[1]}
+                  {(() => {
+                    const [beforeBetterAuth, afterBetterAuth] =
+                      localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")
+
+                    return (
+                      <>
+                        {beforeBetterAuth}
+                        <Link
+                          href="https://better-auth.com"
+                          className={cn(
+                            "text-primary underline",
+                            classNames?.link
+                          )}
+                        >
+                          better-auth
+                        </Link>
+                        {afterBetterAuth}
+                      </>
+                    )
+                  })()}
                 </Text>
               )}
             </Section>

@@ -155,31 +155,28 @@ export const MagicLinkEmail = ({
               <Text
                 className={cn("m-0 text-sm font-normal", classNames?.content)}
               >
-                {email ? (
-                  <>
-                    {
-                      localization.CLICK_BUTTON_TO_SIGN_IN.split(
-                        "{emailAddress}"
-                      )[0]
-                    }
-                    <Link
-                      href={`mailto:${email}`}
-                      className="text-primary font-medium"
-                    >
-                      {email}
-                    </Link>
-                    {
-                      localization.CLICK_BUTTON_TO_SIGN_IN.split(
-                        "{emailAddress}"
-                      )[1]
-                    }
-                  </>
-                ) : (
-                  localization.CLICK_BUTTON_TO_SIGN_IN.replace(
-                    "{emailAddress}",
-                    ""
-                  ).replace(" .", ".")
-                )}
+                {(() => {
+                  const [beforeEmailAddress, afterEmailAddress] =
+                    localization.CLICK_BUTTON_TO_SIGN_IN.split("{emailAddress}")
+
+                  return email ? (
+                    <>
+                      {beforeEmailAddress}
+                      <Link
+                        href={`mailto:${email}`}
+                        className="text-primary font-medium"
+                      >
+                        {email}
+                      </Link>
+                      {afterEmailAddress}
+                    </>
+                  ) : (
+                    localization.CLICK_BUTTON_TO_SIGN_IN.replace(
+                      "{emailAddress}",
+                      ""
+                    ).replace(" .", ".")
+                  )
+                })()}
               </Text>
 
               <Section className="my-6">
@@ -263,14 +260,26 @@ export const MagicLinkEmail = ({
                     classNames?.poweredBy
                   )}
                 >
-                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[0]}
-                  <Link
-                    href="https://better-auth.com"
-                    className={cn("text-primary underline", classNames?.link)}
-                  >
-                    better-auth
-                  </Link>
-                  {localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")[1]}
+                  {(() => {
+                    const [beforeBetterAuth, afterBetterAuth] =
+                      localization.POWERED_BY_BETTER_AUTH.split("{betterAuth}")
+
+                    return (
+                      <>
+                        {beforeBetterAuth}
+                        <Link
+                          href="https://better-auth.com"
+                          className={cn(
+                            "text-primary underline",
+                            classNames?.link
+                          )}
+                        >
+                          better-auth
+                        </Link>
+                        {afterBetterAuth}
+                      </>
+                    )
+                  })()}
                 </Text>
               )}
             </Section>
