@@ -220,14 +220,12 @@ export const PasswordChangedEmail = ({
                 </Section>
               )}
 
-              {(appName || poweredBy || supportEmail) && (
-                <Hr
-                  className={cn(
-                    "my-6 w-full border border-solid border-border",
-                    classNames?.separator
-                  )}
-                />
-              )}
+              <Hr
+                className={cn(
+                  "my-6 w-full border border-solid border-border",
+                  classNames?.separator
+                )}
+              />
 
               {appName && (
                 <Text
