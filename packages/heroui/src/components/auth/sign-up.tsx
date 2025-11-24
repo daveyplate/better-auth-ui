@@ -27,7 +27,7 @@ import { ProviderButtons } from "./provider-buttons"
 const signUpLocalization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
-  ALREADY_HAVE_AN_ACCOUNT: "Already have an account????",
+  ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
   EMAIL: "Email",
   ENTER_YOUR_EMAIL: "Enter your email",
   ENTER_YOUR_NAME: "Enter your name",
