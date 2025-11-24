@@ -39,6 +39,4 @@ export function Auth<TAuthClient extends AnyAuthClient>({
   }
 }
 
-Object.assign(Auth, {
-  localization: authLocalization
-})
+Auth.localization = authLocalization
