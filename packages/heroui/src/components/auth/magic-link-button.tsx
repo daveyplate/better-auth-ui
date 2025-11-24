@@ -5,8 +5,8 @@ import { cn, useAuthConfig } from "@better-auth-ui/react"
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline"
 
 export const magicLinkButtonLocalization = {
-  CONTINUE_WITH_PASSWORD: "Continue with Password",
-  CONTINUE_WITH_MAGIC_LINK: "Continue with Magic Link"
+  CONTINUE_WITH_MAGIC_LINK: "Continue with Magic Link",
+  CONTINUE_WITH_PASSWORD: "Continue with Password"
 }
 
 export type MagicLinkButtonLocalization = typeof magicLinkButtonLocalization

@@ -1,6 +1,9 @@
 "use client"
 
-import type { AuthConfig, LinkComponent } from "@better-auth-ui/core"
+import type {
+  AuthConfig as BaseAuthConfig,
+  LinkComponent
+} from "@better-auth-ui/core"
 import {
   type Context,
   createContext,
@@ -12,21 +15,20 @@ import {
 import { receiveConfig } from "../lib/receive-config"
 import type { AuthClient } from "../types/auth-client"
 
-export type AuthConfigWithClient<TAuthClient extends AuthClient> = Omit<
-  AuthConfig,
+export type AuthConfig<TAuthClient extends AuthClient> = Omit<
+  BaseAuthConfig,
   "Link"
 > & {
-  authClient: TAuthClient
   Link: LinkComponent<ReactNode>
+  authClient: TAuthClient
 }
 
-export const AuthContext: Context<
-  AuthConfigWithClient<AuthClient> | undefined
-> = createContext<AuthConfigWithClient<AuthClient> | undefined>(undefined)
+export const AuthContext: Context<AuthConfig<AuthClient> | undefined> =
+  createContext<AuthConfig<AuthClient> | undefined>(undefined)
 
 export type AuthProviderProps<TAuthClient extends AuthClient> =
   PropsWithChildren &
-    Omit<Partial<AuthConfigWithClient<TAuthClient>>, "authClient"> & {
+    Omit<Partial<AuthConfig<TAuthClient>>, "authClient"> & {
       authClient: TAuthClient
     }
 
@@ -45,8 +47,8 @@ export function AuthProvider<TAuthClient extends AuthClient>({
 }
 
 export function useAuthConfig(
-  config?: Partial<AuthConfigWithClient<AuthClient>>
-): AuthConfigWithClient<AuthClient> {
+  config?: Partial<AuthConfig<AuthClient>>
+): AuthConfig<AuthClient> {
   const context = useContext(AuthContext)
 
   const merged = {
@@ -68,5 +70,5 @@ export function useAuthConfig(
   return {
     ...configWithoutClient,
     authClient
-  } as AuthConfigWithClient<AuthClient>
+  } as AuthConfig<AuthClient>
 }

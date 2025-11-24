@@ -1,22 +1,24 @@
 "use client"
 
 import type { AuthView } from "@better-auth-ui/core"
-import type { AuthClient, AuthConfigWithClient } from "@better-auth-ui/react"
+import type { AuthClient, AuthConfig } from "@better-auth-ui/react"
 import type { CardProps } from "@heroui/react"
 
-import { MagicLink } from "./magic-link"
+import { MagicLink, magicLinkLocalization } from "./magic-link"
 import { SignIn, signInLocalization } from "./sign-in"
 import { SignOut } from "./sign-out"
-import { SignUp } from "./sign-up"
+import { SignUp, signUpLocalization } from "./sign-up"
 
 export const authLocalization = {
-  ...signInLocalization
+  ...signInLocalization,
+  ...signUpLocalization,
+  ...magicLinkLocalization
 }
 
 export type AuthLocalization = typeof authLocalization
 
 export type AuthProps<TAuthClient extends AuthClient> = CardProps &
-  Partial<AuthConfigWithClient<TAuthClient>> & {
+  Partial<AuthConfig<TAuthClient>> & {
     view: AuthView | string
     localization?: Partial<AuthLocalization>
   }

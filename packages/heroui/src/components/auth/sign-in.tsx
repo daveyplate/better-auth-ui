@@ -2,7 +2,7 @@
 
 import {
   type AuthClient,
-  type AuthConfigWithClient,
+  type AuthConfig,
   cn,
   useAuthConfig
 } from "@better-auth-ui/react"
@@ -33,21 +33,21 @@ import {
 export const signInLocalization = {
   ...magicLinkButtonLocalization,
   ...providerButtonsLocalization,
-  SIGN_IN: "Sign In",
   EMAIL: "Email",
   ENTER_YOUR_EMAIL: "Enter your email",
-  PASSWORD: "Password",
   ENTER_YOUR_PASSWORD: "Enter your password",
-  REMEMBER_ME: "Remember me",
   FORGOT_PASSWORD: "Forgot password?",
   NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
+  PASSWORD: "Password",
+  REMEMBER_ME: "Remember me",
+  SIGN_IN: "Sign In",
   SIGN_UP: "Sign Up"
 }
 
 export type SignInLocalization = typeof signInLocalization
 
 export type SignInProps<TAuthClient extends AuthClient> = CardProps &
-  Partial<AuthConfigWithClient<TAuthClient>> & {
+  Partial<AuthConfig<TAuthClient>> & {
     localization?: Partial<SignInLocalization>
   }
 
