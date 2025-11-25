@@ -57,5 +57,24 @@ export type AuthHooks = {
         members: (Member & { user?: Partial<User> | null })[]
         total: number
     }>
+    useListTeams: (params?: { organizationId?: string }) => AuthHook<Team[]>
+    useListTeamMembers: (params: { teamId?: string }) => AuthHook<TeamMember[]>
+    useListUserTeams: () => AuthHook<Team[]>
     useIsRestoring?: () => boolean
+}
+
+export type Team = {
+    id: string
+    name: string
+    organizationId: string
+    createdAt: Date
+    updatedAt: Date
+}
+
+export type TeamMember = {
+    id: string
+    teamId: string
+    userId: string
+    createdAt: Date
+    user?: Partial<User> | null
 }
