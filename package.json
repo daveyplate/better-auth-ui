@@ -6,7 +6,9 @@
     "scripts": {
         "build": "tsup --clean --dts && cp src/style.css dist/style.css",
         "dev": "tsc-watch",
-        "prepublishOnly": "rm -rf dist && turbo build"
+        "prepublishOnly": "rm -rf dist && turbo build",
+        "lint": "biome check",
+        "lint:fix": "biome check --write"
     },
     "type": "module",
     "main": "./dist/index.cjs",
