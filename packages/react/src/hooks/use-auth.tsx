@@ -6,7 +6,6 @@ import { useContext } from "react"
 
 import type { AuthConfig } from "../components/auth-provider"
 import { AuthContext } from "../components/auth-provider"
-import type { AnyAuthClient, AuthClient } from "../types/auth-client"
 
 const defaultConfig = {
   basePaths: {
@@ -22,19 +21,22 @@ const defaultConfig = {
   },
   replace: (path: string) => window.location.replace(path),
   Link: (props) => <a {...props} />
-} satisfies Omit<AuthConfig<AuthClient>, "authClient">
+} satisfies Omit<AuthConfig, "authClient">
 
-export function receiveConfig(
-  config: DeepPartial<AuthConfig<AnyAuthClient>> = {}
-) {
+export function receiveConfig(config: DeepPartial<AuthConfig> = {}) {
   if (config.authClient === undefined) {
     throw new Error("[Better Auth UI] authClient is required")
   }
 
-  return deepmerge(defaultConfig, config) as AuthConfig<AuthClient>
+  const merged = deepmerge(defaultConfig, config) as AuthConfig
+  // Ensure authClient is typed as AnyAuthClient to avoid type narrowing issues
+  return {
+    ...merged,
+    authClient: merged.authClient as AuthConfig["authClient"]
+  }
 }
 
-export function useAuth(config?: DeepPartial<AuthConfig<AnyAuthClient>>) {
+export function useAuth(config?: DeepPartial<AuthConfig>) {
   const context = useContext(AuthContext)
   return receiveConfig(deepmerge(context || {}, config || {}))
 }

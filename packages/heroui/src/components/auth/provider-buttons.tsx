@@ -1,7 +1,7 @@
 "use client"
 
 import { getProviderName } from "@better-auth-ui/core"
-import { type AuthClient, providerIcons } from "@better-auth-ui/react"
+import { type AnyAuthClient, providerIcons } from "@better-auth-ui/react"
 import { Button } from "@heroui/react"
 import type { SocialProvider } from "better-auth/social-providers"
 import { toast } from "sonner"
@@ -16,7 +16,7 @@ export type ProviderButtonsProps = {
   providers: SocialProvider[]
   isPending: boolean
   setIsPending: (pending: boolean) => void
-  authClient: AuthClient
+  authClient: AnyAuthClient
   localization?: Partial<ProviderButtonsLocalization>
 }
 

@@ -1,11 +1,6 @@
 "use client"
 
-import {
-  type AnyAuthClient,
-  type AuthConfig,
-  cn,
-  useAuth
-} from "@better-auth-ui/react"
+import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -32,17 +27,12 @@ const localization = {
 
 export type ResetPasswordLocalization = typeof localization
 
-export type ResetPasswordProps<TAuthClient extends AnyAuthClient> = DeepPartial<
-  AuthConfig<TAuthClient>
-> & {
+export type ResetPasswordProps = DeepPartial<AuthConfig> & {
   className?: string
   localization?: Partial<ResetPasswordLocalization>
 }
 
-export function ResetPassword<TAuthClient extends AnyAuthClient>({
-  className,
-  ...props
-}: ResetPasswordProps<TAuthClient>) {
+export function ResetPassword({ className, ...props }: ResetPasswordProps) {
   const localization = {
     ...ResetPassword.localization,
     ...props.localization

@@ -1,11 +1,6 @@
 "use client"
 
-import {
-  type AnyAuthClient,
-  type AuthConfig,
-  cn,
-  useAuth
-} from "@better-auth-ui/react"
+import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -41,17 +36,12 @@ const localization = {
 
 export type SignUpLocalization = typeof localization
 
-export type SignUpProps<TAuthClient extends AnyAuthClient> = DeepPartial<
-  AuthConfig<TAuthClient>
-> & {
+export type SignUpProps = DeepPartial<AuthConfig> & {
   className?: string
   localization?: Partial<SignUpLocalization>
 }
 
-export function SignUp<TAuthClient extends AnyAuthClient>({
-  className,
-  ...props
-}: SignUpProps<TAuthClient>) {
+export function SignUp({ className, ...props }: SignUpProps) {
   const localization = { ...SignUp.localization, ...props.localization }
 
   const { authClient, navigate, Link, socialProviders, magicLink, basePaths } =

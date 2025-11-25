@@ -1,7 +1,6 @@
 "use client"
 
 import {
-  type AnyAuthClient,
   type AuthConfig,
   cn,
   useAuth
@@ -38,17 +37,17 @@ const localization = {
 
 export type MagicLinkLocalization = typeof localization
 
-export type MagicLinkProps<TAuthClient extends AnyAuthClient> = DeepPartial<
-  AuthConfig<TAuthClient>
+export type MagicLinkProps = DeepPartial<
+  AuthConfig
 > & {
   className?: string
   localization?: Partial<MagicLinkLocalization>
 }
 
-export function MagicLink<TAuthClient extends AnyAuthClient>({
+export function MagicLink({
   className,
   ...props
-}: MagicLinkProps<TAuthClient>) {
+}: MagicLinkProps) {
   const localization = { ...MagicLink.localization, ...props.localization }
 
   const { authClient, Link, socialProviders, magicLink, basePaths } =
