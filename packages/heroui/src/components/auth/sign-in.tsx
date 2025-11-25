@@ -53,7 +53,9 @@ export function SignIn({ className, ...props }: SignInProps) {
     Link,
     socialProviders,
     magicLink,
-    basePaths
+    basePaths,
+    baseURL,
+    redirectTo
   } = useAuth(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
@@ -86,6 +88,8 @@ export function SignIn({ className, ...props }: SignInProps) {
             <ResendVerificationButton
               email={email}
               authClient={authClient}
+              redirectTo={redirectTo}
+              baseURL={baseURL}
               localization={localization}
             />
           )
@@ -101,7 +105,7 @@ export function SignIn({ className, ...props }: SignInProps) {
     }
 
     await refetch()
-    navigate("/dashboard")
+    navigate(redirectTo)
     setIsPending(false)
   }
 
@@ -218,10 +222,9 @@ export function SignIn({ className, ...props }: SignInProps) {
           {socialProviders && socialProviders.length > 0 && (
             <div className="flex flex-col gap-4">
               <ProviderButtons
-                providers={socialProviders}
+                {...props}
                 isPending={isPending}
                 setIsPending={setIsPending}
-                authClient={authClient}
                 localization={localization}
               />
             </div>

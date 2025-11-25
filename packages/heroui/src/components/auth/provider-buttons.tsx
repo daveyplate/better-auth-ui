@@ -1,9 +1,9 @@
 "use client"
 
 import { getProviderName } from "@better-auth-ui/core"
-import { type AnyAuthClient, providerIcons } from "@better-auth-ui/react"
+import { type AuthConfig, providerIcons, useAuth } from "@better-auth-ui/react"
 import { Button } from "@heroui/react"
-import type { SocialProvider } from "better-auth/social-providers"
+import type { DeepPartial } from "better-auth/client/plugins"
 import { toast } from "sonner"
 
 const localization = {
@@ -12,19 +12,15 @@ const localization = {
 
 export type ProviderButtonsLocalization = typeof localization
 
-export type ProviderButtonsProps = {
-  providers: SocialProvider[]
+export type ProviderButtonsProps = DeepPartial<AuthConfig> & {
   isPending: boolean
   setIsPending: (pending: boolean) => void
-  authClient: AnyAuthClient
   localization?: Partial<ProviderButtonsLocalization>
 }
 
 export function ProviderButtons({
-  providers,
   isPending,
   setIsPending,
-  authClient,
   ...props
 }: ProviderButtonsProps) {
   const localization = {
@@ -32,11 +28,16 @@ export function ProviderButtons({
     ...props.localization
   }
 
-  const handleClick = async (provider: SocialProvider) => {
+  const { authClient, socialProviders, baseURL, redirectTo } = useAuth(props)
+
+  const handleClick = async (provider: string) => {
     setIsPending(true)
 
+    const callbackURL = `${baseURL}${redirectTo}`
+
     const { error } = await authClient.signIn.social({
-      provider
+      provider,
+      callbackURL
     })
 
     if (error) {
@@ -46,9 +47,13 @@ export function ProviderButtons({
     }
   }
 
+  if (!socialProviders || socialProviders.length === 0) {
+    return null
+  }
+
   return (
     <div className="flex flex-col gap-4">
-      {providers.map((provider) => {
+      {socialProviders.map((provider) => {
         const Icon = providerIcons[provider]
         return (
           <Button

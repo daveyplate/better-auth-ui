@@ -19,9 +19,11 @@ export interface AuthConfig {
     auth: string
     account: string
   }
+  baseURL?: string
   emailAndPassword?: EmailAndPasswordConfig
-  socialProviders?: SocialProvider[]
   magicLink?: boolean
+  redirectTo: string
+  socialProviders?: SocialProvider[]
   navigate: (path: string) => void
   replace: (path: string) => void
   Link: LinkComponent

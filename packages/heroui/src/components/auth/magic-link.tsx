@@ -41,8 +41,15 @@ export type MagicLinkProps = DeepPartial<AuthConfig> & {
 export function MagicLink({ className, ...props }: MagicLinkProps) {
   const localization = { ...MagicLink.localization, ...props.localization }
 
-  const { authClient, Link, socialProviders, magicLink, basePaths } =
-    useAuth(props)
+  const {
+    authClient,
+    Link,
+    socialProviders,
+    magicLink,
+    basePaths,
+    baseURL,
+    redirectTo
+  } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
   const showSeparator = socialProviders && socialProviders.length > 0
@@ -54,7 +61,12 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
     const formData = new FormData(e.currentTarget)
     const email = formData.get("email") as string
 
-    const { error } = await authClient.signIn.magicLink({ email })
+    const callbackURL = `${baseURL}${redirectTo}`
+
+    const { error } = await authClient.signIn.magicLink({
+      email,
+      callbackURL
+    })
 
     if (error) {
       toast.error(error.message || error.status)
@@ -120,10 +132,9 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
               <div className="flex flex-col gap-4">
                 {socialProviders && socialProviders.length > 0 && (
                   <ProviderButtons
-                    providers={socialProviders}
+                    {...props}
                     isPending={isPending}
                     setIsPending={setIsPending}
-                    authClient={authClient}
                     localization={localization}
                   />
                 )}

@@ -52,7 +52,8 @@ export function SignUp({ className, ...props }: SignUpProps) {
     socialProviders,
     magicLink,
     basePaths,
-    emailAndPassword
+    emailAndPassword,
+    redirectTo
   } = useAuth(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
@@ -93,7 +94,7 @@ export function SignUp({ className, ...props }: SignUpProps) {
     }
 
     await refetch()
-    navigate("/dashboard")
+    navigate(redirectTo)
     setIsPending(false)
   }
 
@@ -178,10 +179,9 @@ export function SignUp({ className, ...props }: SignUpProps) {
               <div className="flex flex-col gap-4">
                 {socialProviders && socialProviders.length > 0 && (
                   <ProviderButtons
-                    providers={socialProviders}
+                    {...props}
                     isPending={isPending}
                     setIsPending={setIsPending}
-                    authClient={authClient}
                     localization={localization}
                   />
                 )}

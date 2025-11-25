@@ -3,15 +3,18 @@
 import type { DeepPartial } from "better-auth/client/plugins"
 import deepmerge from "deepmerge"
 import { useContext } from "react"
+
 import type { AuthConfig } from "../components/auth-provider"
 import { AuthContext } from "../components/auth-provider"
 import type { AuthClient } from "../types/auth-client"
+import { useHydrated } from "./use-hydrated"
 
 const defaultConfig = {
   basePaths: {
     auth: "/auth",
     account: "/account"
   },
+  baseURL: "",
   emailAndPassword: {
     enabled: true,
     forgotPassword: true
@@ -20,7 +23,8 @@ const defaultConfig = {
     window.location.href = path
   },
   replace: (path: string) => window.location.replace(path),
-  Link: (props) => <a {...props} />
+  Link: (props) => <a {...props} />,
+  redirectTo: "/"
 } satisfies Omit<AuthConfig, "authClient">
 
 export function receiveConfig(config: DeepPartial<AuthConfig> = {}) {
@@ -38,8 +42,12 @@ export function receiveConfig(config: DeepPartial<AuthConfig> = {}) {
 
 export function useAuth(config?: DeepPartial<AuthConfig>) {
   const context = useContext(AuthContext)
-  return receiveConfig(deepmerge(context || {}, config || {})) as Omit<
-    AuthConfig,
-    "authClient"
-  > & { authClient: AuthClient }
+  const authConfig = receiveConfig(deepmerge(context || {}, config || {}))
+
+  authConfig.redirectTo =
+    (useHydrated() &&
+      new URLSearchParams(window.location.search).get("redirectTo")) ||
+    authConfig.redirectTo
+
+  return authConfig as AuthConfig & { authClient: AuthClient }
 }

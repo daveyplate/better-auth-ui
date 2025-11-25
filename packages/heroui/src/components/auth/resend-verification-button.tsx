@@ -15,12 +15,16 @@ export type ResendVerificationButtonLocalization = typeof localization
 export type ResendVerificationButtonProps = {
   email: string
   authClient: AuthClient
+  redirectTo: string
+  baseURL?: string
   localization?: Partial<ResendVerificationButtonLocalization>
 }
 
 export function ResendVerificationButton({
   email,
   authClient,
+  redirectTo,
+  baseURL,
   ...props
 }: ResendVerificationButtonProps) {
   const localization = {
@@ -37,9 +41,11 @@ export function ResendVerificationButton({
       onPress={async () => {
         setIsResending(true)
 
+        const callbackURL = `${baseURL}${redirectTo}`
+
         const { error } = await authClient.sendVerificationEmail({
           email,
-          callbackURL: "/dashboard"
+          callbackURL
         })
 
         toast.dismiss()
