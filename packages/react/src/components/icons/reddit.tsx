@@ -2,11 +2,7 @@ import type { ComponentPropsWithRef } from "react"
 
 export function Reddit(props: ComponentPropsWithRef<"svg">) {
   return (
-    <svg
-      viewBox="0 0 256 256"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>Reddit</title>
       <circle cx="128" cy="128" fill="#ff4500" r="128" />
 

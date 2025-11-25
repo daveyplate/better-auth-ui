@@ -2,11 +2,7 @@ import type { ComponentPropsWithRef } from "react"
 
 export function Microsoft(props: ComponentPropsWithRef<"svg">) {
   return (
-    <svg
-      viewBox="0 0 256 256"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>Microsoft</title>
       <path d="M121.666 121.666H0V0h121.666z" fill="#f1511b" />
       <path d="M256 121.666H134.335V0H256z" fill="#80cc28" />
