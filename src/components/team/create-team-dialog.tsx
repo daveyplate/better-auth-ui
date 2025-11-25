@@ -35,6 +35,16 @@ export interface CreateTeamDialogProps extends ComponentProps<typeof Dialog> {
     organizationId: string
 }
 
+/**
+ * Renders a dialog containing a form to create a team for a given organization.
+ *
+ * The component validates the team name, submits it to create the team, shows success or error toasts, and manages dialog visibility via `onOpenChange`.
+ *
+ * @param organizationId - The ID of the organization to which the new team will belong; when falsy the create action is disabled.
+ * @param onOpenChange - Callback invoked when the dialog open state changes; called with `false` to close the dialog after a successful create or when cancel is clicked.
+ * @param localization - Optional localization overrides for labels, placeholders, descriptions, and messages used by the dialog.
+ * @returns A React element rendering the create-team dialog and its form.
+ */
 export function CreateTeamDialog({
     className,
     classNames,

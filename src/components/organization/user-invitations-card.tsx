@@ -17,6 +17,16 @@ import {
 } from "../ui/dropdown-menu"
 import { UserAvatar } from "../user-avatar"
 
+/**
+ * Render a settings card that lists all pending user invitations.
+ *
+ * The card is omitted (returns `null`) when there are no pending invitations.
+ *
+ * @param className - Optional container class name passed to the SettingsCard
+ * @param classNames - Optional classNames map applied to SettingsCard subcomponents
+ * @param localization - Partial localization overrides that are merged with AuthUIContext localization
+ * @returns The SettingsCard element containing a row for each pending invitation, or `null` when none exist
+ */
 export function UserInvitationsCard({
     className,
     classNames,
@@ -79,6 +89,14 @@ export function UserInvitationsCard({
     )
 }
 
+/**
+ * Render a row showing a pending user invitation with controls to accept or reject it.
+ *
+ * @param classNames - Optional className overrides for card parts (matches SettingsCardProps["classNames"]).
+ * @param invitation - Invitation data; `expiresAt` must be a Date instance.
+ * @param onChanged - Optional callback invoked after the invitation is accepted or rejected.
+ * @returns The JSX element representing the invitation row.
+ */
 function UserInvitationRow({
     classNames,
     invitation,

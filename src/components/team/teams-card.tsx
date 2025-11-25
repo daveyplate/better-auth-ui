@@ -11,6 +11,15 @@ import { CardContent } from "../ui/card"
 import { CreateTeamDialog } from "./create-team-dialog"
 import { TeamCell } from "./team-cell"
 
+/**
+ * Render a settings card that lists teams for the current organization and exposes a dialog to create a new team.
+ *
+ * The component merges provided localization with context localization, fetches teams for the current organization,
+ * shows a loading skeleton while data is pending, displays a localized empty message when no teams exist,
+ * and renders a TeamCell for each team. It also controls a CreateTeamDialog tied to the current organization.
+ *
+ * @returns A React element containing the teams settings card and the create-team dialog
+ */
 export function TeamsCard({
     className,
     classNames,

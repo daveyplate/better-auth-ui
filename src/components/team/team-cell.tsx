@@ -15,6 +15,14 @@ export interface TeamCellProps {
     localization: AuthLocalization
 }
 
+/**
+ * Render a single-row team cell with a color-coded circular avatar, the team name, and a localized "Team" label.
+ *
+ * @param classNames - Optional class name overrides for component parts
+ * @param team - Team data object containing at least `id` and `name`
+ * @param localization - Localization strings providing `TEAM` label
+ * @returns The rendered team cell element
+ */
 export function TeamCell({ classNames, team, localization }: TeamCellProps) {
     const { teams } = useContext(AuthUIContext)
 
