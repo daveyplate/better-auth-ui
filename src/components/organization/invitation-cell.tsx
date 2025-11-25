@@ -49,7 +49,8 @@ export function InvitationCell({
         hooks: { useListInvitations },
         organization: organizationOptions,
         localization: contextLocalization,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const localization = useMemo(
@@ -91,7 +92,11 @@ export function InvitationCell({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
 

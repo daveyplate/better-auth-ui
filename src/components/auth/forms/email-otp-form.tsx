@@ -1,12 +1,11 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import type { BetterFetchOption } from "better-auth/react"
 import { Loader2 } from "lucide-react"
 import { useContext, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-
-import type { BetterFetchOption } from "better-auth/react"
 import { useCaptcha } from "../../../hooks/use-captcha"
 import { useIsHydrated } from "../../../hooks/use-hydrated"
 import { useOnSuccessTransition } from "../../../hooks/use-success-transition"
@@ -65,7 +64,8 @@ function EmailForm({
     const {
         authClient,
         localization: contextLocalization,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
@@ -111,7 +111,11 @@ function EmailForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
     }
@@ -188,7 +192,8 @@ export function OTPForm({
     const {
         authClient,
         localization: contextLocalization,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
@@ -234,7 +239,11 @@ export function OTPForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
 
             form.reset()

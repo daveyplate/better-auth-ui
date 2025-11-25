@@ -138,6 +138,12 @@ export type AuthUIContextType = {
     hooks: AuthHooks
     localization: typeof authLocalization
     /**
+     * Enable or disable error localization.
+     * When false, errors messages from backend will be used directly.
+     * @default true
+     */
+    localizeErrors: boolean
+    /**
      * Enable or disable Magic Link support
      * @default false
      */
@@ -271,6 +277,12 @@ export type AuthUIProviderProps = {
      */
     localization?: AuthLocalization
     /**
+     * Enable or disable error localization.
+     * When false, errors messages from backend will be used directly.
+     * @default true
+     */
+    localizeErrors?: boolean
+    /**
      * ADVANCED: Custom mutators for updating auth data
      */
     mutators?: Partial<AuthMutators>
@@ -307,6 +319,7 @@ export type AuthUIProviderProps = {
         | "credentials"
         | "signUp"
         | "organization"
+        | "localizeErrors"
         | "teams"
     >
 >
@@ -333,6 +346,7 @@ export const AuthUIProvider = ({
     hooks: hooksProp,
     mutators: mutatorsProp,
     localization: localizationProp,
+    localizeErrors = true,
     nameRequired = true,
     organization: organizationProp,
     teams: teamsProp,
@@ -707,6 +721,7 @@ export const AuthUIProvider = ({
                 hooks,
                 mutators,
                 localization,
+                localizeErrors,
                 nameRequired,
                 organization,
                 teams,

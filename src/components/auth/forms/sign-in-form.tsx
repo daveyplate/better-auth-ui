@@ -66,7 +66,8 @@ export function SignInForm({
         viewPaths,
         navigate,
         toast,
-        Link
+        Link,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const rememberMeEnabled = credentials?.rememberMe
@@ -155,7 +156,11 @@ export function SignInForm({
 
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
     }

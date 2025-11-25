@@ -38,7 +38,8 @@ export function UpdateAvatarCard({
         localization: authLocalization,
         optimistic,
         avatar,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     localization = { ...authLocalization, ...localization }
@@ -79,7 +80,11 @@ export function UpdateAvatarCard({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
 
@@ -102,7 +107,11 @@ export function UpdateAvatarCard({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
 

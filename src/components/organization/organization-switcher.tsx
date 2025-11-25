@@ -116,7 +116,8 @@ export function OrganizationSwitcher({
         navigate,
         toast,
         viewPaths,
-        Link
+        Link,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const {
@@ -198,7 +199,11 @@ export function OrganizationSwitcher({
             } catch (error) {
                 toast({
                     variant: "error",
-                    message: getLocalizedError({ error, localization })
+                    message: getLocalizedError({
+                        error,
+                        localization,
+                        localizeErrors
+                    })
                 })
 
                 setActiveOrganizationPending(false)
@@ -208,6 +213,7 @@ export function OrganizationSwitcher({
             authClient,
             toast,
             localization,
+            localizeErrors,
             onSetActive,
             hidePersonal,
             pathMode,

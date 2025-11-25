@@ -63,7 +63,8 @@ export function UpdateFieldCard({
         mutators: { updateUser },
         localization: contextLocalization,
         optimistic,
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const localization = useMemo(
@@ -148,7 +149,11 @@ export function UpdateFieldCard({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
     }

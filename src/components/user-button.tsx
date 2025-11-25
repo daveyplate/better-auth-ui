@@ -112,7 +112,8 @@ export function UserButton({
         toast,
         viewPaths,
         onSessionChange,
-        Link
+        Link,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const localization = useMemo(
@@ -150,12 +151,16 @@ export function UserButton({
             } catch (error) {
                 toast({
                     variant: "error",
-                    message: getLocalizedError({ error, localization })
+                    message: getLocalizedError({
+                        error,
+                        localization,
+                        localizeErrors
+                    })
                 })
                 setActiveSessionPending(false)
             }
         },
-        [setActiveSession, onSessionChange, toast, localization]
+        [setActiveSession, onSessionChange, toast, localization, localizeErrors]
     )
 
     // biome-ignore lint/correctness/useExhaustiveDependencies: ignore

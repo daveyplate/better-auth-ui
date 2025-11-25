@@ -54,7 +54,8 @@ export function InviteMemberDialog({
         hooks: { useListInvitations, useListMembers, useSession },
         localization: contextLocalization,
         toast,
-        organization: organizationOptions
+        organization: organizationOptions,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     const localization = useMemo(
@@ -131,7 +132,11 @@ export function InviteMemberDialog({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
     }

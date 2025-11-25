@@ -29,7 +29,8 @@ export function PasskeyCell({
         hooks: { useSession, useListPasskeys },
         localization: contextLocalization,
         mutators: { deletePasskey },
-        toast
+        toast,
+        localizeErrors
     } = useContext(AuthUIContext)
 
     localization = { ...contextLocalization, ...localization }
@@ -62,7 +63,11 @@ export function PasskeyCell({
 
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
     }
