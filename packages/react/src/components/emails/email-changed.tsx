@@ -152,7 +152,9 @@ export const EmailChangedEmail = ({
                 {localization.EMAIL_ADDRESS_FOR_YOUR_ACCOUNT_CHANGED.replace(
                   "{appName}",
                   appName || ""
-                ).replace(/\s{2,}/g, " ").replace(" .", ".")}
+                )
+                  .replace(/\s{2,}/g, " ")
+                  .replace(" .", ".")}
               </Text>
 
               {(oldEmail || newEmail) && (
@@ -274,7 +276,9 @@ export const EmailChangedEmail = ({
                     localization.IF_YOU_DIDNT_AUTHORIZE_THIS_CHANGE.replace(
                       "{supportEmail}",
                       ""
-                    ).replace(/\s{2,}/g, " ").replace(" .", ".")
+                    )
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
                   )
                 })()}
               </Text>

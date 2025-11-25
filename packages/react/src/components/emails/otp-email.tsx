@@ -149,7 +149,9 @@ export const OtpEmail = ({
                     localization.WE_NEED_TO_VERIFY_YOUR_EMAIL_ADDRESS.replace(
                       "{appName}",
                       appName || ""
-                    ).replace(/\s{2,}/g, " ").replace(" .", ".")
+                    )
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
 
                   const [beforeEmail, afterEmail] =
                     textWithAppName.split("{email}")
@@ -168,7 +170,10 @@ export const OtpEmail = ({
                       {afterEmail}
                     </>
                   ) : (
-                    textWithAppName.replace("{email}", "").replace(/\s{2,}/g, " ").replace(" .", ".")
+                    textWithAppName
+                      .replace("{email}", "")
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
                   )
                 })()}
               </Text>
