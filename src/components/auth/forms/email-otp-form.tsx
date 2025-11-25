@@ -6,11 +6,14 @@ import { useContext, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import type { BetterFetchOption } from "better-auth/react"
+import { useCaptcha } from "../../../hooks/use-captcha"
 import { useIsHydrated } from "../../../hooks/use-hydrated"
 import { useOnSuccessTransition } from "../../../hooks/use-success-transition"
 import { AuthUIContext } from "../../../lib/auth-ui-provider"
 import { cn, getLocalizedError } from "../../../lib/utils"
 import type { AuthLocalization } from "../../../localization/auth-localization"
+import { Captcha } from "../../captcha/captcha"
 import { Button } from "../../ui/button"
 import {
     Form,
@@ -57,6 +60,7 @@ function EmailForm({
     setEmail: (email: string) => void
 }) {
     const isHydrated = useIsHydrated()
+    const { captchaRef, getCaptchaHeaders } = useCaptcha({ localization })
 
     const {
         authClient,
@@ -86,11 +90,16 @@ function EmailForm({
     }, [form.formState.isSubmitting, setIsSubmitting])
 
     async function sendEmailOTP({ email }: z.infer<typeof formSchema>) {
+        const fetchOptions: BetterFetchOption = {
+            throw: true,
+            headers: await getCaptchaHeaders("/email-otp/send-verification-otp")
+        }
+
         try {
             await authClient.emailOtp.sendVerificationOtp({
                 email,
                 type: "sign-in",
-                fetchOptions: { throw: true }
+                fetchOptions
             })
 
             toast({
@@ -136,6 +145,12 @@ function EmailForm({
                             <FormMessage className={classNames?.error} />
                         </FormItem>
                     )}
+                />
+
+                <Captcha
+                    ref={captchaRef}
+                    localization={localization}
+                    action="/email-otp/send-verification-otp"
                 />
 
                 <Button
