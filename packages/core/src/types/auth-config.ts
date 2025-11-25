@@ -3,12 +3,14 @@ import type { SocialProvider } from "better-auth/social-providers"
 type EmailAndPasswordConfig = {
   enabled?: boolean
   rememberMe?: boolean
+  forgotPassword?: boolean
 }
 
 export type LinkComponent<T = unknown> = (props: {
   href: string
   children: T
   className?: string
+  tabIndex?: number
 }) => T
 
 export interface AuthConfig {

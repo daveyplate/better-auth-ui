@@ -127,8 +127,19 @@ export function SignIn<TAuthClient extends AnyAuthClient>({
                   type="password"
                   autoComplete="current-password"
                 >
-                  <Label>{localization.PASSWORD}</Label>
+                  <div className="flex justify-between">
+                    <Label>{localization.PASSWORD}</Label>
 
+                    {!emailAndPassword?.rememberMe &&
+                      emailAndPassword?.forgotPassword && (
+                        <Link
+                          href="/auth/forgot-password"
+                          className="link link--underline-hover"
+                        >
+                          {localization.FORGOT_PASSWORD}
+                        </Link>
+                      )}
+                  </div>
                   <Input
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -142,20 +153,31 @@ export function SignIn<TAuthClient extends AnyAuthClient>({
               </div>
 
               {emailAndPassword.rememberMe && (
-                <div className="flex items-center gap-2">
-                  <Checkbox
-                    id="rememberMe"
-                    name="rememberMe"
-                    isDisabled={isPending}
-                  >
-                    <Checkbox.Control>
-                      <Checkbox.Indicator />
-                    </Checkbox.Control>
-                  </Checkbox>
+                <div className="flex justify-between">
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="rememberMe"
+                      name="rememberMe"
+                      isDisabled={isPending}
+                    >
+                      <Checkbox.Control>
+                        <Checkbox.Indicator />
+                      </Checkbox.Control>
+                    </Checkbox>
 
-                  <Label htmlFor="rememberMe" className="cursor-pointer">
-                    {localization.REMEMBER_ME}
-                  </Label>
+                    <Label htmlFor="rememberMe" className="cursor-pointer">
+                      {localization.REMEMBER_ME}
+                    </Label>
+                  </div>
+
+                  {emailAndPassword?.forgotPassword && (
+                    <Link
+                      href="/auth/forgot-password"
+                      className="link link--underline-hover"
+                    >
+                      {localization.FORGOT_PASSWORD}
+                    </Link>
+                  )}
                 </div>
               )}
 
@@ -199,24 +221,15 @@ export function SignIn<TAuthClient extends AnyAuthClient>({
           )}
 
           {emailAndPassword?.enabled && (
-            <>
+            <p className="text-sm justify-center flex gap-2 items-center mb-1">
+              {localization.NEED_TO_CREATE_AN_ACCOUNT}
               <Link
-                href="/auth/forgot-password"
-                className="link link--underline-hover mx-auto"
+                href="/auth/sign-up"
+                className="link link--underline-always text-accent"
               >
-                {localization.FORGOT_PASSWORD}
+                {localization.SIGN_UP}
               </Link>
-
-              <p className="text-sm justify-center flex gap-2 items-center mb-1">
-                {localization.NEED_TO_CREATE_AN_ACCOUNT}
-                <Link
-                  href="/auth/sign-up"
-                  className="link link--underline-always text-accent"
-                >
-                  {localization.SIGN_UP}
-                </Link>
-              </p>
-            </>
+            </p>
           )}
         </Form>
       </Card.Content>

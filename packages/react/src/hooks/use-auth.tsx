@@ -1,37 +1,32 @@
 "use client"
 
+import deepmerge from "deepmerge"
 import { useContext } from "react"
 import type { AuthConfig } from "../components/auth-provider"
 import { AuthContext } from "../components/auth-provider"
 import type { AnyAuthClient, AuthClient } from "../types/auth-client"
 
-export function receiveConfig<
-  TAuthClient extends AnyAuthClient,
-  TConfig extends AuthConfig<TAuthClient>
->(config: Partial<TConfig>) {
-  return {
-    emailAndPassword: {
-      enabled: true
-    },
-    navigate: (path: string) => {
-      window.location.href = path
-    },
-    replace: (path: string) => window.location.replace(path),
-    Link: (props) => <a {...props} />,
-    ...config
-  } as TConfig
+const defaultConfig = {
+  emailAndPassword: {
+    enabled: true,
+    forgotPassword: true
+  },
+  navigate: (path: string) => {
+    window.location.href = path
+  },
+  replace: (path: string) => window.location.replace(path),
+  Link: (props) => <a {...props} />
+} as Partial<AuthConfig<AnyAuthClient>>
+
+export function receiveConfig(config: Partial<AuthConfig<AnyAuthClient>> = {}) {
+  return deepmerge(defaultConfig, config) as AuthConfig<AuthClient>
 }
 
 export function useAuth(config?: Partial<AuthConfig<AnyAuthClient>>) {
   const context = useContext(AuthContext)
 
-  const merged = {
-    ...(config ? receiveConfig(config) : {}),
-    ...context,
-    ...config
-  }
-
-  const { authClient, ...configWithoutClient } = merged
+  const mergedConfig = receiveConfig(deepmerge(context || {}, config || {}))
+  const { authClient, ...rest } = mergedConfig
 
   if (authClient === undefined) {
     if (context) {
@@ -42,7 +37,7 @@ export function useAuth(config?: Partial<AuthConfig<AnyAuthClient>>) {
   }
 
   return {
-    ...configWithoutClient,
-    authClient: authClient as AuthClient
-  } as AuthConfig<AuthClient>
+    authClient,
+    ...rest
+  }
 }
