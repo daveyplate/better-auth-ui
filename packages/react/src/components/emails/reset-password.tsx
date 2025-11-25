@@ -291,4 +291,3 @@ ResetPasswordEmail.PreviewProps = {
 } as ResetPasswordEmailProps
 
 export default ResetPasswordEmail
-
