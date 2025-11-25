@@ -150,7 +150,9 @@ export const ResetPasswordEmail = ({
                     localization.WE_RECEIVED_REQUEST_TO_RESET_PASSWORD.replace(
                       "{appName}",
                       appName || ""
-                    ).replace(" .", ".")
+                    )
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
 
                   const [beforeEmail, afterEmail] =
                     textWithAppName.split("{email}")
@@ -169,7 +171,10 @@ export const ResetPasswordEmail = ({
                       {afterEmail}
                     </>
                   ) : (
-                    textWithAppName.replace("{email}", "").replace(" .", ".")
+                    textWithAppName
+                      .replace("{email}", "")
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
                   )
                 })()}
               </Text>

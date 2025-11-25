@@ -174,7 +174,9 @@ export const MagicLinkEmail = ({
                     localization.CLICK_BUTTON_TO_SIGN_IN.replace(
                       "{emailAddress}",
                       ""
-                    ).replace(" .", ".")
+                    )
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
                   )
                 })()}
               </Text>

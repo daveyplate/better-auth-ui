@@ -150,7 +150,9 @@ export const EmailVerificationEmail = ({
                     localization.CLICK_BUTTON_TO_VERIFY_EMAIL.replace(
                       "{appName}",
                       appName || ""
-                    ).replace(" .", ".")
+                    )
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
 
                   const [beforeEmailAddress, afterEmailAddress] =
                     textWithAppName.split("{emailAddress}")
@@ -171,6 +173,7 @@ export const EmailVerificationEmail = ({
                   ) : (
                     textWithAppName
                       .replace("{emailAddress}", "")
+                      .replace(/\s{2,}/g, " ")
                       .replace(" .", ".")
                   )
                 })()}

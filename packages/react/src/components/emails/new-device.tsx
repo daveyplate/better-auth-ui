@@ -165,7 +165,9 @@ export const NewDeviceEmail = ({
                     localization.NEW_SIGN_IN_TO_YOUR_ACCOUNT.replace(
                       "{appName}",
                       appName || ""
-                    ).replace(" .", ".")
+                    )
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
 
                   const [beforeUserEmail, afterUserEmail] =
                     textWithAppName.split("{userEmail}")
@@ -186,6 +188,7 @@ export const NewDeviceEmail = ({
                   ) : (
                     textWithAppName
                       .replace("{userEmail}", "")
+                      .replace(/\s{2,}/g, " ")
                       .replace(" .", ".")
                   )
                 })()}
@@ -326,7 +329,9 @@ export const NewDeviceEmail = ({
                     localization.IF_YOU_DIDNT_SIGN_IN.replace(
                       "{supportEmail}",
                       ""
-                    ).replace(" .", ".")
+                    )
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
                   )
                 })()}
               </Text>

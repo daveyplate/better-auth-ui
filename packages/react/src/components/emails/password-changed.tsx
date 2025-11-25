@@ -153,7 +153,9 @@ export const PasswordChangedEmail = ({
                     localization.PASSWORD_FOR_YOUR_ACCOUNT_CHANGED.replace(
                       "{appName}",
                       appName || ""
-                    ).replace(" .", ".")
+                    )
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
 
                   const [beforeUserEmail, afterUserEmail] =
                     textWithAppName.split("{userEmail}")
@@ -174,6 +176,7 @@ export const PasswordChangedEmail = ({
                   ) : (
                     textWithAppName
                       .replace("{userEmail}", "")
+                      .replace(/\s{2,}/g, " ")
                       .replace(" .", ".")
                   )
                 })()}
@@ -271,7 +274,9 @@ export const PasswordChangedEmail = ({
                     localization.IF_YOU_DIDNT_AUTHORIZE_THIS_CHANGE.replace(
                       "{supportEmail}",
                       ""
-                    ).replace(" .", ".")
+                    )
+                      .replace(/\s{2,}/g, " ")
+                      .replace(" .", ".")
                   )
                 })()}
               </Text>
