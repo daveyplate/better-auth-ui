@@ -38,9 +38,9 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type PasswordResetEmailLocalization = typeof localization
+export type ResetPasswordEmailLocalization = typeof localization
 
-interface PasswordResetEmailProps {
+interface ResetPasswordEmailProps {
   url: string
   email?: string
   appName?: string
@@ -51,10 +51,10 @@ interface PasswordResetEmailProps {
   poweredBy?: boolean
   darkMode?: boolean
   head?: ReactNode
-  localization?: Partial<PasswordResetEmailLocalization>
+  localization?: Partial<ResetPasswordEmailLocalization>
 }
 
-export const PasswordResetEmail = ({
+export const ResetPasswordEmail = ({
   url,
   email,
   appName,
@@ -66,9 +66,9 @@ export const PasswordResetEmail = ({
   poweredBy,
   head,
   ...props
-}: PasswordResetEmailProps) => {
+}: ResetPasswordEmailProps) => {
   const localization = {
-    ...PasswordResetEmail.localization,
+    ...ResetPasswordEmail.localization,
     ...props.localization
   }
 
@@ -281,13 +281,14 @@ export const PasswordResetEmail = ({
   )
 }
 
-PasswordResetEmail.localization = localization
+ResetPasswordEmail.localization = localization
 
-PasswordResetEmail.PreviewProps = {
+ResetPasswordEmail.PreviewProps = {
   url: "https://better-auth-ui.com/auth/reset-password?token=example-token",
   email: "m@example.com",
   appName: "Better Auth",
   darkMode: true
-} as PasswordResetEmailProps
+} as ResetPasswordEmailProps
 
-export default PasswordResetEmail
+export default ResetPasswordEmail
+

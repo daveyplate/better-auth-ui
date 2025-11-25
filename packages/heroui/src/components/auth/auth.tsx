@@ -2,7 +2,9 @@
 
 import { type AuthView, authViews } from "@better-auth-ui/core"
 import type { AnyAuthClient, AuthConfig } from "@better-auth-ui/react"
+import { ForgotPassword } from "./forgot-password"
 import { MagicLink } from "./magic-link"
+import { ResetPassword } from "./reset-password"
 import { SignIn } from "./sign-in"
 import { SignOut } from "./sign-out"
 import { SignUp } from "./sign-up"
@@ -10,7 +12,9 @@ import { SignUp } from "./sign-up"
 const localization = {
   ...SignIn.localization,
   ...SignUp.localization,
-  ...MagicLink.localization
+  ...MagicLink.localization,
+  ...ForgotPassword.localization,
+  ...ResetPassword.localization
 }
 
 export type AuthLocalization = typeof localization
@@ -34,6 +38,10 @@ export function Auth<TAuthClient extends AnyAuthClient>({
       return <SignUp {...props} />
     case "magic-link":
       return <MagicLink {...props} />
+    case "forgot-password":
+      return <ForgotPassword {...props} />
+    case "reset-password":
+      return <ResetPassword {...props} />
     case "sign-out":
       return <SignOut {...props} />
     default:

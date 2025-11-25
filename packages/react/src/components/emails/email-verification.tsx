@@ -24,11 +24,11 @@ import {
 } from "./email-styles"
 
 const localization = {
-  VERIFY_YOUR_EMAIL: "Verify your email",
+  VERIFY_YOUR_EMAIL_ADDRESS: "Verify your email address",
   LOGO: "Logo",
   CLICK_BUTTON_TO_VERIFY_EMAIL:
     "Click the button below to verify your email address {emailAddress} for your {appName} account.",
-  VERIFY_EMAIL: "Verify email",
+  VERIFY_EMAIL_ADDRESS: "Verify email address",
   OR_COPY_AND_PASTE_URL: "Or copy and paste this URL into your browser:",
   THIS_LINK_EXPIRES_IN_MINUTES:
     "This link expires in {expirationMinutes} minutes.",
@@ -72,7 +72,7 @@ export const EmailVerificationEmail = ({
     ...props.localization
   }
 
-  const previewText = localization.VERIFY_YOUR_EMAIL
+  const previewText = localization.VERIFY_YOUR_EMAIL_ADDRESS
 
   return (
     <Html>
@@ -141,7 +141,7 @@ export const EmailVerificationEmail = ({
                   classNames?.title
                 )}
               >
-                {localization.VERIFY_YOUR_EMAIL}
+                {localization.VERIFY_EMAIL_ADDRESS}
               </Heading>
 
               <Text className={cn("text-sm font-normal", classNames?.content)}>
@@ -184,7 +184,7 @@ export const EmailVerificationEmail = ({
                     classNames?.button
                   )}
                 >
-                  {localization.VERIFY_EMAIL}
+                  {localization.VERIFY_EMAIL_ADDRESS}
                 </Button>
               </Section>
 

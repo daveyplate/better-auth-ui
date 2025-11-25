@@ -42,9 +42,9 @@ const localization = {
 export type PasswordChangedEmailLocalization = typeof localization
 
 interface PasswordChangedEmailProps {
-  userEmail?: string
+  email?: string
   timestamp?: string
-  secureAccountLink?: string
+  secureAccountURL?: string
   appName?: string
   supportEmail?: string
   logoURL?: string | { light: string; dark: string }
@@ -57,9 +57,9 @@ interface PasswordChangedEmailProps {
 }
 
 export const PasswordChangedEmail = ({
-  userEmail,
+  email,
   timestamp,
-  secureAccountLink,
+  secureAccountURL,
   appName,
   supportEmail,
   logoURL = "https://better-auth.com/logo.png",
@@ -158,15 +158,15 @@ export const PasswordChangedEmail = ({
                   const [beforeUserEmail, afterUserEmail] =
                     textWithAppName.split("{userEmail}")
 
-                  return userEmail ? (
+                  return email ? (
                     <>
                       {beforeUserEmail}
 
                       <Link
-                        href={`mailto:${userEmail}`}
+                        href={`mailto:${email}`}
                         className="text-primary font-medium"
                       >
-                        {userEmail}
+                        {email}
                       </Link>
 
                       {afterUserEmail}
@@ -209,10 +209,10 @@ export const PasswordChangedEmail = ({
                 {localization.IF_YOU_MADE_THIS_CHANGE}
               </Text>
 
-              {secureAccountLink && (
+              {secureAccountURL && (
                 <Section className="mt-6">
                   <Button
-                    href={secureAccountLink}
+                    href={secureAccountURL}
                     className={cn(
                       "inline-block whitespace-nowrap rounded-none text-sm font-medium py-2.5 px-6 bg-primary text-primary-foreground no-underline",
                       classNames?.button
@@ -316,9 +316,9 @@ export const PasswordChangedEmail = ({
 PasswordChangedEmail.localization = localization
 
 PasswordChangedEmail.PreviewProps = {
-  userEmail: "m@example.com",
+  email: "m@example.com",
   timestamp: "February 10, 2026 at 4:20 PM UTC",
-  secureAccountLink: "https://better-auth-ui.com/auth/secure-account",
+  secureAccountURL: "https://better-auth-ui.com/account/security",
   appName: "Better Auth",
   supportEmail: "support@example.com",
   darkMode: true

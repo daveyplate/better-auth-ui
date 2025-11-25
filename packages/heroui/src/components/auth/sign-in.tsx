@@ -200,7 +200,10 @@ export function SignIn<TAuthClient extends AnyAuthClient>({
 
           {emailAndPassword?.enabled && (
             <>
-              <Link href="/" className="link link--underline-hover mx-auto">
+              <Link
+                href="/auth/forgot-password"
+                className="link link--underline-hover mx-auto"
+              >
                 {localization.FORGOT_PASSWORD}
               </Link>
 

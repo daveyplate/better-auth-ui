@@ -4,7 +4,7 @@ import MagicLinkEmail from "./magic-link"
 import NewDeviceEmail from "./new-device"
 import OtpEmail from "./otp-email"
 import PasswordChangedEmail from "./password-changed"
-import PasswordResetEmail from "./password-reset"
+import ResetPasswordEmail from "./reset-password"
 
 export const emailLocalization = {
   ...EmailChangedEmail.localization,
@@ -13,7 +13,7 @@ export const emailLocalization = {
   ...NewDeviceEmail.localization,
   ...OtpEmail.localization,
   ...PasswordChangedEmail.localization,
-  ...PasswordResetEmail.localization
+  ...ResetPasswordEmail.localization
 }
 
 export type EmailLocalization = typeof emailLocalization

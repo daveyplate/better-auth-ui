@@ -59,7 +59,7 @@ export const MagicLinkEmail = ({
   url,
   email,
   appName,
-  expirationMinutes = 15,
+  expirationMinutes = 5,
   logoURL = "https://better-auth.com/logo.png",
   colors,
   classNames,
