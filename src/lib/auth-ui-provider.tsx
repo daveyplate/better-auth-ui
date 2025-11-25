@@ -32,6 +32,7 @@ import type {
 import type { RenderToast } from "../types/render-toast"
 import type { SignUpOptions } from "../types/sign-up-options"
 import type { SocialOptions } from "../types/social-options"
+import type { TeamOptions, TeamOptionsContext } from "../types/team-options"
 import { OrganizationRefetcher } from "./organization-refetcher"
 import type { AuthViewPaths } from "./view-paths"
 import {
@@ -172,6 +173,10 @@ export type AuthUIContextType = {
      */
     organization?: OrganizationOptionsContext
     /**
+     * Teams configuration (requires organizations to be enabled)
+     */
+    teams?: TeamOptionsContext
+    /**
      * Enable or disable Passkey support
      * @default false
      */
@@ -274,6 +279,10 @@ export type AuthUIProviderProps = {
      */
     organization?: OrganizationOptions | boolean
     /**
+     * Teams plugin configuration (requires organizations to be enabled)
+     */
+    teams?: TeamOptions | boolean
+    /**
      * Enable or disable Credentials support
      * @default { forgotPassword: true }
      */
@@ -298,6 +307,7 @@ export type AuthUIProviderProps = {
         | "credentials"
         | "signUp"
         | "organization"
+        | "teams"
     >
 >
 
@@ -325,6 +335,7 @@ export const AuthUIProvider = ({
     localization: localizationProp,
     nameRequired = true,
     organization: organizationProp,
+    teams: teamsProp,
     signUp: signUpProp = true,
     toast = defaultToast,
     viewPaths: viewPathsProp,
@@ -454,9 +465,8 @@ export const AuthUIProvider = ({
                 delete: organizationProp.logo.delete,
                 extension: organizationProp.logo.extension || "png",
                 size:
-                    organizationProp.logo.size || organizationProp.logo.upload
-                        ? 256
-                        : 128
+                    organizationProp.logo.size ||
+                    (organizationProp.logo.upload ? 256 : 128)
             }
         }
 
@@ -476,6 +486,30 @@ export const AuthUIProvider = ({
             }
         }
     }, [organizationProp])
+
+    const teams = useMemo<TeamOptionsContext | undefined>(() => {
+        if (!teamsProp || !organization) return
+
+        if (teamsProp === true) {
+            return {
+                enabled: true,
+                customRoles: [],
+                colors: {
+                    count: 5,
+                    prefix: "team"
+                }
+            }
+        }
+
+        return {
+            enabled: teamsProp.enabled ?? true,
+            customRoles: teamsProp.customRoles || [],
+            colors: {
+                count: teamsProp.colors?.count ?? 5,
+                prefix: teamsProp.colors?.prefix ?? "team"
+            }
+        }
+    }, [teamsProp, organization])
 
     const defaultMutators = useMemo(() => {
         return {
@@ -508,6 +542,12 @@ export const AuthUIProvider = ({
                 authClient.organization.update({
                     ...params,
                     fetchOptions: { throw: true }
+                }),
+            updateTeam: (params) =>
+                authClient.$fetch("/organization/update-team", {
+                    method: "POST",
+                    body: params,
+                    throw: true
                 }),
             updateUser: (params) =>
                 authClient.updateUser({
@@ -572,7 +612,9 @@ export const AuthUIProvider = ({
                 useAuthData({
                     queryFn: () =>
                         authClient.$fetch(
-                            `/organization/list-invitations?organizationId=${params?.query?.organizationId || ""}`
+                            `/organization/list-invitations?organizationId=${
+                                params?.query?.organizationId || ""
+                            }`
                         ),
                     cacheKey: `listInvitations:${JSON.stringify(params)}`
                 }),
@@ -588,9 +630,38 @@ export const AuthUIProvider = ({
                 useAuthData({
                     queryFn: () =>
                         authClient.$fetch(
-                            `/organization/list-members?organizationId=${params?.query?.organizationId || ""}`
+                            `/organization/list-members?organizationId=${
+                                params?.query?.organizationId || ""
+                            }`
                         ),
                     cacheKey: `listMembers:${JSON.stringify(params)}`
+                }),
+            useListTeams: (params) =>
+                useAuthData({
+                    queryFn: () =>
+                        authClient.$fetch(
+                            `/organization/list-teams?organizationId=${
+                                params?.organizationId || ""
+                            }`
+                        ),
+                    cacheKey: `listTeams:${JSON.stringify(params)}`
+                }),
+            useListTeamMembers: (params) =>
+                useAuthData({
+                    queryFn: () =>
+                        authClient.$fetch("/organization/list-team-members", {
+                            method: "POST",
+                            body: params?.teamId
+                                ? { query: { teamId: params.teamId } }
+                                : undefined
+                        }),
+                    cacheKey: `listTeamMembers:${JSON.stringify(params)}`
+                }),
+            useListUserTeams: () =>
+                useAuthData({
+                    queryFn: () =>
+                        authClient.$fetch("/organization/list-user-teams"),
+                    cacheKey: "listUserTeams"
                 })
         } as AuthHooks
     }, [authClient])
@@ -638,6 +709,7 @@ export const AuthUIProvider = ({
                 localization,
                 nameRequired,
                 organization,
+                teams,
                 account,
                 signUp,
                 social,
