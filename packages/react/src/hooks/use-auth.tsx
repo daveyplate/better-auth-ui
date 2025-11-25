@@ -16,7 +16,7 @@ const defaultConfig = {
   },
   replace: (path: string) => window.location.replace(path),
   Link: (props) => <a {...props} />
-} as Partial<AuthConfig<AnyAuthClient>>
+} satisfies Partial<AuthConfig<AnyAuthClient>>
 
 export function receiveConfig(config: Partial<AuthConfig<AnyAuthClient>> = {}) {
   return deepmerge(defaultConfig, config) as AuthConfig<AuthClient>

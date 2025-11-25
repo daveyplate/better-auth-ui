@@ -1,6 +1,6 @@
 import type { SocialProvider } from "better-auth/social-providers"
 
-type EmailAndPasswordConfig = {
+export type EmailAndPasswordConfig = {
   enabled?: boolean
   rememberMe?: boolean
   forgotPassword?: boolean
