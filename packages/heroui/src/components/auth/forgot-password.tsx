@@ -16,6 +16,7 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
+import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
@@ -31,12 +32,11 @@ const localization = {
 
 export type ForgotPasswordLocalization = typeof localization
 
-export type ForgotPasswordProps<TAuthClient extends AnyAuthClient> = Partial<
-  AuthConfig<TAuthClient>
-> & {
-  className?: string
-  localization?: Partial<ForgotPasswordLocalization>
-}
+export type ForgotPasswordProps<TAuthClient extends AnyAuthClient> =
+  DeepPartial<AuthConfig<TAuthClient>> & {
+    className?: string
+    localization?: Partial<ForgotPasswordLocalization>
+  }
 
 export function ForgotPassword<TAuthClient extends AnyAuthClient>({
   className,
@@ -47,7 +47,7 @@ export function ForgotPassword<TAuthClient extends AnyAuthClient>({
     ...props.localization
   }
 
-  const { authClient, navigate, Link } = useAuth(props)
+  const { authClient, navigate, Link, basePaths } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -59,7 +59,7 @@ export function ForgotPassword<TAuthClient extends AnyAuthClient>({
 
     const { error } = await authClient.requestPasswordReset({
       email,
-      redirectTo: "/auth/reset-password"
+      redirectTo: `${basePaths.auth}/reset-password`
     })
 
     if (error) {
@@ -70,7 +70,7 @@ export function ForgotPassword<TAuthClient extends AnyAuthClient>({
     }
 
     toast.success(localization.PASSWORD_RESET_EMAIL_SENT)
-    navigate?.("/auth/sign-in")
+    navigate(`${basePaths.auth}/sign-in`)
 
     setIsPending(false)
   }
@@ -107,7 +107,7 @@ export function ForgotPassword<TAuthClient extends AnyAuthClient>({
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
             {localization.REMEMBER_YOUR_PASSWORD}
             <Link
-              href="/auth/sign-in"
+              href={`${basePaths.auth}/sign-in`}
               className="link link--underline-always text-accent"
             >
               {localization.SIGN_IN}

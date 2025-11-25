@@ -2,6 +2,7 @@
 
 import { type AuthView, authViews } from "@better-auth-ui/core"
 import type { AnyAuthClient, AuthConfig } from "@better-auth-ui/react"
+import type { DeepPartial } from "better-auth/client/plugins"
 import { ForgotPassword } from "./forgot-password"
 import { MagicLink } from "./magic-link"
 import { ResetPassword } from "./reset-password"
@@ -19,7 +20,7 @@ const localization = {
 
 export type AuthLocalization = typeof localization
 
-export type AuthProps<TAuthClient extends AnyAuthClient> = Partial<
+export type AuthProps<TAuthClient extends AnyAuthClient> = DeepPartial<
   AuthConfig<TAuthClient>
 > & {
   view: AuthView | string

@@ -16,6 +16,7 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
+import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -31,7 +32,7 @@ const localization = {
 
 export type ResetPasswordLocalization = typeof localization
 
-export type ResetPasswordProps<TAuthClient extends AnyAuthClient> = Partial<
+export type ResetPasswordProps<TAuthClient extends AnyAuthClient> = DeepPartial<
   AuthConfig<TAuthClient>
 > & {
   className?: string
@@ -47,7 +48,7 @@ export function ResetPassword<TAuthClient extends AnyAuthClient>({
     ...props.localization
   }
 
-  const { authClient, navigate, Link } = useAuth(props)
+  const { authClient, navigate, Link, basePaths } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
   // Check for error or missing token on mount
@@ -58,10 +59,10 @@ export function ResetPassword<TAuthClient extends AnyAuthClient>({
 
     if (error === "INVALID_TOKEN" || !token) {
       toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
-      navigate?.("/auth/sign-in")
+      navigate(`${basePaths.auth}/sign-in`)
       return
     }
-  }, [navigate, localization.INVALID_RESET_PASSWORD_TOKEN])
+  }, [navigate, localization.INVALID_RESET_PASSWORD_TOKEN, basePaths.auth])
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -72,7 +73,7 @@ export function ResetPassword<TAuthClient extends AnyAuthClient>({
 
     if (!token) {
       toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
-      navigate?.("/auth/sign-in")
+      navigate(`${basePaths.auth}/sign-in`)
       setIsPending(false)
       return
     }
@@ -93,7 +94,7 @@ export function ResetPassword<TAuthClient extends AnyAuthClient>({
     }
 
     toast.success(localization.PASSWORD_RESET_SUCCESS)
-    navigate?.("/auth/sign-in")
+    navigate(`${basePaths.auth}/sign-in`)
     setIsPending(false)
   }
 
@@ -136,7 +137,7 @@ export function ResetPassword<TAuthClient extends AnyAuthClient>({
             {localization.REMEMBER_YOUR_PASSWORD}
 
             <Link
-              href="/auth/sign-in"
+              href={`${basePaths.auth}/sign-in`}
               className="link link--underline-always text-accent"
             >
               {localization.SIGN_IN}

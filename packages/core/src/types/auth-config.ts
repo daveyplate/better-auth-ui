@@ -14,6 +14,10 @@ export type LinkComponent<T = unknown> = (props: {
 }) => T
 
 export interface AuthConfig {
+  basePaths: {
+    auth: string
+    account: string
+  }
   emailAndPassword?: EmailAndPasswordConfig
   socialProviders?: SocialProvider[]
   magicLink?: boolean

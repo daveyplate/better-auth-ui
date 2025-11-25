@@ -17,6 +17,7 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
+import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
@@ -40,7 +41,7 @@ const localization = {
 
 export type SignUpLocalization = typeof localization
 
-export type SignUpProps<TAuthClient extends AnyAuthClient> = Partial<
+export type SignUpProps<TAuthClient extends AnyAuthClient> = DeepPartial<
   AuthConfig<TAuthClient>
 > & {
   className?: string
@@ -53,7 +54,7 @@ export function SignUp<TAuthClient extends AnyAuthClient>({
 }: SignUpProps<TAuthClient>) {
   const localization = { ...SignUp.localization, ...props.localization }
 
-  const { authClient, navigate, Link, socialProviders, magicLink } =
+  const { authClient, navigate, Link, socialProviders, magicLink, basePaths } =
     useAuth(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
@@ -69,14 +70,14 @@ export function SignUp<TAuthClient extends AnyAuthClient>({
     const name = formData.get("name") as string
     const email = formData.get("email") as string
 
-    const { error } = await authClient.$fetch("/sign-up/email", {
-      method: "POST",
-      body: {
+    const { error } = await authClient.signUp.email(
+      {
         name,
         email,
         password
-      }
-    })
+      },
+      { disableSignal: true }
+    )
 
     if (error) {
       toast.error(error.message || error.status)
@@ -86,8 +87,8 @@ export function SignUp<TAuthClient extends AnyAuthClient>({
       return
     }
 
-    refetch()
-    navigate?.("/dashboard")
+    await refetch()
+    navigate("/dashboard")
     setIsPending(false)
   }
 
@@ -186,7 +187,7 @@ export function SignUp<TAuthClient extends AnyAuthClient>({
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
             {localization.ALREADY_HAVE_AN_ACCOUNT}
             <Link
-              href="/auth/sign-in"
+              href={`${basePaths.auth}/sign-in`}
               className="link link--underline-always text-accent"
             >
               {localization.SIGN_IN}

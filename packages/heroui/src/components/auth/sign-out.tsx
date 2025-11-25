@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 import { toast } from "sonner"
 
 export function SignOut({ className }: { className?: string }) {
-  const { authClient, navigate } = useAuth()
+  const { authClient, navigate, basePaths } = useAuth()
   const { refetch } = authClient.useSession()
   const hasSignedOut = useRef(false)
 
@@ -22,14 +22,13 @@ export function SignOut({ className }: { className?: string }) {
         toast.error(error.message || error.status)
       }
 
-      // Invalidate session state on client side before redirecting
       await refetch()
 
-      navigate("/auth/sign-in")
+      navigate(`${basePaths.auth}/sign-in`)
     }
 
     handleSignOut()
-  }, [authClient, navigate, refetch])
+  }, [authClient, navigate, refetch, basePaths.auth])
 
   return (
     <Card

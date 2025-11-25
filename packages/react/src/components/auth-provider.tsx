@@ -4,13 +4,13 @@ import type {
   AuthConfig as BaseAuthConfig,
   LinkComponent
 } from "@better-auth-ui/core"
+import type { DeepPartial } from "better-auth/client/plugins"
 import {
   type Context,
   createContext,
   type PropsWithChildren,
   type ReactNode
 } from "react"
-
 import { receiveConfig } from "../hooks/use-auth"
 import type { AnyAuthClient } from "../types/auth-client"
 
@@ -27,7 +27,7 @@ export const AuthContext: Context<AuthConfig<AnyAuthClient> | undefined> =
 
 export type AuthProviderProps<TAuthClient extends AnyAuthClient> =
   PropsWithChildren &
-    Omit<Partial<AuthConfig<TAuthClient>>, "authClient"> & {
+    Omit<DeepPartial<AuthConfig<TAuthClient>>, "authClient"> & {
       authClient: TAuthClient
     }
 

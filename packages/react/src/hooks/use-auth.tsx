@@ -1,5 +1,6 @@
 "use client"
 
+import type { DeepPartial } from "better-auth/client/plugins"
 import deepmerge from "deepmerge"
 import { useContext } from "react"
 import type { AuthConfig } from "../components/auth-provider"
@@ -7,6 +8,10 @@ import { AuthContext } from "../components/auth-provider"
 import type { AnyAuthClient, AuthClient } from "../types/auth-client"
 
 const defaultConfig = {
+  basePaths: {
+    auth: "/auth",
+    account: "/account"
+  },
   emailAndPassword: {
     enabled: true,
     forgotPassword: true
@@ -16,13 +21,15 @@ const defaultConfig = {
   },
   replace: (path: string) => window.location.replace(path),
   Link: (props) => <a {...props} />
-} satisfies Partial<AuthConfig<AnyAuthClient>>
+} satisfies Omit<AuthConfig<AuthClient>, "authClient">
 
-export function receiveConfig(config: Partial<AuthConfig<AnyAuthClient>> = {}) {
+export function receiveConfig(
+  config: DeepPartial<AuthConfig<AnyAuthClient>> = {}
+) {
   return deepmerge(defaultConfig, config) as AuthConfig<AuthClient>
 }
 
-export function useAuth(config?: Partial<AuthConfig<AnyAuthClient>>) {
+export function useAuth(config?: DeepPartial<AuthConfig<AnyAuthClient>>) {
   const context = useContext(AuthContext)
 
   const mergedConfig = receiveConfig(deepmerge(context || {}, config || {}))

@@ -18,6 +18,7 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
+import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 import { MagicLinkButton } from "./magic-link-button"
@@ -40,7 +41,7 @@ const localization = {
 
 export type SignInLocalization = typeof localization
 
-export type SignInProps<TAuthClient extends AnyAuthClient> = Partial<
+export type SignInProps<TAuthClient extends AnyAuthClient> = DeepPartial<
   AuthConfig<TAuthClient>
 > & {
   className?: string
@@ -59,7 +60,8 @@ export function SignIn<TAuthClient extends AnyAuthClient>({
     navigate,
     Link,
     socialProviders,
-    magicLink
+    magicLink,
+    basePaths
   } = useAuth(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
@@ -94,7 +96,7 @@ export function SignIn<TAuthClient extends AnyAuthClient>({
     }
 
     await refetch()
-    navigate?.("/dashboard")
+    navigate("/dashboard")
     setIsPending(false)
   }
 
@@ -133,7 +135,7 @@ export function SignIn<TAuthClient extends AnyAuthClient>({
                     {!emailAndPassword?.rememberMe &&
                       emailAndPassword?.forgotPassword && (
                         <Link
-                          href="/auth/forgot-password"
+                          href={`${basePaths.auth}/forgot-password`}
                           className="link link--underline-hover"
                         >
                           {localization.FORGOT_PASSWORD}
@@ -172,7 +174,7 @@ export function SignIn<TAuthClient extends AnyAuthClient>({
 
                   {emailAndPassword?.forgotPassword && (
                     <Link
-                      href="/auth/forgot-password"
+                      href={`${basePaths.auth}/forgot-password`}
                       className="link link--underline-hover"
                     >
                       {localization.FORGOT_PASSWORD}
@@ -224,7 +226,7 @@ export function SignIn<TAuthClient extends AnyAuthClient>({
             <p className="text-sm justify-center flex gap-2 items-center mb-1">
               {localization.NEED_TO_CREATE_AN_ACCOUNT}
               <Link
-                href="/auth/sign-up"
+                href={`${basePaths.auth}/sign-up`}
                 className="link link--underline-always text-accent"
               >
                 {localization.SIGN_UP}

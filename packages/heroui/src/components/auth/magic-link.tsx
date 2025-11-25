@@ -17,6 +17,7 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
+import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 import { MagicLinkButton } from "./magic-link-button"
@@ -37,7 +38,7 @@ const localization = {
 
 export type MagicLinkLocalization = typeof localization
 
-export type MagicLinkProps<TAuthClient extends AnyAuthClient> = Partial<
+export type MagicLinkProps<TAuthClient extends AnyAuthClient> = DeepPartial<
   AuthConfig<TAuthClient>
 > & {
   className?: string
@@ -50,7 +51,8 @@ export function MagicLink<TAuthClient extends AnyAuthClient>({
 }: MagicLinkProps<TAuthClient>) {
   const localization = { ...MagicLink.localization, ...props.localization }
 
-  const { authClient, Link, socialProviders, magicLink } = useAuth(props)
+  const { authClient, Link, socialProviders, magicLink, basePaths } =
+    useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
   const showSeparator = socialProviders && socialProviders.length > 0
@@ -142,7 +144,7 @@ export function MagicLink<TAuthClient extends AnyAuthClient>({
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
             {localization.NEED_TO_CREATE_AN_ACCOUNT}
             <Link
-              href="/auth/sign-up"
+              href={`${basePaths.auth}/sign-up`}
               className="link link--underline-always text-accent"
             >
               {localization.SIGN_UP}
