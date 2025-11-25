@@ -4,6 +4,7 @@ export type EmailAndPasswordConfig = {
   enabled?: boolean
   rememberMe?: boolean
   forgotPassword?: boolean
+  requireEmailVerification?: boolean
 }
 
 export type LinkComponent<T = unknown> = (props: {

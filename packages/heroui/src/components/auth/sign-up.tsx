@@ -31,7 +31,8 @@ const localization = {
   OR: "OR",
   PASSWORD: "Password",
   SIGN_IN: "Sign In",
-  SIGN_UP: "Sign Up"
+  SIGN_UP: "Sign Up",
+  VERIFY_YOUR_EMAIL: "Please verify your email before signing in"
 }
 
 export type SignUpLocalization = typeof localization
@@ -44,8 +45,15 @@ export type SignUpProps = DeepPartial<AuthConfig> & {
 export function SignUp({ className, ...props }: SignUpProps) {
   const localization = { ...SignUp.localization, ...props.localization }
 
-  const { authClient, navigate, Link, socialProviders, magicLink, basePaths } =
-    useAuth(props)
+  const {
+    authClient,
+    navigate,
+    Link,
+    socialProviders,
+    magicLink,
+    basePaths,
+    emailAndPassword
+  } = useAuth(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
   const [password, setPassword] = useState("")
@@ -74,6 +82,13 @@ export function SignUp({ className, ...props }: SignUpProps) {
       setPassword("")
       setIsPending(false)
 
+      return
+    }
+
+    if (emailAndPassword?.requireEmailVerification) {
+      toast.success(localization.VERIFY_YOUR_EMAIL)
+      navigate(`${basePaths.auth}/sign-in`)
+      setIsPending(false)
       return
     }
 

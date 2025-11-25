@@ -18,10 +18,12 @@ import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons } from "./provider-buttons"
+import { ResendVerificationButton } from "./resend-verification-button"
 
 const localization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
+  ...ResendVerificationButton.localization,
   EMAIL: "Email",
   ENTER_YOUR_EMAIL: "Enter your email",
   ENTER_YOUR_PASSWORD: "Enter your password",
@@ -78,7 +80,20 @@ export function SignIn({ className, ...props }: SignInProps) {
     )
 
     if (error) {
-      toast.error(error.message || error.status)
+      if (error.code === "EMAIL_NOT_VERIFIED") {
+        toast.error(error.message || error.status, {
+          action: (
+            <ResendVerificationButton
+              email={email}
+              authClient={authClient}
+              localization={localization}
+            />
+          )
+        })
+      } else {
+        toast.error(error.message || error.status)
+      }
+
       setPassword("")
       setIsPending(false)
 
