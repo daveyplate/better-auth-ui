@@ -1,10 +1,6 @@
 "use client"
 
-import {
-  type AuthConfig,
-  cn,
-  useAuth
-} from "@better-auth-ui/react"
+import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -37,17 +33,12 @@ const localization = {
 
 export type MagicLinkLocalization = typeof localization
 
-export type MagicLinkProps = DeepPartial<
-  AuthConfig
-> & {
+export type MagicLinkProps = DeepPartial<AuthConfig> & {
   className?: string
   localization?: Partial<MagicLinkLocalization>
 }
 
-export function MagicLink({
-  className,
-  ...props
-}: MagicLinkProps) {
+export function MagicLink({ className, ...props }: MagicLinkProps) {
   const localization = { ...MagicLink.localization, ...props.localization }
 
   const { authClient, Link, socialProviders, magicLink, basePaths } =
