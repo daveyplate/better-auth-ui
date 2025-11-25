@@ -3,9 +3,9 @@
 import type { DeepPartial } from "better-auth/client/plugins"
 import deepmerge from "deepmerge"
 import { useContext } from "react"
-
 import type { AuthConfig } from "../components/auth-provider"
 import { AuthContext } from "../components/auth-provider"
+import type { AuthClient } from "../types/auth-client"
 
 const defaultConfig = {
   basePaths: {
@@ -38,5 +38,8 @@ export function receiveConfig(config: DeepPartial<AuthConfig> = {}) {
 
 export function useAuth(config?: DeepPartial<AuthConfig>) {
   const context = useContext(AuthContext)
-  return receiveConfig(deepmerge(context || {}, config || {}))
+  return receiveConfig(deepmerge(context || {}, config || {})) as Omit<
+    AuthConfig,
+    "authClient"
+  > & { authClient: AuthClient }
 }
