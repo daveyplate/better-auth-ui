@@ -296,7 +296,11 @@ export function SignUpForm({
             console.error(error)
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization, localizeErrors })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
 
@@ -386,7 +390,11 @@ export function SignUpForm({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization, localizeErrors })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
 
             form.resetField("password")
@@ -400,7 +408,7 @@ export function SignUpForm({
             <form
                 onSubmit={form.handleSubmit(signUp)}
                 noValidate={isHydrated}
-                className={cn("gap-6 grid w-full", className, classNames?.base)}
+                className={cn("grid w-full gap-6", className, classNames?.base)}
             >
                 {signUpFields?.includes("image") && avatar && (
                     <>
@@ -428,7 +436,7 @@ export function SignUpForm({
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button
-                                                    className="rounded-full size-fit"
+                                                    className="size-fit rounded-full"
                                                     size="icon"
                                                     variant="ghost"
                                                     type="button"
@@ -520,7 +528,7 @@ export function SignUpForm({
                             <FormItem>
                                 <FormLabel className={classNames?.label}>
                                     {localization.NAME}
-                                       {!nameRequired && (
+                                    {!nameRequired && (
                                         <span className="ml-1 text-muted-foreground">
                                             {localization.OPTIONAL_BRACKETS}
                                         </span>

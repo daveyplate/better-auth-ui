@@ -86,7 +86,11 @@ export function ChangeEmailCard({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization, localizeErrors })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
     }
@@ -110,7 +114,11 @@ export function ChangeEmailCard({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization, localizeErrors })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
             setResendDisabled(false)
             throw error

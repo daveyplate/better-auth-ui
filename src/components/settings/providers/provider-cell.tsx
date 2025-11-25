@@ -70,7 +70,11 @@ export function ProviderCell({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization, localizeErrors })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
 
             setIsLoading(false)
@@ -90,7 +94,11 @@ export function ProviderCell({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization, localizeErrors })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
 

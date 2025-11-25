@@ -12,248 +12,252 @@ import type { AuthLocalization } from "../../localization/auth-localization"
 import type { SettingsCardClassNames } from "../settings/shared/settings-card"
 import { Button } from "../ui/button"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
     DialogTitle
 } from "../ui/dialog"
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
     FormMessage
 } from "../ui/form"
 import { Input } from "../ui/input"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
     SelectValue
 } from "../ui/select"
 
 export interface InviteMemberDialogProps extends ComponentProps<typeof Dialog> {
-  classNames?: SettingsCardClassNames
-  localization?: AuthLocalization
-  organization: Organization
+    classNames?: SettingsCardClassNames
+    localization?: AuthLocalization
+    organization: Organization
 }
 
 export function InviteMemberDialog({
-  classNames,
-  localization: localizationProp,
-  onOpenChange,
-  organization,
-  ...props
+    classNames,
+    localization: localizationProp,
+    onOpenChange,
+    organization,
+    ...props
 }: InviteMemberDialogProps) {
-  const {
-    authClient,
-    hooks: { useListInvitations, useListMembers, useSession },
-    localization: contextLocalization,
-    toast,
-    organization: organizationOptions,
-    localizeErrors,
-  } = useContext(AuthUIContext)
+    const {
+        authClient,
+        hooks: { useListInvitations, useListMembers, useSession },
+        localization: contextLocalization,
+        toast,
+        organization: organizationOptions,
+        localizeErrors
+    } = useContext(AuthUIContext)
 
-  const localization = useMemo(
-    () => ({ ...contextLocalization, ...localizationProp }),
-    [contextLocalization, localizationProp]
-  )
+    const localization = useMemo(
+        () => ({ ...contextLocalization, ...localizationProp }),
+        [contextLocalization, localizationProp]
+    )
 
-  const { data } = useListMembers({
+    const { data } = useListMembers({
         query: { organizationId: organization.id }
-  })
+    })
 
-  const { refetch } = useListInvitations({
+    const { refetch } = useListInvitations({
         query: { organizationId: organization.id }
-  })
+    })
 
-  const members = data?.members
+    const members = data?.members
 
-  const { data: sessionData } = useSession()
-  const membership = members?.find((m) => m.userId === sessionData?.user.id)
+    const { data: sessionData } = useSession()
+    const membership = members?.find((m) => m.userId === sessionData?.user.id)
 
-  const builtInRoles = [
-    { role: "owner", label: localization.OWNER },
-    { role: "admin", label: localization.ADMIN },
+    const builtInRoles = [
+        { role: "owner", label: localization.OWNER },
+        { role: "admin", label: localization.ADMIN },
         { role: "member", label: localization.MEMBER }
-  ] as const
+    ] as const
 
-  const roles = [...builtInRoles, ...(organizationOptions?.customRoles || [])]
-  const availableRoles = roles.filter(
-    (role) => membership?.role === "owner" || role.role !== "owner"
-  )
+    const roles = [...builtInRoles, ...(organizationOptions?.customRoles || [])]
+    const availableRoles = roles.filter(
+        (role) => membership?.role === "owner" || role.role !== "owner"
+    )
 
-  const formSchema = z.object({
+    const formSchema = z.object({
         email: z
             .string()
             .min(1, { message: localization.EMAIL_REQUIRED })
             .email({
                 message: localization.INVALID_EMAIL
-    }),
-    role: z.string().min(1, {
+            }),
+        role: z.string().min(1, {
             message: `${localization.ROLE} ${localization.IS_REQUIRED}`
         })
-  })
+    })
 
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
+    const form = useForm({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            email: "",
             role: "member"
         }
-  })
+    })
 
-  const isSubmitting = form.formState.isSubmitting
+    const isSubmitting = form.formState.isSubmitting
 
-  async function onSubmit({ email, role }: z.infer<typeof formSchema>) {
-    try {
-      await authClient.organization.inviteMember({
-        email,
-        role: role as (typeof builtInRoles)[number]["role"],
-        organizationId: organization.id,
+    async function onSubmit({ email, role }: z.infer<typeof formSchema>) {
+        try {
+            await authClient.organization.inviteMember({
+                email,
+                role: role as (typeof builtInRoles)[number]["role"],
+                organizationId: organization.id,
                 fetchOptions: { throw: true }
-      })
+            })
 
-      await refetch?.()
+            await refetch?.()
 
-      onOpenChange?.(false)
-      form.reset()
+            onOpenChange?.(false)
+            form.reset()
 
-      toast({
-        variant: "success",
-        message:
-          localization.SEND_INVITATION_SUCCESS ||
+            toast({
+                variant: "success",
+                message:
+                    localization.SEND_INVITATION_SUCCESS ||
                     "Invitation sent successfully"
-      })
-    } catch (error) {
-      toast({
-        variant: "error",
-        message: getLocalizedError({ error, localization, localizeErrors }),
-      })
+            })
+        } catch (error) {
+            toast({
+                variant: "error",
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
+            })
+        }
     }
-  }
 
-  return (
-    <Dialog onOpenChange={onOpenChange} {...props}>
-      <DialogContent className={classNames?.dialog?.content}>
-        <DialogHeader className={classNames?.dialog?.header}>
+    return (
+        <Dialog onOpenChange={onOpenChange} {...props}>
+            <DialogContent className={classNames?.dialog?.content}>
+                <DialogHeader className={classNames?.dialog?.header}>
                     <DialogTitle
                         className={cn("text-lg md:text-xl", classNames?.title)}
                     >
-            {localization.INVITE_MEMBER}
-          </DialogTitle>
+                        {localization.INVITE_MEMBER}
+                    </DialogTitle>
 
-          <DialogDescription
+                    <DialogDescription
                         className={cn(
                             "text-xs md:text-sm",
                             classNames?.description
                         )}
-          >
-            {localization.INVITE_MEMBER_DESCRIPTION}
-          </DialogDescription>
-        </DialogHeader>
+                    >
+                        {localization.INVITE_MEMBER_DESCRIPTION}
+                    </DialogDescription>
+                </DialogHeader>
 
-        <Form {...form}>
+                <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-6"
                     >
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={classNames?.label}>
-                    {localization.EMAIL}
-                  </FormLabel>
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className={classNames?.label}>
+                                        {localization.EMAIL}
+                                    </FormLabel>
 
-                  <FormControl>
-                    <Input
+                                    <FormControl>
+                                        <Input
                                             placeholder={
                                                 localization.EMAIL_PLACEHOLDER
                                             }
-                      type="email"
-                      {...field}
-                      className={classNames?.input}
-                    />
-                  </FormControl>
+                                            type="email"
+                                            {...field}
+                                            className={classNames?.input}
+                                        />
+                                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className={classNames?.label}>
-                    {localization.ROLE}
-                  </FormLabel>
+                        <FormField
+                            control={form.control}
+                            name="role"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className={classNames?.label}>
+                                        {localization.ROLE}
+                                    </FormLabel>
 
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                    </FormControl>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                        </FormControl>
 
-                    <SelectContent>
-                      {availableRoles.map((role) => (
+                                        <SelectContent>
+                                            {availableRoles.map((role) => (
                                                 <SelectItem
                                                     key={role.role}
                                                     value={role.role}
                                                 >
-                          {role.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                                                    {role.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
-            <DialogFooter className={classNames?.dialog?.footer}>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => onOpenChange?.(false)}
+                        <DialogFooter className={classNames?.dialog?.footer}>
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => onOpenChange?.(false)}
                                 className={cn(
                                     classNames?.button,
                                     classNames?.outlineButton
                                 )}
-              >
-                {localization.CANCEL}
-              </Button>
+                            >
+                                {localization.CANCEL}
+                            </Button>
 
-              <Button
-                type="submit"
+                            <Button
+                                type="submit"
                                 className={cn(
                                     classNames?.button,
                                     classNames?.primaryButton
                                 )}
-                disabled={isSubmitting}
-              >
+                                disabled={isSubmitting}
+                            >
                                 {isSubmitting && (
                                     <Loader2 className="animate-spin" />
                                 )}
 
-                {localization.SEND_INVITATION}
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
-  )
+                                {localization.SEND_INVITATION}
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </Form>
+            </DialogContent>
+        </Dialog>
+    )
 }

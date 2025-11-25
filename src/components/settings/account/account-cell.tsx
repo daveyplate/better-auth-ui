@@ -70,7 +70,11 @@ export function AccountCell({
 
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization, localizeErrors })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
     }
@@ -87,7 +91,11 @@ export function AccountCell({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization, localizeErrors })
+                message: getLocalizedError({
+                    error,
+                    localization,
+                    localizeErrors
+                })
             })
         }
 

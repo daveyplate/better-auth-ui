@@ -65,7 +65,9 @@ export function getLocalizedError({
         )
     }
 
-    return error?.message || localization?.REQUEST_FAILED || DEFAULT_ERROR_MESSAGE
+    return (
+        error?.message || localization?.REQUEST_FAILED || DEFAULT_ERROR_MESSAGE
+    )
 }
 
 export function getSearchParam(paramName: string) {
