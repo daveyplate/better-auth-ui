@@ -17,7 +17,7 @@ import {
   TextField
 } from "@heroui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
-import { type FormEvent, useEffect, useState } from "react"
+import { type FormEvent, useCallback, useEffect, useState } from "react"
 import { toast } from "sonner"
 
 const localization = {
@@ -51,32 +51,29 @@ export function ResetPassword<TAuthClient extends AnyAuthClient>({
   const { authClient, navigate, Link, basePaths } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
-  // Check for error or missing token on mount
-  useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search)
-    const error = searchParams.get("error")
-    const token = searchParams.get("token")
-
-    if (error === "INVALID_TOKEN" || !token) {
-      toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
-      navigate(`${basePaths.auth}/sign-in`)
-      return
-    }
-  }, [navigate, localization.INVALID_RESET_PASSWORD_TOKEN, basePaths.auth])
-
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsPending(true)
-
+  const validateToken = useCallback(() => {
     const searchParams = new URLSearchParams(window.location.search)
     const token = searchParams.get("token")
 
     if (!token) {
       toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
       navigate(`${basePaths.auth}/sign-in`)
-      setIsPending(false)
-      return
+      return null
     }
+
+    return token
+  }, [navigate, localization.INVALID_RESET_PASSWORD_TOKEN, basePaths.auth])
+
+  useEffect(() => {
+    validateToken()
+  }, [validateToken])
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsPending(true)
+
+    const token = validateToken()
+    if (!token) return
 
     const formData = new FormData(e.currentTarget)
     const password = formData.get("password") as string
@@ -95,7 +92,6 @@ export function ResetPassword<TAuthClient extends AnyAuthClient>({
 
     toast.success(localization.PASSWORD_RESET_SUCCESS)
     navigate(`${basePaths.auth}/sign-in`)
-    setIsPending(false)
   }
 
   return (

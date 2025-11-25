@@ -71,8 +71,6 @@ export function ForgotPassword<TAuthClient extends AnyAuthClient>({
 
     toast.success(localization.PASSWORD_RESET_EMAIL_SENT)
     navigate(`${basePaths.auth}/sign-in`)
-
-    setIsPending(false)
   }
 
   return (
