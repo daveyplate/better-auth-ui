@@ -8,13 +8,11 @@
 
 ## [better-auth-ui.com](https://better-auth-ui.com)
 
-Plug & play shadcn/ui auth components for [better-auth](https://better-auth.com).
+Plug & play UI components for [better-auth](https://better-auth.com).
 
 - *Own Your Auth*
 
 [Demo](https://newtech.dev/auth/login) - [Documentation](https://better-auth-ui.com) - [Roadmap](https://betterauthui.featurebase.app/roadmap)
-
-☕️ [Buy me a coffee](https://buymeacoffee.com/daveycodez)
 
 ---
 
@@ -45,8 +43,6 @@ Plug & play shadcn/ui auth components for [better-auth](https://better-auth.com)
 ---
 
 Fully customizable!
-
-Coming Soon: API Keys, Organization, and more!
 
 ## License
 

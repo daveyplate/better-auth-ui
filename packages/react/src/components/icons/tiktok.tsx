@@ -1,9 +1,8 @@
 import type { ComponentPropsWithRef } from "react"
 
-export function TikTok({ className, ...props }: ComponentPropsWithRef<"svg">) {
+export function TikTok(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg
-      className={className}
       viewBox="0 0 256 290"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

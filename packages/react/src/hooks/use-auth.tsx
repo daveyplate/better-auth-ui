@@ -27,22 +27,16 @@ const defaultConfig = {
   redirectTo: "/"
 } satisfies Omit<AuthConfig, "authClient">
 
-export function receiveConfig(config: DeepPartial<AuthConfig> = {}) {
-  if (config.authClient === undefined) {
-    throw new Error("[Better Auth UI] authClient is required")
-  }
-
-  const merged = deepmerge(defaultConfig, config) as AuthConfig
-  // Ensure authClient is typed as AnyAuthClient to avoid type narrowing issues
-  return {
-    ...merged,
-    authClient: merged.authClient as AuthConfig["authClient"]
-  }
-}
-
 export function useAuth(config?: DeepPartial<AuthConfig>) {
   const context = useContext(AuthContext)
-  const authConfig = receiveConfig(deepmerge(context || {}, config || {}))
+  const authConfig = deepmerge(
+    defaultConfig,
+    deepmerge(context || {}, config || {})
+  )
+
+  if (authConfig.authClient === undefined) {
+    throw new Error("[Better Auth UI] authClient is required")
+  }
 
   authConfig.redirectTo =
     (useHydrated() &&

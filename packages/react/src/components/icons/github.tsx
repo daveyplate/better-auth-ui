@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef } from "react"
 
-export function GitHub({ ...props }: ComponentPropsWithRef<"svg">) {
+export function GitHub(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

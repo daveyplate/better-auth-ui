@@ -1,12 +1,8 @@
 import type { ComponentPropsWithRef } from "react"
 
-export function LinkedIn({
-  className,
-  ...props
-}: ComponentPropsWithRef<"svg">) {
+export function LinkedIn(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg
-      className={className}
       viewBox="0 0 128 128"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

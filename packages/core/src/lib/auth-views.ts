@@ -6,4 +6,5 @@ export const authViews = [
   "reset-password",
   "sign-out"
 ] as const
+
 export type AuthView = (typeof authViews)[number]

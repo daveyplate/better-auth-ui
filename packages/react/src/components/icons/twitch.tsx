@@ -1,9 +1,8 @@
 import type { ComponentPropsWithRef } from "react"
 
-export function Twitch({ className, ...props }: ComponentPropsWithRef<"svg">) {
+export function Twitch(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg
-      className={className}
       version="1.1"
       viewBox="0 0 2400 2800"
       x="0px"
