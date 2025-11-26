@@ -742,8 +742,6 @@ export function SignUpForm({
                                             {additionalField.type ===
                                             "number" ? (
                                                 <Input
-
-                                                    autoComplete={field}
                                                     className={
                                                         classNames?.input
                                                     }
@@ -781,8 +779,6 @@ export function SignUpForm({
                                                 />
                                             ) : (
                                                 <Input
-
-                                                    autoComplete={field}
                                                     className={
                                                         classNames?.input
                                                     }
