@@ -10,7 +10,13 @@ export function Zoom(props: ComponentPropsWithRef<"svg">) {
       {...props}
     >
       <defs>
-        <linearGradient id="zoom-gradient" x1="23.666%" x2="76.334%" y1="95.612%" y2="4.388%">
+        <linearGradient
+          id="zoom-gradient"
+          x1="23.666%"
+          x2="76.334%"
+          y1="95.612%"
+          y2="4.388%"
+        >
           <stop offset="0%" stopColor="#0845bf"></stop>
           <stop offset="19.11%" stopColor="#0950de"></stop>
           <stop offset="38.23%" stopColor="#0b59f6"></stop>

@@ -28,4 +28,3 @@ export function PayPal(props: ComponentPropsWithRef<"svg">) {
     </svg>
   )
 }
-

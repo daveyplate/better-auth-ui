@@ -13,4 +13,3 @@ export function Vercel(props: ComponentPropsWithRef<"svg">) {
     </svg>
   )
 }
-

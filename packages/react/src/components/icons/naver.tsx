@@ -16,4 +16,3 @@ export function Naver(props: ComponentPropsWithRef<"svg">) {
     </svg>
   )
 }
-

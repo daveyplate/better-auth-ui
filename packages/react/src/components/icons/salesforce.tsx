@@ -16,4 +16,3 @@ export function Salesforce(props: ComponentPropsWithRef<"svg">) {
     </svg>
   )
 }
-
