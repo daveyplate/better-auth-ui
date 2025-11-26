@@ -32,7 +32,7 @@ import { Input } from "../ui/input"
 export interface CreateTeamDialogProps extends ComponentProps<typeof Dialog> {
     classNames?: SettingsCardClassNames
     localization?: AuthLocalization
-    organizationId: string
+    organizationId?: string
 }
 
 /**
@@ -46,7 +46,6 @@ export interface CreateTeamDialogProps extends ComponentProps<typeof Dialog> {
  * @returns A React element rendering the create-team dialog and its form.
  */
 export function CreateTeamDialog({
-    className,
     classNames,
     localization: localizationProp,
     organizationId,
@@ -56,6 +55,7 @@ export function CreateTeamDialog({
     const {
         authClient,
         localization: contextLocalization,
+        localizeErrors,
         toast
     } = useContext(AuthUIContext)
 
@@ -107,13 +107,13 @@ export function CreateTeamDialog({
         } catch (error) {
             toast({
                 variant: "error",
-                message: getLocalizedError({ error, localization })
+                message: getLocalizedError({ error, localization, localizeErrors })
             })
         }
     }
 
     return (
-        <Dialog onOpenChange={onOpenChange} className={className} {...props}>
+        <Dialog onOpenChange={onOpenChange} {...props}>
             <DialogContent className={classNames?.dialog?.content}>
                 <DialogHeader className={classNames?.dialog?.header}>
                     <DialogTitle
