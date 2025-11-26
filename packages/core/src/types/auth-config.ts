@@ -1,4 +1,5 @@
 import type { SocialProvider } from "better-auth/social-providers"
+import type { ViewPaths } from "../lib/view-paths"
 
 export type EmailAndPasswordConfig = {
   enabled: boolean
@@ -17,6 +18,7 @@ export interface AuthConfig {
   magicLink?: boolean
   redirectTo: string
   socialProviders?: SocialProvider[]
+  viewPaths: ViewPaths
   navigate: (path: string) => void
   replace: (path: string) => void
 }

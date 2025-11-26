@@ -8,7 +8,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!**/node_modules", "!**/src/routeTree.gen.ts"]
+    "includes": ["**", "!**/src/routeTree.gen.ts"]
   },
   "formatter": {
     "enabled": true,
@@ -24,14 +24,23 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": {
+          "fix": "safe",
+          "level": "info",
+          "options": {}
+        }
+      }
     },
     "domains": {
-      "react": "recommended"
+      "react": "recommended",
+      "tailwind": "recommended"
     }
   },
   "javascript": {
     "formatter": {
+      "quoteStyle": "double",
       "semicolons": "asNeeded",
       "trailingCommas": "none"
     }

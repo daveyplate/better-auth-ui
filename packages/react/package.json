@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch & email dev --dir src/components/emails -p 9000"
+    "dev": "tsc --watch",
+    "email": "email dev --dir src/components/emails -p 9000"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

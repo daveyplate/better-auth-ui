@@ -38,7 +38,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
     ...props.localization
   }
 
-  const { authClient, navigate, Link, basePaths } = useAuth(props)
+  const { authClient, navigate, Link, basePaths, viewPaths } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -50,7 +50,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
 
     const { error } = await authClient.requestPasswordReset({
       email,
-      redirectTo: `${basePaths.auth}/reset-password`
+      redirectTo: `${basePaths.auth}/${viewPaths.auth.resetPassword}`
     })
 
     if (error) {
@@ -61,7 +61,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
     }
 
     toast.success(localization.PASSWORD_RESET_EMAIL_SENT)
-    navigate(`${basePaths.auth}/sign-in`)
+    navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
   }
 
   return (
@@ -96,7 +96,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
             {localization.REMEMBER_YOUR_PASSWORD}
             <Link
-              href={`${basePaths.auth}/sign-in`}
+              href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
               className="link link--underline-always text-accent"
             >
               {localization.SIGN_IN}

@@ -55,7 +55,8 @@ export function SignIn({ className, ...props }: SignInProps) {
     magicLink,
     basePaths,
     baseURL,
-    redirectTo
+    redirectTo,
+    viewPaths
   } = useAuth(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
@@ -144,7 +145,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                     {!emailAndPassword?.rememberMe &&
                       emailAndPassword?.forgotPassword && (
                         <Link
-                          href={`${basePaths.auth}/forgot-password`}
+                          href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                           className="link link--underline-hover"
                         >
                           {localization.FORGOT_PASSWORD}
@@ -183,7 +184,7 @@ export function SignIn({ className, ...props }: SignInProps) {
 
                   {emailAndPassword?.forgotPassword && (
                     <Link
-                      href={`${basePaths.auth}/forgot-password`}
+                      href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                       className="link link--underline-hover"
                     >
                       {localization.FORGOT_PASSWORD}
@@ -200,7 +201,7 @@ export function SignIn({ className, ...props }: SignInProps) {
 
                 {magicLink && (
                   <MagicLinkButton
-                    view="sign-in"
+                    view="signIn"
                     isPending={isPending}
                     localization={localization}
                   />
@@ -234,7 +235,7 @@ export function SignIn({ className, ...props }: SignInProps) {
             <p className="text-sm justify-center flex gap-2 items-center mb-1">
               {localization.NEED_TO_CREATE_AN_ACCOUNT}
               <Link
-                href={`${basePaths.auth}/sign-up`}
+                href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
                 className="link link--underline-always text-accent"
               >
                 {localization.SIGN_UP}

@@ -9,11 +9,11 @@ import {
   type PropsWithChildren
 } from "react"
 
-import type { AnyAuthClient } from "../types/auth-client"
+import type { AnyAuthClient, AuthClient } from "../types/auth-client"
 
 export type AuthConfig = BaseAuthConfig & {
   Link: ComponentType<ComponentPropsWithRef<"a"> & { href: string }>
-  authClient: AnyAuthClient
+  authClient: AuthClient
 }
 
 type AuthProviderConfig = DeepPartial<AuthConfig> & {

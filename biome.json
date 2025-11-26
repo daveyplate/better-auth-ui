@@ -24,6 +24,10 @@
           "options": {}
         }
       }
+    },
+    "domains": {
+      "react": "recommended",
+      "tailwind": "recommended"
     }
   },
   "assist": {

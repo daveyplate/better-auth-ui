@@ -38,7 +38,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     ...props.localization
   }
 
-  const { authClient, navigate, Link, basePaths } = useAuth(props)
+  const { authClient, navigate, Link, basePaths, viewPaths } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
   const validateToken = useCallback(() => {
@@ -47,12 +47,17 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
 
     if (!token) {
       toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
-      navigate(`${basePaths.auth}/sign-in`)
+      navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
       return null
     }
 
     return token
-  }, [navigate, localization.INVALID_RESET_PASSWORD_TOKEN, basePaths.auth])
+  }, [
+    navigate,
+    localization.INVALID_RESET_PASSWORD_TOKEN,
+    basePaths.auth,
+    viewPaths.auth.signIn
+  ])
 
   useEffect(() => {
     validateToken()
@@ -81,7 +86,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     }
 
     toast.success(localization.PASSWORD_RESET_SUCCESS)
-    navigate(`${basePaths.auth}/sign-in`)
+    navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
   }
 
   return (
@@ -123,7 +128,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
             {localization.REMEMBER_YOUR_PASSWORD}
 
             <Link
-              href={`${basePaths.auth}/sign-in`}
+              href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
               className="link link--underline-always text-accent"
             >
               {localization.SIGN_IN}

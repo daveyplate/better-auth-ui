@@ -48,7 +48,8 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
     magicLink,
     basePaths,
     baseURL,
-    redirectTo
+    redirectTo,
+    viewPaths
   } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
@@ -112,7 +113,7 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
 
             {magicLink && (
               <MagicLinkButton
-                view="magic-link"
+                view="magicLink"
                 isPending={isPending}
                 localization={localization}
               />
@@ -145,7 +146,7 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
             {localization.NEED_TO_CREATE_AN_ACCOUNT}
             <Link
-              href={`${basePaths.auth}/sign-up`}
+              href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
               className="link link--underline-always text-accent"
             >
               {localization.SIGN_UP}

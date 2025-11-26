@@ -1,4 +1,9 @@
-export { type AuthView, authViews } from "@better-auth-ui/core"
+export {
+  type AuthView,
+  authPaths,
+  authViewPaths,
+  viewPaths
+} from "@better-auth-ui/core"
 
 export * from "./components/auth-provider"
 export * from "./components/emails"

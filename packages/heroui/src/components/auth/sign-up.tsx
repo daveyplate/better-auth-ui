@@ -53,7 +53,8 @@ export function SignUp({ className, ...props }: SignUpProps) {
     magicLink,
     basePaths,
     emailAndPassword,
-    redirectTo
+    redirectTo,
+    viewPaths
   } = useAuth(props)
   const { refetch } = authClient.useSession()
   const [isPending, setIsPending] = useState(false)
@@ -88,7 +89,7 @@ export function SignUp({ className, ...props }: SignUpProps) {
 
     if (emailAndPassword?.requireEmailVerification) {
       toast.success(localization.VERIFY_YOUR_EMAIL)
-      navigate(`${basePaths.auth}/sign-in`)
+      navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
       setIsPending(false)
       return
     }
@@ -159,7 +160,7 @@ export function SignUp({ className, ...props }: SignUpProps) {
 
             {magicLink && (
               <MagicLinkButton
-                view="sign-up"
+                view="signUp"
                 isPending={isPending}
                 localization={localization}
               />
@@ -192,7 +193,7 @@ export function SignUp({ className, ...props }: SignUpProps) {
           <p className="text-sm justify-center flex gap-2 items-center mb-1">
             {localization.ALREADY_HAVE_AN_ACCOUNT}
             <Link
-              href={`${basePaths.auth}/sign-in`}
+              href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
               className="link link--underline-always text-accent"
             >
               {localization.SIGN_IN}

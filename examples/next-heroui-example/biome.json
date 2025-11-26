@@ -8,7 +8,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!**/node_modules", "!.next", "!dist", "!build"]
+    "includes": ["**"]
   },
   "formatter": {
     "enabled": true,
@@ -18,13 +18,21 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "correctness": {
+        "noUnusedImports": {
+          "fix": "safe",
+          "level": "info",
+          "options": {}
+        }
+      },
       "suspicious": {
         "noUnknownAtRules": "off"
       }
     },
     "domains": {
       "next": "recommended",
-      "react": "recommended"
+      "react": "recommended",
+      "tailwind": "recommended"
     }
   },
   "assist": {
@@ -36,6 +44,7 @@
   },
   "javascript": {
     "formatter": {
+      "quoteStyle": "double",
       "semicolons": "asNeeded",
       "trailingCommas": "none"
     }

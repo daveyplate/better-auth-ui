@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 import { toast } from "sonner"
 
 export function SignOut({ className }: { className?: string }) {
-  const { authClient, navigate, basePaths } = useAuth()
+  const { authClient, navigate, basePaths, viewPaths } = useAuth()
   const { refetch } = authClient.useSession()
   const hasSignedOut = useRef(false)
 
@@ -24,11 +24,11 @@ export function SignOut({ className }: { className?: string }) {
 
       await refetch()
 
-      navigate(`${basePaths.auth}/sign-in`)
+      navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
     }
 
     handleSignOut()
-  }, [authClient, navigate, refetch, basePaths.auth])
+  }, [authClient, navigate, refetch, basePaths.auth, viewPaths.auth.signIn])
 
   return (
     <Card

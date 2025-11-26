@@ -1,7 +1,7 @@
 "use client"
 
-import { type AuthView, authViews } from "@better-auth-ui/core"
-import type { AuthConfig } from "@better-auth-ui/react"
+import type { AuthView } from "@better-auth-ui/core"
+import { type AuthConfig, useAuth } from "@better-auth-ui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
 import { ForgotPassword } from "./forgot-password"
 import { MagicLink } from "./magic-link"
@@ -21,28 +21,37 @@ const localization = {
 export type AuthLocalization = typeof localization
 
 export type AuthProps = DeepPartial<AuthConfig> & {
-  view: AuthView | string
+  view?: AuthView
+  path?: string
   className?: string
   localization?: Partial<AuthLocalization>
 }
 
-export function Auth({ view, ...props }: AuthProps) {
-  switch (view) {
-    case "sign-in":
+export function Auth({ view, path, ...props }: AuthProps) {
+  const { viewPaths } = useAuth()
+
+  const currentView =
+    view ||
+    (Object.keys(viewPaths.auth).find(
+      (key) => viewPaths.auth[key as AuthView] === path
+    ) as AuthView | undefined)
+
+  switch (currentView) {
+    case "signIn":
       return <SignIn {...props} />
-    case "sign-up":
+    case "signUp":
       return <SignUp {...props} />
-    case "magic-link":
+    case "magicLink":
       return <MagicLink {...props} />
-    case "forgot-password":
+    case "forgotPassword":
       return <ForgotPassword {...props} />
-    case "reset-password":
+    case "resetPassword":
       return <ResetPassword {...props} />
-    case "sign-out":
+    case "signOut":
       return <SignOut {...props} />
     default:
       throw new Error(
-        `Invalid auth view: "${view}". Valid views are: ${authViews.join(", ")}`
+        `Valid paths are: ${Object.keys(viewPaths.auth).join(", ")}`
       )
   }
 }

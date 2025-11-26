@@ -3,8 +3,9 @@
   "version": "0.0.0-alpha.0",
   "type": "module",
   "scripts": {
-    "build": "tsc && cpy src/styles.css dist/ --flat",
-    "dev": "cpy src/styles.css dist/ --flat && tsc --watch"
+    "build": "tsc && bun styles",
+    "dev": "bun styles && tsc --watch",
+    "styles": "cpy src/styles.css dist/ --flat"
   },
   "exports": {
     ".": {

@@ -27,9 +27,9 @@ export function MagicLinkButton({
     ...props.localization
   }
 
-  const { Link, basePaths } = useAuth()
+  const { Link, viewPaths, basePaths } = useAuth()
 
-  const isMagicLinkView = view === "magic-link"
+  const isMagicLinkView = view === "magicLink"
   const Icon = isMagicLinkView ? LockClosedIcon : EnvelopeIcon
   const text = isMagicLinkView
     ? localization.CONTINUE_WITH_PASSWORD
@@ -37,7 +37,7 @@ export function MagicLinkButton({
 
   return (
     <Link
-      href={`${basePaths.auth}/${isMagicLinkView ? "sign-in" : "magic-link"}`}
+      href={`${basePaths.auth}/${isMagicLinkView ? viewPaths.auth.signIn : viewPaths.auth.magicLink}`}
       className={cn(
         "button button--tertiary w-full",
         isPending && "status-disabled pointer-events-none"

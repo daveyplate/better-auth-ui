@@ -10,21 +10,18 @@ import { useAuth } from "./use-auth"
 export function useAuthenticate<TAuthClient extends AnyAuthClient>(
   config?: DeepPartial<AuthConfig & { authClient?: TAuthClient }>
 ) {
-  const { authClient, replace, basePaths } = useAuth(config)
-  const typedAuthClient = authClient as TAuthClient
-  const { data, isPending, ...rest } = typedAuthClient.useSession()
+  const { authClient, basePaths, replace, viewPaths } = useAuth(config)
+  const { data, isPending, ...rest } = (authClient as TAuthClient).useSession()
 
   useEffect(() => {
-    if (isPending) return
+    if (data || isPending) return
 
-    if (!data) {
-      const currentUrl =
-        window.location.pathname + window.location.search + window.location.hash
-      const redirectTo = encodeURIComponent(currentUrl)
-      const signInPath = `${basePaths.auth}/sign-in?redirectTo=${redirectTo}`
-      replace(signInPath)
-    }
-  }, [data, isPending, replace, basePaths.auth])
+    const currentURL = window.location.pathname + window.location.search
+    const redirectTo = encodeURIComponent(currentURL)
+    const signInPath = `${basePaths.auth}/${viewPaths.auth.signIn}?redirectTo=${redirectTo}`
+
+    replace(signInPath)
+  }, [basePaths.auth, data, isPending, replace, viewPaths.auth.signIn])
 
   return { data, isPending, ...rest }
 }
