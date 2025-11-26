@@ -12,7 +12,7 @@ import {
 import type { AnyAuthClient } from "../types/auth-client"
 
 export type AuthConfig = BaseAuthConfig & {
-  Link: ComponentType<ComponentPropsWithRef<"a">>
+  Link: ComponentType<ComponentPropsWithRef<"a"> & { href: string }>
   authClient: AnyAuthClient
 }
 

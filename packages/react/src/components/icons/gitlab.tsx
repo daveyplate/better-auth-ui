@@ -2,8 +2,14 @@ import type { ComponentPropsWithRef } from "react"
 
 export function GitLab(props: ComponentPropsWithRef<"svg">) {
   return (
-    <svg viewBox="0 0 256 236" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <title>GitLab</title>
+    <svg
+      viewBox="0 0 256 236"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-labelledby="gitlab-title"
+      {...props}
+    >
+      <title id="gitlab-title">GitLab</title>
       <path d="m128.075 236.075l47.104-144.97H80.97z" fill="#e24329" />
       <path d="M128.075 236.074L80.97 91.104H14.956z" fill="#fc6d26" />
       <path

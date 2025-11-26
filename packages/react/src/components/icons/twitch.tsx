@@ -10,9 +10,11 @@ export function Twitch(props: ComponentPropsWithRef<"svg">) {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       y="0px"
+      role="img"
+      aria-labelledby="twitch-title"
       {...props}
     >
-      <title>Twitch</title>
+      <title id="twitch-title">Twitch</title>
       <style type="text/css">
         {`
                 .st0{fill:#FFFFFF}
