@@ -3,7 +3,7 @@ import type { SocialProvider } from "better-auth/social-providers"
 export const providerNames = {
   apple: "Apple",
   atlassian: "Atlassian",
-  cognito: "Amazon Cognito",
+  cognito: "Cognito",
   discord: "Discord",
   dropbox: "Dropbox",
   facebook: "Facebook",
@@ -30,7 +30,7 @@ export const providerNames = {
   spotify: "Spotify",
   tiktok: "TikTok",
   twitch: "Twitch",
-  twitter: "Twitter",
+  twitter: "X",
   vk: "VK",
   zoom: "Zoom"
 } as Record<SocialProvider, string>

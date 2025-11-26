@@ -3,16 +3,17 @@ import type { ComponentPropsWithRef } from "react"
 export function Roblox(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg
-      viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 500"
       role="img"
       aria-label="Roblox"
       {...props}
     >
       <path
-        d="M18.926 23.998L0 18.892L5.075.002L24 5.108ZM15.348 10.09l-5.282-1.453l-1.414 5.273l5.282 1.453z"
-        fill="currentColor"
-      />
+        fill="#42a5f5"
+        d="m127.87 38.084l334.05 89.432l-36.055 135.03l-199.37-53.377l-10.251 38.177l-134.68-36.056zm244.26 423.83L38.08 372.482l36.056-135.03l199.01 53.377l10.251-38.176l135.03 36.055z"
+        clipRule="evenodd"
+      ></path>
     </svg>
   )
 }
