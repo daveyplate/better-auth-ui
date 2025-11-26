@@ -13,7 +13,7 @@
     "@react-email/components": "^1.0.1",
     "@react-email/preview-server": "^5.0.5",
     "@types/react": "^19.2.7",
-    "better-auth": "^1.4.2",
+    "better-auth": "^1.4.3",
     "clsx": "^2.1.1",
     "deepmerge": "^4.3.1",
     "react": "^19.2.0",
