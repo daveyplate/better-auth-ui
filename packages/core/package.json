@@ -9,9 +9,9 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "better-auth": "^1.4.1"
+    "better-auth": "^1.4.2"
   },
   "peerDependencies": {
-    "better-auth": ">=1.4.0"
+    "better-auth": ">=1.4.2"
   }
 }

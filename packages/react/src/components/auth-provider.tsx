@@ -11,20 +11,20 @@ import {
 
 import type { AnyAuthClient } from "../types/auth-client"
 
-export type AuthConfig = Omit<BaseAuthConfig, "Link"> & {
+export type AuthConfig = BaseAuthConfig & {
   Link: ComponentType<ComponentPropsWithRef<"a">>
   authClient: AnyAuthClient
 }
 
-export const AuthContext = createContext<DeepPartial<AuthConfig> | undefined>(
+type AuthProviderConfig = DeepPartial<AuthConfig> & {
+  authClient: AnyAuthClient
+}
+
+export const AuthContext = createContext<AuthProviderConfig | undefined>(
   undefined
 )
 
-export type AuthProviderProps = PropsWithChildren<
-  DeepPartial<AuthConfig> & {
-    authClient: AnyAuthClient
-  }
->
+export type AuthProviderProps = PropsWithChildren<AuthProviderConfig>
 
 export function AuthProvider({ children, ...config }: AuthProviderProps) {
   return <AuthContext.Provider value={config}>{children}</AuthContext.Provider>
