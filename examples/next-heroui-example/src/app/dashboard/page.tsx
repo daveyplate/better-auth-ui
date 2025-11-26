@@ -1,10 +1,8 @@
 "use client"
 
+import { useAuthenticate } from "@better-auth-ui/heroui"
 import { Avatar, Card, Spinner } from "@heroui/react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
-import { authClient } from "@/lib/auth-client"
 
 /**
  * Generates user initials from name or email
@@ -27,14 +25,7 @@ function getUserInitials(user: {
 }
 
 export default function Dashboard() {
-  const { data: session, isPending } = authClient.useSession()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!isPending && !session) {
-      router.push("/auth/sign-in")
-    }
-  }, [session, isPending, router])
+  const { data: session } = useAuthenticate()
 
   if (!session) {
     return (

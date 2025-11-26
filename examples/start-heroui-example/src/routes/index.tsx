@@ -7,8 +7,8 @@ function App() {
     <div className="min-h-svh flex items-center justify-center flex-col gap-4">
       <h1 className="text-4xl font-bold">Hello World</h1>
       <Link
-        to="/auth/$view"
-        params={{ view: "sign-in" }}
+        to="/auth/$path"
+        params={{ path: "sign-in" }}
         className="text-blue-600 hover:text-blue-800 underline"
       >
         Sign In

@@ -1,7 +1,6 @@
+import { useAuthenticate } from "@better-auth-ui/heroui"
 import { Avatar, Card, Spinner } from "@heroui/react"
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router"
-import { useEffect } from "react"
-import { authClient } from "@/lib/auth-client"
+import { createFileRoute, Link } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard
@@ -28,14 +27,7 @@ function getUserInitials(user: {
 }
 
 function Dashboard() {
-  const { data: session, isPending } = authClient.useSession()
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (!isPending && !session) {
-      navigate({ to: "/auth/$view", params: { view: "sign-in" } })
-    }
-  }, [session, isPending, navigate])
+  const { data: session } = useAuthenticate()
 
   if (!session) {
     return (
@@ -85,8 +77,8 @@ function Dashboard() {
 
           <div className="mt-4">
             <Link
-              to="/auth/$view"
-              params={{ view: "sign-out" }}
+              to="/auth/$path"
+              params={{ path: "sign-out" }}
               className="button button--danger-soft"
             >
               Sign Out
