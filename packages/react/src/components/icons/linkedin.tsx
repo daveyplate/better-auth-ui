@@ -6,10 +6,9 @@ export function LinkedIn(props: ComponentPropsWithRef<"svg">) {
       viewBox="0 0 128 128"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-labelledby="linkedin-title"
+      aria-label="LinkedIn"
       {...props}
     >
-      <title id="linkedin-title">LinkedIn</title>
       <path
         d="M116 3H12a8.91 8.91 0 0 0-9 8.8v104.42a8.91 8.91 0 0 0 9 8.78h104a8.93 8.93 0 0 0 9-8.81V11.77A8.93 8.93 0 0 0 116 3"
         fill="#0076b2"

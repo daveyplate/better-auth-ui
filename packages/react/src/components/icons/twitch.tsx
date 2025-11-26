@@ -11,10 +11,9 @@ export function Twitch(props: ComponentPropsWithRef<"svg">) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       y="0px"
       role="img"
-      aria-labelledby="twitch-title"
+      aria-label="Twitch"
       {...props}
     >
-      <title id="twitch-title">Twitch</title>
       <style type="text/css">
         {`
                 .st0{fill:#FFFFFF}

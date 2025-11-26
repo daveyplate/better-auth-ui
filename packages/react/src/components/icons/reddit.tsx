@@ -6,10 +6,9 @@ export function Reddit(props: ComponentPropsWithRef<"svg">) {
       viewBox="0 0 256 256"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-labelledby="reddit-title"
+      aria-label="Reddit"
       {...props}
     >
-      <title id="reddit-title">Reddit</title>
       <circle cx="128" cy="128" fill="#ff4500" r="128" />
 
       <path
