@@ -61,6 +61,7 @@ export const providerIcons: Record<
   tiktok: TikTok,
   twitch: Twitch,
   twitter: X,
+  vercel: NullIcon,
   vk: VK,
   zoom: Zoom
 }
