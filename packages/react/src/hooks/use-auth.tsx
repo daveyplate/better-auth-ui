@@ -42,17 +42,19 @@ export function useAuth(config?: DeepPartial<AuthConfig>) {
 
   // Validate redirectTo from URL search params to prevent open redirect vulnerabilities
   if (hydrated) {
-    const redirectToParam = new URLSearchParams(window.location.search).get("redirectTo")
+    const redirectToParam = new URLSearchParams(window.location.search).get(
+      "redirectTo"
+    )
     if (redirectToParam) {
       const decodedRedirectTo = decodeURIComponent(redirectToParam).trim()
-      
+
       // Validate: must be a relative path starting with "/" but not "//"
       // and must not contain a scheme (e.g., "://")
       const isValidRedirect =
         decodedRedirectTo.startsWith("/") &&
         !decodedRedirectTo.startsWith("//") &&
         !decodedRedirectTo.includes("://")
-      
+
       if (isValidRedirect) {
         authConfig.redirectTo = decodedRedirectTo
       }
