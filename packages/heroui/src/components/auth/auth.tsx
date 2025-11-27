@@ -62,7 +62,7 @@ export function Auth({ view, path, ...props }: AuthProps) {
       return <SignOut {...props} />
     default:
       throw new Error(
-        `Valid paths are: ${Object.keys(viewPaths.auth).join(", ")}`
+        `Valid views are: ${Object.keys(viewPaths.auth).join(", ")}`
       )
   }
 }

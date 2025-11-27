@@ -12,7 +12,7 @@ import {
   TextField
 } from "@heroui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
-import { type FormEvent, useCallback, useEffect, useState } from "react"
+import { type FormEvent, useEffect, useState } from "react"
 import { toast } from "sonner"
 
 const localization = {
@@ -47,18 +47,19 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
   const { authClient, basePaths, viewPaths, navigate, Link } = useAuth(props)
 
   const [isPending, setIsPending] = useState(false)
+  const [token, setToken] = useState<string | null>(null)
 
-  const validateToken = useCallback(() => {
+  useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search)
-    const token = searchParams.get("token")
+    const tokenParam = searchParams.get("token")
 
-    if (!token) {
+    if (!tokenParam) {
       toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
       navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
-      return null
+      return
     }
 
-    return token
+    setToken(tokenParam)
   }, [
     basePaths.auth,
     localization.INVALID_RESET_PASSWORD_TOKEN,
@@ -66,16 +67,15 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     navigate
   ])
 
-  useEffect(() => {
-    validateToken()
-  }, [validateToken])
-
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsPending(true)
 
-    const token = validateToken()
-    if (!token) return
+    if (!token) {
+      toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
+      setIsPending(false)
+      return
+    }
 
     const formData = new FormData(e.currentTarget)
     const password = formData.get("password") as string

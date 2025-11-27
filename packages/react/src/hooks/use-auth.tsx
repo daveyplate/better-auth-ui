@@ -54,17 +54,17 @@ export function useAuth(config?: DeepPartial<AuthConfig>) {
     )
 
     if (redirectToParam) {
-      const decodedRedirectTo = decodeURIComponent(redirectToParam).trim()
+      const redirectTo = redirectToParam.trim()
 
       // Validate: must be a relative path starting with "/" but not "//"
       // and must not contain a scheme (e.g., "://")
       const isValidRedirect =
-        decodedRedirectTo.startsWith("/") &&
-        !decodedRedirectTo.startsWith("//") &&
-        !decodedRedirectTo.includes("://")
+        redirectTo.startsWith("/") &&
+        !redirectTo.startsWith("//") &&
+        !redirectTo.includes("://")
 
       if (isValidRedirect) {
-        authConfig.redirectTo = decodedRedirectTo
+        authConfig.redirectTo = redirectTo
       }
     }
   }
