@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest"
 import { renderHook } from "@testing-library/react"
+import { describe, expect, it } from "vitest"
 import { useHydrated } from "../use-hydrated"
 
 describe("useHydrated", () => {
