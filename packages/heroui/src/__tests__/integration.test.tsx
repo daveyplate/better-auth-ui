@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest"
 describe("@better-auth-ui/heroui integration", () => {
   it("should export main components", async () => {
     const module = await import("../index")
-    
+
     expect(module).toHaveProperty("SignIn")
     expect(module).toHaveProperty("SignUp")
     expect(module).toHaveProperty("SignOut")
@@ -18,7 +18,7 @@ describe("@better-auth-ui/heroui integration", () => {
 
   it("should have all components as functions", async () => {
     const module = await import("../index")
-    
+
     expect(typeof module.SignIn).toBe("function")
     expect(typeof module.SignUp).toBe("function")
     expect(typeof module.SignOut).toBe("function")
@@ -32,7 +32,7 @@ describe("@better-auth-ui/heroui integration", () => {
 describe("@better-auth-ui/heroui server exports", () => {
   it("should export server utilities", async () => {
     const module = await import("../server")
-    
+
     expect(module).toHaveProperty("authViewPaths")
     expect(module).toHaveProperty("viewPaths")
   })

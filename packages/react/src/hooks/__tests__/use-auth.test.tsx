@@ -54,7 +54,9 @@ describe("useAuth", () => {
     })
 
     it("should return config when authClient is provided via argument", () => {
-      const { result } = renderHook(() => useAuth({ authClient: mockAuthClient }))
+      const { result } = renderHook(() =>
+        useAuth({ authClient: mockAuthClient })
+      )
 
       expect(result.current.authClient).toBeDefined()
       expect(result.current.basePaths).toBeDefined()
@@ -129,10 +131,7 @@ describe("useAuth", () => {
   describe("configuration merging", () => {
     it("should merge context and prop configurations", () => {
       const wrapper = ({ children }: { children: ReactNode }) => (
-        <AuthProvider
-          authClient={mockAuthClient}
-          baseURL="http://example.com"
-        >
+        <AuthProvider authClient={mockAuthClient} baseURL="http://example.com">
           {children}
         </AuthProvider>
       )
@@ -148,10 +147,7 @@ describe("useAuth", () => {
 
     it("should override context config with prop config", () => {
       const wrapper = ({ children }: { children: ReactNode }) => (
-        <AuthProvider
-          authClient={mockAuthClient}
-          redirectTo="/home"
-        >
+        <AuthProvider authClient={mockAuthClient} redirectTo="/home">
           {children}
         </AuthProvider>
       )
@@ -288,10 +284,7 @@ describe("useAuth", () => {
 
     it("should handle empty social providers array", () => {
       const wrapper = ({ children }: { children: ReactNode }) => (
-        <AuthProvider
-          authClient={mockAuthClient}
-          socialProviders={[]}
-        >
+        <AuthProvider authClient={mockAuthClient} socialProviders={[]}>
           {children}
         </AuthProvider>
       )
@@ -305,10 +298,7 @@ describe("useAuth", () => {
   describe("magic link configuration", () => {
     it("should accept magicLink boolean", () => {
       const wrapper = ({ children }: { children: ReactNode }) => (
-        <AuthProvider
-          authClient={mockAuthClient}
-          magicLink={true}
-        >
+        <AuthProvider authClient={mockAuthClient} magicLink={true}>
           {children}
         </AuthProvider>
       )
