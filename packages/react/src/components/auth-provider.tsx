@@ -11,8 +11,16 @@ import {
 
 import type { AnyAuthClient, AuthClient } from "../types/auth-client"
 
+/**
+ * Extended authentication configuration for React components.
+ *
+ * Extends the base AuthConfig with React-specific requirements including
+ * a Link component for navigation and an authClient instance.
+ */
 export type AuthConfig = BaseAuthConfig & {
+  /** React component for rendering links (e.g., Next.js Link, React Router Link) */
   Link: ComponentType<ComponentPropsWithRef<"a"> & { href: string }>
+  /** Authenticated auth client instance */
   authClient: AuthClient
 }
 
@@ -20,10 +28,19 @@ type AuthProviderConfig = DeepPartial<AuthConfig> & {
   authClient: AnyAuthClient
 }
 
+/**
+ * React context that provides authentication configuration to descendant components.
+ *
+ * Components can access the auth configuration using `useContext(AuthContext)` or
+ * through the `useAuth` hook which wraps this context.
+ */
 export const AuthContext = createContext<AuthProviderConfig | undefined>(
   undefined
 )
 
+/**
+ * Props for the AuthProvider component.
+ */
 export type AuthProviderProps = PropsWithChildren<AuthProviderConfig>
 
 /**

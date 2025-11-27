@@ -46,7 +46,7 @@ export type SignInProps = DeepPartial<AuthConfig> & {
 }
 
 /**
- * Render the sign-in UI with email/password, magic link, and social provider options based on the provided auth configuration.
+ * Renders the sign-in UI with email/password, magic link, and social provider options based on the provided auth configuration.
  *
  * The component handles sign-in submission, offers a resend verification action when the account is unverified, refetches the session on successful sign-in, and navigates to the configured redirect path.
  *

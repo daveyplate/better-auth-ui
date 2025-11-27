@@ -44,9 +44,13 @@ export type SignUpProps = DeepPartial<AuthConfig> & {
 }
 
 /**
- * Render a sign-up form with name, email, and password fields, optional social provider buttons, and submission handling.
+ * Renders a sign-up form with name, email, and password fields, optional social provider buttons, and submission handling.
  *
- * Submits credentials to the configured auth client, shows a verification notification and navigates to sign-in when email verification is required, or refreshes the session and navigates to the configured redirect path on success. Displays error toasts on sign-up failure and manages a pending state while the request is in-flight.
+ * Submits credentials to the configured auth client and handles the response:
+ * - If email verification is required, shows a notification and navigates to sign-in
+ * - On success, refreshes the session and navigates to the configured redirect path
+ * - On failure, displays error toasts
+ * - Manages a pending state while the request is in-flight
  *
  * @param props - Configuration and appearance overrides (e.g., `className`, `localization`, `socialLayout`) plus auth-related options passed through to the auth hook.
  * @returns The sign-up form React element.

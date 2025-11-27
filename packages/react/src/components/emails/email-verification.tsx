@@ -328,8 +328,15 @@ export const EmailVerificationEmail = ({
   )
 }
 
+/**
+ * Default localization strings for the email verification template.
+ * Can be overridden via the `localization` prop.
+ */
 EmailVerificationEmail.localization = emailVerificationEmailLocalization
 
+/**
+ * Example props for previewing the email template in development.
+ */
 EmailVerificationEmail.PreviewProps = {
   url: "https://better-auth-ui.com/auth/verify-email?token=example-token",
   appName: "Better Auth",

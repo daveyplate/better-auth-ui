@@ -11,7 +11,7 @@ export const Route = createFileRoute("/auth/$path")({
 })
 
 /**
- * Render centered authentication UI for the active auth subpath.
+ * Renders centered authentication UI for the active auth subpath.
  *
  * @returns The JSX element containing a centered `Auth` component for the active route `path`.
  */
