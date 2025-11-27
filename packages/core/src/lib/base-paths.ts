@@ -1,4 +1,5 @@
 export const basePaths = {
   auth: "/auth",
-  account: "/account"
+  account: "/account",
+  organization: "/organization"
 }
