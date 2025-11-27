@@ -6,6 +6,7 @@ import type { DeepPartial } from "better-auth/client/plugins"
 
 import { ForgotPassword } from "./forgot-password"
 import { MagicLink } from "./magic-link"
+import type { SocialLayout } from "./provider-buttons"
 import { ResetPassword } from "./reset-password"
 import { SignIn } from "./sign-in"
 import { SignOut } from "./sign-out"
@@ -26,6 +27,7 @@ export type AuthProps = DeepPartial<AuthConfig> & {
   localization?: Partial<AuthLocalization>
   path?: string
   view?: AuthView
+  socialLayout?: SocialLayout
 }
 
 export function Auth({ view, path, ...props }: AuthProps) {

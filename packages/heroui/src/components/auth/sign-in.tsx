@@ -18,7 +18,7 @@ import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
 import { MagicLinkButton } from "./magic-link-button"
-import { ProviderButtons } from "./provider-buttons"
+import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 import { ResendVerificationButton } from "./resend-verification-button"
 
 const localization = {
@@ -42,6 +42,7 @@ export type SignInLocalization = typeof localization
 export type SignInProps = DeepPartial<AuthConfig> & {
   className?: string
   localization?: Partial<SignInLocalization>
+  socialLayout?: SocialLayout
 }
 
 export function SignIn({ className, ...props }: SignInProps) {
