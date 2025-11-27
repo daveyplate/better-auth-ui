@@ -23,7 +23,7 @@ import {
   EmailStyles
 } from "./email-styles"
 
-const localization = {
+const magicLinkEmailLocalization = {
   SIGN_IN_TO_APP_NAME: "Sign in to {appName}",
   SIGN_IN_TO_YOUR_ACCOUNT: "Sign in to your account",
   YOUR_ACCOUNT: "your account",
@@ -39,7 +39,7 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type MagicLinkEmailLocalization = typeof localization
+export type MagicLinkEmailLocalization = typeof magicLinkEmailLocalization
 
 interface MagicLinkEmailProps {
   url: string
@@ -292,7 +292,7 @@ export const MagicLinkEmail = ({
   )
 }
 
-MagicLinkEmail.localization = localization
+MagicLinkEmail.localization = magicLinkEmailLocalization
 
 MagicLinkEmail.PreviewProps = {
   url: "https://better-auth-ui.com/auth/verify?token=example-token",

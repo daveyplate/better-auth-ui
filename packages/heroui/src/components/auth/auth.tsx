@@ -12,7 +12,7 @@ import { SignIn } from "./sign-in"
 import { SignOut } from "./sign-out"
 import { SignUp } from "./sign-up"
 
-const localization = {
+const authLocalization = {
   ...SignIn.localization,
   ...SignUp.localization,
   ...MagicLink.localization,
@@ -20,7 +20,7 @@ const localization = {
   ...ResetPassword.localization
 }
 
-export type AuthLocalization = typeof localization
+export type AuthLocalization = typeof authLocalization
 
 export type AuthProps = DeepPartial<AuthConfig> & {
   className?: string
@@ -67,4 +67,4 @@ export function Auth({ view, path, ...props }: AuthProps) {
   }
 }
 
-Auth.localization = localization
+Auth.localization = authLocalization

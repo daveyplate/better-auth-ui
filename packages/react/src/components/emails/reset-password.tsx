@@ -23,7 +23,7 @@ import {
   EmailStyles
 } from "./email-styles"
 
-const localization = {
+const resetPasswordEmailLocalization = {
   RESET_YOUR_PASSWORD: "Reset your password",
   LOGO: "Logo",
   WE_RECEIVED_REQUEST_TO_RESET_PASSWORD:
@@ -38,7 +38,8 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type ResetPasswordEmailLocalization = typeof localization
+export type ResetPasswordEmailLocalization =
+  typeof resetPasswordEmailLocalization
 
 interface ResetPasswordEmailProps {
   url: string
@@ -286,7 +287,7 @@ export const ResetPasswordEmail = ({
   )
 }
 
-ResetPasswordEmail.localization = localization
+ResetPasswordEmail.localization = resetPasswordEmailLocalization
 
 ResetPasswordEmail.PreviewProps = {
   url: "https://better-auth-ui.com/auth/reset-password?token=example-token",

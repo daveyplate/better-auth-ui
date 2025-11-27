@@ -21,7 +21,7 @@ import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 import { ResendVerificationButton } from "./resend-verification-button"
 
-const localization = {
+const signInLocalization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
   ...ResendVerificationButton.localization,
@@ -37,7 +37,7 @@ const localization = {
   SIGN_UP: "Sign Up"
 }
 
-export type SignInLocalization = typeof localization
+export type SignInLocalization = typeof signInLocalization
 
 export type SignInProps = DeepPartial<AuthConfig> & {
   className?: string
@@ -267,4 +267,4 @@ export function SignIn({ className, ...props }: SignInProps) {
   )
 }
 
-SignIn.localization = localization
+SignIn.localization = signInLocalization

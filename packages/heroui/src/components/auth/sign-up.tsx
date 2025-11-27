@@ -19,7 +19,7 @@ import { toast } from "sonner"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 
-const localization = {
+const signUpLocalization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
   ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
@@ -35,7 +35,7 @@ const localization = {
   VERIFY_YOUR_EMAIL: "Please verify your email before signing in"
 }
 
-export type SignUpLocalization = typeof localization
+export type SignUpLocalization = typeof signUpLocalization
 
 export type SignUpProps = DeepPartial<AuthConfig> & {
   className?: string
@@ -215,4 +215,4 @@ export function SignUp({ className, ...props }: SignUpProps) {
   )
 }
 
-SignUp.localization = localization
+SignUp.localization = signUpLocalization

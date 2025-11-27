@@ -5,12 +5,13 @@ import { Button, Spinner } from "@heroui/react"
 import { useState } from "react"
 import { toast } from "sonner"
 
-const localization = {
+const resendVerificationButtonLocalization = {
   RESEND: "Resend",
   VERIFICATION_EMAIL_SENT: "Verification email sent!"
 }
 
-export type ResendVerificationButtonLocalization = typeof localization
+export type ResendVerificationButtonLocalization =
+  typeof resendVerificationButtonLocalization
 
 export type ResendVerificationButtonProps = {
   authClient: AuthClient
@@ -74,4 +75,4 @@ export function ResendVerificationButton({
   )
 }
 
-ResendVerificationButton.localization = localization
+ResendVerificationButton.localization = resendVerificationButtonLocalization

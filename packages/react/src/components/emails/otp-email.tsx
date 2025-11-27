@@ -22,7 +22,7 @@ import {
   EmailStyles
 } from "./email-styles"
 
-const localization = {
+const otpEmailLocalization = {
   YOUR_VERIFICATION_CODE_IS_CODE:
     "Your verification code is {verificationCode}",
   LOGO: "Logo",
@@ -37,7 +37,7 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type OtpEmailEmailLocalization = typeof localization
+export type OtpEmailEmailLocalization = typeof otpEmailLocalization
 
 interface OtpEmailProps {
   verificationCode: string
@@ -265,7 +265,7 @@ export const OtpEmail = ({
   )
 }
 
-OtpEmail.localization = localization
+OtpEmail.localization = otpEmailLocalization
 
 OtpEmail.PreviewProps = {
   verificationCode: "069420",

@@ -23,7 +23,7 @@ import {
   EmailStyles
 } from "./email-styles"
 
-const localization = {
+const emailChangedEmailLocalization = {
   YOUR_EMAIL_ADDRESS_HAS_BEEN_CHANGED: "Your email address has been changed",
   LOGO: "Logo",
   EMAIL_ADDRESS_CHANGED: "Email address changed",
@@ -40,7 +40,7 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type EmailChangedEmailLocalization = typeof localization
+export type EmailChangedEmailLocalization = typeof emailChangedEmailLocalization
 
 interface EmailChangedEmailProps {
   oldEmail?: string
@@ -320,7 +320,7 @@ export const EmailChangedEmail = ({
   )
 }
 
-EmailChangedEmail.localization = localization
+EmailChangedEmail.localization = emailChangedEmailLocalization
 
 EmailChangedEmail.PreviewProps = {
   oldEmail: "old@example.com",

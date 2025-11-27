@@ -23,7 +23,7 @@ import {
   EmailStyles
 } from "./email-styles"
 
-const localization = {
+const emailVerificationEmailLocalization = {
   VERIFY_YOUR_EMAIL_ADDRESS: "Verify your email address",
   LOGO: "Logo",
   CLICK_BUTTON_TO_VERIFY_EMAIL:
@@ -38,7 +38,8 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type EmailVerificationEmailLocalization = typeof localization
+export type EmailVerificationEmailLocalization =
+  typeof emailVerificationEmailLocalization
 
 interface EmailVerificationEmailProps {
   url: string
@@ -286,7 +287,7 @@ export const EmailVerificationEmail = ({
   )
 }
 
-EmailVerificationEmail.localization = localization
+EmailVerificationEmail.localization = emailVerificationEmailLocalization
 
 EmailVerificationEmail.PreviewProps = {
   url: "https://better-auth-ui.com/auth/verify-email?token=example-token",

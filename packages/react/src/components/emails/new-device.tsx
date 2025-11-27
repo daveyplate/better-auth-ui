@@ -31,7 +31,7 @@ interface DeviceInfo {
   timestamp?: string
 }
 
-const localization = {
+const newDeviceEmailLocalization = {
   NEW_SIGN_IN_DETECTED: "New sign-in detected",
   LOGO: "Logo",
   NEW_SIGN_IN_TO_YOUR_ACCOUNT:
@@ -51,7 +51,7 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type NewDeviceEmailLocalization = typeof localization
+export type NewDeviceEmailLocalization = typeof newDeviceEmailLocalization
 
 interface NewDeviceEmailProps {
   userEmail?: string
@@ -373,7 +373,7 @@ export const NewDeviceEmail = ({
   )
 }
 
-NewDeviceEmail.localization = localization
+NewDeviceEmail.localization = newDeviceEmailLocalization
 
 NewDeviceEmail.PreviewProps = {
   userEmail: "m@example.com",
