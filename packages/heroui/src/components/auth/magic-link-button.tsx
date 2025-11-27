@@ -17,6 +17,16 @@ export type MagicLinkButtonProps = {
   view?: AuthView
 }
 
+/**
+ * Render a full-width tertiary button that links to either the magic-link or sign-in route and displays the corresponding icon and label.
+ *
+ * The component merges provided localization overrides with built-in defaults. When `isPending` is true, the button receives disabled styling and prevents pointer interactions.
+ *
+ * @param isPending - If true, apply disabled styling and prevent interactions
+ * @param view - Current auth view; when `"magicLink"`, the button shows the password/sign-in variant
+ * @param props - Additional props; supported property `localization` can provide partial overrides for button text
+ * @returns A link-styled button element that navigates to the appropriate auth route and shows the matching icon and text
+ */
 export function MagicLinkButton({
   isPending,
   view,

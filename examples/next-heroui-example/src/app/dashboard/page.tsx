@@ -5,9 +5,13 @@ import { Avatar, Card, Spinner } from "@heroui/react"
 import Link from "next/link"
 
 /**
- * Generates user initials from name or email
- * @param user - User object with optional name and email
- * @returns Initials string (max 2 characters, uppercase)
+ * Produce up to two uppercase initials derived from a user's name or email.
+ *
+ * If `user.name` is present, uses the first character of each name segment (up to two characters).
+ * Otherwise uses the first character of `user.email`, or `"U"` when neither is available.
+ *
+ * @param user - Object containing optional `name` and `email` fields
+ * @returns A 1- or 2-character uppercase initials string
  */
 function getUserInitials(user: {
   name?: string | null
@@ -24,6 +28,11 @@ function getUserInitials(user: {
   return user.email?.[0]?.toUpperCase() || "U"
 }
 
+/**
+ * Renders the authenticated user dashboard with avatar, time-based greeting, user name/email badge, and a sign-out link; displays a centered spinner while no session is available.
+ *
+ * @returns The dashboard UI as JSX when a session exists, otherwise a full-height centered loading spinner.
+ */
 export default function Dashboard() {
   const { data: session } = useAuthenticate()
 

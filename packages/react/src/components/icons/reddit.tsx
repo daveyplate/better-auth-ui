@@ -1,5 +1,14 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Render the Reddit logo as an SVG icon.
+ *
+ * The component forwards received props to the root `<svg>` element so callers can
+ * override attributes (className, style, aria-*, ref, etc.) and control sizing.
+ *
+ * @param props - Props forwarded to the root SVG element
+ * @returns A JSX element containing the Reddit circular logo
+ */
 export function Reddit(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

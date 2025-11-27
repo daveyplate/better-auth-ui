@@ -45,6 +45,13 @@ export type SignInProps = DeepPartial<AuthConfig> & {
   socialLayout?: SocialLayout
 }
 
+/**
+ * Render the sign-in UI that supports email/password, magic link, and social provider flows according to the provided auth configuration.
+ *
+ * The component submits email/password credentials, handles EMAIL_NOT_VERIFIED by offering a resend action, refetches the session on success, and navigates to the configured redirect path. UI elements (remember-me checkbox, forgot-password link, magic link button, provider buttons, and sign-up prompt) are shown conditionally based on the auth client configuration passed via props.
+ *
+ * @returns A React element containing the sign-in form and related controls (email/password inputs, optional remember-me and forgot-password links, magic link button, social provider buttons, and sign-up link) configured according to the auth settings.
+ */
 export function SignIn({ className, ...props }: SignInProps) {
   const localization = { ...SignIn.localization, ...props.localization }
 

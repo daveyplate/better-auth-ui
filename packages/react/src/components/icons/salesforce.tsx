@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the Salesforce logo as an inline SVG and forwards received props to the root `<svg>`.
+ *
+ * @param props - Props forwarded to the SVG element (for example: `className`, `style`, `ref`, and `aria-*` attributes).
+ * @returns An SVG element representing the Salesforce logo.
+ */
 export function Salesforce(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

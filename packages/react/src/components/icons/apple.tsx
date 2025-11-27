@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders an Apple SVG icon.
+ *
+ * @param props - Props forwarded to the root `<svg>` element; they are spread onto the element and can override attributes such as `width`, `height`, `className`, and `aria-label`.
+ * @returns The SVG element for the Apple icon.
+ */
 export function Apple(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

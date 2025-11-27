@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Render the VK social icon as an SVG element.
+ *
+ * @param props - SVG attributes and ref forwarded to the root `<svg>` element
+ * @returns An `<svg>` element containing the VK icon path
+ */
 export function VK(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

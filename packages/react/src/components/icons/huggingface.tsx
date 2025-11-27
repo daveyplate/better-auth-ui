@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the Hugging Face logo as an SVG.
+ *
+ * @param props - Props forwarded to the root `<svg>` element (for example `className`, `width`, `height`, `ref`)
+ * @returns The SVG element for the Hugging Face icon
+ */
 export function HuggingFace(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

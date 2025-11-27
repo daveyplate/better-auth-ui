@@ -1,5 +1,13 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Render the Kick icon as an inline SVG.
+ *
+ * The root SVG has defaults (viewBox "0 0 512 512" and aria-label "Kick") and accepts any standard SVG/element props which are spread onto it.
+ *
+ * @param props - Props forwarded to the root SVG element; can override attributes and receive a ref
+ * @returns The SVG element for the Kick icon
+ */
 export function Kick(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

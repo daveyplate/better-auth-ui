@@ -40,6 +40,14 @@ export type MagicLinkProps = DeepPartial<AuthConfig> & {
   socialLayout?: SocialLayout
 }
 
+/**
+ * Renders a card-based sign-in form that sends an email magic link and optionally shows social provider buttons.
+ *
+ * Submits the entered email to the auth client to request a magic link, displays success or error toasts, and can render alternative social sign-in buttons when providers are configured. Localization and layout can be customized via props.
+ *
+ * @param props - Component props for configuring appearance, localization, social layout, and auth-related options.
+ * @returns A JSX element containing the magic-link sign-in UI and related controls.
+ */
 export function MagicLink({ className, ...props }: MagicLinkProps) {
   const localization = { ...MagicLink.localization, ...props.localization }
 

@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the Linear SVG icon.
+ *
+ * @param props - Props applied to and forwarded onto the underlying `<svg>` element.
+ * @returns The SVG element representing the Linear icon.
+ */
 export function Linear(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

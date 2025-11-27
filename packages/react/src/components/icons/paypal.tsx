@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the PayPal logo as an SVG icon.
+ *
+ * @param props - Props forwarded to the root SVG element (standard SVG/DOM attributes such as `className`, `style`, `width`, `height`, and ARIA attributes).
+ * @returns The SVG element representing the PayPal logo.
+ */
 export function PayPal(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

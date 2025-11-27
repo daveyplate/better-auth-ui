@@ -32,6 +32,12 @@ export type ResetPasswordProps = DeepPartial<AuthConfig> & {
   localization?: Partial<ResetPasswordLocalization>
 }
 
+/**
+ * Render a password reset form that validates a token from the URL and submits a new password to the auth client.
+ *
+ * @param props - Component props; may include `className` for container styling and `localization` to override displayed strings.
+ * @returns The rendered ResetPassword form element.
+ */
 export function ResetPassword({ className, ...props }: ResetPasswordProps) {
   const localization = {
     ...ResetPassword.localization,

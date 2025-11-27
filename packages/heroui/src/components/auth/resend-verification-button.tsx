@@ -20,6 +20,15 @@ export type ResendVerificationButtonProps = {
   redirectTo: string
 }
 
+/**
+ * Renders a small button that resends a verification email to the provided address.
+ *
+ * @param authClient - Auth client used to send the verification email
+ * @param baseURL - Base URL used to build the verification callback URL
+ * @param email - Recipient email address for the verification message
+ * @param redirectTo - Path appended to `baseURL` to form the verification callback URL
+ * @returns The button element which shows a spinner while the request is in progress
+ */
 export function ResendVerificationButton({
   authClient,
   baseURL,

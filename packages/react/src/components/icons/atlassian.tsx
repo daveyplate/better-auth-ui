@@ -1,5 +1,13 @@
 import { type ComponentPropsWithRef, useId } from "react"
 
+/**
+ * Render the Atlassian logo as an inline SVG element.
+ *
+ * The SVG includes a linear gradient and two path shapes, and sets role="img" with aria-label="Atlassian".
+ *
+ * @param props - Props forwarded to the root SVG element.
+ * @returns An SVG element representing the Atlassian icon.
+ */
 export function Atlassian(props: ComponentPropsWithRef<"svg">) {
   const gradientId = useId()
   return (

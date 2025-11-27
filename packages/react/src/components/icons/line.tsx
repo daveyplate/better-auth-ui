@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Render the "Line" SVG icon.
+ *
+ * @param props - Props spread onto the root `<svg>` element (e.g., `className`, `style`, `ref`, event handlers) to customize the icon.
+ * @returns The SVG element for the Line icon.
+ */
 export function Line(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg
