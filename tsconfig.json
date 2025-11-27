@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "declaration": true,
     "isolatedModules": true,
     "lib": ["esnext", "dom", "dom.iterable"],
