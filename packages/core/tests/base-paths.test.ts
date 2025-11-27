@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { basePaths } from "../lib/base-paths"
+import { basePaths } from "../src/lib/base-paths"
 
 describe("basePaths", () => {
   it("should contain all expected base paths", () => {

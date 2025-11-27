@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
-import { useHydrated } from "../use-hydrated"
+import { useHydrated } from "../../src/hooks/use-hydrated"
 
 describe("useHydrated", () => {
   it("should return a boolean value", () => {

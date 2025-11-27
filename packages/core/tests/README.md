@@ -26,3 +26,4 @@ Generate coverage report:
 ```bash
 bun test:coverage
 ```
+

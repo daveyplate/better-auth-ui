@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { providerIcons } from "../provider-icons"
+import { providerIcons } from "../../src/lib/provider-icons"
 
 describe("providerIcons", () => {
   it("should export an object with all social provider icons", () => {

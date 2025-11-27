@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 
 describe("@better-auth-ui/heroui integration", () => {
   it("should export main components", async () => {
-    const module = await import("../index")
+    const module = await import("../src/index")
 
     expect(module).toHaveProperty("SignIn")
     expect(module).toHaveProperty("SignUp")
@@ -17,7 +17,7 @@ describe("@better-auth-ui/heroui integration", () => {
   })
 
   it("should have all components as functions", async () => {
-    const module = await import("../index")
+    const module = await import("../src/index")
 
     expect(typeof module.SignIn).toBe("function")
     expect(typeof module.SignUp).toBe("function")
@@ -31,7 +31,7 @@ describe("@better-auth-ui/heroui integration", () => {
 
 describe("@better-auth-ui/heroui server exports", () => {
   it("should export server utilities", async () => {
-    const module = await import("../server")
+    const module = await import("../src/server")
 
     expect(module).toHaveProperty("authViewPaths")
     expect(module).toHaveProperty("viewPaths")

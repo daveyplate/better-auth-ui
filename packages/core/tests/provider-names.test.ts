@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getProviderName, providerNames } from "../lib/provider-names"
+import { getProviderName, providerNames } from "../src/lib/provider-names"
 
 describe("providerNames", () => {
   it("should contain all expected social providers", () => {

@@ -6,7 +6,7 @@ import {
   authViews,
   type ViewPaths,
   viewPaths
-} from "../lib/view-paths"
+} from "../src/lib/view-paths"
 
 describe("authViewPaths", () => {
   it("should contain all expected view paths", () => {

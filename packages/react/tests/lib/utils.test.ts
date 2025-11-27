@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { cn } from "../utils"
+import { cn } from "../../src/lib/utils"
 
 describe("cn (className utility)", () => {
   describe("basic functionality", () => {
