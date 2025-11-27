@@ -6,8 +6,7 @@
     "build": "tsc && bun styles",
     "dev": "bun styles && tsc --watch",
     "styles": "cpy src/styles.css dist/ --flat",
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test": "vitest"
   },
   "files": [
     "src",
@@ -28,19 +27,18 @@
     "@heroicons/react": "^2.2.0",
     "@heroui/react": "^3.0.0-beta.2",
     "@heroui/styles": "^3.0.0-beta.2",
-    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/react": "^19.2.7",
     "@vitejs/plugin-react": "^5.0.4",
-    "@vitest/coverage-v8": "^3.1.4",
+    "@vitest/browser-playwright": "^4.0.14",
     "better-auth": "^1.4.3",
     "cpy-cli": "^6.0.0",
-    "jsdom": "^26.0.0",
+    "playwright": "^1.57.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "sonner": "^2.0.7",
-    "vitest": "^3.1.4"
+    "vitest": "^4.0.14"
   },
   "dependencies": {
     "@better-auth-ui/core": "workspace:*",

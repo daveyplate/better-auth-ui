@@ -21,20 +21,10 @@ describe("useAuth", () => {
     baseURL: "http://localhost:3000"
   })
 
-  beforeEach(() => {
-    // Reset window location
-    Object.defineProperty(window, "location", {
-      value: {
-        search: "",
-        href: "http://localhost:3000"
-      },
-      writable: true,
-      configurable: true
-    })
-  })
-
   afterEach(() => {
     vi.clearAllMocks()
+    // Reset URL to base
+    window.history.pushState({}, "", "/")
   })
 
   describe("basic functionality", () => {
@@ -185,7 +175,7 @@ describe("useAuth", () => {
 
   describe("redirectTo validation from URL", () => {
     it("should use redirectTo from URL query param when valid", () => {
-      window.location.search = "?redirectTo=/dashboard"
+      window.history.pushState({}, "", "/?redirectTo=/dashboard")
 
       const wrapper = ({ children }: { children: ReactNode }) => (
         <AuthProvider authClient={mockAuthClient}>{children}</AuthProvider>
@@ -197,7 +187,7 @@ describe("useAuth", () => {
     })
 
     it("should reject redirectTo with double slashes", () => {
-      window.location.search = "?redirectTo=//evil.com"
+      window.history.pushState({}, "", "/?redirectTo=//evil.com")
 
       const wrapper = ({ children }: { children: ReactNode }) => (
         <AuthProvider authClient={mockAuthClient}>{children}</AuthProvider>
@@ -209,7 +199,7 @@ describe("useAuth", () => {
     })
 
     it("should reject redirectTo with scheme", () => {
-      window.location.search = "?redirectTo=http://evil.com"
+      window.history.pushState({}, "", "/?redirectTo=http://evil.com")
 
       const wrapper = ({ children }: { children: ReactNode }) => (
         <AuthProvider authClient={mockAuthClient}>{children}</AuthProvider>
@@ -221,7 +211,7 @@ describe("useAuth", () => {
     })
 
     it("should reject redirectTo not starting with slash", () => {
-      window.location.search = "?redirectTo=dashboard"
+      window.history.pushState({}, "", "/?redirectTo=dashboard")
 
       const wrapper = ({ children }: { children: ReactNode }) => (
         <AuthProvider authClient={mockAuthClient}>{children}</AuthProvider>
@@ -233,7 +223,11 @@ describe("useAuth", () => {
     })
 
     it("should accept complex valid paths", () => {
-      window.location.search = "?redirectTo=/dashboard/settings?tab=profile"
+      window.history.pushState(
+        {},
+        "",
+        "/?redirectTo=/dashboard/settings?tab=profile"
+      )
 
       const wrapper = ({ children }: { children: ReactNode }) => (
         <AuthProvider authClient={mockAuthClient}>{children}</AuthProvider>
@@ -245,7 +239,11 @@ describe("useAuth", () => {
     })
 
     it("should handle URL-encoded redirectTo", () => {
-      window.location.search = "?redirectTo=%2Fdashboard%2Fsettings"
+      window.history.pushState(
+        {},
+        "",
+        "/?redirectTo=%2Fdashboard%2Fsettings"
+      )
 
       const wrapper = ({ children }: { children: ReactNode }) => (
         <AuthProvider authClient={mockAuthClient}>{children}</AuthProvider>
@@ -257,7 +255,7 @@ describe("useAuth", () => {
     })
 
     it("should trim whitespace from redirectTo", () => {
-      window.location.search = "?redirectTo= /dashboard "
+      window.history.pushState({}, "", "/?redirectTo=%20/dashboard%20")
 
       const wrapper = ({ children }: { children: ReactNode }) => (
         <AuthProvider authClient={mockAuthClient}>{children}</AuthProvider>
