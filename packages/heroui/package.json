@@ -29,6 +29,9 @@
     "react-dom": "^19.2.0",
     "sonner": "^2.0.7"
   },
+  "dependencies": {
+    "@better-auth-ui/react": "workspace:*"
+  },
   "peerDependencies": {
     "@better-auth-ui/core": ">=0.0.0-alpha.0",
     "@better-auth-ui/react": ">=0.0.0-alpha.0",

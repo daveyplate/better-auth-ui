@@ -22,8 +22,10 @@
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.17"
   },
+  "dependencies": {
+    "@better-auth-ui/core": "workspace:*"
+  },
   "peerDependencies": {
-    "@better-auth-ui/core": "workspace:*",
     "@react-email/components": ">=1.0.0",
     "better-auth": ">=1.4.2",
     "clsx": ">=2.0.0",
