@@ -13,7 +13,8 @@ const defaultConfig = {
   baseURL: "",
   emailAndPassword: {
     enabled: true,
-    forgotPassword: true
+    forgotPassword: true,
+    rememberMe: false
   },
   redirectTo: "/",
   viewPaths,

@@ -12,6 +12,7 @@ export interface AuthConfig {
   basePaths: {
     auth: string
     account: string
+    organization: string
   }
   baseURL?: string
   emailAndPassword?: EmailAndPasswordConfig
