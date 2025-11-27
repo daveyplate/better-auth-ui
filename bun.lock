@@ -93,6 +93,8 @@
         "sonner": "^2.0.7",
       },
       "peerDependencies": {
+        "@better-auth-ui/core": ">=0.0.0-alpha.0",
+        "@better-auth-ui/react": ">=0.0.0-alpha.0",
         "@heroicons/react": ">=2.2.0",
         "@heroui/react": ">=3.0.0-beta.2",
         "@heroui/styles": ">=3.0.0-beta.2",
@@ -122,6 +124,7 @@
         "tailwindcss": "^4.1.17",
       },
       "peerDependencies": {
+        "@better-auth-ui/core": ">=0.0.0-alpha.0",
         "@react-email/components": ">=1.0.0",
         "better-auth": ">=1.4.2",
         "clsx": ">=2.0.0",
