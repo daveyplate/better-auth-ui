@@ -1,6 +1,7 @@
-import type { ComponentPropsWithRef } from "react"
+import { type ComponentPropsWithRef, useId } from "react"
 
 export function Atlassian(props: ComponentPropsWithRef<"svg">) {
+  const gradientId = useId()
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +12,7 @@ export function Atlassian(props: ComponentPropsWithRef<"svg">) {
     >
       <defs>
         <linearGradient
-          id="atlassian-gradient"
+          id={gradientId}
           x1="99.687%"
           x2="39.836%"
           y1="15.801%"
@@ -22,7 +23,7 @@ export function Atlassian(props: ComponentPropsWithRef<"svg">) {
         </linearGradient>
       </defs>
       <path
-        fill="url(#atlassian-gradient)"
+        fill={`url(#${gradientId})`}
         d="M75.793 117.95c-3.82-4.08-9.77-3.85-12.367 1.342L.791 244.565a7.488 7.488 0 0 0 6.697 10.838h87.228a7.22 7.22 0 0 0 6.699-4.14c18.808-38.89 7.413-98.018-25.622-133.314"
       ></path>
       <path

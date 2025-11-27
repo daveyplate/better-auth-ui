@@ -36,8 +36,6 @@ import {
   Zoom
 } from "../components/icons"
 
-const NullIcon = (_props: ComponentPropsWithRef<"svg">) => null
-
 export const providerIcons: Record<
   SocialProvider,
   ComponentType<ComponentPropsWithRef<"svg">>

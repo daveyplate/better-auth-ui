@@ -1,6 +1,7 @@
-import type { ComponentPropsWithRef } from "react"
+import { type ComponentPropsWithRef, useId } from "react"
 
 export function Zoom(props: ComponentPropsWithRef<"svg">) {
+  const gradientId = useId()
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +12,7 @@ export function Zoom(props: ComponentPropsWithRef<"svg">) {
     >
       <defs>
         <linearGradient
-          id="zoom-gradient"
+          id={gradientId}
           x1="23.666%"
           x2="76.334%"
           y1="95.612%"
@@ -29,7 +30,7 @@ export function Zoom(props: ComponentPropsWithRef<"svg">) {
         </linearGradient>
       </defs>
       <path
-        fill="url(#zoom-gradient)"
+        fill={`url(#${gradientId})`}
         d="M256 128c0 13.568-1.024 27.136-3.328 40.192c-6.912 43.264-41.216 77.568-84.48 84.48C155.136 254.976 141.568 256 128 256s-27.136-1.024-40.192-3.328c-43.264-6.912-77.568-41.216-84.48-84.48C1.024 155.136 0 141.568 0 128s1.024-27.136 3.328-40.192c6.912-43.264 41.216-77.568 84.48-84.48C100.864 1.024 114.432 0 128 0s27.136 1.024 40.192 3.328c43.264 6.912 77.568 41.216 84.48 84.48C254.976 100.864 256 114.432 256 128"
       ></path>
       <path
