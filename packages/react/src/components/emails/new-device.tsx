@@ -382,7 +382,7 @@ NewDeviceEmail.PreviewProps = {
     os: "macOS 26.2",
     location: "San Francisco, CA, United States",
     ipAddress: "127.0.0.1",
-    timestamp: "February 10, 2026 at 4:20 PM UTC"
+    timestamp: "February 10, 2025 at 4:20 PM UTC"
   },
   secureAccountLink: "https://better-auth-ui.com/auth/secure-account",
   appName: "Better Auth",

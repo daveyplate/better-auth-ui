@@ -323,7 +323,7 @@ PasswordChangedEmail.localization = passwordChangedEmailLocalization
 
 PasswordChangedEmail.PreviewProps = {
   email: "m@example.com",
-  timestamp: "February 10, 2026 at 4:20 PM UTC",
+  timestamp: "February 10, 2025 at 4:20 PM UTC",
   secureAccountURL: "https://better-auth-ui.com/account/security",
   appName: "Better Auth",
   supportEmail: "support@example.com",
