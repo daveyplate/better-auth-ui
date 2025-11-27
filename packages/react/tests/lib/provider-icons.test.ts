@@ -126,12 +126,12 @@ describe("providerIcons", () => {
       })
     })
 
-    it("should only contain known providers plus vercel", () => {
+    it("should only contain known providers from core", () => {
       const coreProviderKeys = Object.keys(providerNames)
       const iconKeys = Object.keys(providerIcons)
 
-      // providerIcons includes vercel which is not in core providerNames
-      const expectedKeys = [...coreProviderKeys, "vercel"].sort()
+      // providerIcons should match all providers from core providerNames
+      const expectedKeys = coreProviderKeys.sort()
       expect(iconKeys.sort()).toEqual(expectedKeys)
     })
   })
