@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react"
 import { createAuthClient } from "better-auth/react"
 import type { ReactNode } from "react"
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import { AuthProvider } from "../../src/components/auth-provider"
 import { useAuth } from "../../src/hooks/use-auth"
 
@@ -239,11 +239,7 @@ describe("useAuth", () => {
     })
 
     it("should handle URL-encoded redirectTo", () => {
-      window.history.pushState(
-        {},
-        "",
-        "/?redirectTo=%2Fdashboard%2Fsettings"
-      )
+      window.history.pushState({}, "", "/?redirectTo=%2Fdashboard%2Fsettings")
 
       const wrapper = ({ children }: { children: ReactNode }) => (
         <AuthProvider authClient={mockAuthClient}>{children}</AuthProvider>
