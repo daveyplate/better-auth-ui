@@ -11,8 +11,6 @@ export type AuthView = keyof typeof authViewPaths
 export const authViews = Object.keys(authViewPaths) as AuthView[]
 export const authPaths = Object.values(authViewPaths)
 
-export const viewPaths = {
-  auth: authViewPaths
-}
+export const viewPaths = { auth: authViewPaths }
 
 export type ViewPaths = typeof viewPaths

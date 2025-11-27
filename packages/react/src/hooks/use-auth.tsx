@@ -42,6 +42,7 @@ export function useAuth(config?: DeepPartial<AuthConfig>) {
     const redirectToParam = new URLSearchParams(window.location.search).get(
       "redirectTo"
     )
+
     if (redirectToParam) {
       const decodedRedirectTo = decodeURIComponent(redirectToParam).trim()
 
