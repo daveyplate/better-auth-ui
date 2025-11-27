@@ -36,7 +36,7 @@ export type AuthProps = DeepPartial<AuthConfig> & {
  * @param view - Optional explicit auth view to render (e.g., "signIn", "signUp").
  * @param path - Optional route path used to resolve an auth view via `viewPaths.auth`.
  * @returns The React element for the resolved authentication view.
- * @throws Error if neither `view` nor `path` resolve to a valid auth view; the thrown error lists the valid paths.
+ * @throws Error if neither `view` nor `path` resolve to a valid auth view; the thrown error lists the valid view keys (e.g., "signIn", "signUp").
  */
 export function Auth({ view, path, ...props }: AuthProps) {
   const { viewPaths } = useAuth()
