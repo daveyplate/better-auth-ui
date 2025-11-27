@@ -6,7 +6,7 @@ export function Linear(props: ComponentPropsWithRef<"svg">) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       role="img"
-      aria-label="LinearU"
+      aria-label="Linear"
       {...props}
     >
       <path
