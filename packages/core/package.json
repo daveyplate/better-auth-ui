@@ -13,7 +13,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "better-auth": "^1.4.2"
+    "better-auth": "^1.4.3"
   },
   "peerDependencies": {
     "better-auth": ">=1.4.2"
