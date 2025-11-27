@@ -1,5 +1,13 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the Kakao logo as an inline SVG.
+ *
+ * The SVG has viewBox "0 0 576 512", role "img", and aria-label "Kakao". All other props (including ref) are forwarded to the root `<svg>` element.
+ *
+ * @param props - Standard SVG attributes and ref forwarded to the root element
+ * @returns The SVG element representing the Kakao logo
+ */
 export function Kakao(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

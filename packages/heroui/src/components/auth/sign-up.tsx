@@ -43,6 +43,12 @@ export type SignUpProps = DeepPartial<AuthConfig> & {
   socialLayout?: SocialLayout
 }
 
+/**
+ * Render a sign-up form with name, email, and password fields, optional social provider buttons, and submission handling that navigates or requests email verification.
+ *
+ * @param props - Props to customize appearance (`className`), override localization, configure social layout, and pass through auth-related options.
+ * @returns The SignUp React element.
+ */
 export function SignUp({ className, ...props }: SignUpProps) {
   const localization = { ...SignUp.localization, ...props.localization }
 

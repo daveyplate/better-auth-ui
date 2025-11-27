@@ -1,5 +1,13 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders an accessible Facebook SVG icon.
+ *
+ * The component forwards received props onto the root `<svg>` element to allow external customization (for example `className`, `style`, `ref`, and event handlers). The SVG includes an `aria-label` of "Facebook".
+ *
+ * @param props - Props to spread onto the root SVG element (e.g., `className`, `style`, `ref`, event handlers)
+ * @returns The SVG element representing the Facebook logo
+ */
 export function Facebook(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

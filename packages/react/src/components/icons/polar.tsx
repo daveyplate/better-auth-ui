@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the "Polar" SVG icon.
+ *
+ * @param props - Props spread onto the root `<svg>` element (for example `className`, `style`, `ref`, and event handlers)
+ * @returns The SVG element representing the Polar icon
+ */
 export function Polar(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

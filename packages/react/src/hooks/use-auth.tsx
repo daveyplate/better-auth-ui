@@ -25,6 +25,15 @@ const defaultConfig = {
   Link: (props) => <a {...props} />
 } satisfies Omit<AuthConfig, "authClient">
 
+/**
+ * Build and return the effective AuthConfig by merging defaults, context, and optional overrides.
+ *
+ * Merges default configuration, any AuthContext-provided config, and the optional `config` argument (with latter values taking precedence). When the app is hydrated, a `redirectTo` query parameter is read and — if it decodes to a relative path that starts with `/`, does not start with `//`, and does not contain a scheme (`://`) — it overrides the resulting `redirectTo` value to prevent open-redirects.
+ *
+ * @param config - Partial configuration overrides applied on top of context and defaults
+ * @returns The final `AuthConfig` with a non-optional `authClient`
+ * @throws If the resulting config does not include an `authClient`
+ */
 export function useAuth(config?: DeepPartial<AuthConfig>) {
   const context = useContext(AuthContext)
   const hydrated = useHydrated()

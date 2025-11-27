@@ -1,5 +1,11 @@
 import { type ComponentPropsWithRef, useId } from "react"
 
+/**
+ * Renders a stylized "Zoom" SVG icon featuring a blue multi-stop gradient and a white interior highlight.
+ *
+ * @param props - Props are forwarded to the root `<svg>` element (e.g., className, style, width, height, aria-*).
+ * @returns The SVG element for the Zoom icon.
+ */
 export function Zoom(props: ComponentPropsWithRef<"svg">) {
   const gradientId = useId()
   return (

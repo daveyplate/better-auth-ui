@@ -8,6 +8,12 @@ import type { ReactNode } from "react"
 
 import { authClient } from "@/lib/auth-client"
 
+/**
+ * Wraps descendants with theme and authentication providers for the application.
+ *
+ * @param children - React nodes to render inside the providers
+ * @returns The provider tree (ThemeProvider > AuthProvider) that wraps `children`
+ */
 export function Providers({ children }: { children: ReactNode }) {
   const router = useRouter()
 

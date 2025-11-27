@@ -7,9 +7,10 @@ export const Route = createFileRoute("/dashboard")({
 })
 
 /**
- * Generates user initials from name or email
- * @param user - User object with optional name and email
- * @returns Initials string (max 2 characters, uppercase)
+ * Produce up to two uppercase initials for a user based on name or email.
+ *
+ * @param user - User record that may contain `name` or `email` used to derive initials
+ * @returns Up to two uppercase characters representing the user's initials; if `name` is absent returns the first character of `email` uppercased, or `"U"` if neither is available
  */
 function getUserInitials(user: {
   name?: string | null
@@ -26,6 +27,15 @@ function getUserInitials(user: {
   return user.email?.[0]?.toUpperCase() || "U"
 }
 
+/**
+ * Render the authenticated user's dashboard with avatar, a time-of-day greeting, and a sign-out action.
+ *
+ * Displays a centered loading spinner while authentication session is unavailable. Once authenticated,
+ * it derives the user's display name and initials, shows the user's image (or initials fallback),
+ * displays the user's email when present, and renders a "Sign Out" link.
+ *
+ * @returns The dashboard React element containing the avatar, greeting, optional email badge, and sign-out link.
+ */
 function Dashboard() {
   const { data: session } = useAuthenticate()
 

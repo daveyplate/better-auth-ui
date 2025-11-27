@@ -1,5 +1,12 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the TikTok logo as an inline SVG.
+ *
+ * The component forwards received props to the root `<svg>` element.
+ *
+ * @returns The SVG element representing the TikTok logo.
+ */
 export function TikTok(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

@@ -1,5 +1,13 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the GitHub logo as an inline SVG.
+ *
+ * The SVG sets role="img" and aria-label="GitHub" and uses a path filled with `currentColor` so it inherits text color.
+ *
+ * @param props - Props spread onto the root `<svg>` element (standard SVG attributes and event handlers).
+ * @returns The SVG element for the GitHub mark.
+ */
 export function GitHub(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

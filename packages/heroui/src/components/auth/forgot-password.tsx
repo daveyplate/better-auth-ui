@@ -32,6 +32,13 @@ export type ForgotPasswordProps = DeepPartial<AuthConfig> & {
   localization?: Partial<ForgotPasswordLocalization>
 }
 
+/**
+ * Renders a "Forgot Password" form with an email input and submit button.
+ *
+ * Supports overriding displayed text via `props.localization` and accepts an optional `className` to modify container styling.
+ *
+ * @returns The rendered Forgot Password form UI as a JSX element
+ */
 export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
   const localization = {
     ...ForgotPassword.localization,

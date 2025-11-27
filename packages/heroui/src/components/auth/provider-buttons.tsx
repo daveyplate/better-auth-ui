@@ -27,6 +27,14 @@ export type ProviderButtonsProps = DeepPartial<AuthConfig> & {
 
 export type SocialLayout = "auto" | "horizontal" | "vertical" | "grid"
 
+/**
+ * Render social provider sign-in buttons and handle sign-in initiation and pending state.
+ *
+ * @param isPending - When true, disables all provider buttons.
+ * @param setIsPending - Callback to update the pending state while a sign-in request is in progress.
+ * @param socialLayout - Preferred layout for the provider buttons; when set to `"auto"` the layout is chosen based on the number of available providers.
+ * @returns A JSX element containing the configured social provider buttons (icons and optional labels) with click handlers that start social sign-in.
+ */
 export function ProviderButtons({
   isPending,
   setIsPending,

@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the Slack logo as an accessible inline SVG.
+ *
+ * @param props - Props to spread onto the underlying `svg` element (e.g., `className`, `style`, `width`, `height`, event handlers).
+ * @returns The `svg` element containing the Slack logo paths
+ */
 export function Slack(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders an "X" icon as an SVG React component.
+ *
+ * @param props - Props to spread onto the underlying `svg` element (e.g., className, style, ref).
+ * @returns The SVG element representing the "X" icon with its path filled by `currentColor`.
+ */
 export function X(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

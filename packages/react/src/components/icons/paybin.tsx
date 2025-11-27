@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the Paybin icon as an inline SVG.
+ *
+ * @param props - Additional props spread onto the root `<svg>` element (e.g., className, style, aria attributes)
+ * @returns The SVG element for the Paybin icon
+ */
 export function Paybin(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

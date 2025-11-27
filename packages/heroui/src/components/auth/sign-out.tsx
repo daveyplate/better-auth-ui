@@ -3,6 +3,14 @@ import { Card, Spinner } from "@heroui/react"
 import { useEffect, useRef } from "react"
 import { toast } from "sonner"
 
+/**
+ * Signs the current user out when mounted and displays a loading card while the operation completes.
+ *
+ * Attempts to sign out once, shows an error toast if sign-out fails, refetches session state, and navigates to the sign-in route.
+ *
+ * @param className - Optional class names to apply to the outer Card container
+ * @returns A Card containing a centered Spinner shown while sign-out is in progress
+ */
 export function SignOut({ className }: { className?: string }) {
   const { authClient, basePaths, viewPaths, navigate } = useAuth()
   const { refetch } = authClient.useSession()

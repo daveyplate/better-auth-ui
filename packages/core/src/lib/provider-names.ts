@@ -35,6 +35,12 @@ export const providerNames = {
   zoom: "Zoom"
 } as Record<SocialProvider, string>
 
+/**
+ * Get the human-readable display name for an authentication provider.
+ *
+ * @param provider - The provider identifier (e.g., "github", "google").
+ * @returns The mapped display name for `provider` if available, otherwise `provider` with its first character capitalized.
+ */
 export function getProviderName(provider: string): string {
   return (
     providerNames[provider as keyof typeof providerNames] ||

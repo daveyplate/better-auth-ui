@@ -1,5 +1,14 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Render a Roblox SVG icon and forward incoming SVG props to the root element.
+ *
+ * The rendered SVG is labeled "Roblox" for accessibility and uses a single filled path
+ * with the Roblox visual mark.
+ *
+ * @param props - Props are spread onto the root `<svg>` element to allow customization (className, style, width, height, etc.).
+ * @returns An SVG element containing the Roblox icon
+ */
 export function Roblox(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

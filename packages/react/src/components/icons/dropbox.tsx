@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the Dropbox logo as an SVG element.
+ *
+ * @param props - Props to apply to the root `<svg>` element; all props are forwarded to the SVG.
+ * @returns An SVG element containing the Dropbox logo
+ */
 export function Dropbox(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg

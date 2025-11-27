@@ -1,5 +1,11 @@
 import type { ComponentPropsWithRef } from "react"
 
+/**
+ * Renders the Notion logo as an SVG element.
+ *
+ * @param props - Props forwarded to the root `svg` element; attributes such as `className`, `style`, and `aria-*` can be overridden.
+ * @returns The SVG element for the Notion logo.
+ */
 export function Notion(props: ComponentPropsWithRef<"svg">) {
   return (
     <svg
