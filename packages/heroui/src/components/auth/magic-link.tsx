@@ -74,7 +74,7 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
     form.reset()
 
     if (error) {
-      toast.error(error.message || error.statusText)
+      toast.error(error.message)
       setIsPending(false)
       return
     }

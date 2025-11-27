@@ -48,14 +48,14 @@ export function ResendVerificationButton({
           callbackURL
         })
 
+        toast.dismiss()
+        setIsResending(false)
+
         if (error) {
-          toast.error(error.message || error.statusText)
+          toast.error(error.message)
         } else {
           toast.success(localization.VERIFICATION_EMAIL_SENT)
         }
-
-        toast.dismiss()
-        setIsResending(false)
       }}
     >
       {isResending && <Spinner color="current" size="sm" />}

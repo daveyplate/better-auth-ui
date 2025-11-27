@@ -80,7 +80,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     })
 
     if (error) {
-      toast.error(error.message || error.statusText)
+      toast.error(error.message)
       setIsPending(false)
 
       return

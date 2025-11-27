@@ -83,7 +83,7 @@ export function SignUp({ className, ...props }: SignUpProps) {
     )
 
     if (error) {
-      toast.error(error.message || error.statusText)
+      toast.error(error.message)
       setPassword("")
       setIsPending(false)
       return

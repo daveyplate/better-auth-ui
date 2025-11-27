@@ -41,7 +41,7 @@ export function ProviderButtons({
     })
 
     if (error) {
-      toast.error(error.message || error.statusText)
+      toast.error(error.message)
       setIsPending(false)
       return
     }

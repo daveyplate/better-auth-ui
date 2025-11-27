@@ -20,7 +20,7 @@ export function SignOut({ className }: { className?: string }) {
       })
 
       if (error) {
-        toast.error(error.message || error.statusText)
+        toast.error(error.message)
       }
 
       await refetch()

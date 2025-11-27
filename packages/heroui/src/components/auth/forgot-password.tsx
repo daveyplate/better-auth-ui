@@ -54,7 +54,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
     })
 
     if (error) {
-      toast.error(error.message || error.statusText)
+      toast.error(error.message)
       setIsPending(false)
       e.currentTarget.reset()
       return

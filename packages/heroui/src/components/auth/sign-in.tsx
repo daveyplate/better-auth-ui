@@ -101,7 +101,7 @@ export function SignIn({ className, ...props }: SignInProps) {
           )
         })
       } else {
-        toast.error(error.message || error.statusText)
+        toast.error(error.message)
       }
 
       setPassword("")
