@@ -1,3 +1,4 @@
+import { providerNames } from "@better-auth-ui/core"
 import { describe, expect, it } from "vitest"
 import { providerIcons } from "../../src/lib/provider-icons"
 
@@ -115,45 +116,23 @@ describe("providerIcons", () => {
       })
     })
 
-    it("should match provider names from core package", () => {
-      const expectedKeys = [
-        "apple",
-        "atlassian",
-        "cognito",
-        "discord",
-        "dropbox",
-        "facebook",
-        "figma",
-        "github",
-        "gitlab",
-        "google",
-        "huggingface",
-        "kakao",
-        "kick",
-        "line",
-        "linear",
-        "linkedin",
-        "microsoft",
-        "naver",
-        "notion",
-        "paybin",
-        "paypal",
-        "polar",
-        "reddit",
-        "roblox",
-        "salesforce",
-        "slack",
-        "spotify",
-        "tiktok",
-        "twitch",
-        "twitter",
-        "vercel",
-        "vk",
-        "zoom"
-      ]
+    it("should have icons for all provider names from core package", () => {
+      const coreProviderKeys = Object.keys(providerNames)
+      const iconKeys = Object.keys(providerIcons)
 
-      const actualKeys = Object.keys(providerIcons).sort()
-      expect(actualKeys).toEqual(expectedKeys.sort())
+      // Every provider in core should have an icon
+      coreProviderKeys.forEach((provider) => {
+        expect(iconKeys).toContain(provider)
+      })
+    })
+
+    it("should only contain known providers plus vercel", () => {
+      const coreProviderKeys = Object.keys(providerNames)
+      const iconKeys = Object.keys(providerIcons)
+
+      // providerIcons includes vercel which is not in core providerNames
+      const expectedKeys = [...coreProviderKeys, "vercel"].sort()
+      expect(iconKeys.sort()).toEqual(expectedKeys)
     })
   })
 })

@@ -26,6 +26,9 @@ describe("@better-auth-ui/heroui integration", () => {
     expect(typeof module.ResetPassword).toBe("function")
     expect(typeof module.MagicLink).toBe("function")
     expect(typeof module.Auth).toBe("function")
+    expect(typeof module.ProviderButtons).toBe("function")
+    expect(typeof module.MagicLinkButton).toBe("function")
+    expect(typeof module.ResendVerificationButton).toBe("function")
   })
 })
 

@@ -34,8 +34,25 @@ jobs:
       - run: bun install
       - uses: nrwl/nx-set-shas@v4
 
-      # Install Playwright browsers for Vitest browser testing
-      - run: bunx playwright install --with-deps chromium
+      # Cache Playwright browsers for Vitest browser testing
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(bun pm ls @playwright/test 2>/dev/null | grep @playwright/test | head -1 | sed 's/.*@//' || echo 'latest')" >> $GITHUB_OUTPUT
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: bunx playwright install --with-deps chromium
+
+      - name: Install Playwright system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: bunx playwright install-deps chromium
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: bun nx-cloud record -- echo Hello World

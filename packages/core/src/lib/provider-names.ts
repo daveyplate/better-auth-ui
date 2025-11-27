@@ -31,6 +31,7 @@ export const providerNames = {
   tiktok: "TikTok",
   twitch: "Twitch",
   twitter: "X",
+  vercel: "Vercel",
   vk: "VK",
   zoom: "Zoom"
 } as Record<SocialProvider, string>

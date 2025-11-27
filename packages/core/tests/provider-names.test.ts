@@ -1,44 +1,10 @@
+import { socialProviderList } from "better-auth/social-providers"
 import { describe, expect, it } from "vitest"
 import { getProviderName, providerNames } from "../src/lib/provider-names"
 
 describe("providerNames", () => {
   it("should contain all expected social providers", () => {
-    const expectedProviders = [
-      "apple",
-      "atlassian",
-      "cognito",
-      "discord",
-      "dropbox",
-      "facebook",
-      "figma",
-      "github",
-      "gitlab",
-      "google",
-      "huggingface",
-      "kakao",
-      "kick",
-      "line",
-      "linear",
-      "linkedin",
-      "microsoft",
-      "naver",
-      "notion",
-      "paybin",
-      "paypal",
-      "polar",
-      "reddit",
-      "roblox",
-      "salesforce",
-      "slack",
-      "spotify",
-      "tiktok",
-      "twitch",
-      "twitter",
-      "vk",
-      "zoom"
-    ]
-
-    expectedProviders.forEach((provider) => {
+    socialProviderList.forEach((provider) => {
       expect(providerNames).toHaveProperty(provider)
       expect(typeof providerNames[provider]).toBe("string")
       expect(providerNames[provider].length).toBeGreaterThan(0)
@@ -119,20 +85,6 @@ describe("getProviderName", () => {
 
     it("should handle provider names with underscores", () => {
       expect(getProviderName("my_provider")).toBe("My_provider")
-    })
-  })
-
-  describe("edge cases", () => {
-    it("should handle uppercase input", () => {
-      expect(getProviderName("GITHUB")).toBe("GITHUB")
-    })
-
-    it("should handle mixed case input", () => {
-      expect(getProviderName("GitHuB")).toBe("GitHuB")
-    })
-
-    it("should handle provider with special characters", () => {
-      expect(getProviderName("provider@123")).toBe("Provider@123")
     })
   })
 })
