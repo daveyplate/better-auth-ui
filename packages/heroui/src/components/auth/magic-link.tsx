@@ -72,13 +72,13 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
       callbackURL
     })
 
-    form.reset()
-
     if (error) {
       toast.error(error.message)
       setIsPending(false)
       return
     }
+
+    form.reset()
 
     toast.success(localization.MAGIC_LINK_SENT)
     setIsPending(false)

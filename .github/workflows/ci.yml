@@ -47,4 +47,4 @@ jobs:
       - run: bun nx fix-ci
         if: always()
 
-      - run: bunx pkg-pr-new publish --compact --bun './packages/*'
+      - run: bunx pkg-pr-new publish --bun './packages/*'
