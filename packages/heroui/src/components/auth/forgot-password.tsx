@@ -62,6 +62,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
 
     toast.success(localization.PASSWORD_RESET_EMAIL_SENT)
     navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
+    setIsPending(false)
   }
 
   return (

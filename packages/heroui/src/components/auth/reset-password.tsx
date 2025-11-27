@@ -88,6 +88,8 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
 
     toast.success(localization.PASSWORD_RESET_SUCCESS)
     navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
+
+    setIsPending(false)
   }
 
   return (

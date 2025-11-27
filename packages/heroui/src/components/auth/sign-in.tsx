@@ -112,6 +112,7 @@ export function SignIn({ className, ...props }: SignInProps) {
 
     await refetch()
     navigate(redirectTo)
+    setIsPending(false)
   }
 
   return (

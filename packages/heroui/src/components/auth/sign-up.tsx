@@ -93,11 +93,13 @@ export function SignUp({ className, ...props }: SignUpProps) {
     if (emailAndPassword?.requireEmailVerification) {
       toast.success(localization.VERIFY_YOUR_EMAIL)
       navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
+      setIsPending(false)
       return
     }
 
     await refetch()
     navigate(redirectTo)
+    setIsPending(false)
   }
 
   return (
