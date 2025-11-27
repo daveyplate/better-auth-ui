@@ -7,6 +7,10 @@
     "dev": "tsc --watch",
     "email": "email dev --dir src/components/emails -p 9000"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "devDependencies": {

@@ -68,7 +68,7 @@
       "name": "@better-auth-ui/core",
       "version": "0.0.0-alpha.0",
       "dependencies": {
-        "better-auth": "^1.4.3",
+        "better-auth": "^1.4.2",
       },
       "peerDependencies": {
         "better-auth": ">=1.4.2",

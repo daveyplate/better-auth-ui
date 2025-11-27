@@ -7,6 +7,10 @@
     "dev": "bun styles && tsc --watch",
     "styles": "cpy src/styles.css dist/ --flat"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
