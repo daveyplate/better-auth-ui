@@ -38,9 +38,6 @@ export const AuthContext = createContext<AuthProviderConfig | undefined>(
   undefined
 )
 
-/**
- * Props for the AuthProvider component.
- */
 export type AuthProviderProps = PropsWithChildren<AuthProviderConfig>
 
 /**
