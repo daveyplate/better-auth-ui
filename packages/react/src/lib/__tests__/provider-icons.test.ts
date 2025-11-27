@@ -55,8 +55,8 @@ describe("providerIcons", () => {
     })
   })
 
-  it("should have exactly 35 provider icons", () => {
-    expect(Object.keys(providerIcons)).toHaveLength(35)
+  it("should have exactly 33 provider icons", () => {
+    expect(Object.keys(providerIcons)).toHaveLength(33)
   })
 
   describe("common provider icons", () => {

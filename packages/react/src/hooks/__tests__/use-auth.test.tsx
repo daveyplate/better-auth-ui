@@ -23,11 +23,14 @@ describe("useAuth", () => {
 
   beforeEach(() => {
     // Reset window location
-    delete (window as unknown as { location: Location }).location
-    window.location = {
-      search: "",
-      href: "http://localhost:3000"
-    } as unknown as Location
+    Object.defineProperty(window, "location", {
+      value: {
+        search: "",
+        href: "http://localhost:3000"
+      },
+      writable: true,
+      configurable: true
+    })
   })
 
   afterEach(() => {
