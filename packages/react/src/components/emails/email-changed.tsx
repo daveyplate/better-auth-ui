@@ -42,7 +42,7 @@ const emailChangedEmailLocalization = {
 
 export type EmailChangedEmailLocalization = typeof emailChangedEmailLocalization
 
-interface EmailChangedEmailProps {
+export interface EmailChangedEmailProps {
   oldEmail?: string
   newEmail?: string
   revertURL?: string

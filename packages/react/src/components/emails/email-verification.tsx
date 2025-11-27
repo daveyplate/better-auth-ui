@@ -41,7 +41,7 @@ const emailVerificationEmailLocalization = {
 export type EmailVerificationEmailLocalization =
   typeof emailVerificationEmailLocalization
 
-interface EmailVerificationEmailProps {
+export interface EmailVerificationEmailProps {
   url: string
   email?: string
   appName?: string
@@ -234,7 +234,7 @@ export const EmailVerificationEmail = ({
 
                   {appName && (
                     <>
-                      {" "}
+                      {expirationMinutes ? " " : ""}
                       {localization.EMAIL_SENT_BY.replace("{appName}", appName)}
                     </>
                   )}

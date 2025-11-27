@@ -41,7 +41,7 @@ const resetPasswordEmailLocalization = {
 export type ResetPasswordEmailLocalization =
   typeof resetPasswordEmailLocalization
 
-interface ResetPasswordEmailProps {
+export interface ResetPasswordEmailProps {
   url: string
   email?: string
   appName?: string
@@ -234,7 +234,7 @@ export const ResetPasswordEmail = ({
 
                   {appName && (
                     <>
-                      {" "}
+                      {expirationMinutes ? " " : ""}
                       {localization.EMAIL_SENT_BY.replace("{appName}", appName)}
                     </>
                   )}

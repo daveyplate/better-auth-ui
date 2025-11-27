@@ -42,7 +42,7 @@ const passwordChangedEmailLocalization = {
 export type PasswordChangedEmailLocalization =
   typeof passwordChangedEmailLocalization
 
-interface PasswordChangedEmailProps {
+export interface PasswordChangedEmailProps {
   email?: string
   timestamp?: string
   secureAccountURL?: string

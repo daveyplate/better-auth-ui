@@ -41,7 +41,7 @@ const magicLinkEmailLocalization = {
 
 export type MagicLinkEmailLocalization = typeof magicLinkEmailLocalization
 
-interface MagicLinkEmailProps {
+export interface MagicLinkEmailProps {
   url: string
   email?: string
   appName?: string
@@ -239,7 +239,7 @@ export const MagicLinkEmail = ({
                     : null}
                   {appName && (
                     <>
-                      {" "}
+                      {expirationMinutes ? " " : ""}
                       {localization.EMAIL_SENT_BY.replace("{appName}", appName)}
                     </>
                   )}

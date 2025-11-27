@@ -23,7 +23,7 @@ import {
   EmailStyles
 } from "./email-styles"
 
-interface DeviceInfo {
+export interface DeviceInfo {
   browser?: string
   os?: string
   location?: string
@@ -53,7 +53,7 @@ const newDeviceEmailLocalization = {
 
 export type NewDeviceEmailLocalization = typeof newDeviceEmailLocalization
 
-interface NewDeviceEmailProps {
+export interface NewDeviceEmailProps {
   userEmail?: string
   deviceInfo?: DeviceInfo
   secureAccountLink?: string

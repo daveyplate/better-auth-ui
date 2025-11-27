@@ -39,7 +39,7 @@ const otpEmailLocalization = {
 
 export type OtpEmailEmailLocalization = typeof otpEmailLocalization
 
-interface OtpEmailProps {
+export interface OtpEmailProps {
   verificationCode: string
   email?: string
   appName?: string
