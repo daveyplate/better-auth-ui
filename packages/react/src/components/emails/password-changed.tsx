@@ -39,24 +39,68 @@ const passwordChangedEmailLocalization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
+/**
+ * Localization strings for the PasswordChangedEmail component.
+ *
+ * Contains all text content used in the password changed notification email template.
+ */
 export type PasswordChangedEmailLocalization =
   typeof passwordChangedEmailLocalization
 
+/**
+ * Props for the PasswordChangedEmail component.
+ */
 export interface PasswordChangedEmailProps {
+  /** Email address of the user account */
   email?: string
+  /** Timestamp when the password was changed */
   timestamp?: string
+  /** URL to secure the account if unauthorized change occurred */
   secureAccountURL?: string
+  /** Name of the application sending the email */
   appName?: string
+  /** Support email address for security concerns */
   supportEmail?: string
+  /** Logo URL(s) - can be a single string or an object with light/dark variants */
   logoURL?: string | { light: string; dark: string }
+  /** Custom CSS class names for styling specific parts of the email */
   classNames?: EmailClassNames
+  /** Custom color scheme for light and dark modes */
   colors?: EmailColors
+  /** Whether to show the "Powered by better-auth" footer */
   poweredBy?: boolean
+  /** Whether to enable dark mode support */
   darkMode?: boolean
+  /** Additional React nodes to inject into the email head */
   head?: ReactNode
+  /** Partial localization overrides for customizing email text */
   localization?: Partial<PasswordChangedEmailLocalization>
 }
 
+/**
+ * Email template component that notifies users when their password has been changed.
+ *
+ * This email includes:
+ * - Password change confirmation message
+ * - Timestamp of the change
+ * - Secure account action button if unauthorized change occurred
+ * - Security warnings and support contact information
+ * - Customizable branding and styling
+ * - Support for light/dark mode themes
+ *
+ * @example
+ * ```tsx
+ * <PasswordChangedEmail
+ *   email="user@example.com"
+ *   timestamp="February 10, 2025 at 4:20 PM UTC"
+ *   secureAccountURL="https://example.com/account/security"
+ *   appName="My App"
+ *   supportEmail="support@example.com"
+ *   logoURL="https://example.com/logo.png"
+ *   darkMode={true}
+ * />
+ * ```
+ */
 export const PasswordChangedEmail = ({
   email,
   timestamp,

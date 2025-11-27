@@ -3,9 +3,9 @@ import { createFileRoute, Link } from "@tanstack/react-router"
 export const Route = createFileRoute("/")({ component: App })
 
 /**
- * Root UI component that renders a centered "Hello World" heading and a Sign In link.
+ * Root UI component that displays a centered "Hello World" heading and a Sign In link.
  *
- * @returns The component's JSX: a vertically centered column containing the heading and a link to "/auth/$path" with params `{ path: "sign-in" }`
+ * @returns The JSX element containing a vertically centered column with the heading and a sign-in link.
  */
 function App() {
   return (

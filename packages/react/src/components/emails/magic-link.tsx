@@ -39,22 +39,64 @@ const magicLinkEmailLocalization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
+/**
+ * Localization strings for the MagicLinkEmail component.
+ *
+ * Contains all text content used in the magic link authentication email template.
+ */
 export type MagicLinkEmailLocalization = typeof magicLinkEmailLocalization
 
+/**
+ * Props for the MagicLinkEmail component.
+ */
 export interface MagicLinkEmailProps {
+  /** Magic link URL for passwordless authentication */
   url: string
+  /** Email address of the user signing in */
   email?: string
+  /** Name of the application sending the email */
   appName?: string
+  /** Number of minutes until the magic link expires */
   expirationMinutes?: number
+  /** Logo URL(s) - can be a single string or an object with light/dark variants */
   logoURL?: string | { light: string; dark: string }
+  /** Custom CSS class names for styling specific parts of the email */
   classNames?: EmailClassNames
+  /** Custom color scheme for light and dark modes */
   colors?: EmailColors
+  /** Whether to show the "Powered by better-auth" footer */
   poweredBy?: boolean
+  /** Whether to enable dark mode support */
   darkMode?: boolean
+  /** Additional React nodes to inject into the email head */
   head?: ReactNode
+  /** Partial localization overrides for customizing email text */
   localization?: Partial<MagicLinkEmailLocalization>
 }
 
+/**
+ * Email template component that sends magic link authentication emails for passwordless sign-in.
+ *
+ * This email includes:
+ * - Sign-in button with magic link
+ * - Fallback URL for manual copy/paste
+ * - Expiration time information
+ * - Security notice for unauthorized requests
+ * - Customizable branding and styling
+ * - Support for light/dark mode themes
+ *
+ * @example
+ * ```tsx
+ * <MagicLinkEmail
+ *   url="https://example.com/auth/verify?token=abc123"
+ *   email="user@example.com"
+ *   appName="My App"
+ *   expirationMinutes={5}
+ *   logoURL="https://example.com/logo.png"
+ *   darkMode={true}
+ * />
+ * ```
+ */
 export const MagicLinkEmail = ({
   url,
   email,

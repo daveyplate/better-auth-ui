@@ -37,22 +37,63 @@ const otpEmailLocalization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
+/**
+ * Localization strings for the OtpEmail component.
+ *
+ * Contains all text content used in the OTP (One-Time Password) email template.
+ */
 export type OtpEmailEmailLocalization = typeof otpEmailLocalization
 
+/**
+ * Props for the OtpEmail component.
+ */
 export interface OtpEmailProps {
+  /** The one-time verification code to display */
   verificationCode: string
+  /** Email address being verified */
   email?: string
+  /** Name of the application sending the email */
   appName?: string
+  /** Number of minutes until the verification code expires */
   expirationMinutes?: number
+  /** Logo URL(s) - can be a single string or an object with light/dark variants */
   logoURL?: string | { light: string; dark: string }
+  /** Custom CSS class names for styling specific parts of the email */
   classNames?: EmailClassNames
+  /** Custom color scheme for light and dark modes */
   colors?: EmailColors
+  /** Whether to show the "Powered by better-auth" footer */
   poweredBy?: boolean
+  /** Whether to enable dark mode support */
   darkMode?: boolean
+  /** Additional React nodes to inject into the email head */
   head?: ReactNode
+  /** Partial localization overrides for customizing email text */
   localization?: Partial<OtpEmailEmailLocalization>
 }
 
+/**
+ * Email template component that sends one-time password (OTP) verification codes to users.
+ *
+ * This email includes:
+ * - Large, prominently displayed verification code
+ * - Expiration time information
+ * - Security notice for unauthorized requests
+ * - Customizable branding and styling
+ * - Support for light/dark mode themes
+ *
+ * @example
+ * ```tsx
+ * <OtpEmail
+ *   verificationCode="069420"
+ *   email="user@example.com"
+ *   appName="My App"
+ *   expirationMinutes={10}
+ *   logoURL="https://example.com/logo.png"
+ *   darkMode={true}
+ * />
+ * ```
+ */
 export const OtpEmail = ({
   verificationCode,
   email,
