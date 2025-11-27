@@ -4,8 +4,9 @@ import { useEffect, useRef } from "react"
 import { toast } from "sonner"
 
 export function SignOut({ className }: { className?: string }) {
-  const { authClient, navigate, basePaths, viewPaths } = useAuth()
+  const { authClient, basePaths, viewPaths, navigate } = useAuth()
   const { refetch } = authClient.useSession()
+
   const hasSignedOut = useRef(false)
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export function SignOut({ className }: { className?: string }) {
       })
 
       if (error) {
-        toast.error(error.message || error.status)
+        toast.error(error.message || error.statusText)
       }
 
       await refetch()
@@ -28,7 +29,7 @@ export function SignOut({ className }: { className?: string }) {
     }
 
     handleSignOut()
-  }, [authClient, navigate, refetch, basePaths.auth, viewPaths.auth.signIn])
+  }, [authClient, basePaths.auth, viewPaths.auth.signIn, navigate, refetch])
 
   return (
     <Card

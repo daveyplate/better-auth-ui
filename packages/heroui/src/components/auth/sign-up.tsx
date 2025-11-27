@@ -24,12 +24,12 @@ const localization = {
   ...ProviderButtons.localization,
   ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
   EMAIL: "Email",
-  ENTER_YOUR_EMAIL: "Enter your email",
+  EMAIL_PLACEHOLDER: "Enter your email",
   ENTER_YOUR_NAME: "Enter your name",
-  ENTER_YOUR_PASSWORD: "Enter your password",
   NAME: "Name",
   OR: "OR",
   PASSWORD: "Password",
+  PASSWORD_PLACEHOLDER: "Enter your password",
   SIGN_IN: "Sign In",
   SIGN_UP: "Sign Up",
   VERIFY_YOUR_EMAIL: "Please verify your email before signing in"
@@ -47,16 +47,18 @@ export function SignUp({ className, ...props }: SignUpProps) {
 
   const {
     authClient,
-    navigate,
-    Link,
-    socialProviders,
-    magicLink,
     basePaths,
     emailAndPassword,
+    magicLink,
     redirectTo,
-    viewPaths
+    socialProviders,
+    viewPaths,
+    navigate,
+    Link
   } = useAuth(props)
+
   const { refetch } = authClient.useSession()
+
   const [isPending, setIsPending] = useState(false)
   const [password, setPassword] = useState("")
 
@@ -67,6 +69,7 @@ export function SignUp({ className, ...props }: SignUpProps) {
     setIsPending(true)
 
     const formData = new FormData(e.currentTarget)
+
     const name = formData.get("name") as string
     const email = formData.get("email") as string
 
@@ -80,23 +83,20 @@ export function SignUp({ className, ...props }: SignUpProps) {
     )
 
     if (error) {
-      toast.error(error.message || error.status)
+      toast.error(error.message || error.statusText)
       setPassword("")
       setIsPending(false)
-
       return
     }
 
     if (emailAndPassword?.requireEmailVerification) {
       toast.success(localization.VERIFY_YOUR_EMAIL)
       navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
-      setIsPending(false)
       return
     }
 
     await refetch()
     navigate(redirectTo)
-    setIsPending(false)
   }
 
   return (
@@ -108,26 +108,28 @@ export function SignUp({ className, ...props }: SignUpProps) {
       <Card.Content>
         <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
           <div className="flex flex-col gap-4">
-            <TextField name="name" type="text" autoComplete="name">
+            <TextField
+              name="name"
+              type="text"
+              autoComplete="name"
+              isDisabled={isPending}
+            >
               <Label>{localization.NAME}</Label>
 
-              <Input
-                placeholder={localization.ENTER_YOUR_NAME}
-                required
-                disabled={isPending}
-              />
+              <Input placeholder={localization.ENTER_YOUR_NAME} required />
 
               <FieldError />
             </TextField>
 
-            <TextField name="email" type="email" autoComplete="email">
+            <TextField
+              name="email"
+              type="email"
+              autoComplete="email"
+              isDisabled={isPending}
+            >
               <Label>{localization.EMAIL}</Label>
 
-              <Input
-                placeholder={localization.ENTER_YOUR_EMAIL}
-                required
-                disabled={isPending}
-              />
+              <Input placeholder={localization.EMAIL_PLACEHOLDER} required />
 
               <FieldError />
             </TextField>
@@ -137,16 +139,13 @@ export function SignUp({ className, ...props }: SignUpProps) {
               name="password"
               type="password"
               autoComplete="new-password"
+              isDisabled={isPending}
+              value={password}
+              onChange={setPassword}
             >
               <Label>{localization.PASSWORD}</Label>
 
-              <Input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder={localization.ENTER_YOUR_PASSWORD}
-                required
-                disabled={isPending}
-              />
+              <Input placeholder={localization.PASSWORD_PLACEHOLDER} required />
 
               <FieldError />
             </TextField>
@@ -155,6 +154,7 @@ export function SignUp({ className, ...props }: SignUpProps) {
           <div className="flex flex-col gap-4">
             <Button type="submit" className="w-full" isPending={isPending}>
               {isPending && <Spinner color="current" size="sm" />}
+
               {localization.SIGN_UP}
             </Button>
 
@@ -190,8 +190,9 @@ export function SignUp({ className, ...props }: SignUpProps) {
             </>
           )}
 
-          <p className="text-sm justify-center flex gap-2 items-center mb-1">
+          <p className="text-sm justify-center flex gap-2 items-center">
             {localization.ALREADY_HAVE_AN_ACCOUNT}
+
             <Link
               href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
               className="link link--underline-always text-accent"

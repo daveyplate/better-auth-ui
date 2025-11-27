@@ -1,6 +1,6 @@
 "use client"
 
-import { viewPaths } from "@better-auth-ui/core"
+import { basePaths, viewPaths } from "@better-auth-ui/core"
 import type { DeepPartial } from "better-auth/react"
 import deepmerge from "deepmerge"
 import { useContext } from "react"
@@ -9,17 +9,14 @@ import { AuthContext } from "../components/auth-provider"
 import { useHydrated } from "./use-hydrated"
 
 const defaultConfig = {
-  basePaths: {
-    auth: "/auth",
-    account: "/account"
-  },
+  basePaths,
   baseURL: "",
   emailAndPassword: {
     enabled: true,
     forgotPassword: true
   },
   redirectTo: "/",
-  viewPaths: viewPaths,
+  viewPaths,
   navigate: (path: string) => {
     window.location.href = path
   },

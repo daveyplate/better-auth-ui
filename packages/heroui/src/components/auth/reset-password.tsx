@@ -16,12 +16,12 @@ import { type FormEvent, useCallback, useEffect, useState } from "react"
 import { toast } from "sonner"
 
 const localization = {
-  ENTER_NEW_PASSWORD: "Enter your new password",
   INVALID_RESET_PASSWORD_TOKEN: "Invalid reset password token",
+  NEW_PASSWORD_PLACEHOLDER: "Enter your new password",
   PASSWORD: "Password",
-  RESET_PASSWORD: "Reset Password",
   PASSWORD_RESET_SUCCESS: "Password reset successfully",
   REMEMBER_YOUR_PASSWORD: "Remember your password?",
+  RESET_PASSWORD: "Reset Password",
   SIGN_IN: "Sign In"
 }
 
@@ -38,7 +38,8 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     ...props.localization
   }
 
-  const { authClient, navigate, Link, basePaths, viewPaths } = useAuth(props)
+  const { authClient, basePaths, viewPaths, navigate, Link } = useAuth(props)
+
   const [isPending, setIsPending] = useState(false)
 
   const validateToken = useCallback(() => {
@@ -53,10 +54,10 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
 
     return token
   }, [
-    navigate,
-    localization.INVALID_RESET_PASSWORD_TOKEN,
     basePaths.auth,
-    viewPaths.auth.signIn
+    localization.INVALID_RESET_PASSWORD_TOKEN,
+    viewPaths.auth.signIn,
+    navigate
   ])
 
   useEffect(() => {
@@ -79,7 +80,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     })
 
     if (error) {
-      toast.error(error.message || error.status)
+      toast.error(error.message || error.statusText)
       setIsPending(false)
 
       return
@@ -97,34 +98,30 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
 
       <Card.Content>
         <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
-          <div className="flex flex-col gap-4">
-            <TextField
-              minLength={8}
-              name="password"
-              type="password"
-              autoComplete="new-password"
-            >
-              <Label>{localization.PASSWORD}</Label>
+          <TextField
+            minLength={8}
+            name="password"
+            type="password"
+            autoComplete="new-password"
+            isDisabled={isPending}
+          >
+            <Label>{localization.PASSWORD}</Label>
 
-              <Input
-                placeholder={localization.ENTER_NEW_PASSWORD}
-                required
-                disabled={isPending}
-              />
+            <Input
+              placeholder={localization.NEW_PASSWORD_PLACEHOLDER}
+              required
+            />
 
-              <FieldError />
-            </TextField>
-          </div>
+            <FieldError />
+          </TextField>
 
-          <div className="flex flex-col gap-4">
-            <Button type="submit" className="w-full" isPending={isPending}>
-              {isPending && <Spinner color="current" size="sm" />}
+          <Button type="submit" className="w-full" isPending={isPending}>
+            {isPending && <Spinner color="current" size="sm" />}
 
-              {localization.RESET_PASSWORD}
-            </Button>
-          </div>
+            {localization.RESET_PASSWORD}
+          </Button>
 
-          <p className="text-sm justify-center flex gap-2 items-center mb-1">
+          <p className="text-sm justify-center flex gap-2 items-center">
             {localization.REMEMBER_YOUR_PASSWORD}
 
             <Link

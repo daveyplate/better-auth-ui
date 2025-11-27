@@ -14,8 +14,8 @@ export type ProviderButtonsLocalization = typeof localization
 
 export type ProviderButtonsProps = DeepPartial<AuthConfig> & {
   isPending: boolean
-  setIsPending: (pending: boolean) => void
   localization?: Partial<ProviderButtonsLocalization>
+  setIsPending: (pending: boolean) => void
 }
 
 export function ProviderButtons({
@@ -28,7 +28,7 @@ export function ProviderButtons({
     ...props.localization
   }
 
-  const { authClient, socialProviders, baseURL, redirectTo } = useAuth(props)
+  const { authClient, baseURL, redirectTo, socialProviders } = useAuth(props)
 
   const handleClick = async (provider: string) => {
     setIsPending(true)
@@ -41,31 +41,29 @@ export function ProviderButtons({
     })
 
     if (error) {
-      toast.error(error.message || error.status)
+      toast.error(error.message || error.statusText)
       setIsPending(false)
       return
     }
   }
 
-  if (!socialProviders || socialProviders.length === 0) {
-    return null
-  }
-
   return (
     <div className="flex flex-col gap-4">
-      {socialProviders.map((provider) => {
-        const Icon = providerIcons[provider]
+      {socialProviders?.map((provider) => {
+        const ProviderIcon = providerIcons[provider]
+
         return (
           <Button
             key={provider}
-            type="button"
-            variant="tertiary"
             className="w-full"
+            variant="tertiary"
+            type="button"
             isDisabled={isPending}
             onClick={() => handleClick(provider)}
           >
-            {Icon && <Icon />}
-            {localization.CONTINUE_WITH_PROVIDER?.replace(
+            <ProviderIcon />
+
+            {localization.CONTINUE_WITH_PROVIDER.replace(
               "{provider}",
               getProviderName(provider)
             )}

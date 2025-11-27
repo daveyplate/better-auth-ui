@@ -16,6 +16,7 @@ import {
 import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
+
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons } from "./provider-buttons"
 import { ResendVerificationButton } from "./resend-verification-button"
@@ -25,12 +26,12 @@ const localization = {
   ...ProviderButtons.localization,
   ...ResendVerificationButton.localization,
   EMAIL: "Email",
-  ENTER_YOUR_EMAIL: "Enter your email",
-  ENTER_YOUR_PASSWORD: "Enter your password",
+  EMAIL_PLACEHOLDER: "Enter your email",
   FORGOT_PASSWORD: "Forgot password?",
+  PASSWORD: "Password",
+  PASSWORD_PLACEHOLDER: "Enter your password",
   NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
   OR: "OR",
-  PASSWORD: "Password",
   REMEMBER_ME: "Remember me",
   SIGN_IN: "Sign In",
   SIGN_UP: "Sign Up"
@@ -47,20 +48,22 @@ export function SignIn({ className, ...props }: SignInProps) {
   const localization = { ...SignIn.localization, ...props.localization }
 
   const {
-    emailAndPassword,
     authClient,
-    navigate,
-    Link,
-    socialProviders,
-    magicLink,
     basePaths,
     baseURL,
+    emailAndPassword,
+    magicLink,
     redirectTo,
-    viewPaths
+    socialProviders,
+    viewPaths,
+    navigate,
+    Link
   } = useAuth(props)
+
   const { refetch } = authClient.useSession()
-  const [isPending, setIsPending] = useState(false)
+
   const [password, setPassword] = useState("")
+  const [isPending, setIsPending] = useState(false)
 
   const showSeparator =
     emailAndPassword?.enabled && socialProviders && socialProviders.length > 0
@@ -70,7 +73,9 @@ export function SignIn({ className, ...props }: SignInProps) {
     setIsPending(true)
 
     const formData = new FormData(e.currentTarget)
+
     const email = formData.get("email") as string
+    const password = formData.get("password") as string
     const rememberMe = formData.get("rememberMe") === "on"
 
     const { error } = await authClient.signIn.email(
@@ -84,30 +89,28 @@ export function SignIn({ className, ...props }: SignInProps) {
 
     if (error) {
       if (error.code === "EMAIL_NOT_VERIFIED") {
-        toast.error(error.message || error.status, {
+        toast.error(error.message, {
           action: (
             <ResendVerificationButton
-              email={email}
               authClient={authClient}
-              redirectTo={redirectTo}
               baseURL={baseURL}
+              email={email}
               localization={localization}
+              redirectTo={redirectTo}
             />
           )
         })
       } else {
-        toast.error(error.message || error.status)
+        toast.error(error.message || error.statusText)
       }
 
       setPassword("")
       setIsPending(false)
-
       return
     }
 
     await refetch()
     navigate(redirectTo)
-    setIsPending(false)
   }
 
   return (
@@ -121,13 +124,17 @@ export function SignIn({ className, ...props }: SignInProps) {
           {emailAndPassword?.enabled && (
             <>
               <div className="flex flex-col gap-4">
-                <TextField name="email" type="email" autoComplete="email">
+                <TextField
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  isDisabled={isPending}
+                >
                   <Label>{localization.EMAIL}</Label>
 
                   <Input
-                    placeholder={localization.ENTER_YOUR_EMAIL}
+                    placeholder={localization.EMAIL_PLACEHOLDER}
                     required
-                    disabled={isPending}
                   />
 
                   <FieldError />
@@ -138,6 +145,9 @@ export function SignIn({ className, ...props }: SignInProps) {
                   name="password"
                   type="password"
                   autoComplete="current-password"
+                  isDisabled={isPending}
+                  value={password}
+                  onChange={setPassword}
                 >
                   <div className="flex justify-between">
                     <Label>{localization.PASSWORD}</Label>
@@ -152,12 +162,10 @@ export function SignIn({ className, ...props }: SignInProps) {
                         </Link>
                       )}
                   </div>
+
                   <Input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder={localization.ENTER_YOUR_PASSWORD}
+                    placeholder={localization.PASSWORD_PLACEHOLDER}
                     required
-                    disabled={isPending}
                   />
 
                   <FieldError />
@@ -196,6 +204,7 @@ export function SignIn({ className, ...props }: SignInProps) {
               <div className="flex flex-col gap-4">
                 <Button type="submit" className="w-full" isPending={isPending}>
                   {isPending && <Spinner color="current" size="sm" />}
+
                   {localization.SIGN_IN}
                 </Button>
 
@@ -232,8 +241,9 @@ export function SignIn({ className, ...props }: SignInProps) {
           )}
 
           {emailAndPassword?.enabled && (
-            <p className="text-sm justify-center flex gap-2 items-center mb-1">
+            <p className="text-sm justify-center flex gap-2 items-center">
               {localization.NEED_TO_CREATE_AN_ACCOUNT}
+
               <Link
                 href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
                 className="link link--underline-always text-accent"

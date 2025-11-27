@@ -15,6 +15,7 @@ import {
 import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
+
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons } from "./provider-buttons"
 
@@ -22,7 +23,7 @@ const localization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
   EMAIL: "Email",
-  ENTER_YOUR_EMAIL: "Enter your email",
+  EMAIL_PLACEHOLDER: "Enter your email",
   MAGIC_LINK_SENT: "Magic link sent to your email",
   NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
   OR: "OR",
@@ -43,25 +44,26 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
 
   const {
     authClient,
-    Link,
-    socialProviders,
-    magicLink,
     basePaths,
     baseURL,
+    magicLink,
+    socialProviders,
     redirectTo,
-    viewPaths
+    viewPaths,
+    Link
   } = useAuth(props)
-  const [isPending, setIsPending] = useState(false)
 
+  const [isPending, setIsPending] = useState(false)
   const showSeparator = socialProviders && socialProviders.length > 0
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsPending(true)
 
-    const formData = new FormData(e.currentTarget)
-    const email = formData.get("email") as string
+    const form = e.currentTarget
+    const formData = new FormData(form)
 
+    const email = formData.get("email") as string
     const callbackURL = `${baseURL}${redirectTo}`
 
     const { error } = await authClient.signIn.magicLink({
@@ -69,10 +71,11 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
       callbackURL
     })
 
-    if (error) {
-      toast.error(error.message || error.status)
-      setIsPending(false)
+    form.reset()
 
+    if (error) {
+      toast.error(error.message || error.statusText)
+      setIsPending(false)
       return
     }
 
@@ -81,33 +84,30 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
   }
 
   return (
-    <Card
-      key="auth-card"
-      className={cn("w-full max-w-sm md:p-6 gap-6", className)}
-    >
+    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)}>
       <Card.Header className="text-xl font-medium">
         {localization.SIGN_IN}
       </Card.Header>
 
       <Card.Content>
         <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
-          <div className="flex flex-col gap-4">
-            <TextField name="email" type="email" autoComplete="email">
-              <Label>{localization.EMAIL}</Label>
+          <TextField
+            name="email"
+            type="email"
+            autoComplete="email"
+            isDisabled={isPending}
+          >
+            <Label>{localization.EMAIL}</Label>
 
-              <Input
-                placeholder={localization.ENTER_YOUR_EMAIL}
-                required
-                disabled={isPending}
-              />
+            <Input placeholder={localization.EMAIL_PLACEHOLDER} required />
 
-              <FieldError />
-            </TextField>
-          </div>
+            <FieldError />
+          </TextField>
 
           <div className="flex flex-col gap-4">
             <Button type="submit" className="w-full" isPending={isPending}>
               {isPending && <Spinner color="current" size="sm" />}
+
               {localization.SEND_MAGIC_LINK}
             </Button>
 
@@ -143,8 +143,9 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
             </>
           )}
 
-          <p className="text-sm justify-center flex gap-2 items-center mb-1">
+          <p className="text-sm justify-center flex gap-2 items-center">
             {localization.NEED_TO_CREATE_AN_ACCOUNT}
+
             <Link
               href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
               className="link link--underline-always text-accent"

@@ -12,14 +12,14 @@ const localization = {
 export type MagicLinkButtonLocalization = typeof localization
 
 export type MagicLinkButtonProps = {
-  view?: AuthView
   isPending: boolean
   localization?: Partial<MagicLinkButtonLocalization>
+  view?: AuthView
 }
 
 export function MagicLinkButton({
-  view,
   isPending,
+  view,
   ...props
 }: MagicLinkButtonProps) {
   const localization = {
@@ -27,13 +27,9 @@ export function MagicLinkButton({
     ...props.localization
   }
 
-  const { Link, viewPaths, basePaths } = useAuth()
+  const { basePaths, viewPaths, Link } = useAuth()
 
   const isMagicLinkView = view === "magicLink"
-  const Icon = isMagicLinkView ? LockClosedIcon : EnvelopeIcon
-  const text = isMagicLinkView
-    ? localization.CONTINUE_WITH_PASSWORD
-    : localization.CONTINUE_WITH_MAGIC_LINK
 
   return (
     <Link
@@ -43,8 +39,11 @@ export function MagicLinkButton({
         isPending && "status-disabled pointer-events-none"
       )}
     >
-      <Icon />
-      {text}
+      {isMagicLinkView ? <LockClosedIcon /> : <EnvelopeIcon />}
+
+      {isMagicLinkView
+        ? localization.CONTINUE_WITH_PASSWORD
+        : localization.CONTINUE_WITH_MAGIC_LINK}
     </Link>
   )
 }

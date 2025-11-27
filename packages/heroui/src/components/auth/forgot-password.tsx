@@ -17,7 +17,7 @@ import { toast } from "sonner"
 
 const localization = {
   EMAIL: "Email",
-  ENTER_YOUR_EMAIL: "Enter your email",
+  EMAIL_PLACEHOLDER: "Enter your email",
   FORGOT_PASSWORD: "Forgot Password",
   PASSWORD_RESET_EMAIL_SENT: "Password reset email sent",
   REMEMBER_YOUR_PASSWORD: "Remember your password?",
@@ -38,7 +38,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
     ...props.localization
   }
 
-  const { authClient, navigate, Link, basePaths, viewPaths } = useAuth(props)
+  const { authClient, basePaths, viewPaths, navigate, Link } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -54,9 +54,9 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
     })
 
     if (error) {
-      toast.error(error.message || error.status)
+      toast.error(error.message || error.statusText)
       setIsPending(false)
-
+      e.currentTarget.reset()
       return
     }
 
@@ -72,29 +72,28 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
 
       <Card.Content>
         <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
-          <div className="flex flex-col gap-4">
-            <TextField name="email" type="email" autoComplete="email">
-              <Label>{localization.EMAIL}</Label>
+          <TextField
+            name="email"
+            type="email"
+            autoComplete="email"
+            isDisabled={isPending}
+          >
+            <Label>{localization.EMAIL}</Label>
 
-              <Input
-                placeholder={localization.ENTER_YOUR_EMAIL}
-                required
-                disabled={isPending}
-              />
+            <Input placeholder={localization.EMAIL_PLACEHOLDER} required />
 
-              <FieldError />
-            </TextField>
-          </div>
+            <FieldError />
+          </TextField>
 
-          <div className="flex flex-col gap-4">
-            <Button type="submit" className="w-full" isPending={isPending}>
-              {isPending && <Spinner color="current" size="sm" />}
-              {localization.SEND_RESET_LINK}
-            </Button>
-          </div>
+          <Button type="submit" className="w-full" isPending={isPending}>
+            {isPending && <Spinner color="current" size="sm" />}
 
-          <p className="text-sm justify-center flex gap-2 items-center mb-1">
+            {localization.SEND_RESET_LINK}
+          </Button>
+
+          <p className="text-sm justify-center flex gap-2 items-center">
             {localization.REMEMBER_YOUR_PASSWORD}
+
             <Link
               href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
               className="link link--underline-always text-accent"

@@ -13,18 +13,18 @@ const localization = {
 export type ResendVerificationButtonLocalization = typeof localization
 
 export type ResendVerificationButtonProps = {
-  email: string
   authClient: AuthClient
-  redirectTo: string
   baseURL?: string
+  email: string
   localization?: Partial<ResendVerificationButtonLocalization>
+  redirectTo: string
 }
 
 export function ResendVerificationButton({
-  email,
   authClient,
-  redirectTo,
   baseURL,
+  email,
+  redirectTo,
   ...props
 }: ResendVerificationButtonProps) {
   const localization = {
@@ -48,14 +48,13 @@ export function ResendVerificationButton({
           callbackURL
         })
 
-        toast.dismiss()
-
         if (error) {
-          toast.error(error.message || error.status)
+          toast.error(error.message || error.statusText)
         } else {
           toast.success(localization.VERIFICATION_EMAIL_SENT)
         }
 
+        toast.dismiss()
         setIsResending(false)
       }}
     >

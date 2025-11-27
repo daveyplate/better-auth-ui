@@ -10,7 +10,7 @@ import { useAuth } from "./use-auth"
 export function useAuthenticate<TAuthClient extends AnyAuthClient>(
   config?: DeepPartial<AuthConfig & { authClient?: TAuthClient }>
 ) {
-  const { authClient, basePaths, replace, viewPaths } = useAuth(config)
+  const { authClient, basePaths, viewPaths, replace } = useAuth(config)
   const { data, isPending, ...rest } = (authClient as TAuthClient).useSession()
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export function useAuthenticate<TAuthClient extends AnyAuthClient>(
     const signInPath = `${basePaths.auth}/${viewPaths.auth.signIn}?redirectTo=${redirectTo}`
 
     replace(signInPath)
-  }, [basePaths.auth, data, isPending, replace, viewPaths.auth.signIn])
+  }, [basePaths.auth, data, isPending, viewPaths.auth.signIn, replace])
 
   return { data, isPending, ...rest }
 }

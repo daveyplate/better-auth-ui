@@ -3,6 +3,7 @@
 import type { AuthView } from "@better-auth-ui/core"
 import { type AuthConfig, useAuth } from "@better-auth-ui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
+
 import { ForgotPassword } from "./forgot-password"
 import { MagicLink } from "./magic-link"
 import { ResetPassword } from "./reset-password"
@@ -21,10 +22,10 @@ const localization = {
 export type AuthLocalization = typeof localization
 
 export type AuthProps = DeepPartial<AuthConfig> & {
-  view?: AuthView
-  path?: string
   className?: string
   localization?: Partial<AuthLocalization>
+  path?: string
+  view?: AuthView
 }
 
 export function Auth({ view, path, ...props }: AuthProps) {
