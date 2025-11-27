@@ -29,9 +29,9 @@ export type AuthProviderProps = PropsWithChildren<AuthProviderConfig>
 /**
  * Provides authentication configuration to descendant components via AuthContext.
  *
- * @param children - Elements that will be rendered inside the provider.
- * @param config - Partial authentication configuration (DeepPartial<AuthConfig>) with a required `authClient`; this value is supplied to `AuthContext`.
- * @returns The provider element that supplies the given config to its descendants via `AuthContext`.
+ * @param children - Elements rendered inside the provider.
+ * @param config - Authentication provider configuration; must include an `authClient`.
+ * @returns The AuthContext.Provider element that supplies the given config to its descendants.
  */
 export function AuthProvider({ children, ...config }: AuthProviderProps) {
   return <AuthContext.Provider value={config}>{children}</AuthContext.Provider>

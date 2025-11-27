@@ -28,13 +28,11 @@ function getUserInitials(user: {
 }
 
 /**
- * Render the authenticated user's dashboard with avatar, a time-of-day greeting, and a sign-out action.
+ * Render the authenticated user's dashboard with avatar, a time-of-day greeting, optional email badge, and a sign-out link.
  *
- * Displays a centered loading spinner while authentication session is unavailable. Once authenticated,
- * it derives the user's display name and initials, shows the user's image (or initials fallback),
- * displays the user's email when present, and renders a "Sign Out" link.
+ * Shows a centered loading spinner while the authentication session is unavailable.
  *
- * @returns The dashboard React element containing the avatar, greeting, optional email badge, and sign-out link.
+ * @returns The dashboard React element containing the avatar (image or initials fallback), greeting, optional email badge, and a sign-out link
  */
 function Dashboard() {
   const { data: session } = useAuthenticate()

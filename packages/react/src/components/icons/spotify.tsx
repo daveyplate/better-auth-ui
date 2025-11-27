@@ -1,10 +1,10 @@
 import type { ComponentPropsWithRef } from "react"
 
 /**
- * Render a scalable SVG element of the Spotify logo.
+ * Renders a scalable SVG of the Spotify logo.
  *
- * @param props - Props forwarded to the root `<svg>` element (e.g., `className`, `style`, `width`, `height`, ARIA attributes)
- * @returns The SVG element representing the Spotify logo
+ * @param props - Props forwarded to the root `<svg>` element.
+ * @returns The root `<svg>` element for the Spotify logo.
  */
 export function Spotify(props: ComponentPropsWithRef<"svg">) {
   return (
