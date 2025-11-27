@@ -5,7 +5,10 @@
   "description": "Plug & play UI components for Better Auth",
   "scripts": {
     "dev": "nx run-many -t dev",
-    "build": "nx run-many -t build"
+    "build": "nx run-many -t build",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "workspaces": [
     "packages/*",
@@ -14,7 +17,15 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.7",
     "@nx/js": "22.1.2",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@vitest/coverage-v8": "^3.1.4",
+    "@vitest/ui": "^3.1.4",
+    "jsdom": "^26.0.0",
     "nx": "22.1.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7",
+    "vitest": "^3.1.4"
   }
 }

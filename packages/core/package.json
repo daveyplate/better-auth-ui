@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "files": [
     "src",
