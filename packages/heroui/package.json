@@ -34,6 +34,8 @@
     "@better-auth-ui/react": "workspace:*"
   },
   "peerDependencies": {
+    "@better-auth-ui/core": ">=0.0.0-alpha.0",
+    "@better-auth-ui/react": ">=0.0.0-alpha.0",
     "@heroicons/react": ">=2.2.0",
     "@heroui/react": ">=3.0.0-beta.2",
     "@heroui/styles": ">=3.0.0-beta.2",

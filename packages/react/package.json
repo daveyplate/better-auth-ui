@@ -26,6 +26,7 @@
     "@better-auth-ui/core": "workspace:*"
   },
   "peerDependencies": {
+    "@better-auth-ui/core": ">=0.0.0-alpha.0",
     "@react-email/components": ">=1.0.0",
     "better-auth": ">=1.4.2",
     "clsx": ">=2.0.0",
