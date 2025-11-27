@@ -36,6 +36,16 @@ import {
   Zoom
 } from "../components/icons"
 
+/**
+ * Mapping of social authentication provider names to their corresponding icon components.
+ *
+ * Provides React SVG icon components for all supported social authentication providers.
+ * Each icon is a React component that accepts standard SVG props and can be customized
+ * with className, size, color, etc.
+ *
+ * Supported providers include: Apple, Google, GitHub, Microsoft, Discord, Facebook,
+ * Twitter/X, and many others.
+ */
 export const providerIcons: Record<
   SocialProvider,
   ComponentType<ComponentPropsWithRef<"svg">>

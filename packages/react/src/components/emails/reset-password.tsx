@@ -38,23 +38,64 @@ const resetPasswordEmailLocalization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
+/**
+ * Localization strings for the ResetPasswordEmail component.
+ *
+ * Contains all text content used in the password reset email template.
+ */
 export type ResetPasswordEmailLocalization =
   typeof resetPasswordEmailLocalization
 
+/**
+ * Props for the ResetPasswordEmail component.
+ */
 export interface ResetPasswordEmailProps {
+  /** Password reset URL that users must click to reset their password */
   url: string
+  /** Email address of the user requesting password reset */
   email?: string
+  /** Name of the application sending the email */
   appName?: string
+  /** Number of minutes until the reset link expires */
   expirationMinutes?: number
+  /** Logo URL(s) - can be a single string or an object with light/dark variants */
   logoURL?: string | { light: string; dark: string }
+  /** Custom CSS class names for styling specific parts of the email */
   classNames?: EmailClassNames
+  /** Custom color scheme for light and dark modes */
   colors?: EmailColors
+  /** Whether to show the "Powered by better-auth" footer */
   poweredBy?: boolean
+  /** Whether to enable dark mode support */
   darkMode?: boolean
+  /** Additional React nodes to inject into the email head */
   head?: ReactNode
+  /** Partial localization overrides for customizing email text */
   localization?: Partial<ResetPasswordEmailLocalization>
 }
 
+/**
+ * Email template component that sends password reset links to users.
+ *
+ * This email includes:
+ * - Password reset button and fallback URL
+ * - Expiration time information
+ * - Security notice for unauthorized requests
+ * - Customizable branding and styling
+ * - Support for light/dark mode themes
+ *
+ * @example
+ * ```tsx
+ * <ResetPasswordEmail
+ *   url="https://example.com/auth/reset-password?token=abc123"
+ *   email="user@example.com"
+ *   appName="My App"
+ *   expirationMinutes={60}
+ *   logoURL="https://example.com/logo.png"
+ *   darkMode={true}
+ * />
+ * ```
+ */
 export const ResetPasswordEmail = ({
   url,
   email,
