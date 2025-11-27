@@ -10,7 +10,6 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "devDependencies": {
-    "@better-auth-ui/core": "workspace:*",
     "@react-email/components": "^1.0.1",
     "@react-email/preview-server": "^5.0.5",
     "@types/react": "^19.2.7",
@@ -24,7 +23,7 @@
     "tailwindcss": "^4.1.17"
   },
   "peerDependencies": {
-    "@better-auth-ui/core": ">=0.0.0-alpha.0",
+    "@better-auth-ui/core": "workspace:*",
     "@react-email/components": ">=1.0.0",
     "better-auth": ">=1.4.2",
     "clsx": ">=2.0.0",

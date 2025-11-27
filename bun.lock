@@ -78,8 +78,6 @@
       "name": "@better-auth-ui/heroui",
       "version": "0.0.0-alpha.0",
       "devDependencies": {
-        "@better-auth-ui/core": "workspace:*",
-        "@better-auth-ui/react": "workspace:*",
         "@heroicons/react": "^2.2.0",
         "@heroui/react": "^3.0.0-beta.2",
         "@heroui/styles": "^3.0.0-beta.2",
@@ -106,7 +104,6 @@
       "name": "@better-auth-ui/react",
       "version": "0.0.0-alpha.0",
       "devDependencies": {
-        "@better-auth-ui/core": "workspace:*",
         "@react-email/components": "^1.0.1",
         "@react-email/preview-server": "^5.0.5",
         "@types/react": "^19.2.7",
@@ -120,7 +117,7 @@
         "tailwindcss": "^4.1.17",
       },
       "peerDependencies": {
-        "@better-auth-ui/core": ">=0.0.0-alpha.0",
+        "@better-auth-ui/core": "workspace:*",
         "@react-email/components": ">=1.0.0",
         "better-auth": ">=1.4.2",
         "clsx": ">=2.0.0",
