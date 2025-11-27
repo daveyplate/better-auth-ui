@@ -44,9 +44,9 @@ jobs:
       - run: bun nx affected -t test build
 
       - run: bun nx run-many -t build
-      
+
       # Publish new versions of the packages
-      - run: bun nx-cloud record -- bunx pkg-pr-new publish --bun './packages/*'
+      - run: bun nx-cloud record -- bunx pkg-pr-new publish --bun './packages/*' --packageManager=bun
 
       # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
       - run: bun nx fix-ci
