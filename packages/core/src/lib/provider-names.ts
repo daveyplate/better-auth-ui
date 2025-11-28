@@ -1,5 +1,12 @@
 import type { SocialProvider } from "better-auth/social-providers"
 
+/**
+ * Mapping of social authentication provider identifiers to their human-readable display names.
+ *
+ * Provides standardized display names for all supported social authentication providers.
+ * Used by the `getProviderName` function to convert provider keys (e.g., "github") to
+ * user-friendly names (e.g., "GitHub").
+ */
 export const providerNames = {
   apple: "Apple",
   atlassian: "Atlassian",

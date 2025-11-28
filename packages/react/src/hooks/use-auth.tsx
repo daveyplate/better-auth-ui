@@ -26,7 +26,7 @@ const defaultConfig = {
 } satisfies Omit<AuthConfig, "authClient">
 
 /**
- * Build and return the effective AuthConfig by merging defaults, context, and optional overrides.
+ * Constructs the effective AuthConfig by merging defaults, any AuthContext-provided config, and the optional `config` overrides.
  *
  * Merges default configuration, any AuthContext-provided config, and the optional `config` argument (with latter values taking precedence). When the app is hydrated, a `redirectTo` query parameter is read and — if it decodes to a relative path that starts with `/`, does not start with `//`, does not contain a scheme (`://`), and does not contain backslashes — it overrides the resulting `redirectTo` value to prevent open-redirects.
  *

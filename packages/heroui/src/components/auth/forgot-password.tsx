@@ -15,7 +15,7 @@ import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
-const localization = {
+const forgotPasswordLocalization = {
   EMAIL: "Email",
   EMAIL_PLACEHOLDER: "Enter your email",
   FORGOT_PASSWORD: "Forgot Password",
@@ -25,7 +25,7 @@ const localization = {
   SIGN_IN: "Sign In"
 }
 
-export type ForgotPasswordLocalization = typeof localization
+export type ForgotPasswordLocalization = typeof forgotPasswordLocalization
 
 export type ForgotPasswordProps = DeepPartial<AuthConfig> & {
   className?: string
@@ -115,4 +115,4 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
   )
 }
 
-ForgotPassword.localization = localization
+ForgotPassword.localization = forgotPasswordLocalization

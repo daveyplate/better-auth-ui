@@ -60,7 +60,7 @@ jobs:
       # - run: bun nx-cloud record -- echo Hello World
 
       # Check code formatting and linting
-      - run: bun nx-cloud record -- biome check
+      - run: bun nx-cloud record -- biome lint
 
       # Run tests and build the project
       - run: bun nx run-many -t build

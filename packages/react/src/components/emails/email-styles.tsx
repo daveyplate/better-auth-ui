@@ -1,3 +1,8 @@
+/**
+ * Default color scheme for email templates in light and dark modes.
+ *
+ * Provides a consistent color palette that can be customized via the EmailColors type.
+ */
 export const defaultColors = {
   light: {
     background: "#F5F5F5",
@@ -23,6 +28,11 @@ export const defaultColors = {
   }
 }
 
+/**
+ * Custom CSS class names for styling different parts of email templates.
+ *
+ * Allows fine-grained control over the appearance of email components.
+ */
 export type EmailClassNames = {
   body?: string
   container?: string
@@ -38,16 +48,47 @@ export type EmailClassNames = {
   codeBlock?: string
 }
 
+/**
+ * Custom color scheme configuration for email templates.
+ *
+ * Supports separate color definitions for light and dark modes.
+ * Any color not specified will fall back to the defaultColors values.
+ */
 export type EmailColors = {
   light?: Partial<typeof defaultColors.light>
   dark?: Partial<typeof defaultColors.dark>
 }
 
+/**
+ * Props for the EmailStyles component.
+ */
 interface EmailStylesProps {
+  /** Custom color scheme for light and dark modes */
   colors?: EmailColors
+  /** Whether to enable dark mode support */
   darkMode?: boolean
 }
 
+/**
+ * Component that injects CSS styles for email templates with support for light and dark modes.
+ *
+ * Generates inline styles that adapt to the user's color scheme preference and applies
+ * custom colors if provided. Handles logo visibility switching between light and dark modes.
+ *
+ * @param props - Style configuration options
+ * @returns A style element containing CSS for email template theming
+ *
+ * @example
+ * ```tsx
+ * <EmailStyles
+ *   colors={{
+ *     light: { primary: "#000000" },
+ *     dark: { primary: "#FFFFFF" }
+ *   }}
+ *   darkMode={true}
+ * />
+ * ```
+ */
 export const EmailStyles = ({ colors, darkMode = true }: EmailStylesProps) => {
   return (
     <style type="text/css">{`

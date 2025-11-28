@@ -15,7 +15,7 @@ import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useEffect, useState } from "react"
 import { toast } from "sonner"
 
-const localization = {
+const resetPasswordLocalization = {
   INVALID_RESET_PASSWORD_TOKEN: "Invalid reset password token",
   NEW_PASSWORD_PLACEHOLDER: "Enter your new password",
   PASSWORD: "Password",
@@ -25,7 +25,7 @@ const localization = {
   SIGN_IN: "Sign In"
 }
 
-export type ResetPasswordLocalization = typeof localization
+export type ResetPasswordLocalization = typeof resetPasswordLocalization
 
 export type ResetPasswordProps = DeepPartial<AuthConfig> & {
   className?: string
@@ -33,10 +33,10 @@ export type ResetPasswordProps = DeepPartial<AuthConfig> & {
 }
 
 /**
- * Render a password reset form that validates a token from the URL and submits a new password to the auth client.
+ * Renders a password reset form that validates a token from the URL and submits a new password to the auth client.
  *
  * @param props - Component props; may include `className` for container styling and `localization` to override displayed strings.
- * @returns The rendered ResetPassword form element.
+ * @returns The rendered reset password form element.
  */
 export function ResetPassword({ className, ...props }: ResetPasswordProps) {
   const localization = {
@@ -145,4 +145,4 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
   )
 }
 
-ResetPassword.localization = localization
+ResetPassword.localization = resetPasswordLocalization

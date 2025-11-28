@@ -12,7 +12,7 @@ import { SignIn } from "./sign-in"
 import { SignOut } from "./sign-out"
 import { SignUp } from "./sign-up"
 
-const localization = {
+const authLocalization = {
   ...SignIn.localization,
   ...SignUp.localization,
   ...MagicLink.localization,
@@ -20,7 +20,7 @@ const localization = {
   ...ResetPassword.localization
 }
 
-export type AuthLocalization = typeof localization
+export type AuthLocalization = typeof authLocalization
 
 export type AuthProps = DeepPartial<AuthConfig> & {
   className?: string
@@ -31,12 +31,12 @@ export type AuthProps = DeepPartial<AuthConfig> & {
 }
 
 /**
- * Renders the appropriate authentication view component based on the provided `view` prop or the `path` mapped in `useAuth()`'s `viewPaths`.
+ * Selects and renders the appropriate authentication view component.
  *
- * @param view - Optional explicit auth view to render (e.g., "signIn", "signUp").
- * @param path - Optional route path used to resolve an auth view via `viewPaths.auth`.
- * @returns The React element for the resolved authentication view.
- * @throws Error if neither `view` nor `path` resolve to a valid auth view; the thrown error lists the valid view keys (e.g., "signIn", "signUp").
+ * @param view - Optional explicit auth view to render (e.g., "signIn", "signUp")
+ * @param path - Optional route path used to resolve an auth view when `view` is not provided
+ * @returns The React element for the resolved authentication view
+ * @throws Error if neither `view` nor `path` resolve to a valid auth view; the error message lists valid view keys
  */
 export function Auth({ view, path, ...props }: AuthProps) {
   const { viewPaths } = useAuth()
@@ -67,4 +67,4 @@ export function Auth({ view, path, ...props }: AuthProps) {
   }
 }
 
-Auth.localization = localization
+Auth.localization = authLocalization

@@ -21,7 +21,7 @@ import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 import { ResendVerificationButton } from "./resend-verification-button"
 
-const localization = {
+const signInLocalization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
   ...ResendVerificationButton.localization,
@@ -37,7 +37,7 @@ const localization = {
   SIGN_UP: "Sign Up"
 }
 
-export type SignInLocalization = typeof localization
+export type SignInLocalization = typeof signInLocalization
 
 export type SignInProps = DeepPartial<AuthConfig> & {
   className?: string
@@ -46,11 +46,11 @@ export type SignInProps = DeepPartial<AuthConfig> & {
 }
 
 /**
- * Render the sign-in UI that supports email/password, magic link, and social provider flows according to the provided auth configuration.
+ * Renders the sign-in UI with email/password, magic link, and social provider options based on the provided auth configuration.
  *
- * The component submits email/password credentials, handles EMAIL_NOT_VERIFIED by offering a resend action, refetches the session on success, and navigates to the configured redirect path. UI elements (remember-me checkbox, forgot-password link, magic link button, provider buttons, and sign-up prompt) are shown conditionally based on the auth client configuration passed via props.
+ * The component handles sign-in submission, offers a resend verification action when the account is unverified, refetches the session on successful sign-in, and navigates to the configured redirect path.
  *
- * @returns A React element containing the sign-in form and related controls (email/password inputs, optional remember-me and forgot-password links, magic link button, social provider buttons, and sign-up link) configured according to the auth settings.
+ * @returns A React element for the sign-in form and related controls configured according to the auth settings
  */
 export function SignIn({ className, ...props }: SignInProps) {
   const localization = { ...SignIn.localization, ...props.localization }
@@ -267,4 +267,4 @@ export function SignIn({ className, ...props }: SignInProps) {
   )
 }
 
-SignIn.localization = localization
+SignIn.localization = signInLocalization

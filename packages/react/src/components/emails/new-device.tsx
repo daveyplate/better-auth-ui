@@ -23,15 +23,23 @@ import {
   EmailStyles
 } from "./email-styles"
 
-interface DeviceInfo {
+/**
+ * Device information displayed in the new device email notification.
+ */
+export interface DeviceInfo {
+  /** Browser name and version */
   browser?: string
+  /** Operating system name and version */
   os?: string
+  /** Geographic location of the sign-in */
   location?: string
+  /** IP address of the device */
   ipAddress?: string
+  /** Timestamp of the sign-in event */
   timestamp?: string
 }
 
-const localization = {
+const newDeviceEmailLocalization = {
   NEW_SIGN_IN_DETECTED: "New sign-in detected",
   LOGO: "Logo",
   NEW_SIGN_IN_TO_YOUR_ACCOUNT:
@@ -51,23 +59,71 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type NewDeviceEmailLocalization = typeof localization
+/**
+ * Localization strings for the NewDeviceEmail component.
+ *
+ * Contains all text content used in the new device detection email template.
+ */
+export type NewDeviceEmailLocalization = typeof newDeviceEmailLocalization
 
-interface NewDeviceEmailProps {
+/**
+ * Props for the NewDeviceEmail component.
+ */
+export interface NewDeviceEmailProps {
+  /** Email address of the user account */
   userEmail?: string
+  /** Information about the device that signed in */
   deviceInfo?: DeviceInfo
+  /** URL to secure the account if unauthorized access is suspected */
   secureAccountLink?: string
+  /** Name of the application sending the email */
   appName?: string
+  /** Support email address for security concerns */
   supportEmail?: string
+  /** Logo URL(s) - can be a single string or an object with light/dark variants */
   logoURL?: string | { light: string; dark: string }
+  /** Custom CSS class names for styling specific parts of the email */
   classNames?: EmailClassNames
+  /** Custom color scheme for light and dark modes */
   colors?: EmailColors
+  /** Whether to show the "Powered by better-auth" footer */
   poweredBy?: boolean
+  /** Whether to enable dark mode support */
   darkMode?: boolean
+  /** Additional React nodes to inject into the email head */
   head?: ReactNode
+  /** Partial localization overrides for customizing email text */
   localization?: Partial<NewDeviceEmailLocalization>
 }
 
+/**
+ * Email template component that notifies users when a new device signs into their account.
+ *
+ * This email includes:
+ * - Device information display (browser, OS, location, IP, timestamp)
+ * - Secure account action button
+ * - Security warnings and support contact information
+ * - Customizable branding and styling
+ * - Support for light/dark mode themes
+ *
+ * @example
+ * ```tsx
+ * <NewDeviceEmail
+ *   userEmail="user@example.com"
+ *   deviceInfo={{
+ *     browser: "Chrome on macOS",
+ *     os: "macOS 14.0",
+ *     location: "San Francisco, CA",
+ *     ipAddress: "192.168.1.1",
+ *     timestamp: "February 10, 2025 at 4:20 PM UTC"
+ *   }}
+ *   secureAccountLink="https://example.com/secure-account"
+ *   appName="My App"
+ *   supportEmail="support@example.com"
+ *   darkMode={true}
+ * />
+ * ```
+ */
 export const NewDeviceEmail = ({
   userEmail,
   deviceInfo,
@@ -373,7 +429,7 @@ export const NewDeviceEmail = ({
   )
 }
 
-NewDeviceEmail.localization = localization
+NewDeviceEmail.localization = newDeviceEmailLocalization
 
 NewDeviceEmail.PreviewProps = {
   userEmail: "m@example.com",
@@ -382,7 +438,7 @@ NewDeviceEmail.PreviewProps = {
     os: "macOS 26.2",
     location: "San Francisco, CA, United States",
     ipAddress: "127.0.0.1",
-    timestamp: "February 10, 2026 at 4:20 PM UTC"
+    timestamp: "February 10, 2025 at 4:20 PM UTC"
   },
   secureAccountLink: "https://better-auth-ui.com/auth/secure-account",
   appName: "Better Auth",

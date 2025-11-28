@@ -5,12 +5,13 @@ import { Button, Spinner } from "@heroui/react"
 import { useState } from "react"
 import { toast } from "sonner"
 
-const localization = {
+const resendVerificationButtonLocalization = {
   RESEND: "Resend",
   VERIFICATION_EMAIL_SENT: "Verification email sent!"
 }
 
-export type ResendVerificationButtonLocalization = typeof localization
+export type ResendVerificationButtonLocalization =
+  typeof resendVerificationButtonLocalization
 
 export type ResendVerificationButtonProps = {
   authClient: AuthClient
@@ -21,13 +22,12 @@ export type ResendVerificationButtonProps = {
 }
 
 /**
- * Renders a small button that resends a verification email to the provided address.
+ * Renders a small button that initiates sending a verification email to the given address.
  *
- * @param authClient - Auth client used to send the verification email
- * @param baseURL - Base URL used to build the verification callback URL
+ * @param baseURL - Optional base URL prepended to `redirectTo` to form the verification callback URL
  * @param email - Recipient email address for the verification message
  * @param redirectTo - Path appended to `baseURL` to form the verification callback URL
- * @returns The button element which shows a spinner while the request is in progress
+ * @returns A Button element that initiates resending a verification email and reflects the request state
  */
 export function ResendVerificationButton({
   authClient,
@@ -74,4 +74,4 @@ export function ResendVerificationButton({
   )
 }
 
-ResendVerificationButton.localization = localization
+ResendVerificationButton.localization = resendVerificationButtonLocalization

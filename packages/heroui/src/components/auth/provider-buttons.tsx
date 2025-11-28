@@ -12,11 +12,11 @@ import type { DeepPartial } from "better-auth/client/plugins"
 import { useMemo } from "react"
 import { toast } from "sonner"
 
-const localization = {
+const providerButtonsLocalization = {
   CONTINUE_WITH_PROVIDER: "Continue with {provider}"
 }
 
-export type ProviderButtonsLocalization = typeof localization
+export type ProviderButtonsLocalization = typeof providerButtonsLocalization
 
 export type ProviderButtonsProps = DeepPartial<AuthConfig> & {
   isPending: boolean
@@ -133,4 +133,4 @@ export function ProviderButtons({
   )
 }
 
-ProviderButtons.localization = localization
+ProviderButtons.localization = providerButtonsLocalization

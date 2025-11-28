@@ -19,7 +19,7 @@ import { toast } from "sonner"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 
-const localization = {
+const magicLinkLocalization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
   EMAIL: "Email",
@@ -32,7 +32,7 @@ const localization = {
   SIGN_UP: "Sign Up"
 }
 
-export type MagicLinkLocalization = typeof localization
+export type MagicLinkLocalization = typeof magicLinkLocalization
 
 export type MagicLinkProps = DeepPartial<AuthConfig> & {
   className?: string
@@ -41,12 +41,12 @@ export type MagicLinkProps = DeepPartial<AuthConfig> & {
 }
 
 /**
- * Renders a card-based sign-in form that sends an email magic link and optionally shows social provider buttons.
+ * Render a card-based sign-in form that sends an email magic link and optionally shows social provider buttons.
  *
- * Submits the entered email to the auth client to request a magic link, displays success or error toasts, and can render alternative social sign-in buttons when providers are configured. Localization and layout can be customized via props.
+ * Submits the entered email to the auth client, displays success or error toasts, and supports customizable localization and social layout via props.
  *
- * @param props - Component props for configuring appearance, localization, social layout, and auth-related options.
- * @returns A JSX element containing the magic-link sign-in UI and related controls.
+ * @param props - Component props to configure appearance, localization overrides, social layout, and auth-related options.
+ * @returns A JSX element containing the magic-link sign-in user interface and related controls.
  */
 export function MagicLink({ className, ...props }: MagicLinkProps) {
   const localization = { ...MagicLink.localization, ...props.localization }
@@ -168,4 +168,4 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
   )
 }
 
-MagicLink.localization = localization
+MagicLink.localization = magicLinkLocalization

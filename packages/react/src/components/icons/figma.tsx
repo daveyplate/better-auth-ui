@@ -1,12 +1,13 @@
 import type { ComponentPropsWithRef } from "react"
 
 /**
- * Render the Figma logo as an inline SVG React component.
+ * Renders the Figma logo as an inline SVG icon with built-in accessibility attributes.
  *
- * The returned SVG is accessible (role="img" and aria-label="Figma") and contains the five colored paths that compose the logo.
+ * The icon uses role="img" and aria-label="Figma" for screen readers and contains
+ * five colored paths representing the Figma brand colors.
  *
  * @param props - Props forwarded to the root `<svg>` element
- * @returns An SVG element containing the multicolor Figma logo
+ * @returns An accessible SVG element containing the multicolor Figma logo
  */
 export function Figma(props: ComponentPropsWithRef<"svg">) {
   return (

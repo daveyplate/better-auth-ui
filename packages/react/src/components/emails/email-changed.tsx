@@ -23,7 +23,7 @@ import {
   EmailStyles
 } from "./email-styles"
 
-const localization = {
+const emailChangedEmailLocalization = {
   YOUR_EMAIL_ADDRESS_HAS_BEEN_CHANGED: "Your email address has been changed",
   LOGO: "Logo",
   EMAIL_ADDRESS_CHANGED: "Email address changed",
@@ -40,23 +40,66 @@ const localization = {
   POWERED_BY_BETTER_AUTH: "Powered by {betterAuth}"
 }
 
-export type EmailChangedEmailLocalization = typeof localization
+/**
+ * Localization strings for the EmailChangedEmail component.
+ *
+ * Contains all text content used in the email changed notification email template.
+ */
+export type EmailChangedEmailLocalization = typeof emailChangedEmailLocalization
 
-interface EmailChangedEmailProps {
+/**
+ * Props for the EmailChangedEmail component.
+ */
+export interface EmailChangedEmailProps {
+  /** The previous email address that was changed */
   oldEmail?: string
+  /** The new email address */
   newEmail?: string
+  /** URL to revert the email change if unauthorized */
   revertURL?: string
+  /** Name of the application sending the email */
   appName?: string
+  /** Support email address for security concerns */
   supportEmail?: string
+  /** Logo URL(s) - can be a single string or an object with light/dark variants */
   logoURL?: string | { light: string; dark: string }
+  /** Custom CSS class names for styling specific parts of the email */
   classNames?: EmailClassNames
+  /** Custom color scheme for light and dark modes */
   colors?: EmailColors
+  /** Whether to show the "Powered by better-auth" footer */
   poweredBy?: boolean
+  /** Whether to enable dark mode support */
   darkMode?: boolean
+  /** Additional React nodes to inject into the email head */
   head?: ReactNode
+  /** Partial localization overrides for customizing email text */
   localization?: Partial<EmailChangedEmailLocalization>
 }
 
+/**
+ * Email template component that notifies users when their email address has been changed.
+ *
+ * This email includes:
+ * - Display of both old and new email addresses
+ * - Revert action button if unauthorized change occurred
+ * - Security information and support contact details
+ * - Customizable branding and styling
+ * - Support for light/dark mode themes
+ *
+ * @example
+ * ```tsx
+ * <EmailChangedEmail
+ *   oldEmail="old@example.com"
+ *   newEmail="new@example.com"
+ *   revertURL="https://example.com/revert?token=abc123"
+ *   appName="My App"
+ *   supportEmail="support@example.com"
+ *   logoURL="https://example.com/logo.png"
+ *   darkMode={true}
+ * />
+ * ```
+ */
 export const EmailChangedEmail = ({
   oldEmail,
   newEmail,
@@ -320,7 +363,7 @@ export const EmailChangedEmail = ({
   )
 }
 
-EmailChangedEmail.localization = localization
+EmailChangedEmail.localization = emailChangedEmailLocalization
 
 EmailChangedEmail.PreviewProps = {
   oldEmail: "old@example.com",

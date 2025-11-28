@@ -4,12 +4,12 @@ import type { AuthView } from "@better-auth-ui/core"
 import { cn, useAuth } from "@better-auth-ui/react"
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline"
 
-const localization = {
+const magicLinkButtonLocalization = {
   CONTINUE_WITH_MAGIC_LINK: "Continue with Magic Link",
   CONTINUE_WITH_PASSWORD: "Continue with Password"
 }
 
-export type MagicLinkButtonLocalization = typeof localization
+export type MagicLinkButtonLocalization = typeof magicLinkButtonLocalization
 
 export type MagicLinkButtonProps = {
   isPending: boolean
@@ -58,4 +58,4 @@ export function MagicLinkButton({
   )
 }
 
-MagicLinkButton.localization = localization
+MagicLinkButton.localization = magicLinkButtonLocalization
