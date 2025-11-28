@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "declaration": true,
     "isolatedModules": true,
     "lib": ["esnext", "dom", "dom.iterable"],
@@ -7,6 +8,7 @@
     "moduleResolution": "bundler",
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "jsx": "react-jsx"
   }
 }

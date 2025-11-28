@@ -28,7 +28,7 @@ const defaultConfig = {
 /**
  * Constructs the effective AuthConfig by merging defaults, any AuthContext-provided config, and the optional `config` overrides.
  *
- * When the app is hydrated, a `redirectTo` query parameter may override the merged `redirectTo` only if it decodes to a safe relative path: starts with `/`, does not start with `//`, and does not contain a scheme (`://`).
+ * Merges default configuration, any AuthContext-provided config, and the optional `config` argument (with latter values taking precedence). When the app is hydrated, a `redirectTo` query parameter is read and — if it decodes to a relative path that starts with `/`, does not start with `//`, does not contain a scheme (`://`), and does not contain backslashes — it overrides the resulting `redirectTo` value to prevent open-redirects.
  *
  * @param config - Partial configuration overrides applied on top of context and defaults
  * @returns The final `AuthConfig` with a non-optional `authClient`
@@ -57,11 +57,13 @@ export function useAuth(config?: DeepPartial<AuthConfig>) {
       const redirectTo = redirectToParam.trim()
 
       // Validate: must be a relative path starting with "/" but not "//"
-      // and must not contain a scheme (e.g., "://")
+      // and must not contain a scheme (e.g., "://") or backslashes
+      // (browsers can normalize "\" to "/" making "/\evil.com" become "//evil.com")
       const isValidRedirect =
         redirectTo.startsWith("/") &&
         !redirectTo.startsWith("//") &&
-        !redirectTo.includes("://")
+        !redirectTo.includes("://") &&
+        !redirectTo.includes("\\")
 
       if (isValidRedirect) {
         authConfig.redirectTo = redirectTo

@@ -1,8 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "dist",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@better-auth-ui/core": ["../core/src"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "tests"]
 }
