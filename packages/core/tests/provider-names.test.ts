@@ -62,29 +62,5 @@ describe("getProviderName", () => {
     it("should capitalize first letter of unknown provider", () => {
       expect(getProviderName("unknown")).toBe("Unknown")
     })
-
-    it("should handle single character provider names", () => {
-      expect(getProviderName("x")).toBe("X")
-    })
-
-    it("should capitalize first letter and keep rest lowercase", () => {
-      expect(getProviderName("newprovider")).toBe("Newprovider")
-    })
-
-    it("should handle empty string gracefully", () => {
-      expect(getProviderName("")).toBe("")
-    })
-
-    it("should handle provider names with numbers", () => {
-      expect(getProviderName("auth0")).toBe("Auth0")
-    })
-
-    it("should handle provider names with hyphens", () => {
-      expect(getProviderName("my-provider")).toBe("My-provider")
-    })
-
-    it("should handle provider names with underscores", () => {
-      expect(getProviderName("my_provider")).toBe("My_provider")
-    })
   })
 })

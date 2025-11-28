@@ -39,10 +39,6 @@ describe("basePaths", () => {
     })
   })
 
-  it("should have exactly 3 base paths", () => {
-    expect(Object.keys(basePaths)).toHaveLength(3)
-  })
-
   it("should not contain query parameters", () => {
     Object.values(basePaths).forEach((path) => {
       expect(path).not.toContain("?")

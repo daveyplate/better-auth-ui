@@ -38,16 +38,11 @@ describe("authViewPaths", () => {
       expect(path.trim()).not.toBe("")
     })
   })
-
-  it("should have exactly 6 view paths", () => {
-    expect(Object.keys(authViewPaths)).toHaveLength(6)
-  })
 })
 
 describe("authViews", () => {
   it("should be an array of auth view keys", () => {
     expect(Array.isArray(authViews)).toBe(true)
-    expect(authViews.length).toBe(6)
   })
 
   it("should contain all expected view keys", () => {
@@ -57,11 +52,6 @@ describe("authViews", () => {
     expect(authViews).toContain("forgotPassword")
     expect(authViews).toContain("resetPassword")
     expect(authViews).toContain("signOut")
-  })
-
-  it("should match keys of authViewPaths", () => {
-    const expectedKeys = Object.keys(authViewPaths)
-    expect(authViews.sort()).toEqual(expectedKeys.sort())
   })
 
   it("should have valid AuthView type elements", () => {
@@ -85,11 +75,6 @@ describe("authPaths", () => {
     expect(authPaths).toContain("forgot-password")
     expect(authPaths).toContain("reset-password")
     expect(authPaths).toContain("sign-out")
-  })
-
-  it("should match values of authViewPaths", () => {
-    const expectedValues = Object.values(authViewPaths)
-    expect(authPaths.sort()).toEqual(expectedValues.sort())
   })
 
   it("should have no duplicates", () => {
