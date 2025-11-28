@@ -4,7 +4,9 @@ import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
 import {
   Button,
   Card,
+  Description,
   FieldError,
+  Fieldset,
   Form,
   Input,
   Label,
@@ -69,15 +71,16 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsPending(true)
 
     if (!token) {
       toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
-      setIsPending(false)
       return
     }
 
-    const formData = new FormData(e.currentTarget)
+    setIsPending(true)
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
     const password = formData.get("password") as string
 
     const { error } = await authClient.resetPassword({
@@ -85,60 +88,64 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
       newPassword: password
     })
 
+    setIsPending(false)
+
     if (error) {
       toast.error(error.message)
-      setIsPending(false)
-
+      form.reset()
       return
     }
 
     toast.success(localization.PASSWORD_RESET_SUCCESS)
     navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
-
-    setIsPending(false)
   }
 
   return (
-    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)}>
-      <Card.Header className="text-xl font-medium">
-        {localization.RESET_PASSWORD}
-      </Card.Header>
-
+    <Card className={cn("w-full max-w-sm p-4 md:p-6", className)}>
       <Card.Content>
-        <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
-          <TextField
-            minLength={8}
-            name="password"
-            type="password"
-            autoComplete="new-password"
-            isDisabled={isPending}
-          >
-            <Label>{localization.PASSWORD}</Label>
+        <Form onSubmit={onSubmit}>
+          <Fieldset className="gap-4">
+            <Fieldset.Legend className="text-xl">
+              {localization.RESET_PASSWORD}
+            </Fieldset.Legend>
 
-            <Input
-              placeholder={localization.NEW_PASSWORD_PLACEHOLDER}
-              required
-            />
+            <Description />
 
-            <FieldError />
-          </TextField>
-
-          <Button type="submit" className="w-full" isPending={isPending}>
-            {isPending && <Spinner color="current" size="sm" />}
-
-            {localization.RESET_PASSWORD}
-          </Button>
-
-          <p className="text-sm justify-center flex gap-2 items-center">
-            {localization.REMEMBER_YOUR_PASSWORD}
-
-            <Link
-              href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
-              className="link link--underline-always text-accent"
+            <TextField
+              minLength={8}
+              name="password"
+              type="password"
+              autoComplete="new-password"
+              isDisabled={isPending}
             >
-              {localization.SIGN_IN}
-            </Link>
-          </p>
+              <Label>{localization.PASSWORD}</Label>
+
+              <Input
+                placeholder={localization.NEW_PASSWORD_PLACEHOLDER}
+                required
+              />
+
+              <FieldError className="text-wrap" />
+            </TextField>
+
+            <Fieldset.Actions>
+              <Button type="submit" className="w-full" isPending={isPending}>
+                {isPending && <Spinner color="current" size="sm" />}
+
+                {localization.RESET_PASSWORD}
+              </Button>
+            </Fieldset.Actions>
+
+            <Description className="text-center text-foreground text-sm">
+              {localization.REMEMBER_YOUR_PASSWORD}{" "}
+              <Link
+                href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
+                className="link link--underline-hover text-accent"
+              >
+                {localization.SIGN_IN}
+              </Link>
+            </Description>
+          </Fieldset>
         </Form>
       </Card.Content>
     </Card>

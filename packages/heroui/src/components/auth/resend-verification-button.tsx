@@ -57,8 +57,9 @@ export function ResendVerificationButton({
           callbackURL
         })
 
-        toast.dismiss()
         setIsResending(false)
+
+        toast.dismiss()
 
         if (error) {
           toast.error(error.message)

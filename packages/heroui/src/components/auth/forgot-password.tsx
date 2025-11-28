@@ -4,7 +4,9 @@ import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
 import {
   Button,
   Card,
+  Description,
   FieldError,
+  Fieldset,
   Form,
   Input,
   Label,
@@ -52,7 +54,8 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
     e.preventDefault()
     setIsPending(true)
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     const email = formData.get("email") as string
 
     const { error } = await authClient.requestPasswordReset({
@@ -60,55 +63,60 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
       redirectTo: `${basePaths.auth}/${viewPaths.auth.resetPassword}`
     })
 
+    setIsPending(false)
+
     if (error) {
       toast.error(error.message)
-      setIsPending(false)
-      e.currentTarget.reset()
+      form.reset()
       return
     }
 
     toast.success(localization.PASSWORD_RESET_EMAIL_SENT)
     navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
-    setIsPending(false)
   }
 
   return (
-    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)}>
-      <Card.Header className="text-xl font-medium">
-        {localization.FORGOT_PASSWORD}
-      </Card.Header>
-
+    <Card className={cn("w-full max-w-sm p-4 md:p-6", className)}>
       <Card.Content>
-        <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
-          <TextField
-            name="email"
-            type="email"
-            autoComplete="email"
-            isDisabled={isPending}
-          >
-            <Label>{localization.EMAIL}</Label>
+        <Form onSubmit={onSubmit}>
+          <Fieldset className="gap-4">
+            <Fieldset.Legend className="text-xl">
+              {localization.FORGOT_PASSWORD}
+            </Fieldset.Legend>
 
-            <Input placeholder={localization.EMAIL_PLACEHOLDER} required />
+            <Description />
 
-            <FieldError />
-          </TextField>
-
-          <Button type="submit" className="w-full" isPending={isPending}>
-            {isPending && <Spinner color="current" size="sm" />}
-
-            {localization.SEND_RESET_LINK}
-          </Button>
-
-          <p className="text-sm justify-center flex gap-2 items-center">
-            {localization.REMEMBER_YOUR_PASSWORD}
-
-            <Link
-              href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
-              className="link link--underline-always text-accent"
+            <TextField
+              name="email"
+              type="email"
+              autoComplete="email"
+              isDisabled={isPending}
             >
-              {localization.SIGN_IN}
-            </Link>
-          </p>
+              <Label>{localization.EMAIL}</Label>
+
+              <Input placeholder={localization.EMAIL_PLACEHOLDER} required />
+
+              <FieldError className="text-wrap" />
+            </TextField>
+
+            <Fieldset.Actions>
+              <Button type="submit" className="w-full" isPending={isPending}>
+                {isPending && <Spinner color="current" size="sm" />}
+
+                {localization.SEND_RESET_LINK}
+              </Button>
+            </Fieldset.Actions>
+
+            <Description className="text-center text-foreground text-sm">
+              {localization.REMEMBER_YOUR_PASSWORD}{" "}
+              <Link
+                href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
+                className="link link--underline-hover text-accent"
+              >
+                {localization.SIGN_IN}
+              </Link>
+            </Description>
+          </Fieldset>
         </Form>
       </Card.Content>
     </Card>

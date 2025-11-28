@@ -4,7 +4,9 @@ import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
 import {
   Button,
   Card,
+  Description,
   FieldError,
+  Fieldset,
   Form,
   Input,
   Label,
@@ -15,9 +17,9 @@ import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
 
+import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
-import { FieldSeparator } from "./field-separator"
 
 const magicLinkLocalization = {
   ...MagicLinkButton.localization,
@@ -80,82 +82,83 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
       callbackURL
     })
 
+    setIsPending(false)
+
     if (error) {
       toast.error(error.message)
-      setIsPending(false)
       return
     }
 
     form.reset()
 
     toast.success(localization.MAGIC_LINK_SENT)
-    setIsPending(false)
   }
 
   return (
-    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)}>
-      <Card.Header className="text-xl font-medium">
-        {localization.SIGN_IN}
-      </Card.Header>
-
+    <Card className={cn("w-full max-w-sm p-4 md:p-6", className)}>
       <Card.Content>
-        <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
-          <TextField
-            name="email"
-            type="email"
-            autoComplete="email"
-            isDisabled={isPending}
-          >
-            <Label>{localization.EMAIL}</Label>
+        <Form onSubmit={onSubmit}>
+          <Fieldset className="gap-4">
+            <Fieldset.Legend className="text-xl">
+              {localization.SIGN_IN}
+            </Fieldset.Legend>
 
-            <Input placeholder={localization.EMAIL_PLACEHOLDER} required />
+            <Description />
 
-            <FieldError />
-          </TextField>
+            <Fieldset.Group>
+              <TextField
+                name="email"
+                type="email"
+                autoComplete="email"
+                isDisabled={isPending}
+              >
+                <Label>{localization.EMAIL}</Label>
 
-          <div className="flex flex-col gap-4">
-            <Button type="submit" className="w-full" isPending={isPending}>
-              {isPending && <Spinner color="current" size="sm" />}
+                <Input placeholder={localization.EMAIL_PLACEHOLDER} required />
 
-              {localization.SEND_MAGIC_LINK}
-            </Button>
+                <FieldError className="text-wrap" />
+              </TextField>
+            </Fieldset.Group>
 
-            {magicLink && (
-              <MagicLinkButton
-                view="magicLink"
+            <Fieldset.Actions className="flex-col gap-3">
+              <Button type="submit" className="w-full" isPending={isPending}>
+                {isPending && <Spinner color="current" size="sm" />}
+
+                {localization.SEND_MAGIC_LINK}
+              </Button>
+
+              {magicLink && (
+                <MagicLinkButton
+                  view="magicLink"
+                  isPending={isPending}
+                  localization={localization}
+                />
+              )}
+            </Fieldset.Actions>
+
+            {showSeparator && (
+              <FieldSeparator>{localization.OR}</FieldSeparator>
+            )}
+
+            {socialProviders && socialProviders.length > 0 && (
+              <ProviderButtons
+                {...props}
                 isPending={isPending}
+                setIsPending={setIsPending}
                 localization={localization}
               />
             )}
-          </div>
 
-          {showSeparator && (
-            <>
-              <FieldSeparator>{localization.OR}</FieldSeparator>
-
-              <div className="flex flex-col gap-4">
-                {socialProviders && socialProviders.length > 0 && (
-                  <ProviderButtons
-                    {...props}
-                    isPending={isPending}
-                    setIsPending={setIsPending}
-                    localization={localization}
-                  />
-                )}
-              </div>
-            </>
-          )}
-
-          <p className="text-sm justify-center flex gap-2 items-center">
-            {localization.NEED_TO_CREATE_AN_ACCOUNT}
-
-            <Link
-              href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
-              className="link link--underline-always text-accent"
-            >
-              {localization.SIGN_UP}
-            </Link>
-          </p>
+            <Description className="text-center text-foreground text-sm">
+              {localization.NEED_TO_CREATE_AN_ACCOUNT}{" "}
+              <Link
+                href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
+                className="link link--underline-hover text-accent"
+              >
+                {localization.SIGN_UP}
+              </Link>
+            </Description>
+          </Fieldset>
         </Form>
       </Card.Content>
     </Card>
