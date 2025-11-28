@@ -70,12 +70,9 @@ export function ProviderButtons({
       callbackURL
     })
 
-    setIsPending(false)
+    if (error) toast.error(error.message)
 
-    if (error) {
-      toast.error(error.message)
-      return
-    }
+    setIsPending(false)
   }
 
   return (

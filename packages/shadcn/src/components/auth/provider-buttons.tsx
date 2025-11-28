@@ -71,12 +71,9 @@ export function ProviderButtons({
       callbackURL
     })
 
-    setIsPending(false)
+    if (error) toast.error(error.message)
 
-    if (error) {
-      toast.error(error.message)
-      return
-    }
+    setIsPending(false)
   }
 
   return (
@@ -99,6 +96,7 @@ export function ProviderButtons({
             onClick={() => handleClick(provider)}
           >
             <ProviderIcon className="size-4" />
+
             {resolvedSocialLayout === "vertical"
               ? localization.CONTINUE_WITH_PROVIDER.replace(
                   "{provider}",
