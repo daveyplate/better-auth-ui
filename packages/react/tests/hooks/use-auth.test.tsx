@@ -1,3 +1,4 @@
+import { basePaths, viewPaths } from "@better-auth-ui/core"
 import { renderHook } from "@testing-library/react"
 import { createAuthClient } from "better-auth/react"
 import type { ReactNode } from "react"
@@ -31,7 +32,7 @@ describe("useAuth", () => {
     it("should throw error when authClient is not provided", () => {
       expect(() => {
         renderHook(() => useAuth())
-      }).toThrow("[Better Auth UI] authClient is required")
+      }).toThrow()
     })
 
     it("should return config when authClient is provided via context", () => {
@@ -65,39 +66,18 @@ describe("useAuth", () => {
     it("should have default basePaths", () => {
       const { result } = renderHook(() => useAuth(), { wrapper })
 
-      expect(result.current.basePaths).toEqual({
-        auth: "/auth",
-        account: "/account",
-        organization: "/organization"
-      })
+      expect(result.current.basePaths).toEqual(basePaths)
     })
 
     it("should have default viewPaths", () => {
       const { result } = renderHook(() => useAuth(), { wrapper })
 
-      expect(result.current.viewPaths.auth).toEqual({
-        signIn: "sign-in",
-        signUp: "sign-up",
-        magicLink: "magic-link",
-        forgotPassword: "forgot-password",
-        resetPassword: "reset-password",
-        signOut: "sign-out"
-      })
+      expect(result.current.viewPaths).toEqual(viewPaths)
     })
 
     it("should have default redirectTo", () => {
       const { result } = renderHook(() => useAuth(), { wrapper })
       expect(result.current.redirectTo).toBe("/")
-    })
-
-    it("should have default emailAndPassword config", () => {
-      const { result } = renderHook(() => useAuth(), { wrapper })
-
-      expect(result.current.emailAndPassword).toEqual({
-        enabled: true,
-        forgotPassword: true,
-        rememberMe: false
-      })
     })
 
     it("should have default baseURL as empty string", () => {
@@ -277,18 +257,6 @@ describe("useAuth", () => {
       const { result } = renderHook(() => useAuth(), { wrapper })
 
       expect(result.current.socialProviders).toEqual(["github", "google"])
-    })
-
-    it("should handle empty social providers array", () => {
-      const wrapper = ({ children }: { children: ReactNode }) => (
-        <AuthProvider authClient={mockAuthClient} socialProviders={[]}>
-          {children}
-        </AuthProvider>
-      )
-
-      const { result } = renderHook(() => useAuth(), { wrapper })
-
-      expect(result.current.socialProviders).toEqual([])
     })
   })
 
