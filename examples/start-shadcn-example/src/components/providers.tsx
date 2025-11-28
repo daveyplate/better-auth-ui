@@ -9,7 +9,7 @@ export function Providers({ children }: { children: ReactNode }) {
   const navigate = useNavigate()
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <AuthProvider
         authClient={authClient}
         navigate={(path) => navigate({ to: path })}

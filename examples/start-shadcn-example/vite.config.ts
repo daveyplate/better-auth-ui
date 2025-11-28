@@ -10,7 +10,11 @@ const config = defineConfig({
     port: 3000
   },
   plugins: [
-    devtools(),
+    devtools({
+      eventBusConfig: {
+        port: 42070
+      }
+    }),
     viteTsConfigPaths(),
     tailwindcss(),
     tanstackStart(),

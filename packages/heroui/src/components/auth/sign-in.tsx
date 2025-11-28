@@ -5,7 +5,9 @@ import {
   Button,
   Card,
   Checkbox,
+  Description,
   FieldError,
+  Fieldset,
   Form,
   Input,
   Label,
@@ -16,7 +18,6 @@ import {
 import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
-
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 import { ResendVerificationButton } from "./resend-verification-button"
@@ -123,144 +124,143 @@ export function SignIn({ className, ...props }: SignInProps) {
   }
 
   return (
-    <Card className={cn("w-full max-w-sm md:p-6 gap-6", className)}>
-      <Card.Header className="text-xl font-medium">
-        {localization.SIGN_IN}
-      </Card.Header>
-
+    <Card className={cn("w-full max-w-sm p-4 md:p-6", className)}>
       <Card.Content>
-        <Form className="flex flex-col gap-6" onSubmit={onSubmit}>
-          {emailAndPassword?.enabled && (
-            <>
-              <div className="flex flex-col gap-4">
-                <TextField
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  isDisabled={isPending}
-                >
-                  <Label>{localization.EMAIL}</Label>
+        <Form onSubmit={onSubmit}>
+          <Fieldset className="gap-4">
+            <Fieldset.Legend className="text-xl">
+              {localization.SIGN_IN}
+            </Fieldset.Legend>
 
-                  <Input
-                    placeholder={localization.EMAIL_PLACEHOLDER}
-                    required
-                  />
+            <Description />
 
-                  <FieldError />
-                </TextField>
+            {emailAndPassword?.enabled && (
+              <>
+                <Fieldset.Group>
+                  <TextField
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    isDisabled={isPending}
+                  >
+                    <Label>{localization.EMAIL}</Label>
 
-                <TextField
-                  minLength={8}
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  isDisabled={isPending}
-                  value={password}
-                  onChange={setPassword}
-                >
-                  <div className="flex justify-between">
-                    <Label>{localization.PASSWORD}</Label>
+                    <Input
+                      placeholder={localization.EMAIL_PLACEHOLDER}
+                      required
+                    />
 
-                    {!emailAndPassword?.rememberMe &&
-                      emailAndPassword?.forgotPassword && (
-                        <Link
-                          href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
-                          className="link link--underline-hover"
-                        >
-                          {localization.FORGOT_PASSWORD}
-                        </Link>
-                      )}
-                  </div>
+                    <FieldError />
+                  </TextField>
 
-                  <Input
-                    placeholder={localization.PASSWORD_PLACEHOLDER}
-                    required
-                  />
+                  <TextField
+                    minLength={8}
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    isDisabled={isPending}
+                    value={password}
+                    onChange={setPassword}
+                  >
+                    <div className="flex justify-between">
+                      <Label>{localization.PASSWORD}</Label>
 
-                  <FieldError />
-                </TextField>
-              </div>
+                      {!emailAndPassword?.rememberMe &&
+                        emailAndPassword?.forgotPassword && (
+                          <Link
+                            href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
+                            className="link link--underline-hover text-muted"
+                          >
+                            {localization.FORGOT_PASSWORD}
+                          </Link>
+                        )}
+                    </div>
 
-              {emailAndPassword.rememberMe && (
-                <div className="flex justify-between">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="rememberMe"
-                      name="rememberMe"
-                      isDisabled={isPending}
-                    >
+                    <Input
+                      placeholder={localization.PASSWORD_PLACEHOLDER}
+                      required
+                    />
+
+                    <FieldError />
+                  </TextField>
+                </Fieldset.Group>
+
+                {emailAndPassword?.rememberMe && (
+                  <div className="flex justify-between mt-1">
+                    <Checkbox name="rememberMe" isDisabled={isPending}>
                       <Checkbox.Control>
                         <Checkbox.Indicator />
                       </Checkbox.Control>
+
+                      <Checkbox.Content>
+                        <Label>{localization.REMEMBER_ME}</Label>
+                      </Checkbox.Content>
                     </Checkbox>
 
-                    <Label htmlFor="rememberMe" className="cursor-pointer">
-                      {localization.REMEMBER_ME}
-                    </Label>
+                    {emailAndPassword?.forgotPassword && (
+                      <Link
+                        href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
+                        className="link link--underline-hover text-muted"
+                      >
+                        {localization.FORGOT_PASSWORD}
+                      </Link>
+                    )}
                   </div>
-
-                  {emailAndPassword?.forgotPassword && (
-                    <Link
-                      href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
-                      className="link link--underline-hover"
-                    >
-                      {localization.FORGOT_PASSWORD}
-                    </Link>
-                  )}
-                </div>
-              )}
-
-              <div className="flex flex-col gap-4">
-                <Button type="submit" className="w-full" isPending={isPending}>
-                  {isPending && <Spinner color="current" size="sm" />}
-
-                  {localization.SIGN_IN}
-                </Button>
-
-                {magicLink && (
-                  <MagicLinkButton
-                    view="signIn"
-                    isPending={isPending}
-                    localization={localization}
-                  />
                 )}
+
+                <Fieldset.Actions className="flex-col gap-3">
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    isPending={isPending}
+                  >
+                    {isPending && <Spinner color="current" size="sm" />}
+
+                    {localization.SIGN_IN}
+                  </Button>
+
+                  {magicLink && (
+                    <MagicLinkButton
+                      view="signIn"
+                      isPending={isPending}
+                      localization={localization}
+                    />
+                  )}
+                </Fieldset.Actions>
+              </>
+            )}
+
+            {showSeparator && (
+              <div className="flex items-center gap-4">
+                <Separator className="flex-1 bg-surface-quaternary" />
+
+                <p className="text-xs text-muted shrink-0">{localization.OR}</p>
+
+                <Separator className="flex-1 bg-surface-quaternary" />
               </div>
-            </>
-          )}
+            )}
 
-          {showSeparator && (
-            <div className="flex items-center gap-4">
-              <Separator className="flex-1 bg-surface-quaternary" />
-
-              <p className="text-xs text-muted shrink-0">{localization.OR}</p>
-
-              <Separator className="flex-1 bg-surface-quaternary" />
-            </div>
-          )}
-
-          {socialProviders && socialProviders.length > 0 && (
-            <div className="flex flex-col gap-4">
+            {socialProviders && socialProviders.length > 0 && (
               <ProviderButtons
                 {...props}
                 isPending={isPending}
                 setIsPending={setIsPending}
                 localization={localization}
               />
-            </div>
-          )}
+            )}
 
-          {emailAndPassword?.enabled && (
-            <p className="text-sm justify-center flex gap-2 items-center">
-              {localization.NEED_TO_CREATE_AN_ACCOUNT}
-
-              <Link
-                href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
-                className="link link--underline-always text-accent"
-              >
-                {localization.SIGN_UP}
-              </Link>
-            </p>
-          )}
+            {emailAndPassword?.enabled && (
+              <Description className="text-center text-foreground text-sm">
+                {localization.NEED_TO_CREATE_AN_ACCOUNT}{" "}
+                <Link
+                  href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
+                  className="link link--underline-hover text-accent"
+                >
+                  {localization.SIGN_UP}
+                </Link>
+              </Description>
+            )}
+          </Fieldset>
         </Form>
       </Card.Content>
     </Card>

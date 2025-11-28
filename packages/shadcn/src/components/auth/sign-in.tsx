@@ -10,8 +10,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { Field, FieldError, FieldLabel } from "../ui/field"
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldSeparator
+} from "../ui/field"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 import { ResendVerificationButton } from "./resend-verification-button"
@@ -122,16 +128,16 @@ export function SignIn({ className, ...props }: SignInProps) {
 
   return (
     <Card className={cn("w-full max-w-sm py-4 md:py-6", className)}>
-      <CardHeader className="flex px-4 md:px-6">
+      <CardHeader className="px-4 md:px-6 -mb-4">
         <CardTitle className="text-xl">{localization.SIGN_IN}</CardTitle>
       </CardHeader>
 
       <CardContent className="px-4 md:px-6">
-        <form className="flex flex-col gap-6" onSubmit={onSubmit}>
-          {emailAndPassword?.enabled && (
-            <>
-              <div className="flex flex-col gap-4">
-                <Field className="gap-2" data-invalid={!!fieldErrors.email}>
+        <form onSubmit={onSubmit}>
+          <FieldGroup className="gap-4">
+            {emailAndPassword?.enabled && (
+              <>
+                <Field data-invalid={!!fieldErrors.email} className="gap-1">
                   <FieldLabel htmlFor="email">{localization.EMAIL}</FieldLabel>
 
                   <Input
@@ -161,8 +167,8 @@ export function SignIn({ className, ...props }: SignInProps) {
                   <FieldError>{fieldErrors.email}</FieldError>
                 </Field>
 
-                <Field className="gap-2" data-invalid={!!fieldErrors.password}>
-                  <div className="flex justify-between items-center">
+                <Field data-invalid={!!fieldErrors.password} className="gap-1">
+                  <div className="flex items-center">
                     <FieldLabel htmlFor="password">
                       {localization.PASSWORD}
                     </FieldLabel>
@@ -171,7 +177,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                       emailAndPassword?.forgotPassword && (
                         <Link
                           href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
-                          className="text-sm underline-offset-4 text-card-foreground! hover:underline"
+                          className="ml-auto inline-block text-sm underline-offset-4 hover:underline text-card-foreground!"
                         >
                           {localization.FORGOT_PASSWORD}
                         </Link>
@@ -210,87 +216,82 @@ export function SignIn({ className, ...props }: SignInProps) {
 
                   <FieldError>{fieldErrors.password}</FieldError>
                 </Field>
-              </div>
 
-              {emailAndPassword.rememberMe && (
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="rememberMe"
-                      name="rememberMe"
-                      disabled={isPending}
-                    />
-                    <Label
-                      htmlFor="rememberMe"
-                      className="cursor-pointer text-sm font-normal"
-                    >
-                      {localization.REMEMBER_ME}
-                    </Label>
-                  </div>
+                {emailAndPassword.rememberMe && (
+                  <Field className="my-1">
+                    <div className="flex items-center">
+                      <div className="flex items-center gap-2">
+                        <Checkbox
+                          id="rememberMe"
+                          name="rememberMe"
+                          disabled={isPending}
+                        />
 
-                  {emailAndPassword?.forgotPassword && (
-                    <Link
-                      href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
-                      className="text-sm underline-offset-4 hover:underline"
-                    >
-                      {localization.FORGOT_PASSWORD}
-                    </Link>
-                  )}
-                </div>
-              )}
+                        <Label
+                          htmlFor="rememberMe"
+                          className="cursor-pointer text-sm font-normal"
+                        >
+                          {localization.REMEMBER_ME}
+                        </Label>
+                      </div>
 
-              <div className="flex flex-col gap-4">
-                <Button type="submit" className="w-full" disabled={isPending}>
-                  {isPending && <Loader2 className="size-4 animate-spin" />}
-                  {localization.SIGN_IN}
-                </Button>
-
-                {magicLink && (
-                  <MagicLinkButton
-                    view="signIn"
-                    isPending={isPending}
-                    localization={localization}
-                  />
+                      {emailAndPassword?.forgotPassword && (
+                        <Link
+                          href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
+                          className="ml-auto inline-block text-sm underline-offset-4 hover:underline text-card-foreground!"
+                        >
+                          {localization.FORGOT_PASSWORD}
+                        </Link>
+                      )}
+                    </div>
+                  </Field>
                 )}
-              </div>
-            </>
-          )}
 
-          {showSeparator && (
-            <div className="flex items-center gap-4">
-              <Separator className="flex-1" />
+                <Field>
+                  <Button type="submit" disabled={isPending}>
+                    {isPending && <Loader2 className="animate-spin" />}
 
-              <p className="text-xs text-muted-foreground shrink-0">
+                    {localization.SIGN_IN}
+                  </Button>
+
+                  {magicLink && (
+                    <MagicLinkButton
+                      view="signIn"
+                      isPending={isPending}
+                      localization={localization}
+                    />
+                  )}
+                </Field>
+              </>
+            )}
+
+            {showSeparator && (
+              <FieldSeparator className="m-0 text-xs flex items-center">
                 {localization.OR}
-              </p>
+              </FieldSeparator>
+            )}
 
-              <Separator className="flex-1" />
-            </div>
-          )}
-
-          {socialProviders && socialProviders.length > 0 && (
-            <div className="flex flex-col gap-4">
+            {socialProviders && socialProviders.length > 0 && (
               <ProviderButtons
                 {...props}
                 isPending={isPending}
                 setIsPending={setIsPending}
                 localization={localization}
               />
-            </div>
-          )}
+            )}
 
-          {emailAndPassword?.enabled && (
-            <p className="text-sm justify-center flex gap-2 items-center text-muted-foreground">
-              {localization.NEED_TO_CREATE_AN_ACCOUNT}
-
-              <Link
-                href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
-                className="underline underline-offset-4"
-              >
-                {localization.SIGN_UP}
-              </Link>
-            </p>
-          )}
+            {emailAndPassword?.enabled && (
+              <FieldDescription className="text-center">
+                {localization.NEED_TO_CREATE_AN_ACCOUNT}{" "}
+                <Link
+                  href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
+                  className="underline underline-offset-4"
+                >
+                  {localization.SIGN_UP}
+                </Link>
+              </FieldDescription>
+            )}
+          </FieldGroup>
         </form>
       </CardContent>
     </Card>

@@ -7,7 +7,7 @@ import {
   providerIcons,
   useAuth
 } from "@better-auth-ui/react"
-import { Button } from "@heroui/react"
+import { Button, Fieldset } from "@heroui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
 import { useMemo } from "react"
 import { toast } from "sonner"
@@ -49,31 +49,14 @@ export function ProviderButtons({
   const { authClient, baseURL, redirectTo, socialProviders } = useAuth(props)
 
   const resolvedSocialLayout = useMemo(() => {
-    if (!socialProviders?.length) {
-      return socialLayout
-    }
-
     if (socialLayout === "auto") {
-      if (socialProviders.length === 1) {
-        return "horizontal"
-      }
-      if (socialProviders.length === 2) {
-        return "grid"
-      }
-      if (socialProviders.length === 3) {
-        return "vertical"
-      }
-      if (socialProviders.length === 4) {
+      if (socialProviders?.length && socialProviders.length >= 4) {
         return "horizontal"
       }
 
-      // if it's odd, return vertical
-      if (socialProviders.length % 2 !== 0) {
-        return "vertical"
-      }
-
-      return "grid"
+      return "vertical"
     }
+
     return socialLayout
   }, [socialLayout, socialProviders?.length])
 
@@ -96,12 +79,12 @@ export function ProviderButtons({
   }
 
   return (
-    <div
+    <Fieldset.Actions
       className={cn(
-        "gap-4",
-        resolvedSocialLayout === "vertical" && "flex flex-col",
-        resolvedSocialLayout === "horizontal" && "flex flex-wrap",
-        resolvedSocialLayout === "grid" && "grid grid-cols-2"
+        "gap-3",
+        resolvedSocialLayout === "grid" && "grid grid-cols-2",
+        resolvedSocialLayout === "vertical" && "flex-col",
+        resolvedSocialLayout === "horizontal" && "flex-wrap"
       )}
     >
       {socialProviders?.map((provider) => {
@@ -110,7 +93,10 @@ export function ProviderButtons({
         return (
           <Button
             key={provider}
-            className="w-full flex-1"
+            className={cn(
+              "w-full",
+              resolvedSocialLayout === "horizontal" && "flex-1"
+            )}
             variant="tertiary"
             type="button"
             isDisabled={isPending}
@@ -129,7 +115,7 @@ export function ProviderButtons({
           </Button>
         )
       })}
-    </div>
+    </Fieldset.Actions>
   )
 }
 
