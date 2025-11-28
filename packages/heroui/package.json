@@ -1,0 +1,56 @@
+{
+  "name": "@better-auth-ui/heroui",
+  "version": "0.0.0-alpha.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && bun styles",
+    "dev": "bun styles && tsc --watch",
+    "styles": "cpy src/styles.css dist/ --flat",
+    "test": "vitest"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server.js",
+      "types": "./dist/server.d.ts"
+    },
+    "./styles": "./dist/styles.css"
+  },
+  "devDependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@heroui/react": "^3.0.0-beta.2",
+    "@heroui/styles": "^3.0.0-beta.2",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^19.2.7",
+    "@vitejs/plugin-react": "^5.0.4",
+    "@vitest/browser-playwright": "^4.0.14",
+    "better-auth": "^1.4.3",
+    "cpy-cli": "^6.0.0",
+    "playwright": "^1.57.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sonner": "^2.0.7",
+    "vitest": "^4.0.14"
+  },
+  "dependencies": {
+    "@better-auth-ui/core": "workspace:*",
+    "@better-auth-ui/react": "workspace:*"
+  },
+  "peerDependencies": {
+    "@heroicons/react": ">=2.2.0",
+    "@heroui/react": ">=3.0.0-beta.2",
+    "@heroui/styles": ">=3.0.0-beta.2",
+    "better-auth": ">=1.4.2",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "sonner": ">=2.0.0"
+  }
+}

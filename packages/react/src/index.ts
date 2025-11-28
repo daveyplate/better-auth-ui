@@ -1,0 +1,16 @@
+export {
+  type AuthView,
+  authPaths,
+  authViewPaths,
+  viewPaths
+} from "@better-auth-ui/core"
+
+export * from "./components/auth-provider"
+export * from "./components/emails"
+export * from "./components/icons"
+export * from "./hooks/use-auth"
+export * from "./hooks/use-authenticate"
+export * from "./hooks/use-hydrated"
+export * from "./lib/provider-icons"
+export * from "./lib/utils"
+export * from "./types/auth-client"

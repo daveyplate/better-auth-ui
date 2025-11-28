@@ -19,6 +19,6 @@ jobs:
       - run: bun install
       - uses: nrwl/nx-set-shas@v4
       
-      - run: bun biome format --write
+      - run: bun biome check --write
 
       - uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27

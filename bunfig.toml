@@ -1,0 +1,3 @@
+[test]
+root = "packages/core/tests"
+

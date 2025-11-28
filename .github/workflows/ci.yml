@@ -34,14 +34,40 @@ jobs:
       - run: bun install
       - uses: nrwl/nx-set-shas@v4
 
+      # Cache Playwright browsers for Vitest browser testing
+      - name: Get Playwright version
+        id: playwright-version
+        run: |
+          VERSION=$(jq -r '.devDependencies.playwright // empty' packages/react/package.json 2>/dev/null | sed 's/[\^~]//')
+          echo "version=${VERSION:-latest}" >> $GITHUB_OUTPUT
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: bunx playwright install --with-deps chromium
+
+      - name: Install Playwright system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: bunx playwright install-deps chromium
+
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: bun nx-cloud record -- echo Hello World
 
       # Check code formatting and linting
-      - run: bun nx-cloud record -- biome check
+      - run: bun nx-cloud record -- biome lint
 
       # Run tests and build the project
-      - run: bun nx affected -t test build
+      - run: bun nx run-many -t build
+      - run: bun nx run-many -t test
+
+      # Publish new versions of the packages
+      - run: bun nx-cloud record -- bunx pkg-pr-new publish --packageManager=bun './packages/*'
 
       # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
       - run: bun nx fix-ci
