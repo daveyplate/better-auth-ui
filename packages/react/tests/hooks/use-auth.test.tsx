@@ -241,6 +241,19 @@ describe("useAuth", () => {
 
       expect(result.current.redirectTo).toBe("/dashboard")
     })
+
+    it("should reject redirectTo with backslash prefix", () => {
+      window.history.pushState({}, "", "/?redirectTo=/\\evil.com")
+
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <AuthProvider authClient={mockAuthClient}>{children}</AuthProvider>
+      )
+
+      const { result } = renderHook(() => useAuth(), { wrapper })
+
+      // Should fall back to default since backslash can be normalized to forward slash by browsers
+      expect(result.current.redirectTo).toBe("/")
+    })
   })
 
   describe("social providers configuration", () => {
