@@ -171,7 +171,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                       emailAndPassword?.forgotPassword && (
                         <Link
                           href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
-                          className="text-sm underline-offset-4 hover:underline"
+                          className="text-sm underline-offset-4 text-card-foreground! hover:underline"
                         >
                           {localization.FORGOT_PASSWORD}
                         </Link>

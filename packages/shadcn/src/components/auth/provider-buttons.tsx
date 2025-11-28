@@ -100,7 +100,7 @@ export function ProviderButtons({
       className={cn(
         "gap-4",
         resolvedSocialLayout === "vertical" && "flex flex-col",
-        resolvedSocialLayout === "horizontal" && "flex flex-row",
+        resolvedSocialLayout === "horizontal" && "flex flex-wrap",
         resolvedSocialLayout === "grid" && "grid grid-cols-2"
       )}
     >
@@ -110,7 +110,7 @@ export function ProviderButtons({
         return (
           <Button
             key={provider}
-            className="w-full"
+            className="flex-1"
             variant="outline"
             type="button"
             disabled={isPending}
@@ -133,4 +133,3 @@ export function ProviderButtons({
 }
 
 ProviderButtons.localization = providerButtonsLocalization
-
