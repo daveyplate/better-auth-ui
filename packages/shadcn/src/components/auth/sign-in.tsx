@@ -280,7 +280,7 @@ export function SignIn({ className, ...props }: SignInProps) {
           )}
 
           {emailAndPassword?.enabled && (
-            <p className="text-sm justify-center flex gap-2 items-center">
+            <p className="text-sm justify-center flex gap-2 items-center text-muted-foreground">
               {localization.NEED_TO_CREATE_AN_ACCOUNT}
 
               <Link
