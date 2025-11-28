@@ -2,14 +2,12 @@
 
 import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
-import { Loader2 } from "lucide-react"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+
+import { Button } from "../ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
+import { Checkbox } from "../ui/checkbox"
 import {
   Field,
   FieldDescription,
@@ -18,6 +16,9 @@ import {
   FieldLabel,
   FieldSeparator
 } from "../ui/field"
+import { Input } from "../ui/input"
+import { Label } from "../ui/label"
+import { Spinner } from "../ui/spinner"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 import { ResendVerificationButton } from "./resend-verification-button"
@@ -99,8 +100,6 @@ export function SignIn({ className, ...props }: SignInProps) {
       { disableSignal: true }
     )
 
-    setIsPending(false)
-
     if (error) {
       if (error.code === "EMAIL_NOT_VERIFIED") {
         toast.error(error.message, {
@@ -119,11 +118,12 @@ export function SignIn({ className, ...props }: SignInProps) {
       }
 
       setPassword("")
-      return
+    } else {
+      await refetch()
+      navigate(redirectTo)
     }
 
-    await refetch()
-    navigate(redirectTo)
+    setIsPending(false)
   }
 
   return (
@@ -251,7 +251,7 @@ export function SignIn({ className, ...props }: SignInProps) {
 
             <Field>
               <Button type="submit" disabled={isPending}>
-                {isPending && <Loader2 className="animate-spin" />}
+                {isPending && <Spinner />}
 
                 {localization.SIGN_IN}
               </Button>
@@ -281,8 +281,9 @@ export function SignIn({ className, ...props }: SignInProps) {
             )}
 
             {emailAndPassword?.enabled && (
-              <FieldDescription className="text-center">
-                {localization.NEED_TO_CREATE_AN_ACCOUNT}{" "}
+              <FieldDescription className="flex justify-center gap-1">
+                {localization.NEED_TO_CREATE_AN_ACCOUNT}
+
                 <Link
                   href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
                   className="underline underline-offset-4"
