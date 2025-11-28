@@ -246,24 +246,24 @@ export function SignIn({ className, ...props }: SignInProps) {
                     </div>
                   </Field>
                 )}
-
-                <Field>
-                  <Button type="submit" disabled={isPending}>
-                    {isPending && <Loader2 className="animate-spin" />}
-
-                    {localization.SIGN_IN}
-                  </Button>
-
-                  {magicLink && (
-                    <MagicLinkButton
-                      view="signIn"
-                      isPending={isPending}
-                      localization={localization}
-                    />
-                  )}
-                </Field>
               </>
             )}
+
+            <Field>
+              <Button type="submit" disabled={isPending}>
+                {isPending && <Loader2 className="animate-spin" />}
+
+                {localization.SIGN_IN}
+              </Button>
+
+              {magicLink && (
+                <MagicLinkButton
+                  view="signIn"
+                  isPending={isPending}
+                  localization={localization}
+                />
+              )}
+            </Field>
 
             {showSeparator && (
               <FieldSeparator className="m-0 text-xs flex items-center">

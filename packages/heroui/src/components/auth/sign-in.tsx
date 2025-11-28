@@ -150,7 +150,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                       required
                     />
 
-                    <FieldError />
+                    <FieldError className="text-wrap" />
                   </TextField>
 
                   <TextField
@@ -181,7 +181,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                       required
                     />
 
-                    <FieldError />
+                    <FieldError className="text-wrap" />
                   </TextField>
                 </Fieldset.Group>
 
