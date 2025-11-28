@@ -10,7 +10,7 @@ const componentNames = [
   "Auth",
   "ProviderButtons",
   "MagicLinkButton",
-  "ResendVerificationButton",
+  "ResendVerificationButton"
 ] as const
 
 describe("@better-auth-ui/heroui integration", () => {
