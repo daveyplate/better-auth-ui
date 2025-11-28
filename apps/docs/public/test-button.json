@@ -4,7 +4,9 @@
   "type": "registry:block",
   "title": "Test Button",
   "description": "A simple test button component.",
-  "dependencies": ["button"],
+  "dependencies": [
+    "button"
+  ],
   "files": [
     {
       "path": "src/components/test-button.tsx",

@@ -15,6 +15,51 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "use-auth",
+      "type": "registry:component",
+      "title": "useAuth Hook",
+      "description": "Hook for accessing authentication configuration and client.",
+      "files": [
+        {
+          "path": "../react/src/hooks/use-auth.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sign-in",
+      "type": "registry:block",
+      "title": "Sign In",
+      "description": "A complete sign-in form component with email/password, magic link, and social provider support.",
+      "dependencies": [
+        "button",
+        "card",
+        "input",
+        "label",
+        "checkbox",
+        "separator",
+        "use-auth"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/sign-in.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/auth/magic-link-button.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/auth/provider-buttons.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/auth/resend-verification-button.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
