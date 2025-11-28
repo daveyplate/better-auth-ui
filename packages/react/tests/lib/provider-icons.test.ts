@@ -1,4 +1,5 @@
 import { providerNames } from "@better-auth-ui/core"
+import { socialProviderList } from "better-auth/social-providers"
 import { describe, expect, it } from "vitest"
 import { providerIcons } from "../../src/lib/provider-icons"
 
@@ -9,43 +10,7 @@ describe("providerIcons", () => {
   })
 
   it("should contain all expected provider icons", () => {
-    const expectedProviders = [
-      "apple",
-      "atlassian",
-      "cognito",
-      "discord",
-      "dropbox",
-      "facebook",
-      "figma",
-      "github",
-      "gitlab",
-      "google",
-      "huggingface",
-      "kakao",
-      "kick",
-      "line",
-      "linear",
-      "linkedin",
-      "microsoft",
-      "naver",
-      "notion",
-      "paybin",
-      "paypal",
-      "polar",
-      "reddit",
-      "roblox",
-      "salesforce",
-      "slack",
-      "spotify",
-      "tiktok",
-      "twitch",
-      "twitter",
-      "vercel",
-      "vk",
-      "zoom"
-    ]
-
-    expectedProviders.forEach((provider) => {
+    socialProviderList.forEach((provider) => {
       expect(providerIcons).toHaveProperty(provider)
     })
   })
@@ -56,8 +21,8 @@ describe("providerIcons", () => {
     })
   })
 
-  it("should have exactly 33 provider icons", () => {
-    expect(Object.keys(providerIcons)).toHaveLength(33)
+  it("should have exactly the right amount of provider icons", () => {
+    expect(Object.keys(providerIcons)).toHaveLength(socialProviderList.length)
   })
 
   describe("common provider icons", () => {
