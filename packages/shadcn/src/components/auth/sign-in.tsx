@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
+import { Field, FieldError, FieldLabel } from "../ui/field"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 import { ResendVerificationButton } from "./resend-verification-button"
@@ -66,7 +67,10 @@ export function SignIn({ className, ...props }: SignInProps) {
 
   const [password, setPassword] = useState("")
   const [isPending, setIsPending] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<{
+    email?: string
+    password?: string
+  }>({})
 
   const showSeparator =
     emailAndPassword?.enabled && socialProviders && socialProviders.length > 0
@@ -78,7 +82,7 @@ export function SignIn({ className, ...props }: SignInProps) {
     const formData = new FormData(e.currentTarget)
 
     const email = formData.get("email") as string
-    const password = formData.get("password") as string
+    const rememberMe = formData.get("rememberMe") === "on"
 
     const { error } = await authClient.signIn.email(
       {
@@ -88,6 +92,8 @@ export function SignIn({ className, ...props }: SignInProps) {
       },
       { disableSignal: true }
     )
+
+    setIsPending(false)
 
     if (error) {
       if (error.code === "EMAIL_NOT_VERIFIED") {
@@ -107,28 +113,27 @@ export function SignIn({ className, ...props }: SignInProps) {
       }
 
       setPassword("")
-      setIsPending(false)
       return
     }
 
     await refetch()
     navigate(redirectTo)
-    setIsPending(false)
   }
 
   return (
-    <Card className={cn("w-full max-w-sm", className)}>
-      <CardHeader>
+    <Card className={cn("w-full max-w-sm py-4 md:py-6", className)}>
+      <CardHeader className="flex px-4 md:px-6">
         <CardTitle className="text-xl">{localization.SIGN_IN}</CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="px-4 md:px-6">
         <form className="flex flex-col gap-6" onSubmit={onSubmit}>
           {emailAndPassword?.enabled && (
             <>
               <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="email">{localization.EMAIL}</Label>
+                <Field className="gap-2" data-invalid={!!fieldErrors.email}>
+                  <FieldLabel htmlFor="email">{localization.EMAIL}</FieldLabel>
+
                   <Input
                     id="email"
                     name="email"
@@ -137,23 +142,42 @@ export function SignIn({ className, ...props }: SignInProps) {
                     placeholder={localization.EMAIL_PLACEHOLDER}
                     required
                     disabled={isPending}
+                    onChange={() => {
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        email: undefined
+                      }))
+                    }}
+                    onInvalid={(e) => {
+                      e.preventDefault()
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        email: (e.target as HTMLInputElement).validationMessage
+                      }))
+                    }}
+                    aria-invalid={!!fieldErrors.email}
                   />
-                </div>
 
-                <div className="flex flex-col gap-2">
+                  <FieldError>{fieldErrors.email}</FieldError>
+                </Field>
+
+                <Field className="gap-2" data-invalid={!!fieldErrors.password}>
                   <div className="flex justify-between items-center">
-                    <Label htmlFor="password">{localization.PASSWORD}</Label>
+                    <FieldLabel htmlFor="password">
+                      {localization.PASSWORD}
+                    </FieldLabel>
 
                     {!emailAndPassword?.rememberMe &&
                       emailAndPassword?.forgotPassword && (
                         <Link
                           href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
-                          className="text-sm text-primary hover:underline"
+                          className="text-sm underline-offset-4 hover:underline"
                         >
                           {localization.FORGOT_PASSWORD}
                         </Link>
                       )}
                   </div>
+
                   <Input
                     id="password"
                     name="password"
@@ -163,10 +187,29 @@ export function SignIn({ className, ...props }: SignInProps) {
                     required
                     minLength={8}
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     disabled={isPending}
+                    onChange={(e) => {
+                      setPassword(e.target.value)
+
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        password: undefined
+                      }))
+                    }}
+                    onInvalid={(e) => {
+                      e.preventDefault()
+
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        password: (e.target as HTMLInputElement)
+                          .validationMessage
+                      }))
+                    }}
+                    aria-invalid={!!fieldErrors.password}
                   />
-                </div>
+
+                  <FieldError>{fieldErrors.password}</FieldError>
+                </Field>
               </div>
 
               {emailAndPassword.rememberMe && (
@@ -174,10 +217,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                   <div className="flex items-center gap-2">
                     <Checkbox
                       id="rememberMe"
-                      checked={rememberMe}
-                      onCheckedChange={(checked) => {
-                        setRememberMe(checked === true)
-                      }}
+                      name="rememberMe"
                       disabled={isPending}
                     />
                     <Label
@@ -191,7 +231,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                   {emailAndPassword?.forgotPassword && (
                     <Link
                       href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
-                      className="text-sm text-primary hover:underline"
+                      className="text-sm underline-offset-4 hover:underline"
                     >
                       {localization.FORGOT_PASSWORD}
                     </Link>
@@ -245,7 +285,7 @@ export function SignIn({ className, ...props }: SignInProps) {
 
               <Link
                 href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
-                className="text-primary hover:underline"
+                className="underline underline-offset-4"
               >
                 {localization.SIGN_UP}
               </Link>

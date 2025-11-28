@@ -1,6 +1,5 @@
 @import "tailwindcss";
-@import "@heroui/styles";
-@import "@better-auth-ui/heroui/styles";
+@import "@better-auth-ui/shadcn/styles";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));

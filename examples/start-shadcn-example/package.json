@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@better-auth-ui/heroui": "workspace:*",
+    "@better-auth-ui/shadcn": "workspace:*",
     "@heroui/react": "^3.0.0-beta.2",
     "@heroui/styles": "^3.0.0-beta.2",
     "@radix-ui/react-slot": "^1.2.4",
@@ -35,6 +36,7 @@
     "next-themes": "^0.4.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.0.6",
