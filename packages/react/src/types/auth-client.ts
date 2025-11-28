@@ -14,9 +14,9 @@ const authClient = createAuthClient({
 })
 
 /**
- * Type representing the default auth client with magic link plugin enabled.
+ * Type representing the default auth client with plugins enabled.
  *
  * This is the standard auth client type used throughout the React package
- * and includes magic link authentication capabilities.
+ * and includes all required plugins enabled.
  */
 export type AuthClient = typeof authClient
