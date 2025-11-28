@@ -147,6 +147,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                     <Label>{localization.EMAIL}</Label>
 
                     <Input
+                      className="text-base md:text-sm"
                       placeholder={localization.EMAIL_PLACEHOLDER}
                       required
                     />
@@ -178,6 +179,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                     </div>
 
                     <Input
+                      className="text-base md:text-sm"
                       placeholder={localization.PASSWORD_PLACEHOLDER}
                       required
                     />

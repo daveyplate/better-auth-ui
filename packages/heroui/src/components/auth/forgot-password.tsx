@@ -94,7 +94,11 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
             >
               <Label>{localization.EMAIL}</Label>
 
-              <Input placeholder={localization.EMAIL_PLACEHOLDER} required />
+              <Input
+                className="text-base md:text-sm"
+                placeholder={localization.EMAIL_PLACEHOLDER}
+                required
+              />
 
               <FieldError className="text-wrap" />
             </TextField>

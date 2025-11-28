@@ -136,7 +136,11 @@ export function SignUp({ className, ...props }: SignUpProps) {
               >
                 <Label>{localization.NAME}</Label>
 
-                <Input placeholder={localization.ENTER_YOUR_NAME} required />
+                <Input
+                  className="text-base md:text-sm"
+                  placeholder={localization.ENTER_YOUR_NAME}
+                  required
+                />
 
                 <FieldError className="text-wrap" />
               </TextField>
@@ -149,7 +153,11 @@ export function SignUp({ className, ...props }: SignUpProps) {
               >
                 <Label>{localization.EMAIL}</Label>
 
-                <Input placeholder={localization.EMAIL_PLACEHOLDER} required />
+                <Input
+                  className="text-base md:text-sm"
+                  placeholder={localization.EMAIL_PLACEHOLDER}
+                  required
+                />
 
                 <FieldError className="text-wrap" />
               </TextField>
@@ -166,6 +174,7 @@ export function SignUp({ className, ...props }: SignUpProps) {
                 <Label>{localization.PASSWORD}</Label>
 
                 <Input
+                  className="text-base md:text-sm"
                   placeholder={localization.PASSWORD_PLACEHOLDER}
                   required
                 />

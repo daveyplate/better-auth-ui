@@ -121,6 +121,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
               <Label>{localization.PASSWORD}</Label>
 
               <Input
+                className="text-base md:text-sm"
                 placeholder={localization.NEW_PASSWORD_PLACEHOLDER}
                 required
               />
