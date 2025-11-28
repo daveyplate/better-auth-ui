@@ -11,13 +11,14 @@ import {
   Form,
   Input,
   Label,
-  Separator,
   Spinner,
   TextField
 } from "@heroui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
+
+import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 import { ResendVerificationButton } from "./resend-verification-button"
@@ -231,13 +232,7 @@ export function SignIn({ className, ...props }: SignInProps) {
             )}
 
             {showSeparator && (
-              <div className="flex items-center gap-4">
-                <Separator className="flex-1 bg-surface-quaternary" />
-
-                <p className="text-xs text-muted shrink-0">{localization.OR}</p>
-
-                <Separator className="flex-1 bg-surface-quaternary" />
-              </div>
+              <FieldSeparator>{localization.OR}</FieldSeparator>
             )}
 
             {socialProviders && socialProviders.length > 0 && (

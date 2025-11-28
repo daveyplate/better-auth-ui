@@ -2,11 +2,11 @@
 
 import { basePaths, viewPaths } from "@better-auth-ui/core"
 import type { DeepPartial } from "better-auth/react"
-import deepmerge from "deepmerge"
 import { useContext } from "react"
 
 import type { AuthConfig } from "../components/auth-provider"
 import { AuthContext } from "../components/auth-provider"
+import { deepmerge } from "../lib/utils"
 import { useHydrated } from "./use-hydrated"
 
 const defaultConfig = {
@@ -42,7 +42,7 @@ export function useAuth(config?: DeepPartial<AuthConfig>) {
   const authConfig = deepmerge(
     defaultConfig,
     deepmerge(context || {}, config || {})
-  )
+  ) as AuthConfig
 
   if (authConfig.authClient === undefined) {
     throw new Error("[Better Auth UI] authClient is required")
@@ -72,5 +72,5 @@ export function useAuth(config?: DeepPartial<AuthConfig>) {
     }
   }
 
-  return authConfig as AuthConfig
+  return authConfig
 }
