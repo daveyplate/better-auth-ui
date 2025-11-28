@@ -41,7 +41,7 @@ export const providerNames = {
   vercel: "Vercel",
   vk: "VK",
   zoom: "Zoom"
-} as Record<SocialProvider, string>
+} satisfies Record<SocialProvider, string>
 
 /**
  * Get the human-readable display name for an authentication provider.

@@ -37,8 +37,9 @@ describe("providerIcons", () => {
       const iconKeys = Object.keys(providerIcons)
 
       // providerIcons should match all providers from core providerNames (bidirectional check)
-      const expectedKeys = coreProviderKeys.sort()
-      expect(iconKeys.sort()).toEqual(expectedKeys)
+      const expectedKeys = [...coreProviderKeys].sort()
+      const actualKeys = [...iconKeys].sort()
+      expect(actualKeys).toEqual(expectedKeys)
     })
   })
 })
