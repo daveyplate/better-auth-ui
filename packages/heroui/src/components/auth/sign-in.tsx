@@ -92,7 +92,7 @@ export function SignIn({ className, ...props }: SignInProps) {
       {
         email,
         password,
-        ...(emailAndPassword?.rememberMe && { rememberMe })
+        ...(emailAndPassword?.rememberMe ? { rememberMe } : {})
       },
       { disableSignal: true }
     )
