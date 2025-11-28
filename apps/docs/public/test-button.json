@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "test-button",
+  "type": "registry:block",
+  "title": "Test Button",
+  "description": "A simple test button component.",
+  "files": [
+    {
+      "path": "src/components/test-button.tsx",
+      "content": "import { Button } from \"./ui/button\"\n\nexport function TestButton() {\n  return <Button>Test</Button>\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

@@ -9,6 +9,7 @@
     "test": "nx run-many -t test"
   },
   "workspaces": [
+    "apps/*",
     "packages/*",
     "examples/*"
   ],

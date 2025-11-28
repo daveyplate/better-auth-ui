@@ -1,8 +1,9 @@
 {
-	"$schema": "https://biomejs.dev/schemas/latest/schema.json",
-	"root": false,
-	"files": {
-		"ignoreUnknown": true,
-		"includes": ["**", "!**/src/components/ui"]
-	}
+  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
+  "root": false,
+  "extends": "//",
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**", "!**/src/components/ui"]
+  }
 }

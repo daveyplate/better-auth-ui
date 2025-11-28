@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "better-auth-ui",
+  "homepage": "https://better-auth-ui.com",
+  "items": [
+    {
+      "name": "test-button",
+      "type": "registry:block",
+      "title": "Test Button",
+      "description": "A simple test button component.",
+      "dependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/test-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
