@@ -1,44 +1,44 @@
-import { createFileRoute, notFound } from '@tanstack/react-router';
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
-import { createServerFn } from '@tanstack/react-start';
-import { source } from '@/lib/source';
-import type * as PageTree from 'fumadocs-core/page-tree';
-import { useMemo } from 'react';
-import browserCollections from 'fumadocs-mdx:collections/browser';
+import browserCollections from "fumadocs-mdx:collections/browser"
+import { createFileRoute, notFound } from "@tanstack/react-router"
+import { createServerFn } from "@tanstack/react-start"
+import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions"
+import type * as PageTree from "fumadocs-core/page-tree"
+import { DocsLayout } from "fumadocs-ui/layouts/docs"
+import defaultMdxComponents from "fumadocs-ui/mdx"
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
-  DocsTitle,
-} from 'fumadocs-ui/page';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { baseOptions } from '@/lib/layout.shared';
-import { staticFunctionMiddleware } from '@tanstack/start-static-server-functions';
+  DocsTitle
+} from "fumadocs-ui/page"
+import { useMemo } from "react"
+import { baseOptions } from "@/lib/layout.shared"
+import { source } from "@/lib/source"
 
-export const Route = createFileRoute('/docs/$')({
+export const Route = createFileRoute("/docs/$")({
   component: Page,
   loader: async ({ params }) => {
-    const slugs = params._splat?.split('/') ?? [];
-    const data = await loader({ data: slugs });
-    await clientLoader.preload(data.path);
-    return data;
-  },
-});
+    const slugs = params._splat?.split("/") ?? []
+    const data = await loader({ data: slugs })
+    await clientLoader.preload(data.path)
+    return data
+  }
+})
 
 const loader = createServerFn({
-  method: 'GET',
+  method: "GET"
 })
   .inputValidator((slugs: string[]) => slugs)
   .middleware([staticFunctionMiddleware])
   .handler(async ({ data: slugs }) => {
-    const page = source.getPage(slugs);
-    if (!page) throw notFound();
+    const page = source.getPage(slugs)
+    if (!page) throw notFound()
 
     return {
       tree: source.pageTree as object,
-      path: page.path,
-    };
-  });
+      path: page.path
+    }
+  })
 
 const clientLoader = browserCollections.docs.createClientLoader({
   component({ toc, frontmatter, default: MDX }) {
@@ -49,59 +49,60 @@ const clientLoader = browserCollections.docs.createClientLoader({
         <DocsBody>
           <MDX
             components={{
-              ...defaultMdxComponents,
+              ...defaultMdxComponents
             }}
           />
         </DocsBody>
       </DocsPage>
-    );
-  },
-});
+    )
+  }
+})
 
 function Page() {
-  const data = Route.useLoaderData();
-  const Content = clientLoader.getComponent(data.path);
+  const data = Route.useLoaderData()
+  const Content = clientLoader.getComponent(data.path)
   const tree = useMemo(
     () => transformPageTree(data.tree as PageTree.Folder),
-    [data.tree],
-  );
+    [data.tree]
+  )
 
   return (
     <DocsLayout {...baseOptions()} tree={tree}>
       <Content />
     </DocsLayout>
-  );
+  )
 }
 
 function transformPageTree(root: PageTree.Root): PageTree.Root {
   function mapNode<T extends PageTree.Node>(item: T): T {
-    if (typeof item.icon === 'string') {
+    if (typeof item.icon === "string") {
       item = {
         ...item,
         icon: (
           <span
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: Icons are safe
             dangerouslySetInnerHTML={{
-              __html: item.icon,
+              __html: item.icon
             }}
           />
-        ),
-      };
+        )
+      }
     }
 
-    if (item.type === 'folder') {
+    if (item.type === "folder") {
       return {
         ...item,
         index: item.index ? mapNode(item.index) : undefined,
-        children: item.children.map(mapNode),
-      };
+        children: item.children.map(mapNode)
+      }
     }
 
-    return item;
+    return item
   }
 
   return {
     ...root,
     children: root.children.map(mapNode),
-    fallback: root.fallback ? transformPageTree(root.fallback) : undefined,
-  };
+    fallback: root.fallback ? transformPageTree(root.fallback) : undefined
+  }
 }
