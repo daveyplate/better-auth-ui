@@ -213,8 +213,9 @@ export function SignUp({ className, ...props }: SignUpProps) {
             )}
 
             {emailAndPassword?.enabled && (
-              <Description className="text-center text-foreground text-sm">
-                {localization.ALREADY_HAVE_AN_ACCOUNT}{" "}
+              <Description className="flex justify-center gap-1 text-foreground text-sm">
+                {localization.ALREADY_HAVE_AN_ACCOUNT}
+
                 <Link
                   href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
                   className="link link--underline-hover text-accent"

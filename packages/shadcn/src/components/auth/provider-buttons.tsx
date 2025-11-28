@@ -95,7 +95,7 @@ export function ProviderButtons({
             disabled={isPending}
             onClick={() => handleClick(provider)}
           >
-            <ProviderIcon className="size-4" />
+            <ProviderIcon />
 
             {resolvedSocialLayout === "vertical"
               ? localization.CONTINUE_WITH_PROVIDER.replace(

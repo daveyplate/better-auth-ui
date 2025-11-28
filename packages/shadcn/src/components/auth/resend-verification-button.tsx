@@ -1,10 +1,10 @@
 "use client"
 
 import type { AuthClient } from "@better-auth-ui/react"
-import { Loader2 } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
+import { Spinner } from "../ui/spinner"
 
 const resendVerificationButtonLocalization = {
   RESEND: "Resend",
@@ -68,11 +68,11 @@ export function ResendVerificationButton({
         }
       }}
     >
-      {isResending && <Loader2 className="size-4 animate-spin" />}
+      {isResending && <Spinner />}
+
       {localization.RESEND}
     </Button>
   )
 }
 
 ResendVerificationButton.localization = resendVerificationButtonLocalization
-

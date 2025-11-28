@@ -137,8 +137,9 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
               </Button>
             </Fieldset.Actions>
 
-            <Description className="text-center text-foreground text-sm">
-              {localization.REMEMBER_YOUR_PASSWORD}{" "}
+            <Description className="flex justify-center gap-1 text-foreground text-sm">
+              {localization.REMEMBER_YOUR_PASSWORD}
+
               <Link
                 href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
                 className="link link--underline-hover text-accent"
