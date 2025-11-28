@@ -28,11 +28,6 @@ function getUserInitials(user: {
   return user.email?.[0]?.toUpperCase() || "U"
 }
 
-/**
- * Renders the authenticated user dashboard with avatar, time-based greeting, user name/email badge, and a sign-out link; displays a centered spinner while no session is available.
- *
- * @returns The dashboard UI as JSX when a session exists, otherwise a full-height centered loading spinner.
- */
 export default function Dashboard() {
   const { data: session } = useAuthenticate()
 

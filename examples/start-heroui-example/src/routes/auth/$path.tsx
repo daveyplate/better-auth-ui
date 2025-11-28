@@ -10,11 +10,6 @@ export const Route = createFileRoute("/auth/$path")({
   component: AuthPage
 })
 
-/**
- * Renders centered authentication UI for the active auth subpath.
- *
- * @returns The JSX element containing a centered `Auth` component for the active route `path`.
- */
 function AuthPage() {
   const { path } = Route.useParams()
 

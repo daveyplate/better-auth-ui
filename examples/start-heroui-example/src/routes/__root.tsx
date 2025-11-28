@@ -30,11 +30,6 @@ export const Route = createRootRoute({
   shellComponent: RootDocument
 })
 
-/**
- * Root HTML document shell that renders the app's head, providers, devtools, and runtime scripts.
- *
- * @returns The complete HTML document element containing the head, body with `Providers`-wrapped children, the TanStack devtools panel, and `Scripts`.
- */
 function RootDocument({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>

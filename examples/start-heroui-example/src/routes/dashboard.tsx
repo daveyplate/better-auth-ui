@@ -27,13 +27,6 @@ function getUserInitials(user: {
   return user.email?.[0]?.toUpperCase() || "U"
 }
 
-/**
- * Render the authenticated user's dashboard with avatar, a time-of-day greeting, optional email badge, and a sign-out link.
- *
- * Shows a centered loading spinner while the authentication session is unavailable.
- *
- * @returns The dashboard React element containing the avatar (image or initials fallback), greeting, optional email badge, and a sign-out link
- */
 function Dashboard() {
   const { data: session } = useAuthenticate()
 

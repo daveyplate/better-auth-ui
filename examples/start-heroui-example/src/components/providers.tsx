@@ -4,15 +4,6 @@ import { ThemeProvider } from "next-themes"
 import type { ReactNode } from "react"
 import { authClient } from "@/lib/auth-client"
 
-/**
- * Supplies theme and authentication context to its descendants.
- *
- * Wraps `children` with a ThemeProvider configured for system theme support and an
- * AuthProvider wired to the local `authClient` and the app router for navigation and linking.
- *
- * @param children - Components or elements that will receive theme and auth context
- * @returns A React element that renders `children` inside ThemeProvider and AuthProvider
- */
 export function Providers({ children }: { children: ReactNode }) {
   const navigate = useNavigate()
 
