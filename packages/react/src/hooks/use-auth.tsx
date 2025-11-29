@@ -1,10 +1,9 @@
 "use client"
 
-import { basePaths, viewPaths } from "@better-auth-ui/core"
+import { type AuthConfig, basePaths, viewPaths } from "@better-auth-ui/react"
 import type { DeepPartial } from "better-auth/react"
 import { useContext } from "react"
 
-import type { AuthConfig } from "../components/auth-provider"
 import { AuthContext } from "../components/auth-provider"
 import { deepmerge } from "../lib/utils"
 import { useHydrated } from "./use-hydrated"
@@ -23,6 +22,15 @@ const defaultConfig = {
     window.location.href = path
   },
   replace: (path: string) => window.location.replace(path),
+  toast: ({ message, action }) => {
+    if (action) {
+      if (confirm(message)) {
+        action.onClick()
+      }
+    } else {
+      alert(message)
+    }
+  },
   Link: (props) => <a {...props} />
 } satisfies Omit<AuthConfig, "authClient">
 

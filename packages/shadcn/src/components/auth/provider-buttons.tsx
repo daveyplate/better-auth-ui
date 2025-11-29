@@ -4,14 +4,15 @@ import {
   type AuthConfig,
   cn,
   getProviderName,
-  providerIcons,
-  useAuth
+  providerIcons
 } from "@better-auth-ui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
 import { useMemo } from "react"
 import { toast } from "sonner"
+
 import { Button } from "@/components/ui/button"
 import { Field } from "@/components/ui/field"
+import { useAuth } from "@/hooks/auth/use-auth"
 
 const providerButtonsLocalization = {
   CONTINUE_WITH_PROVIDER: "Continue with {provider}"

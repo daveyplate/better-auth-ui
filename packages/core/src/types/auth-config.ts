@@ -47,4 +47,16 @@ export interface AuthConfig {
   navigate: (path: string) => void
   /** Function to replace current path (e.g., router.replace) */
   replace: (path: string) => void
+  toast: ({
+    message,
+    type,
+    action
+  }: {
+    message: string
+    type: "default" | "success" | "error"
+    action?: {
+      label: string
+      onClick: () => Promise<void> | void
+    }
+  }) => void
 }

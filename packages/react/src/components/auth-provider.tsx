@@ -3,7 +3,6 @@
 import type { AuthConfig as BaseAuthConfig } from "@better-auth-ui/core"
 import type { DeepPartial } from "better-auth/client/plugins"
 import {
-  type ComponentPropsWithRef,
   type ComponentType,
   createContext,
   type PropsWithChildren
@@ -19,7 +18,7 @@ import type { AnyAuthClient, AuthClient } from "../types/auth-client"
  */
 export type AuthConfig = BaseAuthConfig & {
   /** React component for rendering links (e.g., Next.js Link, React Router Link) */
-  Link: ComponentType<ComponentPropsWithRef<"a"> & { href: string }>
+  Link: ComponentType<PropsWithChildren<{ className?: string; href: string }>>
   /** Authenticated auth client instance */
   authClient: AuthClient
 }

@@ -40,6 +40,10 @@
         {
           "path": "src/components/auth/resend-verification-button.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "src/hooks/auth/use-auth.ts",
+          "type": "registry:hook"
         }
       ]
     }

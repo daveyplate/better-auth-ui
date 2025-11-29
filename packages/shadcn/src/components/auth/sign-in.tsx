@@ -1,6 +1,6 @@
 "use client"
 
-import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
+import type { AuthConfig } from "@better-auth-ui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
@@ -19,6 +19,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Spinner } from "@/components/ui/spinner"
+import { useAuth } from "@/hooks/auth/use-auth"
+import { cn } from "@/lib/utils"
 
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
