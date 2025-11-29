@@ -1,5 +1,5 @@
+import { authPaths } from "@better-auth-ui/core"
 import { Auth } from "@better-auth-ui/heroui"
-import { authPaths } from "@better-auth-ui/heroui/server"
 import { notFound } from "next/navigation"
 
 export default async function AuthPage({

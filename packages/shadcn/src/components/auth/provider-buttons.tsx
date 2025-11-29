@@ -1,9 +1,9 @@
 "use client"
 
-import { getProviderName } from "@better-auth-ui/core"
 import {
   type AuthConfig,
   cn,
+  getProviderName,
   providerIcons,
   useAuth
 } from "@better-auth-ui/react"

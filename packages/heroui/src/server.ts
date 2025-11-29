@@ -1,6 +1,1 @@
-export {
-  type AuthView,
-  authPaths,
-  authViewPaths,
-  viewPaths
-} from "@better-auth-ui/core"
+export * from "@better-auth-ui/react/server"

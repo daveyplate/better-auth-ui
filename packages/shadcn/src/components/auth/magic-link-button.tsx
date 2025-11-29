@@ -1,7 +1,6 @@
 "use client"
 
-import type { AuthView } from "@better-auth-ui/core"
-import { cn, useAuth } from "@better-auth-ui/react"
+import { type AuthView, cn, useAuth } from "@better-auth-ui/react"
 import { Lock, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 

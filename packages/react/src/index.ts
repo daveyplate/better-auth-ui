@@ -2,6 +2,7 @@ export {
   type AuthView,
   authPaths,
   authViewPaths,
+  getProviderName,
   viewPaths
 } from "@better-auth-ui/core"
 

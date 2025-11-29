@@ -3,7 +3,8 @@
 import type { AuthClient } from "@better-auth-ui/react"
 import { useState } from "react"
 import { toast } from "sonner"
-import { Button } from "@/components/ui/button"
+
+import { Button } from "../ui/button"
 import { Spinner } from "../ui/spinner"
 
 const resendVerificationButtonLocalization = {
