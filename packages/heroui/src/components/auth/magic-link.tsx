@@ -153,7 +153,7 @@ export function MagicLink({ className, ...props }: MagicLinkProps) {
               />
             )}
 
-            <Description className="flex justify-center gap-1 text-foreground text-sm">
+            <Description className="flex justify-center gap-1.5 text-foreground text-sm">
               {localization.NEED_TO_CREATE_AN_ACCOUNT}
 
               <Link
