@@ -4,33 +4,8 @@
   "homepage": "https://better-auth-ui.com",
   "items": [
     {
-      "name": "test-button",
-      "type": "registry:block",
-      "title": "Test Button",
-      "description": "A simple test button component.",
-      "dependencies": ["button"],
-      "files": [
-        {
-          "path": "src/components/test-button.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "use-auth",
-      "type": "registry:component",
-      "title": "useAuth Hook",
-      "description": "Hook for accessing authentication configuration and client.",
-      "files": [
-        {
-          "path": "../react/src/hooks/use-auth.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
       "name": "sign-in",
-      "type": "registry:block",
+      "type": "registry:component",
       "title": "Sign In",
       "description": "A complete sign-in form component with email/password, magic link, and social provider support.",
       "dependencies": [
@@ -40,7 +15,8 @@
         "label",
         "checkbox",
         "separator",
-        "use-auth"
+        "field",
+        "spinner"
       ],
       "files": [
         {

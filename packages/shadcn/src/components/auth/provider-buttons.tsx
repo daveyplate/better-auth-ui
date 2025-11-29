@@ -11,7 +11,7 @@ import type { DeepPartial } from "better-auth/client/plugins"
 import { useMemo } from "react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
-import { Field } from "../ui/field"
+import { Field } from "@/components/ui/field"
 
 const providerButtonsLocalization = {
   CONTINUE_WITH_PROVIDER: "Continue with {provider}"

@@ -7,7 +7,7 @@
     "dev": "bun styles && vite build --watch",
     "styles": "cpy src/styles.css dist/ --flat",
     "test": "vitest",
-    "registry:build": "shadcn build --output ../../apps/docs/public"
+    "registry:build": "shadcn build --output ../../apps/docs/public/r"
   },
   "files": [
     "src",
