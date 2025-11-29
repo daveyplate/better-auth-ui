@@ -3,10 +3,20 @@
 import { type AuthConfig, basePaths, viewPaths } from "@better-auth-ui/react"
 import type { DeepPartial } from "better-auth/react"
 import { useContext } from "react"
-
+import type { AuthToast } from "../../../core/dist/types/auth-toast"
 import { AuthContext } from "../components/auth-provider"
 import { deepmerge } from "../lib/utils"
 import { useHydrated } from "./use-hydrated"
+
+const defaultToast: AuthToast = (message, options) => {
+  if (options?.action) {
+    if (confirm(message)) {
+      options.action.onClick()
+    }
+  } else {
+    alert(message)
+  }
+}
 
 const defaultConfig = {
   basePaths,
@@ -22,14 +32,10 @@ const defaultConfig = {
     window.location.href = path
   },
   replace: (path: string) => window.location.replace(path),
-  toast: ({ message, action }) => {
-    if (action) {
-      if (confirm(message)) {
-        action.onClick()
-      }
-    } else {
-      alert(message)
-    }
+  toast: {
+    error: defaultToast,
+    success: defaultToast,
+    info: defaultToast
   },
   Link: (props) => <a {...props} />
 } satisfies Omit<AuthConfig, "authClient">

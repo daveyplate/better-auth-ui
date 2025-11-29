@@ -1,5 +1,6 @@
 import type { SocialProvider } from "better-auth/social-providers"
 import type { ViewPaths } from "../lib/view-paths"
+import type { AuthToast } from "./auth-toast"
 
 /**
  * Configuration options for email and password authentication.
@@ -47,16 +48,13 @@ export interface AuthConfig {
   navigate: (path: string) => void
   /** Function to replace current path (e.g., router.replace) */
   replace: (path: string) => void
-  toast: ({
-    message,
-    type,
-    action
-  }: {
-    message: string
-    type: "default" | "success" | "error"
-    action?: {
-      label: string
-      onClick: () => Promise<void> | void
-    }
-  }) => void
+  toast: {
+    // biome-ignore lint/suspicious/noExplicitAny: allow any additional keys for toast functions
+    [key: string]: any
+    error: AuthToast
+    success: AuthToast
+    info: AuthToast
+    // biome-ignore lint/suspicious/noExplicitAny: Flexible dismiss for toasts
+    dismiss?: (id?: number | string | any) => string | number | any
+  }
 }

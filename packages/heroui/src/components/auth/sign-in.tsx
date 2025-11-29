@@ -1,6 +1,6 @@
 "use client"
 
-import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
+import { type AuthConfig, cn } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -16,17 +16,15 @@ import {
 } from "@heroui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
-import { toast } from "sonner"
 
+import { useAuth } from "../../hooks/use-auth"
 import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
-import { ResendVerificationButton } from "./resend-verification-button"
 
 const signInLocalization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
-  ...ResendVerificationButton.localization,
   EMAIL: "Email",
   EMAIL_PLACEHOLDER: "Enter your email",
   FORGOT_PASSWORD: "Forgot password?",
@@ -35,8 +33,10 @@ const signInLocalization = {
   NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
   OR: "OR",
   REMEMBER_ME: "Remember me",
+  RESEND: "Resend",
   SIGN_IN: "Sign In",
-  SIGN_UP: "Sign Up"
+  SIGN_UP: "Sign Up",
+  VERIFICATION_EMAIL_SENT: "Verification email sent!"
 }
 
 export type SignInLocalization = typeof signInLocalization
@@ -67,6 +67,7 @@ export function SignIn({ className, ...props }: SignInProps) {
     socialProviders,
     viewPaths,
     navigate,
+    toast,
     Link
   } = useAuth(props)
 
@@ -99,19 +100,36 @@ export function SignIn({ className, ...props }: SignInProps) {
 
     if (error) {
       if (error.code === "EMAIL_NOT_VERIFIED") {
-        toast.error(error.message, {
-          action: (
-            <ResendVerificationButton
-              authClient={authClient}
-              baseURL={baseURL}
-              email={email}
-              localization={localization}
-              redirectTo={redirectTo}
-            />
-          )
+        const toastId = toast.error(error.message, {
+          action: {
+            label: localization.RESEND,
+            onClick: async () => {
+              const callbackURL = `${baseURL}${redirectTo}`
+
+              const { error } = await authClient.sendVerificationEmail({
+                email,
+                callbackURL
+              })
+
+              toast.dismiss?.(toastId)
+
+              if (error) {
+                toast.error(error.message)
+              } else {
+                toast.success(localization.VERIFICATION_EMAIL_SENT)
+              }
+            }
+          }
         })
       } else {
-        toast.error(error.message)
+        toast.error(error.message, {
+          action: {
+            label: "Resend",
+            onClick: async () => {
+              console.log("resend")
+            }
+          }
+        })
       }
 
       setPassword("")

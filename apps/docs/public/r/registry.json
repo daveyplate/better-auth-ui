@@ -36,10 +36,6 @@
         {
           "path": "src/components/auth/provider-buttons.tsx",
           "type": "registry:component"
-        },
-        {
-          "path": "src/components/auth/resend-verification-button.tsx",
-          "type": "registry:component"
         }
       ]
     }
