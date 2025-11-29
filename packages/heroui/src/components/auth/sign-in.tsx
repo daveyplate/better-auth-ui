@@ -15,9 +15,10 @@ import {
   TextField
 } from "@heroui/react"
 import type { DeepPartial } from "better-auth/client/plugins"
-import { type FormEvent, useState } from "react"
+import { useState } from "react"
 
 import { useAuth } from "../../hooks/use-auth"
+import { useSignIn } from "../../hooks/use-sign-in"
 import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
@@ -57,95 +58,33 @@ export type SignInProps = DeepPartial<AuthConfig> & {
 export function SignIn({ className, ...props }: SignInProps) {
   const localization = { ...SignIn.localization, ...props.localization }
 
+  const config = useAuth(props)
+
   const {
-    authClient,
     basePaths,
-    baseURL,
     emailAndPassword,
     magicLink,
-    redirectTo,
     socialProviders,
     viewPaths,
-    navigate,
-    toast,
     Link
-  } = useAuth(props)
+  } = config
 
-  const { refetch } = authClient.useSession()
+  const [state, formAction, isPending] = useSignIn({
+    config,
+    localization
+  })
 
-  const [password, setPassword] = useState("")
-  const [isPending, setIsPending] = useState(false)
+  const [socialIsPending, setSocialIsPending] = useState(false)
+
+  const isAnyPending = isPending || socialIsPending
 
   const showSeparator =
     emailAndPassword?.enabled && socialProviders && socialProviders.length > 0
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsPending(true)
-
-    const formData = new FormData(e.currentTarget)
-
-    const email = formData.get("email") as string
-    const password = formData.get("password") as string
-    const rememberMe = formData.get("rememberMe") === "on"
-
-    const { error } = await authClient.signIn.email(
-      {
-        email,
-        password,
-        ...(emailAndPassword?.rememberMe ? { rememberMe } : {})
-      },
-      { disableSignal: true }
-    )
-
-    if (error) {
-      if (error.code === "EMAIL_NOT_VERIFIED") {
-        const toastId = toast.error(error.message, {
-          action: {
-            label: localization.RESEND,
-            onClick: async () => {
-              const callbackURL = `${baseURL}${redirectTo}`
-
-              const { error } = await authClient.sendVerificationEmail({
-                email,
-                callbackURL
-              })
-
-              toast.dismiss?.(toastId)
-
-              if (error) {
-                toast.error(error.message)
-              } else {
-                toast.success(localization.VERIFICATION_EMAIL_SENT)
-              }
-            }
-          }
-        })
-      } else {
-        toast.error(error.message, {
-          action: {
-            label: "Resend",
-            onClick: async () => {
-              console.log("resend")
-            }
-          }
-        })
-      }
-
-      setPassword("")
-      setIsPending(false)
-      return
-    }
-
-    await refetch()
-    navigate(redirectTo)
-    setIsPending(false)
-  }
-
   return (
     <Card className={cn("w-full max-w-sm p-4 md:p-6", className)}>
       <Card.Content>
-        <Form onSubmit={onSubmit}>
+        <Form action={formAction}>
           <Fieldset className="gap-4">
             <Fieldset.Legend className="text-xl">
               {localization.SIGN_IN}
@@ -157,10 +96,11 @@ export function SignIn({ className, ...props }: SignInProps) {
               <>
                 <Fieldset.Group>
                   <TextField
+                    defaultValue={state.email}
                     name="email"
                     type="email"
                     autoComplete="email"
-                    isDisabled={isPending}
+                    isDisabled={isAnyPending}
                   >
                     <Label>{localization.EMAIL}</Label>
 
@@ -168,19 +108,18 @@ export function SignIn({ className, ...props }: SignInProps) {
                       className="text-base md:text-sm"
                       placeholder={localization.EMAIL_PLACEHOLDER}
                       required
+                      disabled={isAnyPending}
                     />
 
                     <FieldError className="text-wrap" />
                   </TextField>
 
                   <TextField
+                    defaultValue={state.password}
                     minLength={8}
                     name="password"
                     type="password"
                     autoComplete="current-password"
-                    isDisabled={isPending}
-                    value={password}
-                    onChange={setPassword}
                   >
                     <div className="flex justify-between">
                       <Label>{localization.PASSWORD}</Label>
@@ -208,7 +147,7 @@ export function SignIn({ className, ...props }: SignInProps) {
 
                 {emailAndPassword?.rememberMe && (
                   <div className="flex justify-between mt-1">
-                    <Checkbox name="rememberMe" isDisabled={isPending}>
+                    <Checkbox name="rememberMe" isDisabled={isAnyPending}>
                       <Checkbox.Control>
                         <Checkbox.Indicator />
                       </Checkbox.Control>
@@ -243,7 +182,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                   {magicLink && (
                     <MagicLinkButton
                       view="signIn"
-                      isPending={isPending}
+                      isPending={isAnyPending}
                       localization={localization}
                     />
                   )}
@@ -258,8 +197,8 @@ export function SignIn({ className, ...props }: SignInProps) {
             {socialProviders && socialProviders.length > 0 && (
               <ProviderButtons
                 {...props}
-                isPending={isPending}
-                setIsPending={setIsPending}
+                isPending={isAnyPending}
+                setIsPending={setSocialIsPending}
                 localization={localization}
               />
             )}

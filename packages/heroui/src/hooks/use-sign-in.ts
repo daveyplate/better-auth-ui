@@ -1,0 +1,74 @@
+"use client"
+
+import type { AuthConfig } from "@better-auth-ui/react"
+import { useActionState } from "react"
+
+export type UseSignInOptions = {
+  config: AuthConfig
+  localization: { RESEND: string; VERIFICATION_EMAIL_SENT: string }
+}
+
+export function useSignIn({ config, localization }: UseSignInOptions) {
+  const { authClient, baseURL, emailAndPassword, redirectTo, navigate, toast } =
+    config
+
+  const { refetch } = authClient.useSession()
+
+  const signInAction = async (_: object, formData: FormData) => {
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
+    const rememberMe = formData.get("rememberMe") === "on"
+
+    const { error } = await authClient.signIn.email(
+      {
+        email,
+        password,
+        ...(emailAndPassword?.rememberMe ? { rememberMe } : {})
+      },
+      { disableSignal: true }
+    )
+
+    if (error) {
+      if (error.code === "EMAIL_NOT_VERIFIED") {
+        const toastId = toast.error(error.message, {
+          action: {
+            label: localization.RESEND,
+            onClick: async () => {
+              const callbackURL = `${baseURL ?? ""}${redirectTo}`
+
+              toast.dismiss?.(toastId)
+
+              const { error } = await authClient.sendVerificationEmail({
+                email,
+                callbackURL
+              })
+
+              if (error) {
+                toast.error(error.message)
+              } else {
+                toast.success(localization.VERIFICATION_EMAIL_SENT)
+              }
+            }
+          }
+        })
+      } else {
+        toast.error(error.message)
+      }
+
+      return {
+        email,
+        password: ""
+      }
+    }
+
+    await refetch()
+    navigate(redirectTo)
+
+    return { email, password }
+  }
+
+  return useActionState(signInAction, {
+    email: "",
+    password: ""
+  })
+}
