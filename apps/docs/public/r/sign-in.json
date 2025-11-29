@@ -5,6 +5,11 @@
   "title": "Sign In",
   "description": "A complete sign-in form component with email/password, magic link, and social provider support.",
   "dependencies": [
+    "@better-auth-ui/react@workspace:*",
+    "better-auth",
+    "lucide-react"
+  ],
+  "registryDependencies": [
     "button",
     "card",
     "input",
@@ -12,6 +17,7 @@
     "checkbox",
     "separator",
     "field",
+    "sonner",
     "spinner"
   ],
   "files": [

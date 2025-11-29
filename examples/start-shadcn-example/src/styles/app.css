@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "@better-auth-ui/shadcn/styles";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));

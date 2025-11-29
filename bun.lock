@@ -99,10 +99,10 @@
     "examples/start-shadcn-example": {
       "name": "start-shadcn-example",
       "dependencies": {
-        "@better-auth-ui/heroui": "workspace:*",
-        "@better-auth-ui/shadcn": "workspace:*",
-        "@heroui/react": "^3.0.0-beta.2",
-        "@heroui/styles": "^3.0.0-beta.2",
+        "@better-auth-ui/react": "workspace:*",
+        "@radix-ui/react-checkbox": "^1.3.3",
+        "@radix-ui/react-label": "^2.1.8",
+        "@radix-ui/react-separator": "^1.1.8",
         "@radix-ui/react-slot": "^1.2.4",
         "@tailwindcss/vite": "^4.0.6",
         "@tanstack/react-devtools": "^0.8.2",
