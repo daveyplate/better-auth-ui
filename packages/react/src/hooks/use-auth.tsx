@@ -1,9 +1,14 @@
 "use client"
 
-import { type AuthConfig, basePaths, viewPaths } from "@better-auth-ui/react"
+import {
+  type AuthConfig,
+  type AuthToast,
+  basePaths,
+  viewPaths
+} from "@better-auth-ui/react"
 import type { DeepPartial } from "better-auth/react"
 import { useContext } from "react"
-import type { AuthToast } from "../../../core/dist/types/auth-toast"
+
 import { AuthContext } from "../components/auth-provider"
 import { deepmerge } from "../lib/utils"
 import { useHydrated } from "./use-hydrated"

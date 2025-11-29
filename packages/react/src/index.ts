@@ -1,4 +1,5 @@
 export {
+  type AuthToast,
   type AuthView,
   authPaths,
   authViewPaths,
