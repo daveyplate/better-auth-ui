@@ -1,12 +1,10 @@
-import { defaultConfig } from "@better-auth-ui/core"
+import { deepmerge, defaultConfig } from "@better-auth-ui/core"
 import {
   type AnyAuthConfig,
   type AuthConfig,
   AuthContext
 } from "@better-auth-ui/react"
 import { useContext } from "react"
-
-import { deepmerge } from "../../lib/utils"
 
 const extendConfig: AnyAuthConfig = {
   Link: (props) => <a {...props} />
