@@ -1,10 +1,9 @@
-"use client"
-
 import { getProviderName } from "@better-auth-ui/core"
 import { type AnyAuthConfig, providerIcons } from "@better-auth-ui/react"
 import { Button, Fieldset } from "@heroui/react"
 import { useMemo } from "react"
 import { toast } from "sonner"
+
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 

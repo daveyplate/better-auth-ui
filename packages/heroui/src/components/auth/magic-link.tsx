@@ -1,5 +1,3 @@
-"use client"
-
 import type { AnyAuthConfig } from "@better-auth-ui/react"
 import {
   Button,
@@ -15,6 +13,7 @@ import {
 } from "@heroui/react"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
+
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 

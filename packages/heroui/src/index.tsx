@@ -19,7 +19,6 @@ export {
   viewPaths
 } from "@better-auth-ui/react"
 
-// HeroUI components
 export * from "./components/auth/auth"
 export * from "./components/auth/auth-provider"
 export * from "./components/auth/forgot-password"

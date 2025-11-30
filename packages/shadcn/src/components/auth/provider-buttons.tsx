@@ -1,18 +1,15 @@
-"use client"
-
 import {
-  type AuthConfig,
-  cn,
+  type AnyAuthConfig,
   getProviderName,
   providerIcons
 } from "@better-auth-ui/react"
-import type { DeepPartial } from "better-auth/client/plugins"
 import { useMemo } from "react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Field } from "@/components/ui/field"
 import { useAuth } from "@/hooks/auth/use-auth"
+import { cn } from "@/lib/utils"
 
 const providerButtonsLocalization = {
   CONTINUE_WITH_PROVIDER: "Continue with {provider}"
@@ -20,12 +17,12 @@ const providerButtonsLocalization = {
 
 export type ProviderButtonsLocalization = typeof providerButtonsLocalization
 
-export type ProviderButtonsProps = DeepPartial<AuthConfig> & {
-  isPending: boolean
-  localization?: Partial<ProviderButtonsLocalization>
-  setIsPending: (pending: boolean) => void
-  socialLayout?: SocialLayout
-}
+export type ProviderButtonsProps =
+  AnyAuthConfig<ProviderButtonsLocalization> & {
+    isPending: boolean
+    setIsPending: (pending: boolean) => void
+    socialLayout?: SocialLayout
+  }
 
 export type SocialLayout = "auto" | "horizontal" | "vertical" | "grid"
 

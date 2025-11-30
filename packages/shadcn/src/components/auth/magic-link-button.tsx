@@ -1,9 +1,9 @@
-"use client"
-
-import { type AuthView, cn } from "@better-auth-ui/react"
+import type { AuthView } from "@better-auth-ui/react"
 import { Lock, Mail } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/hooks/auth/use-auth"
+import { cn } from "@/lib/utils"
 
 const magicLinkButtonLocalization = {
   CONTINUE_WITH_MAGIC_LINK: "Continue with Magic Link",

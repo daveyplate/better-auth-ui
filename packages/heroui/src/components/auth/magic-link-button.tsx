@@ -1,7 +1,6 @@
-"use client"
-
 import type { AuthView } from "@better-auth-ui/core"
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline"
+
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 
