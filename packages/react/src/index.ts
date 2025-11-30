@@ -3,9 +3,6 @@
 export {
   type AuthToast,
   type AuthView,
-  authPaths,
-  authViewPaths,
-  authViews,
   basePaths,
   getProviderName,
   providerNames,

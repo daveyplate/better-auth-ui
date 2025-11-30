@@ -17,10 +17,6 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    },
-    "./localization": {
-      "import": "./dist/localization.js",
-      "types": "./dist/localization.d.ts"
     }
   },
   "devDependencies": {

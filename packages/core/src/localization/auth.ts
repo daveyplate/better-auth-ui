@@ -28,5 +28,3 @@ export const authLocalization = {
   verificationEmailSent: "Verification email sent!",
   verifyYourEmail: "Verify your email"
 }
-
-export type AuthLocalization = typeof authLocalization

@@ -1,40 +1,9 @@
 import type { SocialProvider } from "better-auth/social-providers"
-import { basePaths } from "../lib/base-paths"
-import { type ViewPaths, viewPaths } from "../lib/view-paths"
+
 import { type Localization, localization } from "../localization"
-import type { AuthToast } from "./auth-toast"
-
-const defaultToast: AuthToast = (message, options) => {
-  if (options?.action) {
-    if (confirm(message)) {
-      options.action.onClick()
-    }
-  } else {
-    alert(message)
-  }
-}
-
-export const defaultConfig = {
-  basePaths: basePaths,
-  baseURL: "",
-  emailAndPassword: {
-    enabled: true,
-    forgotPassword: true,
-    rememberMe: false
-  },
-  redirectTo: "/",
-  viewPaths: viewPaths,
-  localization: localization,
-  navigate: (path: string) => {
-    window.location.href = path
-  },
-  replace: (path: string) => window.location.replace(path),
-  toast: {
-    error: defaultToast,
-    success: defaultToast,
-    info: defaultToast
-  }
-} satisfies AuthConfig
+import { type AuthToast, defaultToast } from "./auth-toast"
+import { basePaths } from "./base-paths"
+import { type ViewPaths, viewPaths } from "./view-paths"
 
 /**
  * Configuration options for email and password authentication.
@@ -98,4 +67,26 @@ export interface AuthConfig {
   navigate: (path: string) => void
   /** Function to replace current path (e.g., router.replace) */
   replace: (path: string) => void
+}
+
+export const defaultConfig: AuthConfig = {
+  basePaths,
+  baseURL: "",
+  emailAndPassword: {
+    enabled: true,
+    forgotPassword: true,
+    rememberMe: false
+  },
+  redirectTo: "/",
+  viewPaths,
+  localization,
+  navigate: (path: string) => {
+    window.location.href = path
+  },
+  replace: (path: string) => window.location.replace(path),
+  toast: {
+    error: defaultToast,
+    success: defaultToast,
+    info: defaultToast
+  }
 }

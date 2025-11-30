@@ -5,18 +5,9 @@ export {
   type AnyAuthConfig,
   type AuthClient,
   type AuthConfig,
-  type AuthToast,
-  type AuthView,
-  authPaths,
-  authViewPaths,
-  authViews,
-  basePaths,
-  getProviderName,
-  providerIcons,
-  providerNames,
+  AuthProvider,
   useAuthenticate,
-  useSignIn,
-  viewPaths
+  useSignIn
 } from "@better-auth-ui/react"
 
 export * from "./components/auth/auth"

@@ -9,28 +9,24 @@ import {
 import type { AnyAuthClient, AuthClient } from "../../types/auth-client"
 
 /**
- * Extended authentication configuration for React components.
- *
  * Extends the base AuthConfig with React-specific requirements including
- * a Link component for navigation and an authClient instance.
+ * an authClient instance and a Link component for navigation.
  */
 export type AuthConfig = BaseAuthConfig & {
-  /** React component for rendering links (e.g., Next.js Link, React Router Link) */
-  Link: ComponentType<PropsWithChildren<{ className?: string; href: string }>>
-  /** Authenticated auth client instance */
+  /** Better Auth client instance with all plugins */
   authClient: AuthClient
-}
-
-export type AnyAuthConfig = DeepPartial<Omit<AuthConfig, "authClient">> & {
-  authClient?: AnyAuthClient
+  /** React component for rendering links */
+  Link: ComponentType<PropsWithChildren<{ className?: string; href: string }>>
 }
 
 /**
- * React context that provides authentication configuration to descendant components.
- *
- * Components can access the auth configuration using `useContext(AuthContext)` or
- * through the `useAuth` hook which wraps this context.
+ * Partial AuthConfig with any Better Auth client instance.
  */
+export type AnyAuthConfig = DeepPartial<Omit<AuthConfig, "authClient">> & {
+  /** Any Better Auth client instance */
+  authClient?: AnyAuthClient
+}
+
 export const AuthContext = createContext<AnyAuthConfig | undefined>(undefined)
 
 export type AuthProviderProps = PropsWithChildren<AnyAuthConfig> & {
@@ -38,11 +34,7 @@ export type AuthProviderProps = PropsWithChildren<AnyAuthConfig> & {
 }
 
 /**
- * Provides authentication configuration to descendant components via AuthContext.
- *
- * @param children - Elements rendered inside the provider.
- * @param config - Authentication provider configuration; must include an `authClient`.
- * @returns The AuthContext.Provider element that supplies the given config to its descendants.
+ * Provides AuthConfig to descendant components.
  */
 export function AuthProvider({ children, ...config }: AuthProviderProps) {
   return <AuthContext.Provider value={config}>{children}</AuthContext.Provider>
