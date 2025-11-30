@@ -1,12 +1,11 @@
-import type { AuthConfig as BaseAuthConfig } from "@better-auth-ui/core"
+import type { AnyAuthClient, AuthClient } from "@better-auth-ui/react"
+import type { AuthConfig as BaseAuthConfig } from "@better-auth-ui/react/core"
 import type { DeepPartial } from "better-auth/client/plugins"
 import {
   type ComponentType,
   createContext,
   type PropsWithChildren
 } from "react"
-
-import type { AnyAuthClient, AuthClient } from "../../types/auth-client"
 
 /**
  * Extends the base AuthConfig with React-specific requirements including

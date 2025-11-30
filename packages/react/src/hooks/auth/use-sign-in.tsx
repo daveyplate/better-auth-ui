@@ -1,8 +1,7 @@
-import type { AnyAuthConfig } from "@better-auth-ui/react"
+import { type AnyAuthConfig, useRedirectTo } from "@better-auth-ui/react"
 import { useActionState } from "react"
 
 import { useAuth } from "./use-auth"
-import { useRedirectTo } from "./use-redirect-to"
 
 export function useSignIn(config?: AnyAuthConfig) {
   const {
