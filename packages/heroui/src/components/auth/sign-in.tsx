@@ -54,8 +54,8 @@ export type SignInProps = AnyAuthConfig<SignInLocalization> & {
  *
  * @returns A React element for the sign-in form and related controls configured according to the auth settings
  */
-export function SignIn({ className, socialLayout, ...props }: SignInProps) {
-  const config = useAuth(props)
+export function SignIn({ className, socialLayout, ...config }: SignInProps) {
+  const context = useAuth(config)
 
   const {
     basePaths,
@@ -64,15 +64,14 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
     socialProviders,
     viewPaths,
     Link
-  } = config
+  } = context
 
-  const localization = { ...SignIn.localization, ...config.localization }
+  const localization = { ...SignIn.localization, ...context.localization }
 
-  const [state, formAction, isPending] = useSignIn({ ...config, localization })
-
+  const [state, formAction, isPending] = useSignIn(config)
   const [socialIsPending, setSocialIsPending] = useState(false)
 
-  const isAnyPending = isPending || socialIsPending
+  const isSubmitting = isPending || socialIsPending
 
   const showSeparator =
     emailAndPassword?.enabled && socialProviders && socialProviders.length > 0
@@ -96,7 +95,7 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
                     name="email"
                     type="email"
                     autoComplete="email"
-                    isDisabled={isAnyPending}
+                    isDisabled={isSubmitting}
                   >
                     <Label>{localization.EMAIL}</Label>
 
@@ -104,7 +103,7 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
                       className="text-base md:text-sm"
                       placeholder={localization.EMAIL_PLACEHOLDER}
                       required
-                      disabled={isAnyPending}
+                      disabled={isSubmitting}
                     />
 
                     <FieldError className="text-wrap" />
@@ -143,7 +142,7 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
 
                 {emailAndPassword?.rememberMe && (
                   <div className="flex justify-between mt-1">
-                    <Checkbox name="rememberMe" isDisabled={isAnyPending}>
+                    <Checkbox name="rememberMe" isDisabled={isSubmitting}>
                       <Checkbox.Control>
                         <Checkbox.Indicator />
                       </Checkbox.Control>
@@ -178,7 +177,7 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
                   {magicLink && (
                     <MagicLinkButton
                       view="signIn"
-                      isPending={isAnyPending}
+                      isPending={isSubmitting}
                       localization={localization}
                     />
                   )}
@@ -192,8 +191,8 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
 
             {socialProviders && socialProviders.length > 0 && (
               <ProviderButtons
-                {...props}
-                isPending={isAnyPending}
+                {...config}
+                isPending={isSubmitting}
                 setIsPending={setSocialIsPending}
                 localization={localization}
                 socialLayout={socialLayout}
