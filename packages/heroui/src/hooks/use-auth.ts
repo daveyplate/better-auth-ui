@@ -5,12 +5,10 @@ import {
 } from "@better-auth-ui/react"
 import { toast } from "sonner"
 
-export function useAuth<TLocalization = Record<string, string>>(
-  config?: AnyAuthConfig<TLocalization>
-) {
-  const extendConfig: AnyAuthConfig<TLocalization> = {
-    toast
-  }
+const extendConfig: AnyAuthConfig = {
+  toast
+}
 
-  return useAuthPrimitive<TLocalization>(deepmerge(config, extendConfig))
+export function useAuth(config?: AnyAuthConfig) {
+  return useAuthPrimitive(deepmerge(extendConfig, config || {}))
 }

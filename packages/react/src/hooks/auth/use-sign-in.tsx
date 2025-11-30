@@ -2,19 +2,19 @@ import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { useActionState } from "react"
 
 import { useAuth } from "./use-auth"
+import { useRedirectTo } from "./use-redirect-to"
 
 export function useSignIn(config?: AnyAuthConfig) {
-  const context = useAuth(config)
-
   const {
     authClient,
     baseURL,
     emailAndPassword,
     localization,
-    redirectTo,
     toast,
     navigate
-  } = context
+  } = useAuth(config)
+
+  const redirectTo = useRedirectTo(config)
 
   const { refetch } = authClient.useSession()
 
