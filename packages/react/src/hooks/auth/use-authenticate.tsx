@@ -7,10 +7,7 @@ import { useAuth } from "./use-auth"
  * Redirects unauthenticated users to the sign-in page (preserving the current URL) and exposes the active auth session.
  *
  * @param config - Optional partial AuthConfig used to customize auth behavior; may include an `authClient` override.
- * @returns An object containing:
- * - `data`: the authenticated session object or `null` when not signed in
- * - `isPending`: `true` while the session is loading, `false` otherwise
- * - additional fields returned by the underlying auth client's `useSession` hook
+ * @returns Result of useSession hook from the auth client
  */
 export function useAuthenticate<TAuthClient extends AnyAuthClient>(
   config?: AnyAuthConfig & { authClient?: TAuthClient }
