@@ -1,19 +1,11 @@
 import type { AuthView } from "@better-auth-ui/core"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline"
-
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 
-const magicLinkButtonLocalization = {
-  CONTINUE_WITH_MAGIC_LINK: "Continue with Magic Link",
-  CONTINUE_WITH_PASSWORD: "Continue with Password"
-}
-
-export type MagicLinkButtonLocalization = typeof magicLinkButtonLocalization
-
-export type MagicLinkButtonProps = {
+export type MagicLinkButtonProps = AnyAuthConfig & {
   isPending: boolean
-  localization?: Partial<MagicLinkButtonLocalization>
   view?: AuthView
 }
 
@@ -32,12 +24,7 @@ export function MagicLinkButton({
   view,
   ...props
 }: MagicLinkButtonProps) {
-  const localization = {
-    ...MagicLinkButton.localization,
-    ...props.localization
-  }
-
-  const { basePaths, viewPaths, Link } = useAuth()
+  const { basePaths, viewPaths, localization, Link } = useAuth(props)
 
   const isMagicLinkView = view === "magicLink"
 
@@ -52,10 +39,14 @@ export function MagicLinkButton({
       {isMagicLinkView ? <LockClosedIcon /> : <EnvelopeIcon />}
 
       {isMagicLinkView
-        ? localization.CONTINUE_WITH_PASSWORD
-        : localization.CONTINUE_WITH_MAGIC_LINK}
+        ? localization.auth.continueWith.replace(
+            "{{provider}}",
+            localization.auth.password
+          )
+        : localization.auth.continueWith.replace(
+            "{{provider}}",
+            localization.auth.magicLink
+          )}
     </Link>
   )
 }
-
-MagicLinkButton.localization = magicLinkButtonLocalization

@@ -1,6 +1,40 @@
 import type { SocialProvider } from "better-auth/social-providers"
-import type { ViewPaths } from "../lib/view-paths"
+import { basePaths } from "../lib/base-paths"
+import { type ViewPaths, viewPaths } from "../lib/view-paths"
+import { type Localization, localization } from "../localization"
 import type { AuthToast } from "./auth-toast"
+
+const defaultToast: AuthToast = (message, options) => {
+  if (options?.action) {
+    if (confirm(message)) {
+      options.action.onClick()
+    }
+  } else {
+    alert(message)
+  }
+}
+
+export const defaultConfig = {
+  basePaths: basePaths,
+  baseURL: "",
+  emailAndPassword: {
+    enabled: true,
+    forgotPassword: true,
+    rememberMe: false
+  },
+  redirectTo: "/",
+  viewPaths: viewPaths,
+  localization: localization,
+  navigate: (path: string) => {
+    window.location.href = path
+  },
+  replace: (path: string) => window.location.replace(path),
+  toast: {
+    error: defaultToast,
+    success: defaultToast,
+    info: defaultToast
+  }
+} satisfies AuthConfig
 
 /**
  * Configuration options for email and password authentication.
@@ -22,7 +56,7 @@ export type EmailAndPasswordConfig = {
  * Defines the base structure for authentication settings including paths,
  * providers, navigation functions, and feature flags.
  */
-export interface AuthConfig<TLocalization = Record<string, string>> {
+export interface AuthConfig {
   /** Base paths for different application sections */
   basePaths: {
     /** Base path for authentication routes */
@@ -36,8 +70,8 @@ export interface AuthConfig<TLocalization = Record<string, string>> {
   baseURL?: string
   /** Email and password authentication configuration */
   emailAndPassword?: EmailAndPasswordConfig
-  /** Localization strings for UI components. Each component exports its own localization type that can be merged together. */
-  localization: TLocalization
+  /** Localization strings for UI components. */
+  localization: Localization
   /** Whether magic link (passwordless) authentication is enabled */
   magicLink?: boolean
   /** Default redirect path after successful authentication */

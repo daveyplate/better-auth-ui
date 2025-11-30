@@ -1,7 +1,6 @@
 import {
   type AnyAuthConfig,
-  useSignIn,
-  useSignInLocalization
+  useSignIn
 } from "@better-auth-ui/react"
 import {
   Button,
@@ -24,25 +23,7 @@ import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 
-const signInLocalization = {
-  ...MagicLinkButton.localization,
-  ...ProviderButtons.localization,
-  ...useSignInLocalization,
-  EMAIL: "Email",
-  EMAIL_PLACEHOLDER: "Enter your email",
-  FORGOT_PASSWORD: "Forgot password?",
-  PASSWORD: "Password",
-  PASSWORD_PLACEHOLDER: "Enter your password",
-  NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
-  OR: "OR",
-  REMEMBER_ME: "Remember me",
-  SIGN_IN: "Sign In",
-  SIGN_UP: "Sign Up"
-}
-
-export type SignInLocalization = typeof signInLocalization
-
-export type SignInProps = AnyAuthConfig<SignInLocalization> & {
+export type SignInProps = AnyAuthConfig & {
   className?: string
   socialLayout?: SocialLayout
 }
@@ -55,18 +36,15 @@ export type SignInProps = AnyAuthConfig<SignInLocalization> & {
  * @returns A React element for the sign-in form and related controls configured according to the auth settings
  */
 export function SignIn({ className, socialLayout, ...config }: SignInProps) {
-  const context = useAuth(config)
-
   const {
     basePaths,
     emailAndPassword,
+    localization,
     magicLink,
     socialProviders,
     viewPaths,
     Link
-  } = context
-
-  const localization = { ...SignIn.localization, ...context.localization }
+  } = useAuth(config)
 
   const [state, formAction, isPending] = useSignIn(config)
   const [socialIsPending, setSocialIsPending] = useState(false)
@@ -82,7 +60,7 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
         <Form action={formAction}>
           <Fieldset className="gap-4">
             <Fieldset.Legend className="text-xl">
-              {localization.SIGN_IN}
+              {localization.auth.signIn}
             </Fieldset.Legend>
 
             <Description />
@@ -97,11 +75,11 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
                     autoComplete="email"
                     isDisabled={isSubmitting}
                   >
-                    <Label>{localization.EMAIL}</Label>
+                    <Label>{localization.auth.email}</Label>
 
                     <Input
                       className="text-base md:text-sm"
-                      placeholder={localization.EMAIL_PLACEHOLDER}
+                      placeholder={localization.auth.emailPlaceholder}
                       required
                       disabled={isSubmitting}
                     />
@@ -117,7 +95,7 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
                     autoComplete="current-password"
                   >
                     <div className="flex justify-between">
-                      <Label>{localization.PASSWORD}</Label>
+                      <Label>{localization.auth.password}</Label>
 
                       {!emailAndPassword?.rememberMe &&
                         emailAndPassword?.forgotPassword && (
@@ -125,14 +103,14 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
                             href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                             className="link link--underline-hover text-muted"
                           >
-                            {localization.FORGOT_PASSWORD}
+                            {localization.auth.forgotPassword}
                           </Link>
                         )}
                     </div>
 
                     <Input
                       className="text-base md:text-sm"
-                      placeholder={localization.PASSWORD_PLACEHOLDER}
+                      placeholder={localization.auth.passwordPlaceholder}
                       required
                     />
 
@@ -148,7 +126,7 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
                       </Checkbox.Control>
 
                       <Checkbox.Content>
-                        <Label>{localization.REMEMBER_ME}</Label>
+                        <Label>{localization.auth.rememberMe}</Label>
                       </Checkbox.Content>
                     </Checkbox>
 
@@ -157,7 +135,7 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
                         href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                         className="link link--underline-hover text-muted"
                       >
-                        {localization.FORGOT_PASSWORD}
+                        {localization.auth.forgotPassword}
                       </Link>
                     )}
                   </div>
@@ -171,14 +149,14 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
                   >
                     {isPending && <Spinner color="current" size="sm" />}
 
-                    {localization.SIGN_IN}
+                    {localization.auth.signIn}
                   </Button>
 
                   {magicLink && (
                     <MagicLinkButton
+                      {...config}
                       view="signIn"
                       isPending={isSubmitting}
-                      localization={localization}
                     />
                   )}
                 </Fieldset.Actions>
@@ -186,7 +164,7 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
             )}
 
             {showSeparator && (
-              <FieldSeparator>{localization.OR}</FieldSeparator>
+              <FieldSeparator>{localization.auth.or}</FieldSeparator>
             )}
 
             {socialProviders && socialProviders.length > 0 && (
@@ -201,13 +179,13 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
 
             {emailAndPassword?.enabled && (
               <Description className="flex justify-center gap-1.5 text-foreground text-sm">
-                {localization.NEED_TO_CREATE_AN_ACCOUNT}
+                {localization.auth.needToCreateAnAccount}
 
                 <Link
                   href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
                   className="link link--underline-hover text-accent"
                 >
-                  {localization.SIGN_UP}
+                  {localization.auth.signUp}
                 </Link>
               </Description>
             )}
@@ -217,5 +195,3 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
     </Card>
   )
 }
-
-SignIn.localization = signInLocalization

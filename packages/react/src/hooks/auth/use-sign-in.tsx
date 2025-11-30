@@ -3,20 +3,18 @@ import { useActionState } from "react"
 
 import { useAuth } from "./use-auth"
 
-export const useSignInLocalization = {
-  RESEND: "Resend",
-  VERIFICATION_EMAIL_SENT: "Verification email sent!"
-}
-
-export type UseSignInLocalization = typeof useSignInLocalization
-
-export function useSignIn(config?: AnyAuthConfig<UseSignInLocalization>) {
+export function useSignIn(config?: AnyAuthConfig) {
   const context = useAuth(config)
 
-  const { authClient, baseURL, emailAndPassword, redirectTo, toast, navigate } =
-    context
-
-  const localization = { ...useSignInLocalization, ...context.localization }
+  const {
+    authClient,
+    baseURL,
+    emailAndPassword,
+    localization,
+    redirectTo,
+    toast,
+    navigate
+  } = context
 
   const { refetch } = authClient.useSession()
 
@@ -38,7 +36,7 @@ export function useSignIn(config?: AnyAuthConfig<UseSignInLocalization>) {
       if (error.code === "EMAIL_NOT_VERIFIED") {
         const toastId = toast.error(error.message, {
           action: {
-            label: localization.RESEND,
+            label: localization.auth.resend,
             onClick: async () => {
               const callbackURL = `${baseURL ?? ""}${redirectTo}`
 
@@ -52,7 +50,7 @@ export function useSignIn(config?: AnyAuthConfig<UseSignInLocalization>) {
               if (error) {
                 toast.error(error.message)
               } else {
-                toast.success(localization.VERIFICATION_EMAIL_SENT)
+                toast.success(localization.auth.verificationEmailSent)
               }
             }
           }

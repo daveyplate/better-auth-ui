@@ -1,47 +1,17 @@
+import { defaultConfig } from "@better-auth-ui/core"
 import {
   type AnyAuthConfig,
   type AuthConfig,
-  AuthContext,
-  type AuthToast,
-  basePaths,
-  viewPaths
+  AuthContext
 } from "@better-auth-ui/react"
 import { useContext } from "react"
 
 import { deepmerge } from "../../lib/utils"
 import { useHydrated } from "../use-hydrated"
 
-const defaultToast: AuthToast = (message, options) => {
-  if (options?.action) {
-    if (confirm(message)) {
-      options.action.onClick()
-    }
-  } else {
-    alert(message)
-  }
-}
-
-const defaultConfig = {
-  basePaths,
-  baseURL: "",
-  emailAndPassword: {
-    enabled: true,
-    forgotPassword: true,
-    rememberMe: false
-  },
-  redirectTo: "/",
-  viewPaths,
-  navigate: (path: string) => {
-    window.location.href = path
-  },
-  replace: (path: string) => window.location.replace(path),
-  toast: {
-    error: defaultToast,
-    success: defaultToast,
-    info: defaultToast
-  },
+const extendConfig = {
   Link: (props) => <a {...props} />
-} satisfies Omit<AuthConfig, "authClient" | "localization">
+} satisfies AnyAuthConfig
 
 /**
  * Constructs the effective AuthConfig by merging defaults, any AuthContext-provided config, and the optional `config` overrides.
@@ -52,16 +22,14 @@ const defaultConfig = {
  * @returns The final `AuthConfig` with a non-optional `authClient`
  * @throws If the resulting config does not include an `authClient`
  */
-export function useAuth<TLocalization = Record<string, string>>(
-  config?: AnyAuthConfig<TLocalization>
-) {
-  const context = useContext(AuthContext) as AnyAuthConfig<TLocalization>
+export function useAuth(config?: AnyAuthConfig) {
+  const context = useContext(AuthContext)
   const hydrated = useHydrated()
 
   const authConfig = deepmerge(
-    defaultConfig as AnyAuthConfig<TLocalization>,
+    deepmerge(defaultConfig as AnyAuthConfig, extendConfig),
     deepmerge(context || {}, config || {})
-  ) as AuthConfig<TLocalization>
+  ) as AuthConfig
 
   if (authConfig.authClient === undefined) {
     throw new Error("[Better Auth UI] authClient is required")

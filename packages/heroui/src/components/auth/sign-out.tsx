@@ -1,8 +1,13 @@
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { Card, Spinner } from "@heroui/react"
 import { useEffect, useRef } from "react"
 import { toast } from "sonner"
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
+
+export type SignOutProps = AnyAuthConfig & {
+  className?: string
+}
 
 /**
  * Signs the current user out when mounted and displays a loading card while the operation completes.
@@ -12,8 +17,8 @@ import { cn } from "../../lib/utils"
  * @param className - Optional class names to apply to the outer Card container
  * @returns A Card containing a centered Spinner shown while sign-out is in progress
  */
-export function SignOut({ className }: { className?: string }) {
-  const { authClient, basePaths, viewPaths, navigate } = useAuth()
+export function SignOut({ className, ...props }: SignOutProps) {
+  const { authClient, basePaths, viewPaths, navigate } = useAuth(props)
   const { refetch } = authClient.useSession()
 
   const hasSignedOut = useRef(false)

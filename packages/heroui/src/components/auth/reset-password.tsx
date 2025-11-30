@@ -17,19 +17,7 @@ import { toast } from "sonner"
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 
-const resetPasswordLocalization = {
-  INVALID_RESET_PASSWORD_TOKEN: "Invalid reset password token",
-  NEW_PASSWORD_PLACEHOLDER: "Enter your new password",
-  PASSWORD: "Password",
-  PASSWORD_RESET_SUCCESS: "Password reset successfully",
-  REMEMBER_YOUR_PASSWORD: "Remember your password?",
-  RESET_PASSWORD: "Reset Password",
-  SIGN_IN: "Sign In"
-}
-
-export type ResetPasswordLocalization = typeof resetPasswordLocalization
-
-export type ResetPasswordProps = AnyAuthConfig<ResetPasswordLocalization> & {
+export type ResetPasswordProps = AnyAuthConfig & {
   className?: string
 }
 
@@ -41,10 +29,7 @@ export type ResetPasswordProps = AnyAuthConfig<ResetPasswordLocalization> & {
  */
 export function ResetPassword({ className, ...props }: ResetPasswordProps) {
   const { authClient, basePaths, localization, viewPaths, navigate, Link } =
-    useAuth({
-      ...props,
-      localization: { ...ResetPassword.localization, ...props.localization }
-    })
+    useAuth(props)
 
   const [isPending, setIsPending] = useState(false)
   const [token, setToken] = useState<string | null>(null)
@@ -54,7 +39,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     const tokenParam = searchParams.get("token")
 
     if (!tokenParam) {
-      toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
+      toast.error(localization.auth.invalidResetPasswordToken)
       navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
       return
     }
@@ -62,7 +47,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     setToken(tokenParam)
   }, [
     basePaths.auth,
-    localization.INVALID_RESET_PASSWORD_TOKEN,
+    localization.auth.invalidResetPasswordToken,
     viewPaths.auth.signIn,
     navigate
   ])
@@ -71,7 +56,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     e.preventDefault()
 
     if (!token) {
-      toast.error(localization.INVALID_RESET_PASSWORD_TOKEN)
+      toast.error(localization.auth.invalidResetPasswordToken)
       return
     }
 
@@ -94,7 +79,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
       return
     }
 
-    toast.success(localization.PASSWORD_RESET_SUCCESS)
+    toast.success(localization.auth.passwordResetSuccess)
     navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
   }
 
@@ -104,7 +89,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
         <Form onSubmit={onSubmit}>
           <Fieldset className="gap-4">
             <Fieldset.Legend className="text-xl">
-              {localization.RESET_PASSWORD}
+              {localization.auth.resetPassword}
             </Fieldset.Legend>
 
             <Description />
@@ -116,11 +101,11 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
               autoComplete="new-password"
               isDisabled={isPending}
             >
-              <Label>{localization.PASSWORD}</Label>
+              <Label>{localization.auth.password}</Label>
 
               <Input
                 className="text-base md:text-sm"
-                placeholder={localization.NEW_PASSWORD_PLACEHOLDER}
+                placeholder={localization.auth.newPasswordPlaceholder}
                 required
               />
 
@@ -131,18 +116,18 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
               <Button type="submit" className="w-full" isPending={isPending}>
                 {isPending && <Spinner color="current" size="sm" />}
 
-                {localization.RESET_PASSWORD}
+                {localization.auth.resetPassword}
               </Button>
             </Fieldset.Actions>
 
             <Description className="flex justify-center gap-1.5 text-foreground text-sm">
-              {localization.REMEMBER_YOUR_PASSWORD}
+              {localization.auth.rememberYourPassword}
 
               <Link
                 href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
                 className="link link--underline-hover text-accent"
               >
-                {localization.SIGN_IN}
+                {localization.auth.signIn}
               </Link>
             </Description>
           </Fieldset>
@@ -151,5 +136,3 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     </Card>
   )
 }
-
-ResetPassword.localization = resetPasswordLocalization

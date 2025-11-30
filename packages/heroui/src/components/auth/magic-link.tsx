@@ -21,22 +21,7 @@ import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 
-const magicLinkLocalization = {
-  ...MagicLinkButton.localization,
-  ...ProviderButtons.localization,
-  EMAIL: "Email",
-  EMAIL_PLACEHOLDER: "Enter your email",
-  MAGIC_LINK_SENT: "Magic link sent to your email",
-  NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
-  OR: "OR",
-  SEND_MAGIC_LINK: "Send Magic Link",
-  SIGN_IN: "Sign In",
-  SIGN_UP: "Sign Up"
-}
-
-export type MagicLinkLocalization = typeof magicLinkLocalization
-
-export type MagicLinkProps = AnyAuthConfig<MagicLinkLocalization> & {
+export type MagicLinkProps = AnyAuthConfig & {
   className?: string
   socialLayout?: SocialLayout
 }
@@ -64,10 +49,7 @@ export function MagicLink({
     redirectTo,
     viewPaths,
     Link
-  } = useAuth({
-    ...props,
-    localization: { ...MagicLink.localization, ...props.localization }
-  })
+  } = useAuth(props)
 
   const [isPending, setIsPending] = useState(false)
   const showSeparator = socialProviders && socialProviders.length > 0
@@ -96,7 +78,7 @@ export function MagicLink({
 
     form.reset()
 
-    toast.success(localization.MAGIC_LINK_SENT)
+    toast.success(localization.auth.magicLinkSent)
   }
 
   return (
@@ -105,7 +87,7 @@ export function MagicLink({
         <Form onSubmit={onSubmit}>
           <Fieldset className="gap-4">
             <Fieldset.Legend className="text-xl">
-              {localization.SIGN_IN}
+              {localization.auth.signIn}
             </Fieldset.Legend>
 
             <Description />
@@ -117,11 +99,11 @@ export function MagicLink({
                 autoComplete="email"
                 isDisabled={isPending}
               >
-                <Label>{localization.EMAIL}</Label>
+                <Label>{localization.auth.email}</Label>
 
                 <Input
                   className="text-base md:text-sm"
-                  placeholder={localization.EMAIL_PLACEHOLDER}
+                  placeholder={localization.auth.emailPlaceholder}
                   required
                 />
 
@@ -133,20 +115,20 @@ export function MagicLink({
               <Button type="submit" className="w-full" isPending={isPending}>
                 {isPending && <Spinner color="current" size="sm" />}
 
-                {localization.SEND_MAGIC_LINK}
+                {localization.auth.sendMagicLink}
               </Button>
 
               {magicLink && (
                 <MagicLinkButton
                   view="magicLink"
                   isPending={isPending}
-                  localization={localization}
+                  {...props}
                 />
               )}
             </Fieldset.Actions>
 
             {showSeparator && (
-              <FieldSeparator>{localization.OR}</FieldSeparator>
+              <FieldSeparator>{localization.auth.or}</FieldSeparator>
             )}
 
             {socialProviders && socialProviders.length > 0 && (
@@ -154,19 +136,18 @@ export function MagicLink({
                 {...props}
                 isPending={isPending}
                 setIsPending={setIsPending}
-                localization={localization}
                 socialLayout={socialLayout}
               />
             )}
 
             <Description className="flex justify-center gap-1.5 text-foreground text-sm">
-              {localization.NEED_TO_CREATE_AN_ACCOUNT}
+              {localization.auth.needToCreateAnAccount}
 
               <Link
                 href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
                 className="link link--underline-hover text-accent"
               >
-                {localization.SIGN_UP}
+                {localization.auth.signUp}
               </Link>
             </Description>
           </Fieldset>
@@ -175,5 +156,3 @@ export function MagicLink({
     </Card>
   )
 }
-
-MagicLink.localization = magicLinkLocalization

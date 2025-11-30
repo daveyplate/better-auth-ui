@@ -7,18 +7,11 @@ import { toast } from "sonner"
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 
-const providerButtonsLocalization = {
-  CONTINUE_WITH_PROVIDER: "Continue with {provider}"
+export type ProviderButtonsProps = AnyAuthConfig & {
+  isPending: boolean
+  setIsPending: (pending: boolean) => void
+  socialLayout?: SocialLayout
 }
-
-export type ProviderButtonsLocalization = typeof providerButtonsLocalization
-
-export type ProviderButtonsProps =
-  AnyAuthConfig<ProviderButtonsLocalization> & {
-    isPending: boolean
-    setIsPending: (pending: boolean) => void
-    socialLayout?: SocialLayout
-  }
 
 export type SocialLayout = "auto" | "horizontal" | "vertical" | "grid"
 
@@ -37,10 +30,7 @@ export function ProviderButtons({
   ...props
 }: ProviderButtonsProps) {
   const { authClient, baseURL, localization, redirectTo, socialProviders } =
-    useAuth({
-      ...props,
-      localization: { ...ProviderButtons.localization, ...props.localization }
-    })
+    useAuth(props)
 
   const resolvedSocialLayout = useMemo(() => {
     if (socialLayout === "auto") {
@@ -96,8 +86,8 @@ export function ProviderButtons({
             <ProviderIcon />
 
             {resolvedSocialLayout === "vertical"
-              ? localization.CONTINUE_WITH_PROVIDER.replace(
-                  "{provider}",
+              ? localization.auth.continueWith.replace(
+                  "{{provider}}",
                   getProviderName(provider)
                 )
               : resolvedSocialLayout === "grid"
@@ -109,5 +99,3 @@ export function ProviderButtons({
     </Fieldset.Actions>
   )
 }
-
-ProviderButtons.localization = providerButtonsLocalization

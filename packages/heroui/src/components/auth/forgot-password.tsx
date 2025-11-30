@@ -17,19 +17,7 @@ import { toast } from "sonner"
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 
-const forgotPasswordLocalization = {
-  EMAIL: "Email",
-  EMAIL_PLACEHOLDER: "Enter your email",
-  FORGOT_PASSWORD: "Forgot Password",
-  PASSWORD_RESET_EMAIL_SENT: "Password reset email sent",
-  REMEMBER_YOUR_PASSWORD: "Remember your password?",
-  SEND_RESET_LINK: "Send Reset Link",
-  SIGN_IN: "Sign In"
-}
-
-export type ForgotPasswordLocalization = typeof forgotPasswordLocalization
-
-export type ForgotPasswordProps = AnyAuthConfig<ForgotPasswordLocalization> & {
+export type ForgotPasswordProps = AnyAuthConfig & {
   className?: string
 }
 
@@ -42,10 +30,7 @@ export type ForgotPasswordProps = AnyAuthConfig<ForgotPasswordLocalization> & {
  */
 export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
   const { authClient, basePaths, localization, viewPaths, navigate, Link } =
-    useAuth({
-      ...props,
-      localization: { ...ForgotPassword.localization, ...props.localization }
-    })
+    useAuth(props)
 
   const [isPending, setIsPending] = useState(false)
 
@@ -70,7 +55,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
       return
     }
 
-    toast.success(localization.PASSWORD_RESET_EMAIL_SENT)
+    toast.success(localization.auth.passwordResetEmailSent)
     navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
   }
 
@@ -80,7 +65,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
         <Form onSubmit={onSubmit}>
           <Fieldset className="gap-4">
             <Fieldset.Legend className="text-xl">
-              {localization.FORGOT_PASSWORD}
+              {localization.auth.forgotPassword}
             </Fieldset.Legend>
 
             <Description />
@@ -91,11 +76,11 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
               autoComplete="email"
               isDisabled={isPending}
             >
-              <Label>{localization.EMAIL}</Label>
+              <Label>{localization.auth.email}</Label>
 
               <Input
                 className="text-base md:text-sm"
-                placeholder={localization.EMAIL_PLACEHOLDER}
+                placeholder={localization.auth.emailPlaceholder}
                 required
               />
 
@@ -106,18 +91,18 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
               <Button type="submit" className="w-full" isPending={isPending}>
                 {isPending && <Spinner color="current" size="sm" />}
 
-                {localization.SEND_RESET_LINK}
+                {localization.auth.sendResetLink}
               </Button>
             </Fieldset.Actions>
 
             <Description className="flex justify-center gap-1.5 text-foreground text-sm">
-              {localization.REMEMBER_YOUR_PASSWORD}
+              {localization.auth.rememberYourPassword}
 
               <Link
                 href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
                 className="link link--underline-hover text-accent"
               >
-                {localization.SIGN_IN}
+                {localization.auth.signIn}
               </Link>
             </Description>
           </Fieldset>
@@ -126,5 +111,3 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
     </Card>
   )
 }
-
-ForgotPassword.localization = forgotPasswordLocalization

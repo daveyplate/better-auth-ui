@@ -21,25 +21,7 @@ import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 
-const signUpLocalization = {
-  ...MagicLinkButton.localization,
-  ...ProviderButtons.localization,
-  ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
-  EMAIL: "Email",
-  EMAIL_PLACEHOLDER: "Enter your email",
-  ENTER_YOUR_NAME: "Enter your name",
-  NAME: "Name",
-  OR: "OR",
-  PASSWORD: "Password",
-  PASSWORD_PLACEHOLDER: "Enter your password",
-  SIGN_IN: "Sign In",
-  SIGN_UP: "Sign Up",
-  VERIFY_YOUR_EMAIL: "Please verify your email before signing in"
-}
-
-export type SignUpLocalization = typeof signUpLocalization
-
-export type SignUpProps = AnyAuthConfig<SignUpLocalization> & {
+export type SignUpProps = AnyAuthConfig & {
   className?: string
   socialLayout?: SocialLayout
 }
@@ -68,10 +50,7 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
     viewPaths,
     navigate,
     Link
-  } = useAuth({
-    ...props,
-    localization: { ...SignUp.localization, ...props.localization }
-  })
+  } = useAuth(props)
 
   const { refetch } = authClient.useSession()
 
@@ -108,7 +87,7 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
     }
 
     if (emailAndPassword?.requireEmailVerification) {
-      toast.success(localization.VERIFY_YOUR_EMAIL)
+      toast.success(localization.auth.verifyYourEmail)
       navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
       return
     }
@@ -123,7 +102,7 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
         <Form onSubmit={onSubmit}>
           <Fieldset className="gap-4">
             <Fieldset.Legend className="text-xl">
-              {localization.SIGN_UP}
+              {localization.auth.signUp}
             </Fieldset.Legend>
 
             <Description />
@@ -135,11 +114,11 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
                 autoComplete="name"
                 isDisabled={isPending}
               >
-                <Label>{localization.NAME}</Label>
+                <Label>{localization.auth.name}</Label>
 
                 <Input
                   className="text-base md:text-sm"
-                  placeholder={localization.ENTER_YOUR_NAME}
+                  placeholder={localization.auth.namePlaceholder}
                   required
                 />
 
@@ -152,11 +131,11 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
                 autoComplete="email"
                 isDisabled={isPending}
               >
-                <Label>{localization.EMAIL}</Label>
+                <Label>{localization.auth.email}</Label>
 
                 <Input
                   className="text-base md:text-sm"
-                  placeholder={localization.EMAIL_PLACEHOLDER}
+                  placeholder={localization.auth.emailPlaceholder}
                   required
                 />
 
@@ -172,11 +151,11 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
                 value={password}
                 onChange={setPassword}
               >
-                <Label>{localization.PASSWORD}</Label>
+                <Label>{localization.auth.password}</Label>
 
                 <Input
                   className="text-base md:text-sm"
-                  placeholder={localization.PASSWORD_PLACEHOLDER}
+                  placeholder={localization.auth.passwordPlaceholder}
                   required
                 />
 
@@ -188,20 +167,20 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
               <Button type="submit" className="w-full" isPending={isPending}>
                 {isPending && <Spinner color="current" size="sm" />}
 
-                {localization.SIGN_UP}
+                {localization.auth.signUp}
               </Button>
 
               {magicLink && (
                 <MagicLinkButton
                   view="signUp"
                   isPending={isPending}
-                  localization={localization}
+                  {...props}
                 />
               )}
             </Fieldset.Actions>
 
             {showSeparator && (
-              <FieldSeparator>{localization.OR}</FieldSeparator>
+              <FieldSeparator>{localization.auth.or}</FieldSeparator>
             )}
 
             {socialProviders && socialProviders.length > 0 && (
@@ -216,13 +195,13 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
 
             {emailAndPassword?.enabled && (
               <Description className="flex justify-center gap-1.5 text-foreground text-sm">
-                {localization.ALREADY_HAVE_AN_ACCOUNT}
+                {localization.auth.alreadyHaveAnAccount}
 
                 <Link
                   href={`${basePaths.auth}/${viewPaths.auth.signIn}`}
                   className="link link--underline-hover text-accent"
                 >
-                  {localization.SIGN_IN}
+                  {localization.auth.signIn}
                 </Link>
               </Description>
             )}
@@ -232,5 +211,3 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
     </Card>
   )
 }
-
-SignUp.localization = signUpLocalization

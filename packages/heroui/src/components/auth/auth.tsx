@@ -10,17 +10,7 @@ import { SignIn } from "./sign-in"
 import { SignOut } from "./sign-out"
 import { SignUp } from "./sign-up"
 
-const authLocalization = {
-  ...SignIn.localization,
-  ...SignUp.localization,
-  ...MagicLink.localization,
-  ...ForgotPassword.localization,
-  ...ResetPassword.localization
-}
-
-export type AuthLocalization = typeof authLocalization
-
-export type AuthProps = AnyAuthConfig<AuthLocalization> & {
+export type AuthProps = AnyAuthConfig & {
   className?: string
   path?: string
   view?: AuthView
@@ -35,8 +25,14 @@ export type AuthProps = AnyAuthConfig<AuthLocalization> & {
  * @returns The React element for the resolved authentication view
  * @throws Error if neither `view` nor `path` resolve to a valid auth view; the error message lists valid view keys
  */
-export function Auth({ view, path, ...props }: AuthProps) {
-  const { viewPaths } = useAuth(props)
+export function Auth({
+  className,
+  view,
+  path,
+  socialLayout,
+  ...config
+}: AuthProps) {
+  const { viewPaths } = useAuth(config)
 
   if (!view && !path) {
     throw new Error("[Better Auth UI] Either `view` or `path` must be provided")
@@ -50,22 +46,30 @@ export function Auth({ view, path, ...props }: AuthProps) {
 
   switch (currentView) {
     case "signIn":
-      return <SignIn {...props} />
+      return (
+        <SignIn className={className} socialLayout={socialLayout} {...config} />
+      )
     case "signUp":
-      return <SignUp {...props} />
+      return (
+        <SignUp className={className} socialLayout={socialLayout} {...config} />
+      )
     case "magicLink":
-      return <MagicLink {...props} />
+      return (
+        <MagicLink
+          className={className}
+          socialLayout={socialLayout}
+          {...config}
+        />
+      )
     case "forgotPassword":
-      return <ForgotPassword {...props} />
+      return <ForgotPassword className={className} {...config} />
     case "resetPassword":
-      return <ResetPassword {...props} />
+      return <ResetPassword className={className} {...config} />
     case "signOut":
-      return <SignOut {...props} />
+      return <SignOut className={className} {...config} />
     default:
       throw new Error(
         `[Better Auth UI] Valid views are: ${Object.keys(viewPaths.auth).join(", ")}`
       )
   }
 }
-
-Auth.localization = authLocalization
