@@ -1,6 +1,6 @@
 "use client"
 
-import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -13,9 +13,10 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
-import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
+import { useAuth } from "../../hooks/use-auth"
+import { cn } from "../../lib/utils"
 
 import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
@@ -39,9 +40,8 @@ const signUpLocalization = {
 
 export type SignUpLocalization = typeof signUpLocalization
 
-export type SignUpProps = DeepPartial<AuthConfig> & {
+export type SignUpProps = AnyAuthConfig<SignUpLocalization> & {
   className?: string
-  localization?: Partial<SignUpLocalization>
   socialLayout?: SocialLayout
 }
 
@@ -57,20 +57,22 @@ export type SignUpProps = DeepPartial<AuthConfig> & {
  * @param props - Configuration and appearance overrides (e.g., `className`, `localization`, `socialLayout`) plus auth-related options passed through to the auth hook.
  * @returns The sign-up form React element.
  */
-export function SignUp({ className, ...props }: SignUpProps) {
-  const localization = { ...SignUp.localization, ...props.localization }
-
+export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
   const {
     authClient,
     basePaths,
     emailAndPassword,
+    localization,
     magicLink,
     redirectTo,
     socialProviders,
     viewPaths,
     navigate,
     Link
-  } = useAuth(props)
+  } = useAuth({
+    ...props,
+    localization: { ...SignUp.localization, ...props.localization }
+  })
 
   const { refetch } = authClient.useSession()
 
@@ -209,6 +211,7 @@ export function SignUp({ className, ...props }: SignUpProps) {
                 isPending={isPending}
                 setIsPending={setIsPending}
                 localization={localization}
+                socialLayout={socialLayout}
               />
             )}
 

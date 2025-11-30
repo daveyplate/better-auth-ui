@@ -2,6 +2,8 @@ export {
   type AuthView,
   authPaths,
   authViewPaths,
+  authViews,
+  basePaths,
   getProviderName,
   providerNames,
   viewPaths

@@ -1,9 +1,7 @@
-"use client"
-
 import type { AuthView } from "@better-auth-ui/core"
-import { type AuthConfig, useAuth } from "@better-auth-ui/react"
-import type { DeepPartial } from "better-auth/client/plugins"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 
+import { useAuth } from "../../hooks/use-auth"
 import { ForgotPassword } from "./forgot-password"
 import { MagicLink } from "./magic-link"
 import type { SocialLayout } from "./provider-buttons"
@@ -22,9 +20,8 @@ const authLocalization = {
 
 export type AuthLocalization = typeof authLocalization
 
-export type AuthProps = DeepPartial<AuthConfig> & {
+export type AuthProps = AnyAuthConfig<AuthLocalization> & {
   className?: string
-  localization?: Partial<AuthLocalization>
   path?: string
   view?: AuthView
   socialLayout?: SocialLayout
@@ -33,19 +30,23 @@ export type AuthProps = DeepPartial<AuthConfig> & {
 /**
  * Selects and renders the appropriate authentication view component.
  *
- * @param view - Optional explicit auth view to render (e.g., "signIn", "signUp")
- * @param path - Optional route path used to resolve an auth view when `view` is not provided
+ * @param view - Explicit auth view to render (e.g., "signIn", "signUp")
+ * @param path - Route path used to resolve an auth view when `view` is not provided
  * @returns The React element for the resolved authentication view
  * @throws Error if neither `view` nor `path` resolve to a valid auth view; the error message lists valid view keys
  */
 export function Auth({ view, path, ...props }: AuthProps) {
-  const { viewPaths } = useAuth()
+  const { viewPaths } = useAuth(props)
 
-  const currentView =
-    view ||
-    (Object.keys(viewPaths.auth).find(
-      (key) => viewPaths.auth[key as AuthView] === path
-    ) as AuthView | undefined)
+  if (!view && !path) {
+    throw new Error("[Better Auth UI] Either `view` or `path` must be provided")
+  }
+
+  const authPathViews = Object.fromEntries(
+    Object.entries(viewPaths.auth).map(([k, v]) => [v, k])
+  ) as Record<string, AuthView>
+
+  const currentView = view || authPathViews[path ?? ""]
 
   switch (currentView) {
     case "signIn":
@@ -62,7 +63,7 @@ export function Auth({ view, path, ...props }: AuthProps) {
       return <SignOut {...props} />
     default:
       throw new Error(
-        `Valid views are: ${Object.keys(viewPaths.auth).join(", ")}`
+        `[Better Auth UI] Valid views are: ${Object.keys(viewPaths.auth).join(", ")}`
       )
   }
 }

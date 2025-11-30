@@ -1,5 +1,3 @@
-"use client"
-
 import type { AuthConfig as BaseAuthConfig } from "@better-auth-ui/core"
 import type { DeepPartial } from "better-auth/client/plugins"
 import {
@@ -8,7 +6,7 @@ import {
   type PropsWithChildren
 } from "react"
 
-import type { AnyAuthClient, AuthClient } from "../types/auth-client"
+import type { AnyAuthClient, AuthClient } from "../../types/auth-client"
 
 /**
  * Extended authentication configuration for React components.
@@ -16,15 +14,18 @@ import type { AnyAuthClient, AuthClient } from "../types/auth-client"
  * Extends the base AuthConfig with React-specific requirements including
  * a Link component for navigation and an authClient instance.
  */
-export type AuthConfig = BaseAuthConfig & {
-  /** React component for rendering links (e.g., Next.js Link, React Router Link) */
-  Link: ComponentType<PropsWithChildren<{ className?: string; href: string }>>
-  /** Authenticated auth client instance */
-  authClient: AuthClient
-}
+export type AuthConfig<TLocalization = Record<string, string>> =
+  BaseAuthConfig<TLocalization> & {
+    /** React component for rendering links (e.g., Next.js Link, React Router Link) */
+    Link: ComponentType<PropsWithChildren<{ className?: string; href: string }>>
+    /** Authenticated auth client instance */
+    authClient: AuthClient
+  }
 
-type AuthProviderConfig = DeepPartial<AuthConfig> & {
-  authClient: AnyAuthClient
+export type AnyAuthConfig<TLocalization = Record<string, string>> = DeepPartial<
+  Omit<AuthConfig<TLocalization>, "authClient">
+> & {
+  authClient?: AnyAuthClient
 }
 
 /**
@@ -33,11 +34,14 @@ type AuthProviderConfig = DeepPartial<AuthConfig> & {
  * Components can access the auth configuration using `useContext(AuthContext)` or
  * through the `useAuth` hook which wraps this context.
  */
-export const AuthContext = createContext<AuthProviderConfig | undefined>(
-  undefined
-)
+export const AuthContext = createContext<
+  AnyAuthConfig<Record<string, string>> | undefined
+>(undefined)
 
-export type AuthProviderProps = PropsWithChildren<AuthProviderConfig>
+export type AuthProviderProps<TLocalization = Record<string, string>> =
+  PropsWithChildren<AnyAuthConfig<TLocalization>> & {
+    authClient: AnyAuthClient
+  }
 
 /**
  * Provides authentication configuration to descendant components via AuthContext.

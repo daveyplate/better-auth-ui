@@ -1,10 +1,6 @@
-"use client"
-
-import type { DeepPartial } from "better-auth/client/plugins"
+import type { AnyAuthClient, AnyAuthConfig } from "@better-auth-ui/react"
 import { useEffect } from "react"
 
-import type { AuthConfig } from "../components/auth-provider"
-import type { AnyAuthClient } from "../types/auth-client"
 import { useAuth } from "./use-auth"
 
 /**
@@ -17,7 +13,7 @@ import { useAuth } from "./use-auth"
  * - additional fields returned by the underlying auth client's `useSession` hook
  */
 export function useAuthenticate<TAuthClient extends AnyAuthClient>(
-  config?: DeepPartial<AuthConfig & { authClient?: TAuthClient }>
+  config?: AnyAuthConfig & { authClient?: TAuthClient }
 ) {
   const { authClient, basePaths, viewPaths, replace } = useAuth(config)
   const { data, isPending, ...rest } = (authClient as TAuthClient).useSession()

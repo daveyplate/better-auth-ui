@@ -152,6 +152,8 @@
       "dependencies": {
         "@better-auth-ui/core": "workspace:*",
         "@better-auth-ui/react": "workspace:*",
+        "clsx": "^2.1.1",
+        "tailwind-merge": "^3.1.0",
       },
       "devDependencies": {
         "@heroicons/react": "^2.2.0",

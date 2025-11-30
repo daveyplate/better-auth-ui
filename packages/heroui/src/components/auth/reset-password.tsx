@@ -1,6 +1,6 @@
 "use client"
 
-import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -13,9 +13,10 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
-import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useEffect, useState } from "react"
 import { toast } from "sonner"
+import { useAuth } from "../../hooks/use-auth"
+import { cn } from "../../lib/utils"
 
 const resetPasswordLocalization = {
   INVALID_RESET_PASSWORD_TOKEN: "Invalid reset password token",
@@ -29,9 +30,8 @@ const resetPasswordLocalization = {
 
 export type ResetPasswordLocalization = typeof resetPasswordLocalization
 
-export type ResetPasswordProps = DeepPartial<AuthConfig> & {
+export type ResetPasswordProps = AnyAuthConfig<ResetPasswordLocalization> & {
   className?: string
-  localization?: Partial<ResetPasswordLocalization>
 }
 
 /**
@@ -41,12 +41,11 @@ export type ResetPasswordProps = DeepPartial<AuthConfig> & {
  * @returns The rendered reset password form element.
  */
 export function ResetPassword({ className, ...props }: ResetPasswordProps) {
-  const localization = {
-    ...ResetPassword.localization,
-    ...props.localization
-  }
-
-  const { authClient, basePaths, viewPaths, navigate, Link } = useAuth(props)
+  const { authClient, basePaths, localization, viewPaths, navigate, Link } =
+    useAuth({
+      ...props,
+      localization: { ...ResetPassword.localization, ...props.localization }
+    })
 
   const [isPending, setIsPending] = useState(false)
   const [token, setToken] = useState<string | null>(null)

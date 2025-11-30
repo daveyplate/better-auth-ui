@@ -1,6 +1,4 @@
-"use client"
-
-import { type AuthConfig, cn, useAuth } from "@better-auth-ui/react"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -13,9 +11,11 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
-import type { DeepPartial } from "better-auth/client/plugins"
 import { type FormEvent, useState } from "react"
 import { toast } from "sonner"
+
+import { useAuth } from "../../hooks/use-auth"
+import { cn } from "../../lib/utils"
 
 const forgotPasswordLocalization = {
   EMAIL: "Email",
@@ -29,9 +29,8 @@ const forgotPasswordLocalization = {
 
 export type ForgotPasswordLocalization = typeof forgotPasswordLocalization
 
-export type ForgotPasswordProps = DeepPartial<AuthConfig> & {
+export type ForgotPasswordProps = AnyAuthConfig<ForgotPasswordLocalization> & {
   className?: string
-  localization?: Partial<ForgotPasswordLocalization>
 }
 
 /**
@@ -42,12 +41,12 @@ export type ForgotPasswordProps = DeepPartial<AuthConfig> & {
  * @returns The rendered Forgot Password form UI as a JSX element
  */
 export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
-  const localization = {
-    ...ForgotPassword.localization,
-    ...props.localization
-  }
+  const { authClient, basePaths, localization, viewPaths, navigate, Link } =
+    useAuth({
+      ...props,
+      localization: { ...ForgotPassword.localization, ...props.localization }
+    })
 
-  const { authClient, basePaths, viewPaths, navigate, Link } = useAuth(props)
   const [isPending, setIsPending] = useState(false)
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {

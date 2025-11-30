@@ -1,17 +1,15 @@
-"use client"
-
 import {
+  type AnyAuthConfig,
   type AuthConfig,
+  AuthContext,
   type AuthToast,
   basePaths,
   viewPaths
 } from "@better-auth-ui/react"
-import type { DeepPartial } from "better-auth/react"
 import { useContext } from "react"
 
-import { AuthContext } from "../components/auth-provider"
-import { deepmerge } from "../lib/utils"
-import { useHydrated } from "./use-hydrated"
+import { deepmerge } from "../../lib/utils"
+import { useHydrated } from "../use-hydrated"
 
 const defaultToast: AuthToast = (message, options) => {
   if (options?.action) {
@@ -43,7 +41,7 @@ const defaultConfig = {
     info: defaultToast
   },
   Link: (props) => <a {...props} />
-} satisfies Omit<AuthConfig, "authClient">
+} satisfies Omit<AuthConfig, "authClient" | "localization">
 
 /**
  * Constructs the effective AuthConfig by merging defaults, any AuthContext-provided config, and the optional `config` overrides.
@@ -54,14 +52,16 @@ const defaultConfig = {
  * @returns The final `AuthConfig` with a non-optional `authClient`
  * @throws If the resulting config does not include an `authClient`
  */
-export function useAuth(config?: DeepPartial<AuthConfig>) {
-  const context = useContext(AuthContext)
+export function useAuth<TLocalization = Record<string, string>>(
+  config?: AnyAuthConfig<TLocalization>
+) {
+  const context = useContext(AuthContext) as AnyAuthConfig<TLocalization>
   const hydrated = useHydrated()
 
   const authConfig = deepmerge(
-    defaultConfig,
+    defaultConfig as AnyAuthConfig<TLocalization>,
     deepmerge(context || {}, config || {})
-  ) as AuthConfig
+  ) as AuthConfig<TLocalization>
 
   if (authConfig.authClient === undefined) {
     throw new Error("[Better Auth UI] authClient is required")

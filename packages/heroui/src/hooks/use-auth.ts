@@ -1,15 +1,16 @@
 import {
-  type AuthConfig,
+  type AnyAuthConfig,
   deepmerge,
   useAuth as useAuthPrimitive
 } from "@better-auth-ui/react"
-import type { DeepPartial } from "better-auth/react"
 import { toast } from "sonner"
 
-export function useAuth(config?: DeepPartial<AuthConfig>) {
-  const extendConfig: Partial<AuthConfig> = {
+export function useAuth<TLocalization = Record<string, string>>(
+  config?: AnyAuthConfig<TLocalization>
+) {
+  const extendConfig: AnyAuthConfig<TLocalization> = {
     toast
   }
 
-  return useAuthPrimitive(deepmerge(config, extendConfig))
+  return useAuthPrimitive<TLocalization>(deepmerge(config, extendConfig))
 }

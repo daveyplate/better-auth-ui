@@ -1,8 +1,27 @@
 "use client"
 
-export * from "@better-auth-ui/react"
+export {
+  type AnyAuthClient,
+  type AnyAuthConfig,
+  type AuthClient,
+  type AuthConfig,
+  type AuthToast,
+  type AuthView,
+  authPaths,
+  authViewPaths,
+  authViews,
+  basePaths,
+  getProviderName,
+  providerIcons,
+  providerNames,
+  useAuthenticate,
+  useSignIn,
+  viewPaths
+} from "@better-auth-ui/react"
 
+// HeroUI components
 export * from "./components/auth/auth"
+export * from "./components/auth/auth-provider"
 export * from "./components/auth/forgot-password"
 export * from "./components/auth/magic-link"
 export * from "./components/auth/magic-link-button"

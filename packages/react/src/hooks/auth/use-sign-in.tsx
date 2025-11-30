@@ -1,16 +1,22 @@
-"use client"
-
-import type { AuthConfig } from "@better-auth-ui/react"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { useActionState } from "react"
 
-export type UseSignInOptions = {
-  config: AuthConfig
-  localization: { RESEND: string; VERIFICATION_EMAIL_SENT: string }
+import { useAuth } from "./use-auth"
+
+export const useSignInLocalization = {
+  RESEND: "Resend",
+  VERIFICATION_EMAIL_SENT: "Verification email sent!"
 }
 
-export function useSignIn({ config, localization }: UseSignInOptions) {
-  const { authClient, baseURL, emailAndPassword, redirectTo, navigate, toast } =
-    config
+export type UseSignInLocalization = typeof useSignInLocalization
+
+export function useSignIn(config?: AnyAuthConfig<UseSignInLocalization>) {
+  const context = useAuth(config)
+
+  const { authClient, baseURL, emailAndPassword, redirectTo, toast, navigate } =
+    context
+
+  const localization = { ...useSignInLocalization, ...context.localization }
 
   const { refetch } = authClient.useSession()
 

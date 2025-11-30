@@ -1,16 +1,12 @@
 "use client"
 
 import { getProviderName } from "@better-auth-ui/core"
-import {
-  type AuthConfig,
-  cn,
-  providerIcons,
-  useAuth
-} from "@better-auth-ui/react"
+import { type AnyAuthConfig, providerIcons } from "@better-auth-ui/react"
 import { Button, Fieldset } from "@heroui/react"
-import type { DeepPartial } from "better-auth/client/plugins"
 import { useMemo } from "react"
 import { toast } from "sonner"
+import { useAuth } from "../../hooks/use-auth"
+import { cn } from "../../lib/utils"
 
 const providerButtonsLocalization = {
   CONTINUE_WITH_PROVIDER: "Continue with {provider}"
@@ -18,12 +14,12 @@ const providerButtonsLocalization = {
 
 export type ProviderButtonsLocalization = typeof providerButtonsLocalization
 
-export type ProviderButtonsProps = DeepPartial<AuthConfig> & {
-  isPending: boolean
-  localization?: Partial<ProviderButtonsLocalization>
-  setIsPending: (pending: boolean) => void
-  socialLayout?: SocialLayout
-}
+export type ProviderButtonsProps =
+  AnyAuthConfig<ProviderButtonsLocalization> & {
+    isPending: boolean
+    setIsPending: (pending: boolean) => void
+    socialLayout?: SocialLayout
+  }
 
 export type SocialLayout = "auto" | "horizontal" | "vertical" | "grid"
 
@@ -41,12 +37,11 @@ export function ProviderButtons({
   socialLayout = "auto",
   ...props
 }: ProviderButtonsProps) {
-  const localization = {
-    ...ProviderButtons.localization,
-    ...props.localization
-  }
-
-  const { authClient, baseURL, redirectTo, socialProviders } = useAuth(props)
+  const { authClient, baseURL, localization, redirectTo, socialProviders } =
+    useAuth({
+      ...props,
+      localization: { ...ProviderButtons.localization, ...props.localization }
+    })
 
   const resolvedSocialLayout = useMemo(() => {
     if (socialLayout === "auto") {

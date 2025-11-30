@@ -1,6 +1,8 @@
-"use client"
-
-import { type AuthConfig, cn } from "@better-auth-ui/react"
+import {
+  type AnyAuthConfig,
+  useSignIn,
+  useSignInLocalization
+} from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -14,11 +16,10 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
-import type { DeepPartial } from "better-auth/client/plugins"
 import { useState } from "react"
 
 import { useAuth } from "../../hooks/use-auth"
-import { useSignIn } from "../../hooks/use-sign-in"
+import { cn } from "../../lib/utils"
 import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
@@ -26,6 +27,7 @@ import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 const signInLocalization = {
   ...MagicLinkButton.localization,
   ...ProviderButtons.localization,
+  ...useSignInLocalization,
   EMAIL: "Email",
   EMAIL_PLACEHOLDER: "Enter your email",
   FORGOT_PASSWORD: "Forgot password?",
@@ -34,17 +36,14 @@ const signInLocalization = {
   NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
   OR: "OR",
   REMEMBER_ME: "Remember me",
-  RESEND: "Resend",
   SIGN_IN: "Sign In",
-  SIGN_UP: "Sign Up",
-  VERIFICATION_EMAIL_SENT: "Verification email sent!"
+  SIGN_UP: "Sign Up"
 }
 
 export type SignInLocalization = typeof signInLocalization
 
-export type SignInProps = DeepPartial<AuthConfig> & {
+export type SignInProps = AnyAuthConfig<SignInLocalization> & {
   className?: string
-  localization?: Partial<SignInLocalization>
   socialLayout?: SocialLayout
 }
 
@@ -55,9 +54,7 @@ export type SignInProps = DeepPartial<AuthConfig> & {
  *
  * @returns A React element for the sign-in form and related controls configured according to the auth settings
  */
-export function SignIn({ className, ...props }: SignInProps) {
-  const localization = { ...SignIn.localization, ...props.localization }
-
+export function SignIn({ className, socialLayout, ...props }: SignInProps) {
   const config = useAuth(props)
 
   const {
@@ -69,10 +66,9 @@ export function SignIn({ className, ...props }: SignInProps) {
     Link
   } = config
 
-  const [state, formAction, isPending] = useSignIn({
-    config,
-    localization
-  })
+  const localization = { ...SignIn.localization, ...config.localization }
+
+  const [state, formAction, isPending] = useSignIn({ ...config, localization })
 
   const [socialIsPending, setSocialIsPending] = useState(false)
 
@@ -200,6 +196,7 @@ export function SignIn({ className, ...props }: SignInProps) {
                 isPending={isAnyPending}
                 setIsPending={setSocialIsPending}
                 localization={localization}
+                socialLayout={socialLayout}
               />
             )}
 

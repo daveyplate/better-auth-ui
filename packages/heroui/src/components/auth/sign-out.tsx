@@ -1,7 +1,8 @@
-import { cn, useAuth } from "@better-auth-ui/react"
 import { Card, Spinner } from "@heroui/react"
 import { useEffect, useRef } from "react"
 import { toast } from "sonner"
+import { useAuth } from "../../hooks/use-auth"
+import { cn } from "../../lib/utils"
 
 /**
  * Signs the current user out when mounted and displays a loading card while the operation completes.

@@ -1,8 +1,9 @@
 "use client"
 
 import type { AuthView } from "@better-auth-ui/core"
-import { cn, useAuth } from "@better-auth-ui/react"
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline"
+import { useAuth } from "../../hooks/use-auth"
+import { cn } from "../../lib/utils"
 
 const magicLinkButtonLocalization = {
   CONTINUE_WITH_MAGIC_LINK: "Continue with Magic Link",
