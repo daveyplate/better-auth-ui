@@ -1,5 +1,5 @@
-import type { AuthView } from "@better-auth-ui/core"
 import type { AnyAuthConfig } from "@better-auth-ui/react"
+import type { AuthView } from "@better-auth-ui/react/core"
 
 import { useAuth } from "../../hooks/use-auth"
 import { ForgotPassword } from "./forgot-password"
@@ -13,9 +13,9 @@ import { SignUp } from "./sign-up"
 export type AuthProps = AnyAuthConfig & {
   className?: string
   path?: string
-  view?: AuthView
   socialLayout?: SocialLayout
   socialPosition?: "top" | "bottom"
+  view?: AuthView
 }
 
 /**
@@ -44,7 +44,7 @@ export function Auth({
     Object.entries(viewPaths.auth).map(([k, v]) => [v, k])
   ) as Record<string, AuthView>
 
-  const currentView = view || authPathViews[path ?? ""]
+  const currentView = view || (path ? authPathViews[path] : undefined)
 
   switch (currentView) {
     case "signIn":

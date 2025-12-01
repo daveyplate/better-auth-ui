@@ -18,7 +18,6 @@ import {
 
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
-
 import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
