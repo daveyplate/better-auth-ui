@@ -16,6 +16,7 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
+
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 import { FieldSeparator } from "./field-separator"
@@ -30,10 +31,6 @@ export type SignInProps = AnyAuthConfig & {
 
 /**
  * Renders the sign-in UI with email/password, magic link, and social provider options based on the provided auth configuration.
- *
- * The component handles sign-in submission, offers a resend verification action when the account is unverified, refetches the session on successful sign-in, and navigates to the configured redirect path.
- *
- * @returns A React element for the sign-in form and related controls configured according to the auth settings
  */
 export function SignIn({
   className,
@@ -53,7 +50,8 @@ export function SignIn({
     Link
   } = config
 
-  const [state, signInEmail, signInPending] = useSignInEmail(config)
+  const [{ email, password }, signInEmail, signInPending] =
+    useSignInEmail(config)
   const [_, signInSocial, socialPending] = useSignInSocial(config)
 
   const isPending = signInPending || socialPending
@@ -92,7 +90,7 @@ export function SignIn({
             <Form action={signInEmail} className="flex flex-col gap-4">
               <Fieldset.Group>
                 <TextField
-                  defaultValue={state.email}
+                  defaultValue={email}
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -111,7 +109,7 @@ export function SignIn({
                 </TextField>
 
                 <TextField
-                  defaultValue={state.password}
+                  defaultValue={password}
                   minLength={8}
                   name="password"
                   type="password"

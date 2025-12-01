@@ -1,0 +1,61 @@
+import { type AnyAuthConfig, useRedirectTo } from "@better-auth-ui/react"
+import { useActionState } from "react"
+
+import { useAuth } from "./use-auth"
+
+export function useSignUpEmail(config?: AnyAuthConfig) {
+  const {
+    authClient,
+    basePaths,
+    emailAndPassword,
+    localization,
+    toast,
+    viewPaths,
+    navigate
+  } = useAuth(config)
+
+  const { refetch } = authClient.useSession()
+  const redirectTo = useRedirectTo(config)
+
+  const signUpEmail = async (_: object, formData: FormData) => {
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
+
+    const { error } = await authClient.signUp.email(
+      {
+        name,
+        email,
+        password
+      },
+      { disableSignal: true }
+    )
+
+    if (error) {
+      toast.error(error.message)
+
+      return {
+        name,
+        email,
+        password: ""
+      }
+    }
+
+    if (emailAndPassword?.requireEmailVerification) {
+      toast.success(localization.auth.verifyYourEmail)
+      navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
+    } else {
+      await refetch()
+
+      navigate(redirectTo)
+    }
+
+    return { name, email, password }
+  }
+
+  return useActionState(signUpEmail, {
+    name: "",
+    email: "",
+    password: ""
+  })
+}

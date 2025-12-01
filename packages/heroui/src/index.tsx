@@ -8,7 +8,8 @@ export {
   AuthProvider,
   useAuthenticate,
   useSignInEmail,
-  useSignInSocial
+  useSignInSocial,
+  useSignUpEmail
 } from "@better-auth-ui/react"
 
 export * from "./components/auth/auth"
