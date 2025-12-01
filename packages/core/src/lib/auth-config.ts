@@ -8,9 +8,15 @@ import { type ViewPaths, viewPaths } from "./view-paths"
  * Configuration options for email and password authentication.
  */
 export type EmailAndPasswordConfig = {
-  /** Whether email/password authentication is enabled */
+  /**
+   * Whether email/password authentication is enabled
+   * @default true
+   */
   enabled: boolean
-  /** Whether users can reset forgotten passwords */
+  /**
+   * Whether users can reset forgotten passwords
+   * @default true
+   */
   forgotPassword: boolean
   /** Whether to show a "Remember me" checkbox on sign-in forms */
   rememberMe?: boolean
@@ -27,22 +33,40 @@ export type EmailAndPasswordConfig = {
 export interface AuthConfig {
   /** Base paths for different application sections */
   basePaths: {
-    /** Base path for authentication routes */
+    /**
+     * Base path for authentication routes
+     * @default "/auth"
+     */
     auth: string
-    /** Base path for account management routes */
+    /**
+     * Base path for account management routes
+     * @default "/account"
+     */
     account: string
-    /** Base path for organization management routes */
+    /**
+     * Base path for organization management routes
+     * @default "/organization"
+     */
     organization: string
   }
-  /** Base URL for API endpoints (optional) */
+  /**
+   * Base URL for API endpoints (optional)
+   * @default ""
+   */
   baseURL: string
-  /** Email and password authentication configuration */
+  /**
+   * Email and password authentication configuration
+   * @default { enabled: true, forgotPassword: true, rememberMe: false }
+   */
   emailAndPassword?: EmailAndPasswordConfig
   /** Localization strings for UI components. */
   localization: Localization
   /** Whether magic link (passwordless) authentication is enabled */
   magicLink?: boolean
-  /** Default redirect path after successful authentication */
+  /**
+   * Default redirect path after successful authentication
+   * @default "/"
+   */
   redirectTo: string
   /** List of enabled social authentication providers */
   socialProviders?: SocialProvider[]
@@ -62,9 +86,15 @@ export interface AuthConfig {
     // biome-ignore lint/suspicious/noExplicitAny: Flexible dismiss for toasts
     dismiss?: (id?: number | string | any) => string | number | any
   }
-  /** Function to navigate to a new path (e.g., router.push) */
+  /**
+   * Function to navigate to a new path (e.g., router.push)
+   * @default window.location.href = path
+   */
   navigate: (path: string) => void
-  /** Function to replace current path (e.g., router.replace) */
+  /**
+   * Function to replace current path (e.g., router.replace)
+   * @default window.location.replace(path)
+   */
   replace: (path: string) => void
 }
 
