@@ -1,8 +1,7 @@
 import type { SocialProvider } from "better-auth/social-providers"
-
-import { type Localization, localization } from "../localization"
 import { type AuthToast, defaultToast } from "./auth-toast"
 import { basePaths } from "./base-paths"
+import { type Localization, localization } from "./localization"
 import { type ViewPaths, viewPaths } from "./view-paths"
 
 /**

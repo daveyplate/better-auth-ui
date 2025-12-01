@@ -1,7 +1,4 @@
-import {
-  type AnyAuthConfig,
-  useSignIn
-} from "@better-auth-ui/react"
+import { type AnyAuthConfig, useSignIn } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -16,7 +13,6 @@ import {
   TextField
 } from "@heroui/react"
 import { useState } from "react"
-
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 import { FieldSeparator } from "./field-separator"
@@ -35,7 +31,9 @@ export type SignInProps = AnyAuthConfig & {
  *
  * @returns A React element for the sign-in form and related controls configured according to the auth settings
  */
-export function SignIn({ className, socialLayout, ...config }: SignInProps) {
+export function SignIn({ className, socialLayout, ...props }: SignInProps) {
+  const config = useAuth(props)
+
   const {
     basePaths,
     emailAndPassword,
@@ -44,7 +42,7 @@ export function SignIn({ className, socialLayout, ...config }: SignInProps) {
     socialProviders,
     viewPaths,
     Link
-  } = useAuth(config)
+  } = config
 
   const [state, formAction, isPending] = useSignIn(config)
   const [socialIsPending, setSocialIsPending] = useState(false)
