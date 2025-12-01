@@ -34,7 +34,7 @@ export function SignOut({ className, ...props }: SignOutProps) {
       })
 
       if (error) {
-        toast.error(error.message)
+        toast.error(error.message || error.statusText)
       }
 
       await refetch()

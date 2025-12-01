@@ -17,7 +17,7 @@ export function useSignInSocial(config?: AnyAuthConfig) {
       callbackURL
     })
 
-    if (error) toast.error(error.message)
+    if (error) toast.error(error.message || error.statusText)
 
     return { provider }
   }

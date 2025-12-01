@@ -32,7 +32,7 @@ export function useSignInEmail(config?: AnyAuthConfig) {
 
     if (error) {
       if (error.code === "EMAIL_NOT_VERIFIED") {
-        const toastId = toast.error(error.message, {
+        const toastId = toast.error(error.message || error.statusText, {
           action: {
             label: localization.auth.resend,
             onClick: async () => {
@@ -46,7 +46,7 @@ export function useSignInEmail(config?: AnyAuthConfig) {
               })
 
               if (error) {
-                toast.error(error.message)
+                toast.error(error.message || error.statusText)
               } else {
                 toast.success(localization.auth.verificationEmailSent)
               }
@@ -54,7 +54,7 @@ export function useSignInEmail(config?: AnyAuthConfig) {
           }
         })
       } else {
-        toast.error(error.message)
+        toast.error(error.message || error.statusText)
       }
 
       return {

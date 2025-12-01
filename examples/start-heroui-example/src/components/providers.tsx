@@ -13,6 +13,7 @@ export function Providers({ children }: { children: ReactNode }) {
       <AuthProvider
         authClient={authClient}
         socialProviders={["google", "github"]}
+        magicLink
         navigate={(path) => navigate({ to: path })}
         replace={(path) => navigate({ to: path, replace: true })}
         Link={({ href, ...props }) => <Link to={href} {...props} />}

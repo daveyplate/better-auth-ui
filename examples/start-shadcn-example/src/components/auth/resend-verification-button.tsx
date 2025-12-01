@@ -61,7 +61,7 @@ export function ResendVerificationButton({
         setIsResending(false)
 
         if (error) {
-          toast.error(error.message)
+          toast.error(error.message || error.statusText)
         } else {
           toast.success(localization.VERIFICATION_EMAIL_SENT)
         }

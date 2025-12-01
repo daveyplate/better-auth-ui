@@ -32,7 +32,7 @@ export function useSignUpEmail(config?: AnyAuthConfig) {
     )
 
     if (error) {
-      toast.error(error.message)
+      toast.error(error.message || error.statusText)
 
       return {
         name,

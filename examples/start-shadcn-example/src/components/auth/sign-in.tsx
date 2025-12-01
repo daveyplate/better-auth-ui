@@ -103,7 +103,7 @@ export function SignIn({ className, ...props }: SignInProps) {
 
     if (error) {
       if (error.code === "EMAIL_NOT_VERIFIED") {
-        toast.error(error.message, {
+        toast.error(error.message || error.statusText, {
           action: (
             <ResendVerificationButton
               authClient={authClient}
@@ -115,7 +115,7 @@ export function SignIn({ className, ...props }: SignInProps) {
           )
         })
       } else {
-        toast.error(error.message)
+        toast.error(error.message || error.statusText)
       }
 
       setPassword("")

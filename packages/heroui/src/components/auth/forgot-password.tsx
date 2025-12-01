@@ -50,7 +50,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
     setIsPending(false)
 
     if (error) {
-      toast.error(error.message)
+      toast.error(error.message || error.statusText)
       form.reset()
       return
     }

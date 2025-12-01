@@ -74,7 +74,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     setIsPending(false)
 
     if (error) {
-      toast.error(error.message)
+      toast.error(error.message || error.statusText)
       form.reset()
       return
     }

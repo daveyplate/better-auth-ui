@@ -1,4 +1,8 @@
-import type { AnyAuthConfig } from "@better-auth-ui/react"
+import {
+  type AnyAuthConfig,
+  useSignInMagicLink,
+  useSignInSocial
+} from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -11,19 +15,18 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
-import { type FormEvent, useState } from "react"
-import { toast } from "sonner"
 
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 
 import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
-import type { SocialLayout } from "./provider-buttons"
+import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 
 export type MagicLinkProps = AnyAuthConfig & {
   className?: string
   socialLayout?: SocialLayout
+  socialPosition?: "top" | "bottom"
 }
 
 /**
@@ -37,63 +40,59 @@ export type MagicLinkProps = AnyAuthConfig & {
 export function MagicLink({
   className,
   socialLayout,
+  socialPosition = "bottom",
   ...props
 }: MagicLinkProps) {
+  const config = useAuth(props)
+
   const {
-    authClient,
     basePaths,
-    baseURL,
     localization,
     magicLink,
     socialProviders,
-    redirectTo,
     viewPaths,
     Link
-  } = useAuth(props)
+  } = config
 
-  const [isPending, setIsPending] = useState(false)
+  const [{ email }, signInMagicLink, magicLinkPending] =
+    useSignInMagicLink(config)
+  const [_, signInSocial, socialPending] = useSignInSocial(config)
+
+  const isPending = magicLinkPending || socialPending
+
   const showSeparator = socialProviders && socialProviders.length > 0
-
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsPending(true)
-
-    const form = e.currentTarget
-    const formData = new FormData(form)
-
-    const email = formData.get("email") as string
-    const callbackURL = `${baseURL}${redirectTo}`
-
-    const { error } = await authClient.signIn.magicLink({
-      email,
-      callbackURL
-    })
-
-    setIsPending(false)
-
-    if (error) {
-      toast.error(error.message)
-      return
-    }
-
-    form.reset()
-
-    toast.success(localization.auth.magicLinkSent)
-  }
 
   return (
     <Card className={cn("w-full max-w-sm p-4 md:p-6", className)}>
       <Card.Content>
-        <Form onSubmit={onSubmit}>
-          <Fieldset className="gap-4">
-            <Fieldset.Legend className="text-xl">
-              {localization.auth.signIn}
-            </Fieldset.Legend>
+        <Fieldset className="gap-4">
+          <Fieldset.Legend className="text-xl">
+            {localization.auth.signIn}
+          </Fieldset.Legend>
 
-            <Description />
+          <Description />
 
+          {socialPosition === "top" && (
+            <>
+              {socialProviders && socialProviders.length > 0 && (
+                <ProviderButtons
+                  {...config}
+                  socialLayout={socialLayout}
+                  signInSocial={signInSocial}
+                  isPending={isPending}
+                />
+              )}
+
+              {showSeparator && (
+                <FieldSeparator>{localization.auth.or}</FieldSeparator>
+              )}
+            </>
+          )}
+
+          <Form action={signInMagicLink} className="flex flex-col gap-4">
             <Fieldset.Group>
               <TextField
+                defaultValue={email}
                 name="email"
                 type="email"
                 autoComplete="email"
@@ -120,29 +119,42 @@ export function MagicLink({
 
               {magicLink && (
                 <MagicLinkButton
+                  {...config}
                   view="magicLink"
                   isPending={isPending}
-                  {...props}
                 />
               )}
             </Fieldset.Actions>
+          </Form>
 
-            {showSeparator && (
-              <FieldSeparator>{localization.auth.or}</FieldSeparator>
-            )}
+          {socialPosition === "bottom" && (
+            <>
+              {showSeparator && (
+                <FieldSeparator>{localization.auth.or}</FieldSeparator>
+              )}
 
-            <Description className="flex justify-center gap-1.5 text-foreground text-sm">
-              {localization.auth.needToCreateAnAccount}
+              {socialProviders && socialProviders.length > 0 && (
+                <ProviderButtons
+                  {...config}
+                  socialLayout={socialLayout}
+                  signInSocial={signInSocial}
+                  isPending={isPending}
+                />
+              )}
+            </>
+          )}
 
-              <Link
-                href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
-                className="link link--underline-hover text-accent"
-              >
-                {localization.auth.signUp}
-              </Link>
-            </Description>
-          </Fieldset>
-        </Form>
+          <Description className="flex justify-center gap-1.5 text-foreground text-sm">
+            {localization.auth.needToCreateAnAccount}
+
+            <Link
+              href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
+              className="link link--underline-hover text-accent"
+            >
+              {localization.auth.signUp}
+            </Link>
+          </Description>
+        </Fieldset>
       </Card.Content>
     </Card>
   )
