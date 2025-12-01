@@ -3,10 +3,7 @@ function isObject(item: unknown): item is Record<string, unknown> {
 }
 
 export function deepmerge<T>(target: T, source: Partial<T>): T {
-  if (Array.isArray(target) && Array.isArray(source)) {
-    // merge arrays by concatenation
-    return [...target, ...source] as T
-  } else if (isObject(target) && isObject(source)) {
+  if (isObject(target) && isObject(source)) {
     const result: Record<string, unknown> = { ...target }
 
     for (const [key, value] of Object.entries(source)) {
@@ -25,6 +22,5 @@ export function deepmerge<T>(target: T, source: Partial<T>): T {
     return result as T
   }
 
-  // primitives and fallback: source overrides target
   return source as T
 }

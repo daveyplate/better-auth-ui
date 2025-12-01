@@ -7,7 +7,8 @@ export {
   type AuthConfig,
   AuthProvider,
   useAuthenticate,
-  useSignIn
+  useSignInEmail,
+  useSignInSocial
 } from "@better-auth-ui/react"
 
 export * from "./components/auth/auth"

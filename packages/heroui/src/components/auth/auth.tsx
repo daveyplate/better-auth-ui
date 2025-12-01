@@ -15,6 +15,7 @@ export type AuthProps = AnyAuthConfig & {
   path?: string
   view?: AuthView
   socialLayout?: SocialLayout
+  socialPosition?: "top" | "bottom"
 }
 
 /**
@@ -30,6 +31,7 @@ export function Auth({
   view,
   path,
   socialLayout,
+  socialPosition,
   ...config
 }: AuthProps) {
   const { viewPaths } = useAuth(config)
@@ -47,7 +49,12 @@ export function Auth({
   switch (currentView) {
     case "signIn":
       return (
-        <SignIn className={className} socialLayout={socialLayout} {...config} />
+        <SignIn
+          className={className}
+          socialLayout={socialLayout}
+          socialPosition={socialPosition}
+          {...config}
+        />
       )
     case "signUp":
       return (

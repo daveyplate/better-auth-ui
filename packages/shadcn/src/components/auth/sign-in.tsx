@@ -40,7 +40,7 @@ const signInLocalization = {
 
 export type SignInLocalization = typeof signInLocalization
 
-export type SignInProps = AnyAuthConfig<SignInLocalization> & {
+export type SignInProps = AnyAuthConfig & {
   className?: string
   socialLayout?: SocialLayout
 }

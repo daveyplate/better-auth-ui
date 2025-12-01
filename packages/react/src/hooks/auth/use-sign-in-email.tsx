@@ -3,7 +3,7 @@ import { useActionState } from "react"
 
 import { useAuth } from "./use-auth"
 
-export function useSignIn(config?: AnyAuthConfig) {
+export function useSignInEmail(config?: AnyAuthConfig) {
   const {
     authClient,
     baseURL,

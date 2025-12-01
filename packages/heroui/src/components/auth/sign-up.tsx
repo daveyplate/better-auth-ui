@@ -19,7 +19,7 @@ import { cn } from "../../lib/utils"
 
 import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
-import { ProviderButtons, type SocialLayout } from "./provider-buttons"
+import type { SocialLayout } from "./provider-buttons"
 
 export type SignUpProps = AnyAuthConfig & {
   className?: string
@@ -181,16 +181,6 @@ export function SignUp({ className, socialLayout, ...props }: SignUpProps) {
 
             {showSeparator && (
               <FieldSeparator>{localization.auth.or}</FieldSeparator>
-            )}
-
-            {socialProviders && socialProviders.length > 0 && (
-              <ProviderButtons
-                {...props}
-                isPending={isPending}
-                setIsPending={setIsPending}
-                localization={localization}
-                socialLayout={socialLayout}
-              />
             )}
 
             {emailAndPassword?.enabled && (

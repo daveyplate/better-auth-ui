@@ -1,16 +1,15 @@
 import { getProviderName } from "@better-auth-ui/core"
 import { type AnyAuthConfig, providerIcons } from "@better-auth-ui/react"
-import { Button, Fieldset } from "@heroui/react"
+import { Button, Fieldset, Form } from "@heroui/react"
 import { useMemo } from "react"
-import { toast } from "sonner"
 
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 
 export type ProviderButtonsProps = AnyAuthConfig & {
   isPending: boolean
-  setIsPending: (pending: boolean) => void
   socialLayout?: SocialLayout
+  signInSocial: (formData: FormData) => void
 }
 
 export type SocialLayout = "auto" | "horizontal" | "vertical" | "grid"
@@ -19,18 +18,16 @@ export type SocialLayout = "auto" | "horizontal" | "vertical" | "grid"
  * Render social provider sign-in buttons and handle sign-in initiation and pending state.
  *
  * @param isPending - When true, disables all provider buttons.
- * @param setIsPending - Callback to update the pending state while a sign-in request is in progress.
  * @param socialLayout - Preferred layout for the provider buttons; when set to `"auto"` the layout is chosen based on the number of available providers.
  * @returns A JSX element containing the configured social provider buttons (icons and optional labels) with click handlers that start social sign-in.
  */
 export function ProviderButtons({
   isPending,
-  setIsPending,
   socialLayout = "auto",
+  signInSocial,
   ...props
 }: ProviderButtonsProps) {
-  const { authClient, baseURL, localization, redirectTo, socialProviders } =
-    useAuth(props)
+  const { localization, socialProviders } = useAuth(props)
 
   const resolvedSocialLayout = useMemo(() => {
     if (socialLayout === "auto") {
@@ -44,58 +41,46 @@ export function ProviderButtons({
     return socialLayout
   }, [socialLayout, socialProviders?.length])
 
-  const handleClick = async (provider: string) => {
-    setIsPending(true)
-
-    const callbackURL = `${baseURL}${redirectTo}`
-
-    const { error } = await authClient.signIn.social({
-      provider,
-      callbackURL
-    })
-
-    if (error) toast.error(error.message)
-
-    setIsPending(false)
-  }
-
   return (
-    <Fieldset.Actions
-      className={cn(
-        "gap-3",
-        resolvedSocialLayout === "grid" && "grid grid-cols-2",
-        resolvedSocialLayout === "vertical" && "flex-col",
-        resolvedSocialLayout === "horizontal" && "flex-wrap"
-      )}
-    >
-      {socialProviders?.map((provider) => {
-        const ProviderIcon = providerIcons[provider]
+    <Form action={signInSocial}>
+      <Fieldset.Actions
+        className={cn(
+          "gap-3",
+          resolvedSocialLayout === "grid" && "grid grid-cols-2",
+          resolvedSocialLayout === "vertical" && "flex-col",
+          resolvedSocialLayout === "horizontal" && "flex-wrap"
+        )}
+      >
+        {socialProviders?.map((provider) => {
+          const ProviderIcon = providerIcons[provider]
 
-        return (
-          <Button
-            key={provider}
-            className={cn(
-              "w-full",
-              resolvedSocialLayout === "horizontal" && "flex-1"
-            )}
-            variant="tertiary"
-            type="button"
-            isDisabled={isPending}
-            onClick={() => handleClick(provider)}
-          >
-            <ProviderIcon />
+          return (
+            <Button
+              key={provider}
+              name="provider"
+              value={provider}
+              className={cn(
+                "w-full",
+                resolvedSocialLayout === "horizontal" && "flex-1"
+              )}
+              variant="tertiary"
+              type="submit"
+              isPending={isPending}
+            >
+              <ProviderIcon />
 
-            {resolvedSocialLayout === "vertical"
-              ? localization.auth.continueWith.replace(
-                  "{{provider}}",
-                  getProviderName(provider)
-                )
-              : resolvedSocialLayout === "grid"
-                ? getProviderName(provider)
-                : null}
-          </Button>
-        )
-      })}
-    </Fieldset.Actions>
+              {resolvedSocialLayout === "vertical"
+                ? localization.auth.continueWith.replace(
+                    "{{provider}}",
+                    getProviderName(provider)
+                  )
+                : resolvedSocialLayout === "grid"
+                  ? getProviderName(provider)
+                  : null}
+            </Button>
+          )
+        })}
+      </Fieldset.Actions>
+    </Form>
   )
 }

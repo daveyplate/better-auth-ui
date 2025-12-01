@@ -19,7 +19,7 @@ import { cn } from "../../lib/utils"
 
 import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
-import { ProviderButtons, type SocialLayout } from "./provider-buttons"
+import type { SocialLayout } from "./provider-buttons"
 
 export type MagicLinkProps = AnyAuthConfig & {
   className?: string
@@ -129,15 +129,6 @@ export function MagicLink({
 
             {showSeparator && (
               <FieldSeparator>{localization.auth.or}</FieldSeparator>
-            )}
-
-            {socialProviders && socialProviders.length > 0 && (
-              <ProviderButtons
-                {...props}
-                isPending={isPending}
-                setIsPending={setIsPending}
-                socialLayout={socialLayout}
-              />
             )}
 
             <Description className="flex justify-center gap-1.5 text-foreground text-sm">
