@@ -35,7 +35,7 @@ export interface AuthConfig {
     organization: string
   }
   /** Base URL for API endpoints (optional) */
-  baseURL?: string
+  baseURL: string
   /** Email and password authentication configuration */
   emailAndPassword?: EmailAndPasswordConfig
   /** Localization strings for UI components. */

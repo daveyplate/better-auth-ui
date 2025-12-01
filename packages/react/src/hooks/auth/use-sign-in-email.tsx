@@ -13,11 +13,10 @@ export function useSignIn(config?: AnyAuthConfig) {
     navigate
   } = useAuth(config)
 
+  const { refetch } = authClient.useSession()
   const redirectTo = useRedirectTo(config)
 
-  const { refetch } = authClient.useSession()
-
-  const signInAction = async (_: object, formData: FormData) => {
+  const signInEmail = async (_: object, formData: FormData) => {
     const email = formData.get("email") as string
     const password = formData.get("password") as string
     const rememberMe = formData.get("rememberMe") === "on"
@@ -37,7 +36,7 @@ export function useSignIn(config?: AnyAuthConfig) {
           action: {
             label: localization.auth.resend,
             onClick: async () => {
-              const callbackURL = `${baseURL ?? ""}${redirectTo}`
+              const callbackURL = `${baseURL}${redirectTo}`
 
               toast.dismiss?.(toastId)
 
@@ -65,12 +64,13 @@ export function useSignIn(config?: AnyAuthConfig) {
     }
 
     await refetch()
+
     navigate(redirectTo)
 
     return { email, password }
   }
 
-  return useActionState(signInAction, {
+  return useActionState(signInEmail, {
     email: "",
     password: ""
   })
