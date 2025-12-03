@@ -2,6 +2,8 @@ import { betterAuth } from "better-auth"
 
 export const auth = betterAuth({
   emailAndPassword: {
-    enabled: true
+    enabled: true,
+    minPasswordLength: 8,
+    maxPasswordLength: 128
   }
 })

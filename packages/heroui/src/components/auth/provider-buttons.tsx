@@ -19,7 +19,7 @@ export type SocialLayout = "auto" | "horizontal" | "vertical" | "grid"
  *
  * @param isPending - When true, disables all provider buttons.
  * @param socialLayout - Preferred layout for the provider buttons; when set to `"auto"` the layout is chosen based on the number of available providers.
- * @returns A JSX element containing the configured social provider buttons (icons and optional labels) with click handlers that start social sign-in.
+ * @param signInSocial - The function to call when a social provider button is clicked.
  */
 export function ProviderButtons({
   isPending,

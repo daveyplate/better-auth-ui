@@ -41,9 +41,9 @@ export function SignIn({
   className,
   socialLayout,
   socialPosition = "bottom",
-  ...props
+  ...config
 }: SignInProps) {
-  const config = useAuth(props)
+  const context = useAuth(config)
 
   const {
     basePaths,
@@ -53,11 +53,11 @@ export function SignIn({
     socialProviders,
     viewPaths,
     Link
-  } = config
+  } = context
 
   const [{ email, password }, signInEmail, signInPending] =
-    useSignInEmail(config)
-  const [_, signInSocial, socialPending] = useSignInSocial(config)
+    useSignInEmail(context)
+  const [_, signInSocial, socialPending] = useSignInSocial(context)
 
   const isPending = signInPending || socialPending
 
@@ -115,7 +115,8 @@ export function SignIn({
 
                 <TextField
                   defaultValue={password}
-                  minLength={8}
+                  minLength={emailAndPassword?.minPasswordLength}
+                  maxLength={emailAndPassword?.maxPasswordLength}
                   name="password"
                   type="password"
                   autoComplete="current-password"

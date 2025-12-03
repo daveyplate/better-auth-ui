@@ -1,8 +1,7 @@
 import type { AnyAuthConfig } from "@better-auth-ui/react"
+import { useSignOut } from "@better-auth-ui/react"
 import { Card, Spinner } from "@heroui/react"
 import { useEffect, useRef } from "react"
-import { toast } from "sonner"
-import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
 
 export type SignOutProps = AnyAuthConfig & {
@@ -11,39 +10,18 @@ export type SignOutProps = AnyAuthConfig & {
 
 /**
  * Signs the current user out when mounted and displays a loading card while the operation completes.
- *
- * Attempts to sign out once, shows an error toast if sign-out fails, refetches session state, and navigates to the sign-in route.
- *
- * @param className - Optional class names to apply to the outer Card container
- * @returns A Card containing a centered Spinner shown while sign-out is in progress
  */
 export function SignOut({ className, ...props }: SignOutProps) {
-  const { authClient, basePaths, viewPaths, navigate } = useAuth(props)
-  const { refetch } = authClient.useSession()
+  const { signOut } = useSignOut(props)
 
   const hasSignedOut = useRef(false)
 
   useEffect(() => {
     if (hasSignedOut.current) return
+    hasSignedOut.current = true
 
-    const handleSignOut = async () => {
-      hasSignedOut.current = true
-
-      const { error } = await authClient.signOut({
-        fetchOptions: { disableSignal: true }
-      })
-
-      if (error) {
-        toast.error(error.message || error.statusText)
-      }
-
-      await refetch()
-
-      navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
-    }
-
-    handleSignOut()
-  }, [authClient, basePaths.auth, viewPaths.auth.signIn, navigate, refetch])
+    signOut()
+  }, [signOut])
 
   return (
     <Card

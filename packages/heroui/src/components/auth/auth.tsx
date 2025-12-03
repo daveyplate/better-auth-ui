@@ -23,8 +23,6 @@ export type AuthProps = AnyAuthConfig & {
  *
  * @param view - Explicit auth view to render (e.g., "signIn", "signUp")
  * @param path - Route path used to resolve an auth view when `view` is not provided
- * @returns The React element for the resolved authentication view
- * @throws Error if neither `view` nor `path` resolve to a valid auth view; the error message lists valid view keys
  */
 export function Auth({
   className,
@@ -58,13 +56,19 @@ export function Auth({
       )
     case "signUp":
       return (
-        <SignUp className={className} socialLayout={socialLayout} {...config} />
+        <SignUp
+          className={className}
+          socialLayout={socialLayout}
+          socialPosition={socialPosition}
+          {...config}
+        />
       )
     case "magicLink":
       return (
         <MagicLink
           className={className}
           socialLayout={socialLayout}
+          socialPosition={socialPosition}
           {...config}
         />
       )

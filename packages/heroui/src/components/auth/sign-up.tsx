@@ -135,7 +135,9 @@ export function SignUp({
 
                 <TextField
                   defaultValue={password}
-                  minLength={8}
+                  minLength={emailAndPassword?.minPasswordLength}
+                  maxLength={emailAndPassword?.maxPasswordLength}
+                  validate={emailAndPassword?.validatePassword}
                   name="password"
                   type="password"
                   autoComplete="new-password"

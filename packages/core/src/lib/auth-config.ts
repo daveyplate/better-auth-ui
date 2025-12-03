@@ -18,10 +18,28 @@ export type EmailAndPasswordConfig = {
    * @default true
    */
   forgotPassword: boolean
+  /**
+   * Maximum password length
+   * @default 128
+   */
+  maxPasswordLength?: number
+  /**
+   * Minimum password length
+   * @default 8
+   */
+  minPasswordLength?: number
+  /**
+   * Maximum password length
+   * @default 128
+   */
   /** Whether to show a "Remember me" checkbox on sign-in forms */
   rememberMe?: boolean
   /** Whether email verification is required before account activation */
   requireEmailVerification?: boolean
+  /**
+   * Function to validate a password
+   */
+  validatePassword?: (value: string) => string | true | null | undefined
 }
 
 /**
@@ -104,7 +122,9 @@ export const defaultConfig: AuthConfig = {
   emailAndPassword: {
     enabled: true,
     forgotPassword: true,
-    rememberMe: false
+    rememberMe: false,
+    minPasswordLength: 8,
+    maxPasswordLength: 128
   },
   redirectTo: "/",
   viewPaths,

@@ -28,8 +28,15 @@ export type ResetPasswordProps = AnyAuthConfig & {
  * @returns The rendered reset password form element.
  */
 export function ResetPassword({ className, ...props }: ResetPasswordProps) {
-  const { authClient, basePaths, localization, viewPaths, navigate, Link } =
-    useAuth(props)
+  const {
+    authClient,
+    basePaths,
+    emailAndPassword,
+    localization,
+    viewPaths,
+    navigate,
+    Link
+  } = useAuth(props)
 
   const [isPending, setIsPending] = useState(false)
   const [token, setToken] = useState<string | null>(null)
@@ -95,7 +102,9 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
             <Description />
 
             <TextField
-              minLength={8}
+              minLength={emailAndPassword?.minPasswordLength}
+              maxLength={emailAndPassword?.maxPasswordLength}
+              validate={emailAndPassword?.validatePassword}
               name="password"
               type="password"
               autoComplete="new-password"
