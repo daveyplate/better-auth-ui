@@ -17,7 +17,6 @@ export function useSignInMagicLink(config?: AnyAuthConfig) {
       callbackURL
     })
 
-    console.log({ error })
     if (error) {
       toast.error(error.message || error.statusText)
 

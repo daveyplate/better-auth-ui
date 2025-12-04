@@ -19,9 +19,9 @@ export type MagicLinkButtonProps = AnyAuthConfig & {
 export function MagicLinkButton({
   isPending,
   view,
-  ...props
+  ...config
 }: MagicLinkButtonProps) {
-  const { basePaths, viewPaths, localization, Link } = useAuth(props)
+  const { basePaths, viewPaths, localization, Link } = useAuth(config)
 
   const isMagicLinkView = view === "magicLink"
 

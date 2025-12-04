@@ -25,9 +25,9 @@ export function ProviderButtons({
   isPending,
   socialLayout = "auto",
   signInSocial,
-  ...props
+  ...config
 }: ProviderButtonsProps) {
-  const { localization, socialProviders } = useAuth(props)
+  const { localization, socialProviders } = useAuth(config)
 
   const resolvedSocialLayout = useMemo(() => {
     if (socialLayout === "auto") {

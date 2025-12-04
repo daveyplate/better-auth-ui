@@ -12,8 +12,8 @@ export type SignOutProps = AnyAuthConfig & {
 /**
  * Signs the current user out when mounted and displays a loading card while the operation completes.
  */
-export function SignOut({ className, ...props }: SignOutProps) {
-  const { signOut } = useSignOut(props)
+export function SignOut({ className, ...config }: SignOutProps) {
+  const { signOut } = useSignOut(config)
 
   const hasSignedOut = useRef(false)
 
