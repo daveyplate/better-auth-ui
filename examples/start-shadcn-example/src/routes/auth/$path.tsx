@@ -16,7 +16,7 @@ function AuthPage() {
 
   return (
     <div className="min-h-svh flex items-center justify-center p-4 md:p-6">
-      <Auth path={path} />
+      <Auth path={path} socialProviders={["github"]} />
     </div>
   )
 }

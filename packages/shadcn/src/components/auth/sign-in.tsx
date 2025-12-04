@@ -3,7 +3,7 @@ import {
   useSignInEmail,
   useSignInSocial
 } from "@better-auth-ui/react"
-
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -18,8 +18,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Spinner } from "@/components/ui/spinner"
+import { useAuth } from "@/hooks/auth/use-auth"
 import { cn } from "@/lib/utils"
-import { useAuth } from "../../hooks/auth/use-auth"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
 
@@ -58,6 +58,11 @@ export function SignIn({
 
   const isPending = signInPending || socialPending
 
+  const [fieldErrors, setFieldErrors] = useState<{
+    email?: string
+    password?: string
+  }>({})
+
   const showSeparator =
     emailAndPassword?.enabled && socialProviders && socialProviders.length > 0
 
@@ -81,7 +86,7 @@ export function SignIn({
               )}
 
               {showSeparator && (
-                <FieldSeparator className="m-0 text-xs flex items-center">
+                <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card m-0 text-xs flex items-center">
                   {localization.auth.or}
                 </FieldSeparator>
               )}
@@ -105,9 +110,23 @@ export function SignIn({
                     placeholder={localization.auth.emailPlaceholder}
                     required
                     disabled={isPending}
+                    onChange={() => {
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        email: undefined
+                      }))
+                    }}
+                    onInvalid={(e) => {
+                      e.preventDefault()
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        email: (e.target as HTMLInputElement).validationMessage
+                      }))
+                    }}
+                    aria-invalid={!!fieldErrors.email}
                   />
 
-                  <FieldError />
+                  <FieldError>{fieldErrors.email}</FieldError>
                 </Field>
 
                 <Field className="gap-1">
@@ -138,9 +157,25 @@ export function SignIn({
                     minLength={emailAndPassword?.minPasswordLength}
                     maxLength={emailAndPassword?.maxPasswordLength}
                     disabled={isPending}
+                    onChange={() => {
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        password: undefined
+                      }))
+                    }}
+                    onInvalid={(e) => {
+                      e.preventDefault()
+
+                      setFieldErrors((prev) => ({
+                        ...prev,
+                        password: (e.target as HTMLInputElement)
+                          .validationMessage
+                      }))
+                    }}
+                    aria-invalid={!!fieldErrors.password}
                   />
 
-                  <FieldError />
+                  <FieldError>{fieldErrors.password}</FieldError>
                 </Field>
 
                 {emailAndPassword.rememberMe && (
@@ -173,7 +208,7 @@ export function SignIn({
                   </Field>
                 )}
 
-                <Field>
+                <Field className="mt-1">
                   <Button type="submit" disabled={isPending}>
                     {isPending && <Spinner />}
 
@@ -195,7 +230,7 @@ export function SignIn({
           {socialPosition === "bottom" && (
             <>
               {showSeparator && (
-                <FieldSeparator className="m-0 text-xs flex items-center">
+                <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card m-0 text-xs flex items-center">
                   {localization.auth.or}
                 </FieldSeparator>
               )}

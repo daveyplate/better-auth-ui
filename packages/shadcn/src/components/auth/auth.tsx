@@ -4,6 +4,7 @@ import type { AuthView } from "@better-auth-ui/react/core"
 import { useAuth } from "@/hooks/auth/use-auth"
 import type { SocialLayout } from "./provider-buttons"
 import { SignIn } from "./sign-in"
+import { SignUp } from "./sign-up"
 
 export type AuthProps = AnyAuthConfig & {
   className?: string
@@ -51,15 +52,15 @@ export function Auth({
           {...config}
         />
       )
-    // case "signUp":
-    //   return (
-    //     <SignUp
-    //       className={className}
-    //       socialLayout={socialLayout}
-    //       socialPosition={socialPosition}
-    //       {...config}
-    //     />
-    //   )
+    case "signUp":
+      return (
+        <SignUp
+          className={className}
+          socialLayout={socialLayout}
+          socialPosition={socialPosition}
+          {...config}
+        />
+      )
     // case "magicLink":
     //   return (
     //     <MagicLink
