@@ -32,10 +32,6 @@ export type SignInProps = AnyAuthConfig & {
 /**
  * Renders the Sign In UI with email/password, magic link, and social provider
  * options based on the provided `AuthConfig`.
- *
- * The component handles sign-in submission, offers a resend verification
- * action when the account is unverified, refetches the session on successful
- * sign-in, and navigates to the configured `redirectTo`.
  */
 export function SignIn({
   className,
@@ -57,6 +53,7 @@ export function SignIn({
 
   const [{ email, password }, signInEmail, signInPending] =
     useSignInEmail(context)
+
   const [_, signInSocial, socialPending] = useSignInSocial(context)
 
   const isPending = signInPending || socialPending

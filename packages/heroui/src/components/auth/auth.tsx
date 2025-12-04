@@ -21,8 +21,10 @@ export type AuthProps = AnyAuthConfig & {
 /**
  * Selects and renders the appropriate authentication view component.
  *
- * @param view - Explicit auth view to render (e.g., "signIn", "signUp")
  * @param path - Route path used to resolve an auth view when `view` is not provided
+ * @param socialLayout - Social layout to apply to the component
+ * @param socialPosition - Social position to apply to the component
+ * @param view - Explicit auth view to render (e.g., "signIn", "signUp")
  */
 export function Auth({
   className,

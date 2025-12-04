@@ -2,6 +2,7 @@ import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { useSignOut } from "@better-auth-ui/react"
 import { Card, Spinner } from "@heroui/react"
 import { useEffect, useRef } from "react"
+
 import { cn } from "../../lib/utils"
 
 export type SignOutProps = AnyAuthConfig & {

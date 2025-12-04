@@ -44,9 +44,9 @@ export function SignUp({
   className,
   socialLayout,
   socialPosition = "bottom",
-  ...props
+  ...config
 }: SignUpProps) {
-  const config = useAuth(props)
+  const context = useAuth(config)
 
   const {
     basePaths,
@@ -56,11 +56,12 @@ export function SignUp({
     socialProviders,
     viewPaths,
     Link
-  } = config
+  } = context
 
   const [{ name, email, password }, signUpEmail, signUpPending] =
-    useSignUpEmail(config)
-  const [_, signInSocial, socialPending] = useSignInSocial(config)
+    useSignUpEmail(context)
+
+  const [_, signInSocial, socialPending] = useSignInSocial(context)
 
   const isPending = signUpPending || socialPending
 
