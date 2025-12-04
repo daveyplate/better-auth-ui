@@ -18,7 +18,6 @@ import {
 
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
-
 import { FieldSeparator } from "./field-separator"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
@@ -31,19 +30,14 @@ export type MagicLinkProps = AnyAuthConfig & {
 
 /**
  * Render a card-based sign-in form that sends an email magic link and optionally shows social provider buttons.
- *
- * Submits the entered email to the auth client, displays success or error toasts, and supports customizable localization and social layout via props.
- *
- * @param props - Component props to configure appearance, localization overrides, social layout, and auth-related options.
- * @returns A JSX element containing the magic-link sign-in user interface and related controls.
  */
 export function MagicLink({
   className,
   socialLayout,
   socialPosition = "bottom",
-  ...props
+  ...config
 }: MagicLinkProps) {
-  const config = useAuth(props)
+  const context = useAuth(config)
 
   const {
     basePaths,
@@ -52,11 +46,12 @@ export function MagicLink({
     socialProviders,
     viewPaths,
     Link
-  } = config
+  } = context
 
   const [{ email }, signInMagicLink, magicLinkPending] =
-    useSignInMagicLink(config)
-  const [_, signInSocial, socialPending] = useSignInSocial(config)
+    useSignInMagicLink(context)
+
+  const [_, signInSocial, socialPending] = useSignInSocial(context)
 
   const isPending = magicLinkPending || socialPending
 
