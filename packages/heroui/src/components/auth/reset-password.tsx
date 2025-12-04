@@ -1,4 +1,4 @@
-import type { AnyAuthConfig } from "@better-auth-ui/react"
+import { type AnyAuthConfig, useResetPassword } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -11,7 +11,7 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
-import { type FormEvent, useEffect, useState } from "react"
+import { useEffect } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "../../hooks/use-auth"
@@ -24,19 +24,19 @@ export type ResetPasswordProps = AnyAuthConfig & {
 /**
  * Renders a password reset form that validates a token from the URL and submits a new password to the auth client.
  */
-export function ResetPassword({ className, ...props }: ResetPasswordProps) {
+export function ResetPassword({ className, ...config }: ResetPasswordProps) {
+  const context = useAuth(config)
+
   const {
-    authClient,
     basePaths,
     emailAndPassword,
     localization,
     viewPaths,
     navigate,
     Link
-  } = useAuth(props)
+  } = context
 
-  const [isPending, setIsPending] = useState(false)
-  const [token, setToken] = useState<string | null>(null)
+  const [{ password }, resetPassword, isPending] = useResetPassword(context)
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search)
@@ -45,10 +45,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     if (!tokenParam) {
       toast.error(localization.auth.invalidResetPasswordToken)
       navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
-      return
     }
-
-    setToken(tokenParam)
   }, [
     basePaths.auth,
     localization.auth.invalidResetPasswordToken,
@@ -56,41 +53,10 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
     navigate
   ])
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    if (!token) {
-      toast.error(localization.auth.invalidResetPasswordToken)
-      return
-    }
-
-    setIsPending(true)
-
-    const form = e.currentTarget
-    const formData = new FormData(form)
-    const password = formData.get("password") as string
-
-    const { error } = await authClient.resetPassword({
-      token,
-      newPassword: password
-    })
-
-    setIsPending(false)
-
-    if (error) {
-      toast.error(error.message || error.statusText)
-      form.reset()
-      return
-    }
-
-    toast.success(localization.auth.passwordResetSuccess)
-    navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
-  }
-
   return (
     <Card className={cn("w-full max-w-sm p-4 md:p-6", className)}>
       <Card.Content>
-        <Form onSubmit={onSubmit}>
+        <Form action={resetPassword}>
           <Fieldset className="gap-4">
             <Fieldset.Legend className="text-xl">
               {localization.auth.resetPassword}
@@ -99,6 +65,7 @@ export function ResetPassword({ className, ...props }: ResetPasswordProps) {
             <Description />
 
             <TextField
+              defaultValue={password}
               minLength={emailAndPassword?.minPasswordLength}
               maxLength={emailAndPassword?.maxPasswordLength}
               validate={emailAndPassword?.validatePassword}
