@@ -74,7 +74,6 @@ export function ResetPassword({ className, ...config }: ResetPasswordProps) {
               defaultValue={password}
               minLength={emailAndPassword?.minPasswordLength}
               maxLength={emailAndPassword?.maxPasswordLength}
-              validate={emailAndPassword?.validatePassword}
               name="password"
               autoComplete="new-password"
               isDisabled={isPending}

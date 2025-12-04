@@ -41,10 +41,6 @@ export type EmailAndPasswordConfig = {
   rememberMe?: boolean
   /** Whether email verification is required before account activation */
   requireEmailVerification?: boolean
-  /**
-   * Function to validate a password
-   */
-  validatePassword?: (value: string) => string | true | null | undefined
 }
 
 /**
