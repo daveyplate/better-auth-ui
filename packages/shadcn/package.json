@@ -3,8 +3,8 @@
   "version": "0.0.0-alpha.0",
   "type": "module",
   "scripts": {
-    "build": "vite build && bun styles",
-    "dev": "bun styles && vite build --watch",
+    "build": "tsc && tsc-alias && bun styles",
+    "dev": "bun styles && concurrently 'tsc -w' 'tsc-alias -w'",
     "styles": "cpy src/styles.css dist/ --flat",
     "test": "vitest",
     "registry:build": "shadcn build --output ../../apps/docs/public/r"
@@ -31,11 +31,13 @@
     "@vitejs/plugin-react": "^5.0.4",
     "@vitest/browser-playwright": "^4.0.15",
     "better-auth": "^1.4.5",
+    "concurrently": "^9.2.1",
     "cpy-cli": "^6.0.0",
     "playwright": "^1.57.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "sonner": "^2.0.7",
+    "tsc-alias": "^1.8.16",
     "vite": "^7.2.6",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.0.15"
