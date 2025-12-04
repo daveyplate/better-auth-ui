@@ -12,8 +12,11 @@ export const localization = {
     /** @default "Enter your email" */
     emailPlaceholder: "Enter your email",
 
+    /** @default "Forgot Password" */
+    forgotPassword: "Forgot Password",
+
     /** @default "Forgot password?" */
-    forgotPassword: "Forgot password?",
+    forgotPasswordLink: "Forgot password?",
 
     /** @default "Hide password" */
     hidePassword: "Hide password",

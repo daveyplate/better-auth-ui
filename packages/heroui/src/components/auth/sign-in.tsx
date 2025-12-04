@@ -127,7 +127,7 @@ export function SignIn({
                           href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                           className="link link--underline-hover text-muted"
                         >
-                          {localization.auth.forgotPassword}
+                          {localization.auth.forgotPasswordLink}
                         </Link>
                       )}
                   </div>
@@ -159,7 +159,7 @@ export function SignIn({
                       href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                       className="link link--underline-hover text-muted"
                     >
-                      {localization.auth.forgotPassword}
+                      {localization.auth.forgotPasswordLink}
                     </Link>
                   )}
                 </div>

@@ -141,7 +141,7 @@ export function SignIn({
                           href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                           className="ml-auto inline-block text-sm underline-offset-4 hover:underline text-card-foreground!"
                         >
-                          {localization.auth.forgotPassword}
+                          {localization.auth.forgotPasswordLink}
                         </Link>
                       )}
                   </div>
@@ -201,7 +201,7 @@ export function SignIn({
                           href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                           className="ml-auto inline-block text-sm underline-offset-4 hover:underline text-card-foreground!"
                         >
-                          {localization.auth.forgotPassword}
+                          {localization.auth.forgotPasswordLink}
                         </Link>
                       )}
                     </div>
