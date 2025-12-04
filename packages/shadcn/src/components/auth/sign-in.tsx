@@ -1,5 +1,8 @@
-import type { AnyAuthConfig } from "@better-auth-ui/react"
-import { useState } from "react"
+import {
+  type AnyAuthConfig,
+  useSignInEmail,
+  useSignInSocial
+} from "@better-auth-ui/react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -15,59 +18,45 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Spinner } from "@/components/ui/spinner"
-
-import { useAuth } from "@/hooks/auth/use-auth"
-import { useSignIn, useSignInLocalization } from "@/hooks/auth/use-sign-in"
 import { cn } from "@/lib/utils"
+import { useAuth } from "../../hooks/auth/use-auth"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"
-
-const signInLocalization = {
-  ...MagicLinkButton.localization,
-  ...ProviderButtons.localization,
-  ...useSignInLocalization,
-  EMAIL: "Email",
-  EMAIL_PLACEHOLDER: "Enter your email",
-  FORGOT_PASSWORD: "Forgot password?",
-  PASSWORD: "Password",
-  PASSWORD_PLACEHOLDER: "Enter your password",
-  NEED_TO_CREATE_AN_ACCOUNT: "Need to create an account?",
-  OR: "OR",
-  REMEMBER_ME: "Remember me",
-  SIGN_IN: "Sign In",
-  SIGN_UP: "Sign Up"
-}
-
-export type SignInLocalization = typeof signInLocalization
 
 export type SignInProps = AnyAuthConfig & {
   className?: string
   socialLayout?: SocialLayout
+  socialPosition?: "top" | "bottom"
 }
 
-export function SignIn({ className, socialLayout, ...props }: SignInProps) {
-  const config = useAuth(props)
+/**
+ * Renders the Sign In UI with email/password, magic link, and social provider
+ * options based on the provided `AuthConfig`.
+ */
+export function SignIn({
+  className,
+  socialLayout,
+  socialPosition = "bottom",
+  ...config
+}: SignInProps) {
+  const context = useAuth(config)
 
   const {
     basePaths,
     emailAndPassword,
+    localization,
     magicLink,
     socialProviders,
     viewPaths,
     Link
-  } = config
+  } = context
 
-  const localization = { ...SignIn.localization, ...config.localization }
+  const [{ email, password }, signInEmail, signInPending] =
+    useSignInEmail(context)
 
-  const [state, formAction, isPending] = useSignIn({ ...config, localization })
-  const [socialIsPending, setSocialIsPending] = useState(false)
+  const [_, signInSocial, socialPending] = useSignInSocial(context)
 
-  const isSubmitting = isPending || socialIsPending
-
-  const [fieldErrors, setFieldErrors] = useState<{
-    email?: string
-    password?: string
-  }>({})
+  const isPending = signInPending || socialPending
 
   const showSeparator =
     emailAndPassword?.enabled && socialProviders && socialProviders.length > 0
@@ -75,49 +64,56 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
   return (
     <Card className={cn("w-full max-w-sm py-4 md:py-6", className)}>
       <CardHeader className="px-4 md:px-6 -mb-4">
-        <CardTitle className="text-xl">{localization.SIGN_IN}</CardTitle>
+        <CardTitle className="text-xl">{localization.auth.signIn}</CardTitle>
       </CardHeader>
 
       <CardContent className="px-4 md:px-6">
-        <form action={formAction}>
-          <FieldGroup className="gap-4">
-            {emailAndPassword?.enabled && (
-              <>
-                <Field data-invalid={!!fieldErrors.email} className="gap-1">
-                  <FieldLabel htmlFor="email">{localization.EMAIL}</FieldLabel>
+        <FieldGroup className="gap-4">
+          {socialPosition === "top" && (
+            <>
+              {socialProviders && socialProviders.length > 0 && (
+                <ProviderButtons
+                  {...config}
+                  socialLayout={socialLayout}
+                  signInSocial={signInSocial}
+                  isPending={isPending}
+                />
+              )}
+
+              {showSeparator && (
+                <FieldSeparator className="m-0 text-xs flex items-center">
+                  {localization.auth.or}
+                </FieldSeparator>
+              )}
+            </>
+          )}
+
+          {emailAndPassword?.enabled && (
+            <form action={signInEmail}>
+              <FieldGroup className="gap-4">
+                <Field className="gap-1">
+                  <FieldLabel htmlFor="email">
+                    {localization.auth.email}
+                  </FieldLabel>
 
                   <Input
                     id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
-                    defaultValue={state.email}
-                    placeholder={localization.EMAIL_PLACEHOLDER}
+                    defaultValue={email}
+                    placeholder={localization.auth.emailPlaceholder}
                     required
-                    disabled={isSubmitting}
-                    onChange={() => {
-                      setFieldErrors((prev) => ({
-                        ...prev,
-                        email: undefined
-                      }))
-                    }}
-                    onInvalid={(e) => {
-                      e.preventDefault()
-                      setFieldErrors((prev) => ({
-                        ...prev,
-                        email: (e.target as HTMLInputElement).validationMessage
-                      }))
-                    }}
-                    aria-invalid={!!fieldErrors.email}
+                    disabled={isPending}
                   />
 
-                  <FieldError>{fieldErrors.email}</FieldError>
+                  <FieldError />
                 </Field>
 
-                <Field data-invalid={!!fieldErrors.password} className="gap-1">
+                <Field className="gap-1">
                   <div className="flex items-center">
                     <FieldLabel htmlFor="password">
-                      {localization.PASSWORD}
+                      {localization.auth.password}
                     </FieldLabel>
 
                     {!emailAndPassword?.rememberMe &&
@@ -126,7 +122,7 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
                           href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                           className="ml-auto inline-block text-sm underline-offset-4 hover:underline text-card-foreground!"
                         >
-                          {localization.FORGOT_PASSWORD}
+                          {localization.auth.forgotPassword}
                         </Link>
                       )}
                   </div>
@@ -136,30 +132,15 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
                     name="password"
                     type="password"
                     autoComplete="current-password"
-                    defaultValue={state.password}
-                    placeholder={localization.PASSWORD_PLACEHOLDER}
+                    defaultValue={password}
+                    placeholder={localization.auth.passwordPlaceholder}
                     required
-                    minLength={8}
-                    disabled={isSubmitting}
-                    onChange={() => {
-                      setFieldErrors((prev) => ({
-                        ...prev,
-                        password: undefined
-                      }))
-                    }}
-                    onInvalid={(e) => {
-                      e.preventDefault()
-
-                      setFieldErrors((prev) => ({
-                        ...prev,
-                        password: (e.target as HTMLInputElement)
-                          .validationMessage
-                      }))
-                    }}
-                    aria-invalid={!!fieldErrors.password}
+                    minLength={emailAndPassword?.minPasswordLength}
+                    maxLength={emailAndPassword?.maxPasswordLength}
+                    disabled={isPending}
                   />
 
-                  <FieldError>{fieldErrors.password}</FieldError>
+                  <FieldError />
                 </Field>
 
                 {emailAndPassword.rememberMe && (
@@ -169,14 +150,14 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
                         <Checkbox
                           id="rememberMe"
                           name="rememberMe"
-                          disabled={isSubmitting}
+                          disabled={isPending}
                         />
 
                         <Label
                           htmlFor="rememberMe"
                           className="cursor-pointer text-sm font-normal"
                         >
-                          {localization.REMEMBER_ME}
+                          {localization.auth.rememberMe}
                         </Label>
                       </div>
 
@@ -185,64 +166,65 @@ export function SignIn({ className, socialLayout, ...props }: SignInProps) {
                           href={`${basePaths.auth}/${viewPaths.auth.forgotPassword}`}
                           className="ml-auto inline-block text-sm underline-offset-4 hover:underline text-card-foreground!"
                         >
-                          {localization.FORGOT_PASSWORD}
+                          {localization.auth.forgotPassword}
                         </Link>
                       )}
                     </div>
                   </Field>
                 )}
-              </>
-            )}
 
-            <Field>
-              <Button type="submit" disabled={isSubmitting}>
-                {isPending && <Spinner />}
+                <Field>
+                  <Button type="submit" disabled={isPending}>
+                    {isPending && <Spinner />}
 
-                {localization.SIGN_IN}
-              </Button>
+                    {localization.auth.signIn}
+                  </Button>
 
-              {magicLink && (
-                <MagicLinkButton
-                  view="signIn"
-                  isPending={isSubmitting}
-                  localization={localization}
+                  {magicLink && (
+                    <MagicLinkButton
+                      {...config}
+                      view="signIn"
+                      isPending={isPending}
+                    />
+                  )}
+                </Field>
+              </FieldGroup>
+            </form>
+          )}
+
+          {socialPosition === "bottom" && (
+            <>
+              {showSeparator && (
+                <FieldSeparator className="m-0 text-xs flex items-center">
+                  {localization.auth.or}
+                </FieldSeparator>
+              )}
+
+              {socialProviders && socialProviders.length > 0 && (
+                <ProviderButtons
+                  {...config}
+                  socialLayout={socialLayout}
+                  signInSocial={signInSocial}
+                  isPending={isPending}
                 />
               )}
-            </Field>
+            </>
+          )}
 
-            {showSeparator && (
-              <FieldSeparator className="m-0 text-xs flex items-center">
-                {localization.OR}
-              </FieldSeparator>
-            )}
+          {emailAndPassword?.enabled && (
+            <FieldDescription className="flex justify-center gap-1">
+              {localization.auth.needToCreateAnAccount}
 
-            {socialProviders && socialProviders.length > 0 && (
-              <ProviderButtons
-                {...props}
-                isPending={isSubmitting}
-                setIsPending={setSocialIsPending}
-                localization={localization}
-                socialLayout={socialLayout}
-              />
-            )}
-
-            {emailAndPassword?.enabled && (
-              <FieldDescription className="flex justify-center gap-1">
-                {localization.NEED_TO_CREATE_AN_ACCOUNT}
-
-                <Link
-                  href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
-                  className="underline underline-offset-4"
-                >
-                  {localization.SIGN_UP}
-                </Link>
-              </FieldDescription>
-            )}
-          </FieldGroup>
-        </form>
+              <Link
+                href={`${basePaths.auth}/${viewPaths.auth.signUp}`}
+                className="underline underline-offset-4"
+              >
+                {localization.auth.signUp}
+              </Link>
+            </FieldDescription>
+          )}
+        </FieldGroup>
       </CardContent>
     </Card>
   )
 }
-
-SignIn.localization = signInLocalization

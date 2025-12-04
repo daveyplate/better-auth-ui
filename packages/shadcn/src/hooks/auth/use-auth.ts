@@ -10,5 +10,5 @@ export function useAuth(config?: AnyAuthConfig) {
     toast
   }
 
-  return useAuthPrimitive(deepmerge(config, extendConfig))
+  return useAuthPrimitive(deepmerge(extendConfig, config || {}))
 }

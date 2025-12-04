@@ -1,1 +1,1 @@
-export { useSignIn, useSignInLocalization } from "@better-auth-ui/react"
+export { useSignInEmail } from "@better-auth-ui/react"
