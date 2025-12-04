@@ -4,7 +4,6 @@ import { Lock, Mail } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/hooks/auth/use-auth"
-import { cn } from "@/lib/utils"
 
 export type MagicLinkButtonProps = AnyAuthConfig & {
   isPending: boolean
@@ -27,15 +26,15 @@ export function MagicLinkButton({
   const isMagicLinkView = view === "magicLink"
 
   return (
-    <Link
-      href={`${basePaths.auth}/${isMagicLinkView ? viewPaths.auth.signIn : viewPaths.auth.magicLink}`}
-      className={cn("w-full", isPending && "pointer-events-none opacity-50")}
+    <Button
+      type="button"
+      variant="outline"
+      className="w-full"
+      disabled={isPending}
+      asChild
     >
-      <Button
-        type="button"
-        variant="outline"
-        className="w-full"
-        disabled={isPending}
+      <Link
+        href={`${basePaths.auth}/${isMagicLinkView ? viewPaths.auth.signIn : viewPaths.auth.magicLink}`}
       >
         {isMagicLinkView ? <Lock /> : <Mail />}
 
@@ -45,7 +44,7 @@ export function MagicLinkButton({
             ? localization.auth.password
             : localization.auth.magicLink
         )}
-      </Button>
-    </Link>
+      </Link>
+    </Button>
   )
 }
