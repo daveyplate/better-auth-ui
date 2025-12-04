@@ -1,4 +1,4 @@
-import type { AnyAuthConfig } from "@better-auth-ui/react"
+import { type AnyAuthConfig, useForgotPassword } from "@better-auth-ui/react"
 import {
   Button,
   Card,
@@ -11,8 +11,6 @@ import {
   Spinner,
   TextField
 } from "@heroui/react"
-import { type FormEvent, useState } from "react"
-import { toast } from "sonner"
 
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
@@ -23,46 +21,18 @@ export type ForgotPasswordProps = AnyAuthConfig & {
 
 /**
  * Renders a "Forgot Password" form with an email input and submit button.
- *
- * Supports overriding displayed text via `props.localization` and accepts an optional `className` to modify container styling.
- *
- * @returns The rendered Forgot Password form UI as a JSX element
  */
-export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
-  const { authClient, basePaths, localization, viewPaths, navigate, Link } =
-    useAuth(props)
+export function ForgotPassword({ className, ...config }: ForgotPasswordProps) {
+  const context = useAuth(config)
 
-  const [isPending, setIsPending] = useState(false)
+  const { basePaths, localization, viewPaths, Link } = context
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsPending(true)
-
-    const form = e.currentTarget
-    const formData = new FormData(form)
-    const email = formData.get("email") as string
-
-    const { error } = await authClient.requestPasswordReset({
-      email,
-      redirectTo: `${basePaths.auth}/${viewPaths.auth.resetPassword}`
-    })
-
-    setIsPending(false)
-
-    if (error) {
-      toast.error(error.message || error.statusText)
-      form.reset()
-      return
-    }
-
-    toast.success(localization.auth.passwordResetEmailSent)
-    navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
-  }
+  const [{ email }, forgotPassword, isPending] = useForgotPassword(context)
 
   return (
     <Card className={cn("w-full max-w-sm p-4 md:p-6", className)}>
       <Card.Content>
-        <Form onSubmit={onSubmit}>
+        <Form action={forgotPassword}>
           <Fieldset className="gap-4">
             <Fieldset.Legend className="text-xl">
               {localization.auth.forgotPassword}
@@ -71,6 +41,7 @@ export function ForgotPassword({ className, ...props }: ForgotPasswordProps) {
             <Description />
 
             <TextField
+              defaultValue={email}
               name="email"
               type="email"
               autoComplete="email"
