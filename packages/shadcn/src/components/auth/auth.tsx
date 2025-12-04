@@ -2,6 +2,7 @@ import type { AnyAuthConfig } from "@better-auth-ui/react"
 import type { AuthView } from "@better-auth-ui/react/core"
 
 import { useAuth } from "@/hooks/auth/use-auth"
+import { MagicLink } from "./magic-link"
 import type { SocialLayout } from "./provider-buttons"
 import { SignIn } from "./sign-in"
 import { SignUp } from "./sign-up"
@@ -61,15 +62,15 @@ export function Auth({
           {...config}
         />
       )
-    // case "magicLink":
-    //   return (
-    //     <MagicLink
-    //       className={className}
-    //       socialLayout={socialLayout}
-    //       socialPosition={socialPosition}
-    //       {...config}
-    //     />
-    //   )
+    case "magicLink":
+      return (
+        <MagicLink
+          className={className}
+          socialLayout={socialLayout}
+          socialPosition={socialPosition}
+          {...config}
+        />
+      )
     // case "forgotPassword":
     //   return <ForgotPassword className={className} {...config} />
     // case "resetPassword":

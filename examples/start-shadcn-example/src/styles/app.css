@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "@better-auth-ui/shadcn/styles";
 
+@import "./custom.css";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
