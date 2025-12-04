@@ -1,4 +1,5 @@
 import { type AnyAuthConfig, useResetPassword } from "@better-auth-ui/react"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"
 import {
   Button,
   Card,
@@ -6,12 +7,12 @@ import {
   FieldError,
   Fieldset,
   Form,
-  Input,
+  InputGroup,
   Label,
   Spinner,
   TextField
 } from "@heroui/react"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "../../hooks/use-auth"
@@ -37,6 +38,8 @@ export function ResetPassword({ className, ...config }: ResetPasswordProps) {
   } = context
 
   const [{ password }, resetPassword, isPending] = useResetPassword(context)
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search)
@@ -70,17 +73,36 @@ export function ResetPassword({ className, ...config }: ResetPasswordProps) {
               maxLength={emailAndPassword?.maxPasswordLength}
               validate={emailAndPassword?.validatePassword}
               name="password"
-              type="password"
               autoComplete="new-password"
               isDisabled={isPending}
             >
               <Label>{localization.auth.password}</Label>
 
-              <Input
-                className="text-base md:text-sm"
-                placeholder={localization.auth.newPasswordPlaceholder}
-                required
-              />
+              <InputGroup>
+                <InputGroup.Input
+                  className="text-base md:text-sm"
+                  placeholder={localization.auth.newPasswordPlaceholder}
+                  type={isPasswordVisible ? "text" : "password"}
+                  required
+                />
+
+                <InputGroup.Suffix className="px-0">
+                  <Button
+                    isIconOnly
+                    aria-label={
+                      isPasswordVisible
+                        ? localization.auth.hidePassword
+                        : localization.auth.showPassword
+                    }
+                    size="sm"
+                    variant="ghost"
+                    onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                    isDisabled={isPending}
+                  >
+                    {isPasswordVisible ? <EyeSlashIcon /> : <EyeIcon />}
+                  </Button>
+                </InputGroup.Suffix>
+              </InputGroup>
 
               <FieldError className="text-wrap" />
             </TextField>

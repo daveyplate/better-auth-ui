@@ -15,6 +15,9 @@ export const localization = {
     /** @default "Forgot password?" */
     forgotPassword: "Forgot password?",
 
+    /** @default "Hide password" */
+    hidePassword: "Hide password",
+
     /** @default "Invalid reset password token" */
     invalidResetPasswordToken: "Invalid reset password token",
 
@@ -71,6 +74,9 @@ export const localization = {
 
     /** @default "Send Reset Link" */
     sendResetLink: "Send Reset Link",
+
+    /** @default "Show password" */
+    showPassword: "Show password",
 
     /** @default "Sign In" */
     signIn: "Sign In",

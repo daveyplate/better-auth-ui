@@ -3,6 +3,7 @@ import {
   useSignInSocial,
   useSignUpEmail
 } from "@better-auth-ui/react"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"
 import {
   Button,
   Card,
@@ -11,10 +12,12 @@ import {
   Fieldset,
   Form,
   Input,
+  InputGroup,
   Label,
   Spinner,
   TextField
 } from "@heroui/react"
+import { useState } from "react"
 
 import { useAuth } from "../../hooks/use-auth"
 import { cn } from "../../lib/utils"
@@ -62,6 +65,8 @@ export function SignUp({
     useSignUpEmail(context)
 
   const [_, signInSocial, socialPending] = useSignInSocial(context)
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   const isPending = signUpPending || socialPending
 
@@ -140,17 +145,36 @@ export function SignUp({
                   maxLength={emailAndPassword?.maxPasswordLength}
                   validate={emailAndPassword?.validatePassword}
                   name="password"
-                  type="password"
                   autoComplete="new-password"
                   isDisabled={isPending}
                 >
                   <Label>{localization.auth.password}</Label>
 
-                  <Input
-                    className="text-base md:text-sm"
-                    placeholder={localization.auth.passwordPlaceholder}
-                    required
-                  />
+                  <InputGroup>
+                    <InputGroup.Input
+                      className="text-base md:text-sm"
+                      placeholder={localization.auth.passwordPlaceholder}
+                      type={isPasswordVisible ? "text" : "password"}
+                      required
+                    />
+
+                    <InputGroup.Suffix className="px-0">
+                      <Button
+                        isIconOnly
+                        aria-label={
+                          isPasswordVisible
+                            ? localization.auth.hidePassword
+                            : localization.auth.showPassword
+                        }
+                        size="sm"
+                        variant="ghost"
+                        onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                        isDisabled={isPending}
+                      >
+                        {isPasswordVisible ? <EyeSlashIcon /> : <EyeIcon />}
+                      </Button>
+                    </InputGroup.Suffix>
+                  </InputGroup>
 
                   <FieldError className="text-wrap" />
                 </TextField>
