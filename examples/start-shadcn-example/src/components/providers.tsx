@@ -13,6 +13,8 @@ export function Providers({ children }: { children: ReactNode }) {
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <AuthProvider
         authClient={authClient}
+        magicLink
+        socialProviders={["github", "google"]}
         navigate={(path) => navigate({ to: path })}
         replace={(path) => navigate({ to: path, replace: true })}
         Link={({ href, ...props }) => <Link to={href} {...props} />}
