@@ -37,9 +37,12 @@ export function ResetPassword({ className, ...config }: ResetPasswordProps) {
     Link
   } = context
 
-  const [{ password }, resetPassword, isPending] = useResetPassword(context)
+  const [{ password, confirmPassword }, resetPassword, isPending] =
+    useResetPassword(context)
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false)
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search)
@@ -106,6 +109,53 @@ export function ResetPassword({ className, ...config }: ResetPasswordProps) {
 
               <FieldError className="text-wrap" />
             </TextField>
+
+            {emailAndPassword?.confirmPassword && (
+              <TextField
+                defaultValue={confirmPassword}
+                minLength={emailAndPassword?.minPasswordLength}
+                maxLength={emailAndPassword?.maxPasswordLength}
+                name="confirmPassword"
+                autoComplete="new-password"
+                isDisabled={isPending}
+              >
+                <Label>{localization.auth.confirmPassword}</Label>
+
+                <InputGroup>
+                  <InputGroup.Input
+                    className="text-base md:text-sm"
+                    placeholder={localization.auth.confirmPasswordPlaceholder}
+                    type={isConfirmPasswordVisible ? "text" : "password"}
+                    required
+                  />
+
+                  <InputGroup.Suffix className="px-0">
+                    <Button
+                      isIconOnly
+                      aria-label={
+                        isConfirmPasswordVisible
+                          ? localization.auth.hidePassword
+                          : localization.auth.showPassword
+                      }
+                      size="sm"
+                      variant="ghost"
+                      onPress={() =>
+                        setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
+                      }
+                      isDisabled={isPending}
+                    >
+                      {isConfirmPasswordVisible ? (
+                        <EyeSlashIcon />
+                      ) : (
+                        <EyeIcon />
+                      )}
+                    </Button>
+                  </InputGroup.Suffix>
+                </InputGroup>
+
+                <FieldError className="text-wrap" />
+              </TextField>
+            )}
 
             <Fieldset.Actions>
               <Button type="submit" className="w-full" isPending={isPending}>

@@ -61,12 +61,17 @@ export function SignUp({
     Link
   } = context
 
-  const [{ name, email, password }, signUpEmail, signUpPending] =
-    useSignUpEmail(context)
+  const [
+    { name, email, password, confirmPassword },
+    signUpEmail,
+    signUpPending
+  ] = useSignUpEmail(context)
 
   const [_, signInSocial, socialPending] = useSignInSocial(context)
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false)
 
   const isPending = signUpPending || socialPending
 
@@ -178,6 +183,57 @@ export function SignUp({
 
                   <FieldError className="text-wrap" />
                 </TextField>
+
+                {emailAndPassword?.confirmPassword && (
+                  <TextField
+                    defaultValue={confirmPassword}
+                    minLength={emailAndPassword?.minPasswordLength}
+                    maxLength={emailAndPassword?.maxPasswordLength}
+                    name="confirmPassword"
+                    autoComplete="new-password"
+                    isDisabled={isPending}
+                  >
+                    <Label>{localization.auth.confirmPassword}</Label>
+
+                    <InputGroup>
+                      <InputGroup.Input
+                        className="text-base md:text-sm"
+                        placeholder={
+                          localization.auth.confirmPasswordPlaceholder
+                        }
+                        type={isConfirmPasswordVisible ? "text" : "password"}
+                        required
+                      />
+
+                      <InputGroup.Suffix className="px-0">
+                        <Button
+                          isIconOnly
+                          aria-label={
+                            isConfirmPasswordVisible
+                              ? localization.auth.hidePassword
+                              : localization.auth.showPassword
+                          }
+                          size="sm"
+                          variant="ghost"
+                          onPress={() =>
+                            setIsConfirmPasswordVisible(
+                              !isConfirmPasswordVisible
+                            )
+                          }
+                          isDisabled={isPending}
+                        >
+                          {isConfirmPasswordVisible ? (
+                            <EyeSlashIcon />
+                          ) : (
+                            <EyeIcon />
+                          )}
+                        </Button>
+                      </InputGroup.Suffix>
+                    </InputGroup>
+
+                    <FieldError className="text-wrap" />
+                  </TextField>
+                )}
               </Fieldset.Group>
 
               <Fieldset.Actions className="flex-col gap-3">

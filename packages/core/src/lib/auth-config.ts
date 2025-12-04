@@ -14,6 +14,11 @@ export type EmailAndPasswordConfig = {
    */
   enabled: boolean
   /**
+   * Whether to show a confirm password field on sign-up forms
+   * @default false
+   */
+  confirmPassword?: boolean
+  /**
    * Whether users can reset forgotten passwords
    * @default true
    */

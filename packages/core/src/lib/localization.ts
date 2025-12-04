@@ -45,6 +45,15 @@ export const localization = {
     /** @default "Enter your password" */
     passwordPlaceholder: "Enter your password",
 
+    /** @default "Confirm password" */
+    confirmPassword: "Confirm password",
+
+    /** @default "Confirm your password" */
+    confirmPasswordPlaceholder: "Confirm your password",
+
+    /** @default "Passwords do not match" */
+    passwordsDoNotMatch: "Passwords do not match",
+
     /** @default "Password reset email sent" */
     passwordResetEmailSent: "Password reset email sent",
 
