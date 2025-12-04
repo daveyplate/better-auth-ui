@@ -2,9 +2,12 @@ import type { AnyAuthConfig } from "@better-auth-ui/react"
 import type { AuthView } from "@better-auth-ui/react/core"
 
 import { useAuth } from "@/hooks/auth/use-auth"
+import { ForgotPassword } from "./forgot-password"
 import { MagicLink } from "./magic-link"
 import type { SocialLayout } from "./provider-buttons"
+import { ResetPassword } from "./reset-password"
 import { SignIn } from "./sign-in"
+import { SignOut } from "./sign-out"
 import { SignUp } from "./sign-up"
 
 export type AuthProps = AnyAuthConfig & {
@@ -71,12 +74,12 @@ export function Auth({
           {...config}
         />
       )
-    // case "forgotPassword":
-    //   return <ForgotPassword className={className} {...config} />
-    // case "resetPassword":
-    //   return <ResetPassword className={className} {...config} />
-    // case "signOut":
-    //   return <SignOut className={className} {...config} />
+    case "forgotPassword":
+      return <ForgotPassword className={className} {...config} />
+    case "resetPassword":
+      return <ResetPassword className={className} {...config} />
+    case "signOut":
+      return <SignOut className={className} {...config} />
     default:
       throw new Error(
         `[Better Auth UI] Valid views are: ${Object.keys(viewPaths.auth).join(", ")}`
