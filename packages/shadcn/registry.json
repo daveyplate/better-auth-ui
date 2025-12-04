@@ -38,12 +38,152 @@
           "type": "registry:component"
         },
         {
-          "path": "src/components/auth/resend-verification-button.tsx",
+          "path": "src/hooks/auth/use-auth.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "sign-up",
+      "type": "registry:component",
+      "title": "Sign Up",
+      "description": "A complete sign-up form component with name, email, password fields, magic link, and social provider support.",
+      "dependencies": [
+        "@better-auth-ui/react@workspace:*",
+        "better-auth",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "field",
+        "input-group",
+        "sonner",
+        "spinner"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/sign-up.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/auth/magic-link-button.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/auth/provider-buttons.tsx",
           "type": "registry:component"
         },
         {
           "path": "src/hooks/auth/use-auth.ts",
           "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "magic-link",
+      "type": "registry:component",
+      "title": "Magic Link",
+      "description": "A magic link sign-in form component with email input and optional social provider support.",
+      "dependencies": [
+        "@better-auth-ui/react@workspace:*",
+        "better-auth",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "field",
+        "separator",
+        "sonner",
+        "spinner"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/magic-link.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/auth/magic-link-button.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/auth/provider-buttons.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/hooks/auth/use-auth.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "forgot-password",
+      "type": "registry:component",
+      "title": "Forgot Password",
+      "description": "A form component for requesting a password reset link via email.",
+      "dependencies": ["@better-auth-ui/react@workspace:*", "better-auth"],
+      "registryDependencies": [
+        "button",
+        "card",
+        "input",
+        "field",
+        "sonner",
+        "spinner"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/forgot-password.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/hooks/auth/use-auth.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "reset-password",
+      "type": "registry:component",
+      "title": "Reset Password",
+      "description": "A form component for resetting password with a token from the URL.",
+      "dependencies": [
+        "@better-auth-ui/react@workspace:*",
+        "better-auth",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "field",
+        "input-group",
+        "sonner",
+        "spinner"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/reset-password.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/hooks/auth/use-auth.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "sign-out",
+      "type": "registry:component",
+      "title": "Sign Out",
+      "description": "A component that signs the user out when mounted and displays a loading state.",
+      "dependencies": ["@better-auth-ui/react@workspace:*", "better-auth"],
+      "registryDependencies": ["card", "spinner"],
+      "files": [
+        {
+          "path": "src/components/auth/sign-out.tsx",
+          "type": "registry:component"
         }
       ]
     }
