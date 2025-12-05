@@ -5,6 +5,9 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: "Better Auth UI"
     },
-    githubUrl: "https://github.com/daveyplate/better-auth-ui"
+    themeSwitch: {
+      mode: "light-dark-system"
+    },
+    githubUrl: "https://github.com/better-auth-ui/better-auth-ui"
   }
 }
