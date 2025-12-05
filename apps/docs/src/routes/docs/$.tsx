@@ -4,13 +4,13 @@ import { createServerFn } from "@tanstack/react-start"
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions"
 import type * as PageTree from "fumadocs-core/page-tree"
 import { DocsLayout } from "fumadocs-ui/layouts/docs"
-import defaultMdxComponents from "fumadocs-ui/mdx"
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
   DocsTitle
-} from "fumadocs-ui/page"
+} from "fumadocs-ui/layouts/docs/page"
+import defaultMdxComponents from "fumadocs-ui/mdx"
 import { useMemo } from "react"
 import { baseOptions } from "@/lib/layout.shared"
 import { source } from "@/lib/source"

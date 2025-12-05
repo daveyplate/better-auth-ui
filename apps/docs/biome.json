@@ -9,7 +9,12 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!.source"]
+    "includes": ["**", "!node_modules", "!.source"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
   },
   "linter": {
     "enabled": true,
@@ -18,6 +23,13 @@
     },
     "domains": {
       "react": "recommended"
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
     }
   }
 }

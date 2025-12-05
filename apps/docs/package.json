@@ -14,18 +14,18 @@
   },
   "dependencies": {
     "@orama/orama": "^3.1.16",
-    "@tanstack/react-router": "^1.139.14",
-    "@tanstack/react-router-devtools": "^1.139.14",
-    "@tanstack/react-start": "^1.139.14",
-    "@tanstack/start-static-server-functions": "^1.139.14",
-    "fumadocs-core": "16.2.2",
-    "fumadocs-mdx": "14.0.4",
-    "fumadocs-ui": "16.2.2",
-    "lucide-static": "^0.555.0",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "@tanstack/react-router": "^1.134.12",
+    "@tanstack/react-router-devtools": "^1.134.12",
+    "@tanstack/react-start": "^1.134.12",
+    "@tanstack/start-static-server-functions": "^1.134.12",
+    "fumadocs-core": "16.2.3",
+    "fumadocs-mdx": "14.1.0",
+    "fumadocs-ui": "16.2.3",
+    "lucide-static": "^0.556.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tailwind-merge": "^3.3.1",
-    "vite": "^7.2.6"
+    "vite": "^7.2.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.16",
@@ -38,6 +38,6 @@
     "tailwindcss": "^4.1.16",
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^5.1.4",
-    "@biomejs/biome": "^2.3.5"
+    "@biomejs/biome": "^2.3.8"
   }
 }
