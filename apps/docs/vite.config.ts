@@ -30,6 +30,12 @@ export default defineConfig({
           path: "/docs"
         },
         {
+          path: "/docs/shadcn"
+        },
+        {
+          path: "/docs/heroui"
+        },
+        {
           path: "/api/search"
         }
       ]
