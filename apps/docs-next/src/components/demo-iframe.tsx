@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "fumadocs-ui/utils/cn"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface DemoIframeProps {
   src: string
@@ -15,17 +15,43 @@ export function DemoIframe({
   title = "Demo"
 }: DemoIframeProps) {
   const [isLoaded, setIsLoaded] = useState(false)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  useEffect(() => {
+    const iframe = iframeRef.current
+    if (!iframe) return
+
+    const handleLoad = () => {
+      setIsLoaded(true)
+    }
+
+    try {
+      if (iframe.contentDocument?.readyState === "complete") {
+        handleLoad()
+        return
+      }
+    } catch {}
+
+    iframe.addEventListener("load", handleLoad)
+
+    return () => {
+      iframe.removeEventListener("load", handleLoad)
+    }
+  }, [])
 
   return (
-    <iframe
-      title={title}
-      src={src}
-      onLoad={() => setIsLoaded(true)}
-      className={cn(
-        "w-full border rounded-xl bg-transparent transition-all",
-        isLoaded ? "opacity-100" : "opacity-0",
-        className
-      )}
-    />
+    <div className="border rounded-xl">
+      <iframe
+        ref={iframeRef}
+        title={title}
+        src={src}
+        onLoad={() => setIsLoaded(true)}
+        className={cn(
+          "w-full rounded-xl bg-transparent transition-all",
+          isLoaded ? "opacity-100" : "opacity-0",
+          className
+        )}
+      />
+    </div>
   )
 }
