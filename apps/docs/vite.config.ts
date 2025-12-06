@@ -17,7 +17,8 @@ export default defineConfig({
     }),
     tanstackStart({
       prerender: {
-        enabled: true
+        enabled: true,
+        autoSubfolderIndex: false
       },
       pages: [
         {
