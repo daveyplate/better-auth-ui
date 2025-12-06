@@ -1,8 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { HomeLayout } from "fumadocs-ui/layouts/home"
 import { baseOptions } from "@/lib/layout.shared"
+import appCss from "@/styles/app.css?url"
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    links: [{ rel: "stylesheet", href: appCss }]
+  }),
   component: Home
 })
 

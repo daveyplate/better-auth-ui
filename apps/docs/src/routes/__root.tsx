@@ -9,7 +9,6 @@ import type * as React from "react"
 import { Toaster } from "sonner"
 
 import SearchDialog from "@/components/search"
-import appCss from "@/styles/app.css?url"
 
 export const Route = createRootRoute({
   head: () => ({
@@ -24,8 +23,7 @@ export const Route = createRootRoute({
       {
         title: "Fumadocs on TanStack Start"
       }
-    ],
-    links: [{ rel: "stylesheet", href: appCss }]
+    ]
   }),
   component: RootComponent
 })
