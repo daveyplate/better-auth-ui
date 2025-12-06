@@ -30,6 +30,14 @@ Customize the navigation after successful authentication using the `redirectTo` 
 <AuthView redirectTo="/dashboard" />
 ```
 
+### Put Social Buttons First
+
+Render single sign-on buttons before the form by setting `socialPlacement` to `"before"`:
+
+```tsx
+<AuthView socialPlacement="before" />
+```
+
 ## Localization
 
 You can pass custom localization texts to fit different languages or contexts:
