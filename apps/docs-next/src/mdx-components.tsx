@@ -1,8 +1,8 @@
 import { createGenerator } from "fumadocs-typescript"
 import { AutoTypeTable } from "fumadocs-typescript/ui"
 import defaultMdxComponents from "fumadocs-ui/mdx"
-import { cn } from "fumadocs-ui/utils/cn"
 import type { MDXComponents } from "mdx/types"
+import { DemoIframe } from "@/components/demo-iframe"
 
 const generator = createGenerator()
 
@@ -13,11 +13,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
       <AutoTypeTable {...props} generator={generator} />
     ),
     Demo: ({ src, className }: { src: string; className?: string }) => (
-      <iframe
-        title="Demo"
-        src={src}
-        className={cn("w-full border rounded-xl bg-transparent", className)}
-      />
+      <DemoIframe src={src} className={className} />
     ),
     ...components
   }
