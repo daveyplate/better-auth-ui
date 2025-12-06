@@ -10,10 +10,9 @@ import {
   DocsPage,
   DocsTitle
 } from "fumadocs-ui/layouts/docs/page"
-import defaultMdxComponents from "fumadocs-ui/mdx"
 import { useMemo } from "react"
-import { HeroUISignInDemo } from "@/components/demos/heroui/heroui-sign-in-demo"
 import { baseOptions } from "@/lib/layout.shared"
+import { getMDXComponents } from "@/lib/mdx-components"
 import { source } from "@/lib/source"
 
 export const Route = createFileRoute("/docs/$")({
@@ -48,12 +47,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
         <DocsTitle>{frontmatter.title}</DocsTitle>
         <DocsDescription>{frontmatter.description}</DocsDescription>
         <DocsBody>
-          <MDX
-            components={{
-              ...defaultMdxComponents,
-              HeroUISignInDemo
-            }}
-          />
+          <MDX components={getMDXComponents()} />
         </DocsBody>
       </DocsPage>
     )

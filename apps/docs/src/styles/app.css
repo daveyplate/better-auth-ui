@@ -1,6 +1,4 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
-@import "@heroui/styles";
-@import "@better-auth-ui/heroui/styles";
 @import "./custom.css";
