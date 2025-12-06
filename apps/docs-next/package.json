@@ -1,5 +1,5 @@
 {
-  "name": "bui-docs-test",
+  "name": "docs-next",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -32,7 +32,6 @@
     "@types/react-dom": "^19.2.2",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.16",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.53.0"
+    "typescript": "^5.9.3"
   }
 }
