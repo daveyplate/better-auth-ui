@@ -1,12 +1,29 @@
 import { docs } from "fumadocs-mdx:collections/server"
 import { type InferPageType, loader } from "fumadocs-core/source"
 import { lucideIconsPlugin } from "fumadocs-core/source/lucide-icons"
+import { createElement, type ElementType } from "react"
+import { HeroUI } from "@/components/icons/heroui"
+import { Shadcn } from "@/components/icons/shadcn"
+
+const customIcons: Record<string, ElementType> = {
+  heroui: HeroUI,
+  shadcn: Shadcn
+}
 
 // See https://fumadocs.dev/docs/headless/source-api for more info
 export const source = loader({
   baseUrl: "/docs",
   source: docs.toFumadocsSource(),
-  plugins: [lucideIconsPlugin()]
+  plugins: [lucideIconsPlugin()],
+  icon(icon) {
+    if (!icon) {
+      return
+    }
+
+    if (icon in customIcons) return createElement(customIcons[icon])
+
+    return icon
+  }
 })
 
 export function getPageImage(page: InferPageType<typeof source>) {
