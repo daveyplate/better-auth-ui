@@ -4,7 +4,7 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 import type { MDXComponents } from "mdx/types"
 
 const generator = createGenerator({
-  cache: false
+  cache: "fs"
 })
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
