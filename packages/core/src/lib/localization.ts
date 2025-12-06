@@ -1,105 +1,105 @@
 export const localization = {
   auth: {
-    /** @default "Already have an account?" */
+    /** @remarks `"Already have an account?"` */
     alreadyHaveAnAccount: "Already have an account?",
 
-    /** @default "Continue with {{provider}}" */
+    /** @remarks `"Continue with {{provider}}"` */
     continueWith: "Continue with {{provider}}",
 
-    /** @default "Email" */
+    /** @remarks `"Email"` */
     email: "Email",
 
-    /** @default "Enter your email" */
+    /** @remarks `"Enter your email"` */
     emailPlaceholder: "Enter your email",
 
-    /** @default "Forgot Password" */
+    /** @remarks `"Forgot Password"` */
     forgotPassword: "Forgot Password",
 
-    /** @default "Forgot password?" */
+    /** @remarks `"Forgot password?"` */
     forgotPasswordLink: "Forgot password?",
 
-    /** @default "Hide password" */
+    /** @remarks `"Hide password"` */
     hidePassword: "Hide password",
 
-    /** @default "Invalid reset password token" */
+    /** @remarks `"Invalid reset password token"` */
     invalidResetPasswordToken: "Invalid reset password token",
 
-    /** @default "Magic link" */
+    /** @remarks `"Magic link"` */
     magicLink: "Magic link",
 
-    /** @default "Magic link sent to your email" */
+    /** @remarks `"Magic link sent to your email"` */
     magicLinkSent: "Magic link sent to your email",
 
-    /** @default "Name" */
+    /** @remarks `"Name"` */
     name: "Name",
 
-    /** @default "Enter your name" */
+    /** @remarks `"Enter your name"` */
     namePlaceholder: "Enter your name",
 
-    /** @default "New password" */
+    /** @remarks `"New password"` */
     newPassword: "New password",
 
-    /** @default "Enter your new password" */
+    /** @remarks `"Enter your new password"` */
     newPasswordPlaceholder: "Enter your new password",
 
-    /** @default "Password" */
+    /** @remarks `"Password"` */
     password: "Password",
 
-    /** @default "Enter your password" */
+    /** @remarks `"Enter your password"` */
     passwordPlaceholder: "Enter your password",
 
-    /** @default "Confirm password" */
+    /** @remarks `"Confirm password"` */
     confirmPassword: "Confirm password",
 
-    /** @default "Confirm your password" */
+    /** @remarks `"Confirm your password"` */
     confirmPasswordPlaceholder: "Confirm your password",
 
-    /** @default "Passwords do not match" */
+    /** @remarks `"Passwords do not match"` */
     passwordsDoNotMatch: "Passwords do not match",
 
-    /** @default "Password reset email sent" */
+    /** @remarks `"Password reset email sent"` */
     passwordResetEmailSent: "Password reset email sent",
 
-    /** @default "Password reset successfully" */
+    /** @remarks `"Password reset successfully"` */
     passwordResetSuccess: "Password reset successfully",
 
-    /** @default "Need to create an account?" */
+    /** @remarks `"Need to create an account?"` */
     needToCreateAnAccount: "Need to create an account?",
 
-    /** @default "OR" */
+    /** @remarks `"OR"` */
     or: "OR",
 
-    /** @default "Remember your password?" */
+    /** @remarks `"Remember your password?"` */
     rememberYourPassword: "Remember your password?",
 
-    /** @default "Remember me" */
+    /** @remarks `"Remember me"` */
     rememberMe: "Remember me",
 
-    /** @default "Resend" */
+    /** @remarks `"Resend"` */
     resend: "Resend",
 
-    /** @default "Reset Password" */
+    /** @remarks `"Reset Password"` */
     resetPassword: "Reset Password",
 
-    /** @default "Send Magic Link" */
+    /** @remarks `"Send Magic Link"` */
     sendMagicLink: "Send Magic Link",
 
-    /** @default "Send Reset Link" */
+    /** @remarks `"Send Reset Link"` */
     sendResetLink: "Send Reset Link",
 
-    /** @default "Show password" */
+    /** @remarks `"Show password"` */
     showPassword: "Show password",
 
-    /** @default "Sign In" */
+    /** @remarks `"Sign In"` */
     signIn: "Sign In",
 
-    /** @default "Sign Up" */
+    /** @remarks `"Sign Up"` */
     signUp: "Sign Up",
 
-    /** @default "Verification email sent!" */
+    /** @remarks `"Verification email sent!"` */
     verificationEmailSent: "Verification email sent!",
 
-    /** @default "Verify your email" */
+    /** @remarks `"Verify your email"` */
     verifyYourEmail: "Verify your email"
   }
 }
