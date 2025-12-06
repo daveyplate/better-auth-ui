@@ -1,11 +1,5 @@
 import { AuthProvider } from "@better-auth-ui/heroui"
-import { createAuthClient } from "better-auth/react"
-
-const authClient = createAuthClient({
-  fetchOptions: {
-    customFetchImpl: async () => new Response()
-  }
-})
+import { authClient } from "@/lib/auth-client"
 
 export function DemoProviders({ children }: { children: React.ReactNode }) {
   return (
