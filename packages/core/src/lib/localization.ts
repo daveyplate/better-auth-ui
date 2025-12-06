@@ -105,4 +105,4 @@ export const localization = {
 }
 
 export type Localization = typeof localization
-export type AuthLocalization = typeof localization.auth
+export type AuthLocalization = Localization["auth"]

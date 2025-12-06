@@ -1,5 +1,5 @@
 import type { SocialProvider } from "better-auth/social-providers"
-import { type AuthToast, defaultToast } from "./auth-toast"
+import { defaultToast, type Toast } from "./auth-toast"
 import { basePaths } from "./base-paths"
 import { type Localization, localization } from "./localization"
 import { type ViewPaths, viewPaths } from "./view-paths"
@@ -94,20 +94,11 @@ export interface AuthConfig {
   socialProviders?: SocialProvider[]
   /** View path mappings for different authentication views */
   viewPaths: ViewPaths
-  /** Toast notification configuration for user feedback. Functions accept optional message and action options, and should return a toast ID for dismiss. */
-  toast: {
-    // biome-ignore lint/suspicious/noExplicitAny: allow any additional keys for toast functions
-    [key: string]: any
-    /** Display an error toast notification */
-    error: AuthToast
-    /** Display a success toast notification */
-    success: AuthToast
-    /** Display an info toast notification */
-    info: AuthToast
-    /** Optional function to dismiss a toast notification by its ID */
-    // biome-ignore lint/suspicious/noExplicitAny: Flexible dismiss for toasts
-    dismiss?: (id?: number | string | any) => string | number | any
-  }
+  /**
+   * Toast notification configuration for user feedback.
+   * @remarks `Toast`
+   */
+  toast: Toast
   /**
    * Function to navigate to a new path (e.g., router.push)
    * @default window.location.href = path
