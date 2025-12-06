@@ -7,7 +7,7 @@ const authClient = createAuthClient({
   }
 })
 
-export function DemoProvider({ children }: { children: React.ReactNode }) {
+export function DemoProviders({ children }: { children: React.ReactNode }) {
   return (
     <AuthProvider
       authClient={authClient}
@@ -15,7 +15,7 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
       replace={() => {}}
       Link={({ href, ...props }) => <a {...props} />}
     >
-      <div className="demo">{children}</div>
+      {children}
     </AuthProvider>
   )
 }

@@ -1,7 +1,6 @@
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock"
 import defaultComponents from "fumadocs-ui/mdx"
 import type { MDXComponents } from "mdx/types"
-import { ShadcnSignInDemo } from "@/components/demos/shadcn/shadcn-sign-in-demo"
 import { cn } from "./utils"
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -20,7 +19,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
         className={cn("w-full border rounded-xl", className)}
       />
     ),
-    ShadcnSignInDemo,
     ...components
   }
 }
