@@ -2,7 +2,7 @@ import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock"
 import { TypeTable } from "fumadocs-ui/components/type-table"
 import defaultComponents from "fumadocs-ui/mdx"
 import type { MDXComponents } from "mdx/types"
-import { cn } from "./utils"
+import { DemoIframe } from "@/components/demo-iframe"
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -13,13 +13,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
         <Pre>{props.children}</Pre>
       </CodeBlock>
     ),
-    Demo: ({ src, className }: { src: string; className?: string }) => (
-      <iframe
-        title="Demo"
-        src={src}
-        className={cn("w-full border rounded-xl", className)}
-      />
-    ),
+    Demo: DemoIframe,
     TypeTable: (props) => <TypeTable {...props} />,
     ...components
   }

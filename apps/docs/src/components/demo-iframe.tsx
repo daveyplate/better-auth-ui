@@ -1,0 +1,55 @@
+import { cn } from "fumadocs-ui/utils/cn"
+import { useEffect, useRef, useState } from "react"
+
+interface DemoIframeProps {
+  src: string
+  className?: string
+  title?: string
+}
+
+export function DemoIframe({
+  src,
+  className,
+  title = "Demo"
+}: DemoIframeProps) {
+  const [isLoaded, setIsLoaded] = useState(false)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  useEffect(() => {
+    const iframe = iframeRef.current
+    if (!iframe) return
+
+    const handleLoad = () => {
+      setIsLoaded(true)
+    }
+
+    try {
+      if (iframe.contentDocument?.readyState === "complete") {
+        handleLoad()
+        return
+      }
+    } catch {}
+
+    iframe.addEventListener("load", handleLoad)
+
+    return () => {
+      iframe.removeEventListener("load", handleLoad)
+    }
+  }, [])
+
+  return (
+    <div className="border rounded-xl">
+      <iframe
+        ref={iframeRef}
+        title={title}
+        src={src}
+        onLoad={() => setIsLoaded(true)}
+        className={cn(
+          "w-full rounded-xl bg-transparent transition-all",
+          isLoaded ? "opacity-100" : "opacity-0",
+          className
+        )}
+      />
+    </div>
+  )
+}
