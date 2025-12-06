@@ -20,7 +20,9 @@ export function DemoIframe({
     if (!iframe) return
 
     const handleLoad = () => {
-      setIsLoaded(true)
+      setTimeout(() => {
+        setIsLoaded(true)
+      }, 100)
     }
 
     try {
@@ -33,6 +35,7 @@ export function DemoIframe({
     iframe.addEventListener("load", handleLoad)
 
     return () => {
+      setIsLoaded(false)
       iframe.removeEventListener("load", handleLoad)
     }
   }, [])
@@ -43,7 +46,6 @@ export function DemoIframe({
         ref={iframeRef}
         title={title}
         src={src}
-        onLoad={() => setIsLoaded(true)}
         className={cn(
           "w-full rounded-xl bg-transparent transition-all",
           isLoaded ? "opacity-100" : "opacity-0",
