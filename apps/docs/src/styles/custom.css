@@ -15,14 +15,6 @@
   }
 }
 
-.demo a {
-  text-decoration: none;
-}
-
-.demo a:hover {
-  text-decoration: none;
-}
-
-.demo a {
-  text-decoration-line: none;
+a {
+  cursor: pointer;
 }
