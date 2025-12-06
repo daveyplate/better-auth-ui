@@ -1,0 +1,6 @@
+{
+  "title": "shadcn/ui",
+  "icon": "shadcn",
+  "description": "shadcn/ui auth components",
+  "root": true
+}

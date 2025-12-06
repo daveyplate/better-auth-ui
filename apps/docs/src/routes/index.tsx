@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <HomeLayout {...baseOptions()}>
-      <div className="relative min-h-[calc(100svh-4rem)] overflow-hidden">
+      <div className="relative grow">
         {/* Background */}
         <div className="absolute inset-0 bg-neutral-50 dark:bg-neutral-950" />
 
@@ -18,7 +18,7 @@ function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-orange-100/40 via-transparent to-transparent dark:from-orange-500/5" />
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-center px-6 pt-20 pb-16 text-center sm:pt-32">
+        <div className="relative z-10 flex flex-col items-center px-6 py-20 text-center sm:pt-32">
           {/* Badge */}
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-4 py-1.5 text-sm text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">
             <svg

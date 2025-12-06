@@ -12,5 +12,7 @@ export const source = loader({
 
     // biome-ignore lint/performance/noDynamicNamespaceImportAccess: Static Icons
     if (icon in icons) return icons[icon as keyof typeof icons]
+
+    return icon
   }
 })

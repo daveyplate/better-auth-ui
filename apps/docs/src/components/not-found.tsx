@@ -7,9 +7,8 @@ export function NotFound() {
       nav={{
         title: "Tanstack Start"
       }}
-      className="text-center py-32 justify-center"
     >
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col gap-4 justify-center items-center grow">
         <h1 className="text-6xl font-bold text-fd-muted-foreground">404</h1>
         <h2 className="text-2xl font-semibold">Page Not Found</h2>
         <p className="text-fd-muted-foreground max-w-md">
