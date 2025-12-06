@@ -16,7 +16,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
       <iframe
         title="Demo"
         src={src}
-        className={cn("w-full border rounded-xl", className)}
+        className={cn("w-full border rounded-xl bg-transparent", className)}
       />
     ),
     ...components
