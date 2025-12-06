@@ -1,4 +1,5 @@
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock"
+import { TypeTable } from "fumadocs-ui/components/type-table"
 import defaultComponents from "fumadocs-ui/mdx"
 import type { MDXComponents } from "mdx/types"
 import { cn } from "./utils"
@@ -19,6 +20,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
         className={cn("w-full border rounded-xl", className)}
       />
     ),
+    TypeTable: (props) => <TypeTable {...props} />,
     ...components
   }
 }

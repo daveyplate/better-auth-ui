@@ -45,6 +45,7 @@
         "@types/react": "^19.2.2",
         "@types/react-dom": "^19.2.2",
         "@vitejs/plugin-react": "^5.1.0",
+        "fumadocs-typescript": "^4.0.13",
         "serve": "^14.2.5",
         "tailwindcss": "^4.1.16",
         "typescript": "^5.9.3",

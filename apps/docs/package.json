@@ -38,16 +38,17 @@
     "vite": "^7.2.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3.8",
     "@tailwindcss/vite": "^4.1.16",
     "@types/mdx": "^2.0.13",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.0",
+    "fumadocs-typescript": "^4.0.13",
     "serve": "^14.2.5",
     "tailwindcss": "^4.1.16",
     "typescript": "^5.9.3",
-    "vite-tsconfig-paths": "^5.1.4",
-    "@biomejs/biome": "^2.3.8"
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

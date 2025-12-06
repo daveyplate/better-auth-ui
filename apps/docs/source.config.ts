@@ -1,5 +1,8 @@
 import { defineConfig, defineDocs } from "fumadocs-mdx/config"
+import { createGenerator, remarkAutoTypeTable } from "fumadocs-typescript"
 import remarkCodeImport from "remark-code-import"
+
+const generator = createGenerator()
 
 export const docs = defineDocs({
   dir: "content/docs"
@@ -7,6 +10,6 @@ export const docs = defineDocs({
 
 export default defineConfig({
   mdxOptions: {
-    remarkPlugins: [remarkCodeImport]
+    remarkPlugins: [remarkCodeImport, [remarkAutoTypeTable, { generator }]]
   }
 })
