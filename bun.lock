@@ -55,6 +55,8 @@
       "name": "docs-next",
       "version": "0.0.0",
       "dependencies": {
+        "@better-auth-ui/heroui": "workspace:*",
+        "@better-auth-ui/shadcn": "workspace:*",
         "fumadocs-core": "16.2.3",
         "fumadocs-mdx": "14.1.0",
         "fumadocs-typescript": "^4.0.13",
