@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "start": "next start",
+    "serve": "bunx serve out",
     "types:check": "fumadocs-mdx && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
     "lint": "biome check",
@@ -15,8 +16,8 @@
     "fumadocs-core": "16.2.3",
     "fumadocs-mdx": "14.1.0",
     "fumadocs-ui": "16.2.3",
-    "lucide-react": "^0.552.0",
-    "next": "16.0.1",
+    "lucide-react": "^0.556.0",
+    "next": "16.0.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
