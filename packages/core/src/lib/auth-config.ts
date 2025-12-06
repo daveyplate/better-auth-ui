@@ -87,7 +87,10 @@ export interface AuthConfig {
    * @default "/"
    */
   redirectTo: string
-  /** List of enabled social authentication providers */
+  /**
+   * List of enabled social authentication providers
+   * @remarks `SocialProvider[]`
+   */
   socialProviders?: SocialProvider[]
   /** View path mappings for different authentication views */
   viewPaths: ViewPaths
