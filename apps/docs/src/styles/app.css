@@ -1,3 +1,20 @@
 @import "tailwindcss";
-@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
+
+@theme {
+  --color-fd-ring: var(--color-orange-400);
+  --color-fd-primary: var(--color-orange-400);
+}
+
+.dark {
+  --color-fd-ring: var(--color-orange-300);
+  --color-fd-primary: var(--color-orange-300);
+}
+
+@layer base {
+  button:not([disabled]),
+  [role="button"]:not([disabled]) {
+    cursor: pointer;
+  }
+}
