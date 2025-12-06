@@ -4,7 +4,7 @@ export const Route = createFileRoute("/docs/")({
   beforeLoad: () => {
     throw redirect({
       to: "/docs/$",
-      params: { _splat: "my-folder" }
+      params: { _splat: "shadcn" }
     })
   }
 })
