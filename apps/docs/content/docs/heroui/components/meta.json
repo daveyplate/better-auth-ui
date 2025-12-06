@@ -1,4 +1,5 @@
 {
+  "icon": "Box",
   "defaultOpen": true,
   "pages": ["auth-provider", "---Auth---", "sign-in"]
 }
