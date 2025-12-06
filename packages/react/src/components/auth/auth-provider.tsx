@@ -12,9 +12,11 @@ import {
  * an authClient instance and a Link component for navigation.
  */
 export type AuthConfig = BaseAuthConfig & {
-  /** Better Auth client instance with all plugins */
   authClient: AuthClient
-  /** React component for rendering links */
+  /**
+   * React component for rendering links
+   * @remarks `LinkComponent`
+   */
   Link: ComponentType<PropsWithChildren<{ className?: string; href: string }>>
 }
 
@@ -22,7 +24,10 @@ export type AuthConfig = BaseAuthConfig & {
  * Partial AuthConfig with any Better Auth client instance.
  */
 export type AnyAuthConfig = DeepPartial<Omit<AuthConfig, "authClient">> & {
-  /** Any Better Auth client instance */
+  /**
+   * Better Auth client instance
+   * @remarks `AuthClient`
+   */
   authClient?: AnyAuthClient
 }
 

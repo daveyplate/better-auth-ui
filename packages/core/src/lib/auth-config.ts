@@ -15,7 +15,6 @@ export type EmailAndPasswordConfig = {
   enabled: boolean
   /**
    * Whether to show a confirm password field on sign-up forms
-   * @default false
    */
   confirmPassword?: boolean
   /**
@@ -75,7 +74,7 @@ export interface AuthConfig {
   baseURL: string
   /**
    * Email and password authentication configuration
-   * @default { enabled: true, forgotPassword: true, rememberMe: false }
+   * @default { enabled: true, forgotPassword: true, minPasswordLength: 8, maxPasswordLength: 128 }
    */
   emailAndPassword?: EmailAndPasswordConfig
   /** Localization strings for UI components. */
