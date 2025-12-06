@@ -14,7 +14,10 @@ import {
 export type AuthConfig = BaseAuthConfig & {
   /** Better Auth client instance with all plugins */
   authClient: AuthClient
-  /** React component for rendering links */
+  /**
+   * React component for rendering links
+   * @remarks `LinkComponent`
+   */
   Link: ComponentType<PropsWithChildren<{ className?: string; href: string }>>
 }
 
