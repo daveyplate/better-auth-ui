@@ -16,15 +16,9 @@ export default defineConfig({
       projects: ["./tsconfig.json"]
     }),
     tanstackStart({
-      spa: {
-        enabled: true,
-        prerender: {
-          outputPath: "index.html",
-          enabled: true,
-          crawlLinks: true
-        }
+      prerender: {
+        enabled: true
       },
-
       pages: [
         {
           path: "/"
