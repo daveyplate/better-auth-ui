@@ -26,7 +26,7 @@ function Home() {
 
   const copyShadcnCommand = () => {
     navigator.clipboard.writeText(
-      "bunx shadcn@latest add https://better-auth-ui.com/r/auth"
+      "bunx shadcn@latest add https://better-auth-ui.com/r/auth.json"
     )
     setCopiedShadcn(true)
     setTimeout(() => setCopiedShadcn(false), 2000)
@@ -106,16 +106,16 @@ function Home() {
           </div>
 
           {/* Install commands */}
-          <div className="mt-12 grid w-full max-w-3xl gap-6 sm:grid-cols-2">
+          <div className="mt-12 grid w-full max-w-3xl gap-4 sm:grid-cols-2 sm:gap-6">
             <button
               type="button"
               onClick={copyShadcnCommand}
-              className="group flex items-center justify-between gap-3 rounded-xl border border-neutral-200 bg-white/80 px-4 py-3 text-left font-mono text-xs backdrop-blur-sm transition-all hover:border-neutral-300 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
+              className="group flex min-w-0 items-center justify-between gap-3 overflow-hidden rounded-xl border border-neutral-200 bg-white/80 px-4 py-3 text-left font-mono text-xs backdrop-blur-sm transition-all hover:border-neutral-300 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
             >
-              <div className="flex items-center gap-2 overflow-hidden">
+              <div className="flex min-w-0 items-center gap-2">
                 <span className="shrink-0 text-orange-500">$</span>
                 <span className="truncate text-neutral-600 dark:text-neutral-400">
-                  bunx shadcn@latest add https://better-auth-ui.com/r/auth
+                  bunx shadcn@latest add https://better-auth-ui.com/r/auth.json
                 </span>
               </div>
               <span className="shrink-0 text-neutral-400 transition-colors group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-400">
@@ -129,9 +129,9 @@ function Home() {
             <button
               type="button"
               onClick={copyHeroUiCommand}
-              className="group flex items-center justify-between gap-3 rounded-xl border border-neutral-200 bg-white/80 px-4 py-3 text-left font-mono text-xs backdrop-blur-sm transition-all hover:border-neutral-300 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
+              className="group flex min-w-0 items-center justify-between gap-3 overflow-hidden rounded-xl border border-neutral-200 bg-white/80 px-4 py-3 text-left font-mono text-xs backdrop-blur-sm transition-all hover:border-neutral-300 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
             >
-              <div className="flex items-center gap-2 overflow-hidden">
+              <div className="flex min-w-0 items-center gap-2">
                 <span className="shrink-0 text-orange-500">$</span>
                 <span className="truncate text-neutral-600 dark:text-neutral-400">
                   bun add @better-auth-ui/heroui
