@@ -1,8 +1,8 @@
 import { useAuthenticate } from "@better-auth-ui/shadcn"
+import { createFileRoute, Link } from "@tanstack/react-router"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card } from "@/components/ui/card"
 import { Spinner } from "@/components/ui/spinner"
-import { createFileRoute, Link } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard
