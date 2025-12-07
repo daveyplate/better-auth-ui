@@ -1,4 +1,4 @@
-import type { AnyAuthConfig } from "../../components/auth/auth-provider"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { useHydrated } from "../use-hydrated"
 import { useAuth } from "./use-auth"
 
