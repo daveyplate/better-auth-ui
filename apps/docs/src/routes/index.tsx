@@ -155,7 +155,7 @@ function Home() {
             <div className="relative flex flex-col items-center justify-center gap-6 sm:flex-row sm:items-start lg:gap-8">
               {/* shadcn Screenshot */}
               <div className="group relative w-full max-w-sm sm:w-auto sm:max-w-none">
-                <div className="absolute -inset-1 rounded-2xl bg-linear-to-br from-neutral-200 to-neutral-300 opacity-0 blur transition-all group-hover:opacity-100 dark:from-neutral-700 dark:to-neutral-800" />
+                <div className="absolute -inset-1 rounded-2xl bg-linear-to-br from-neutral-300 to-neutral-400 opacity-0 blur transition-opacity duration-300 group-hover:opacity-70 dark:from-neutral-600 dark:to-neutral-700" />
                 <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl shadow-neutral-900/20 transition-transform duration-300 group-hover:scale-[1.02] dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-black/50">
                   <div className="flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-900">
                     <div className="h-3 w-3 rounded-full bg-red-500/80" />
@@ -182,7 +182,7 @@ function Home() {
 
               {/* HeroUI Screenshot */}
               <div className="group relative w-full max-w-sm sm:w-auto sm:max-w-none sm:translate-y-8 lg:translate-y-12">
-                <div className="absolute -inset-1 rounded-3xl bg-linear-to-br from-blue-400 to-blue-600 opacity-0 blur transition-all group-hover:opacity-75 dark:from-blue-500 dark:to-blue-700" />
+                <div className="absolute -inset-1 rounded-3xl bg-linear-to-br from-blue-400 to-blue-600 opacity-0 blur transition-opacity duration-300 group-hover:opacity-70 dark:from-blue-500 dark:to-blue-700" />
                 <div className="relative overflow-hidden rounded-2xl rounded-b-3xl border border-neutral-200 bg-white shadow-2xl shadow-neutral-900/20 transition-transform duration-300 group-hover:scale-[1.02] dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-black/50">
                   <div className="flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-900">
                     <div className="h-3 w-3 rounded-full bg-red-500/80" />
