@@ -1,7 +1,7 @@
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { Eye, EyeOff, Link } from "lucide-react"
 import { useEffect, useState } from "react"
 
-import type { AnyAuthConfig } from "@/components/auth/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {

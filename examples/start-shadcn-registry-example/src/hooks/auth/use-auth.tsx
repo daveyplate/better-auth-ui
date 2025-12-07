@@ -1,11 +1,8 @@
+import type { AnyAuthConfig, AuthConfig } from "@better-auth-ui/react"
 import { deepmerge, defaultConfig } from "@better-auth-ui/react/core"
 import { useContext } from "react"
 import { toast } from "sonner"
-import {
-  type AnyAuthConfig,
-  type AuthConfig,
-  AuthContext
-} from "@/components/auth/auth-provider"
+import { AuthContext } from "@/components/auth/auth-provider"
 
 const extendConfig: AnyAuthConfig = {
   toast,
