@@ -1,6 +1,6 @@
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { useEffect, useRef } from "react"
 
-import type { AnyAuthConfig } from "@/components/auth/auth-provider"
 import { Card, CardContent } from "@/components/ui/card"
 import { Spinner } from "@/components/ui/spinner"
 import { useSignOut } from "@/hooks/auth/use-sign-out"
