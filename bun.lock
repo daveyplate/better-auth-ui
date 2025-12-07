@@ -28,6 +28,7 @@
         "fumadocs-core": "16.2.3",
         "fumadocs-mdx": "14.1.0",
         "fumadocs-ui": "16.2.3",
+        "lucide-react": "^0.556.0",
         "lucide-static": "^0.556.0",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
