@@ -1,4 +1,4 @@
-import { type AnyAuthConfig, useForgotPassword } from "@better-auth-ui/react"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Spinner } from "@/components/ui/spinner"
 import { useAuth } from "@/hooks/auth/use-auth"
+import { useForgotPassword } from "@/hooks/auth/use-forgot-password"
 import { cn } from "@/lib/utils"
 
 export type ForgotPasswordProps = AnyAuthConfig & {

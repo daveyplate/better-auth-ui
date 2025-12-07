@@ -148,6 +148,44 @@
         "vite": "^7.2.6",
       },
     },
+    "examples/start-shadcn-registry-example": {
+      "name": "start-shadcn-registry-example",
+      "dependencies": {
+        "@radix-ui/react-avatar": "^1.1.11",
+        "@radix-ui/react-checkbox": "^1.3.3",
+        "@radix-ui/react-label": "^2.1.8",
+        "@radix-ui/react-separator": "^1.1.8",
+        "@radix-ui/react-slot": "^1.2.4",
+        "@tailwindcss/vite": "^4.0.6",
+        "@tanstack/react-devtools": "^0.8.2",
+        "@tanstack/react-router": "^1.139.14",
+        "@tanstack/react-router-devtools": "^1.139.15",
+        "@tanstack/react-start": "^1.139.14",
+        "@tanstack/router-plugin": "^1.139.14",
+        "better-auth": "^1.4.5",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "lucide-react": "^0.556.0",
+        "next-themes": "^0.4.6",
+        "react": "^19.2.1",
+        "react-dom": "^19.2.1",
+        "sonner": "^2.0.7",
+        "tailwind-merge": "^3.4.0",
+        "tailwind-variants": "^3.2.2",
+        "tailwindcss": "^4.0.6",
+        "vite-tsconfig-paths": "^5.1.4",
+      },
+      "devDependencies": {
+        "@tanstack/devtools-vite": "^0.3.11",
+        "@types/node": "^24.10.1",
+        "@types/react": "^19.2.7",
+        "@types/react-dom": "^19.2.0",
+        "@vitejs/plugin-react": "^5.0.4",
+        "tw-animate-css": "^1.4.0",
+        "typescript": "^5.7.2",
+        "vite": "^7.2.6",
+      },
+    },
     "packages/core": {
       "name": "@better-auth-ui/core",
       "version": "0.0.0-alpha.0",
@@ -2585,6 +2623,8 @@
     "start-heroui-example": ["start-heroui-example@workspace:examples/start-heroui-example"],
 
     "start-shadcn-example": ["start-shadcn-example@workspace:examples/start-shadcn-example"],
+
+    "start-shadcn-registry-example": ["start-shadcn-registry-example@workspace:examples/start-shadcn-registry-example"],
 
     "statuses": ["statuses@2.0.2", "", {}, "sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw=="],
 

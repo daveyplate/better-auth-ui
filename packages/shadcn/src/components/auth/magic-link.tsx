@@ -1,8 +1,4 @@
-import {
-  type AnyAuthConfig,
-  useSignInMagicLink,
-  useSignInSocial
-} from "@better-auth-ui/react"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -18,6 +14,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Spinner } from "@/components/ui/spinner"
 import { useAuth } from "@/hooks/auth/use-auth"
+import { useSignInMagicLink } from "@/hooks/auth/use-sign-in-magic-link"
+import { useSignInSocial } from "@/hooks/auth/use-sign-in-social"
 import { cn } from "@/lib/utils"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"

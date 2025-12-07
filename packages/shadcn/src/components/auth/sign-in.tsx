@@ -1,9 +1,6 @@
-import {
-  type AnyAuthConfig,
-  useSignInEmail,
-  useSignInSocial
-} from "@better-auth-ui/react"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { useState } from "react"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -19,6 +16,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Spinner } from "@/components/ui/spinner"
 import { useAuth } from "@/hooks/auth/use-auth"
+import { useSignInEmail } from "@/hooks/auth/use-sign-in-email"
+import { useSignInSocial } from "@/hooks/auth/use-sign-in-social"
 import { cn } from "@/lib/utils"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"

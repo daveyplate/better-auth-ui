@@ -1,4 +1,4 @@
-import { type AnyAuthConfig, useResetPassword } from "@better-auth-ui/react"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { Eye, EyeOff, Link } from "lucide-react"
 import { useEffect, useState } from "react"
 
@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/input-group"
 import { Spinner } from "@/components/ui/spinner"
 import { useAuth } from "@/hooks/auth/use-auth"
+import { useResetPassword } from "@/hooks/auth/use-reset-password"
 import { cn } from "@/lib/utils"
 
 export type ResetPasswordProps = AnyAuthConfig & {

@@ -1,8 +1,4 @@
-import {
-  type AnyAuthConfig,
-  useSignInSocial,
-  useSignUpEmail
-} from "@better-auth-ui/react"
+import type { AnyAuthConfig } from "@better-auth-ui/react"
 import { Eye, EyeOff } from "lucide-react"
 import { useState } from "react"
 
@@ -25,6 +21,8 @@ import {
 } from "@/components/ui/input-group"
 import { Spinner } from "@/components/ui/spinner"
 import { useAuth } from "@/hooks/auth/use-auth"
+import { useSignInSocial } from "@/hooks/auth/use-sign-in-social"
+import { useSignUpEmail } from "@/hooks/auth/use-sign-up-email"
 import { cn } from "@/lib/utils"
 import { MagicLinkButton } from "./magic-link-button"
 import { ProviderButtons, type SocialLayout } from "./provider-buttons"

@@ -40,6 +40,14 @@
         {
           "path": "src/hooks/auth/use-auth.ts",
           "type": "registry:hook"
+        },
+        {
+          "path": "../react/src/hooks/auth/use-sign-in-email.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "../react/src/hooks/auth/use-sign-in-social.ts",
+          "type": "registry:hook"
         }
       ]
     },
@@ -77,6 +85,14 @@
         },
         {
           "path": "src/hooks/auth/use-auth.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "../react/src/hooks/auth/use-sign-up-email.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "../react/src/hooks/auth/use-sign-in-social.ts",
           "type": "registry:hook"
         }
       ]
@@ -116,6 +132,14 @@
         {
           "path": "src/hooks/auth/use-auth.ts",
           "type": "registry:hook"
+        },
+        {
+          "path": "../react/src/hooks/auth/use-sign-in-magic-link.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "../react/src/hooks/auth/use-sign-in-social.ts",
+          "type": "registry:hook"
         }
       ]
     },
@@ -140,6 +164,10 @@
         },
         {
           "path": "src/hooks/auth/use-auth.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "../react/src/hooks/auth/use-forgot-password.ts",
           "type": "registry:hook"
         }
       ]
@@ -170,6 +198,10 @@
         {
           "path": "src/hooks/auth/use-auth.ts",
           "type": "registry:hook"
+        },
+        {
+          "path": "../react/src/hooks/auth/use-reset-password.ts",
+          "type": "registry:hook"
         }
       ]
     },
@@ -184,6 +216,10 @@
         {
           "path": "src/components/auth/sign-out.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "../react/src/hooks/auth/use-sign-out.ts",
+          "type": "registry:hook"
         }
       ]
     }
