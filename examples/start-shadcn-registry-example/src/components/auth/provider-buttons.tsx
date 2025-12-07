@@ -1,7 +1,8 @@
-import { type AnyAuthConfig, providerIcons } from "@better-auth-ui/react"
+import { providerIcons } from "@better-auth-ui/react"
 import { getProviderName } from "@better-auth-ui/react/core"
 import { useMemo } from "react"
 
+import type { AnyAuthConfig } from "@/components/auth/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Field } from "@/components/ui/field"
 import { useAuth } from "@/hooks/auth/use-auth"

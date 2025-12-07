@@ -26,6 +26,10 @@
       ],
       "files": [
         {
+          "path": "../react/src/components/auth/auth-provider.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/auth/sign-in.tsx",
           "type": "registry:component"
         },
@@ -38,7 +42,7 @@
           "type": "registry:component"
         },
         {
-          "path": "src/hooks/auth/use-auth.ts",
+          "path": "src/hooks/auth/use-auth.tsx",
           "type": "registry:hook"
         },
         {
@@ -72,6 +76,10 @@
       ],
       "files": [
         {
+          "path": "../react/src/components/auth/auth-provider.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/auth/sign-up.tsx",
           "type": "registry:component"
         },
@@ -84,7 +92,7 @@
           "type": "registry:component"
         },
         {
-          "path": "src/hooks/auth/use-auth.ts",
+          "path": "src/hooks/auth/use-auth.tsx",
           "type": "registry:hook"
         },
         {
@@ -118,6 +126,10 @@
       ],
       "files": [
         {
+          "path": "../react/src/components/auth/auth-provider.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/auth/magic-link.tsx",
           "type": "registry:component"
         },
@@ -130,7 +142,7 @@
           "type": "registry:component"
         },
         {
-          "path": "src/hooks/auth/use-auth.ts",
+          "path": "src/hooks/auth/use-auth.tsx",
           "type": "registry:hook"
         },
         {
@@ -159,11 +171,15 @@
       ],
       "files": [
         {
+          "path": "../react/src/components/auth/auth-provider.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/auth/forgot-password.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/hooks/auth/use-auth.ts",
+          "path": "src/hooks/auth/use-auth.tsx",
           "type": "registry:hook"
         },
         {
@@ -192,11 +208,15 @@
       ],
       "files": [
         {
+          "path": "../react/src/components/auth/auth-provider.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/auth/reset-password.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/hooks/auth/use-auth.ts",
+          "path": "src/hooks/auth/use-auth.tsx",
           "type": "registry:hook"
         },
         {
@@ -213,6 +233,10 @@
       "dependencies": ["@better-auth-ui/react@workspace:*", "better-auth"],
       "registryDependencies": ["card", "spinner"],
       "files": [
+        {
+          "path": "../react/src/components/auth/auth-provider.tsx",
+          "type": "registry:component"
+        },
         {
           "path": "src/components/auth/sign-out.tsx",
           "type": "registry:component"
@@ -245,6 +269,23 @@
         {
           "path": "src/components/auth/auth.tsx",
           "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "auth-provider",
+      "type": "registry:component",
+      "title": "Auth Provider",
+      "description": "A context provider component that supplies AuthConfig to all descendant components.",
+      "dependencies": ["@better-auth-ui/react@workspace:*", "better-auth"],
+      "files": [
+        {
+          "path": "../react/src/components/auth/auth-provider.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/hooks/auth/use-auth.tsx",
+          "type": "registry:hook"
         }
       ]
     }

@@ -1,8 +1,8 @@
-import { AuthProvider } from "@better-auth-ui/react"
 import { Link, useNavigate } from "@tanstack/react-router"
 import { ThemeProvider } from "next-themes"
 import type { ReactNode } from "react"
 
+import { AuthProvider } from "@/components/auth/auth-provider"
 import { authClient } from "@/lib/auth-client"
 import { Toaster } from "./ui/sonner"
 

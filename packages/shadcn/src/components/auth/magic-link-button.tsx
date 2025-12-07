@@ -1,7 +1,7 @@
-import type { AnyAuthConfig } from "@better-auth-ui/react"
 import type { AuthView } from "@better-auth-ui/react/core"
 import { Lock, Mail } from "lucide-react"
 
+import type { AnyAuthConfig } from "@/components/auth/auth-provider"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/hooks/auth/use-auth"
 
