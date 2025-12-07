@@ -11,4 +11,3 @@ export const Route = createFileRoute("/docs")({
 function RouteComponent() {
   return <Outlet />
 }
-
