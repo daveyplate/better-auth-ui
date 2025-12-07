@@ -222,6 +222,31 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "auth",
+      "type": "registry:component",
+      "title": "Auth",
+      "description": "A unified authentication component that renders the appropriate auth view based on path or view prop.",
+      "dependencies": [
+        "@better-auth-ui/react@workspace:*",
+        "better-auth",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/sign-in.json",
+        "http://localhost:3000/r/sign-up.json",
+        "http://localhost:3000/r/magic-link.json",
+        "http://localhost:3000/r/forgot-password.json",
+        "http://localhost:3000/r/reset-password.json",
+        "http://localhost:3000/r/sign-out.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/auth/auth.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
