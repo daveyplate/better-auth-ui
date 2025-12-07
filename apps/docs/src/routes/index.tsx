@@ -156,7 +156,7 @@ function Home() {
               {/* shadcn Screenshot */}
               <div className="group relative w-full max-w-sm sm:w-auto sm:max-w-none">
                 <div className="absolute -inset-1 rounded-2xl bg-linear-to-br from-orange-300 to-orange-500 opacity-0 blur transition-opacity duration-300 will-change-[opacity] group-hover:opacity-30 dark:from-orange-400 dark:to-orange-600" />
-                <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl shadow-neutral-900/20 transition-transform duration-250 ease-out will-change-transform group-hover:scale-[1.02] dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-black/50">
+                <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-2xl shadow-neutral-900/20 transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.02] dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-black/50">
                   <div className="flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-900">
                     <div className="h-3 w-3 rounded-full bg-red-500/80" />
                     <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
@@ -183,7 +183,7 @@ function Home() {
               {/* HeroUI Screenshot */}
               <div className="group relative w-full max-w-sm sm:w-auto sm:max-w-none sm:translate-y-8 lg:translate-y-12">
                 <div className="absolute -inset-1 rounded-3xl bg-linear-to-br from-blue-400 to-blue-600 opacity-0 blur transition-opacity duration-300 will-change-[opacity] group-hover:opacity-60 dark:from-blue-500 dark:to-blue-700" />
-                <div className="relative overflow-hidden rounded-2xl rounded-b-3xl border border-neutral-200 bg-white shadow-2xl shadow-neutral-900/20 transition-transform duration-250 ease-out will-change-transform group-hover:scale-[1.02] dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-black/50">
+                <div className="relative overflow-hidden rounded-2xl rounded-b-3xl border border-neutral-200 bg-white shadow-2xl shadow-neutral-900/20 transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.02] dark:border-neutral-700 dark:bg-neutral-900 dark:shadow-black/50">
                   <div className="flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-900">
                     <div className="h-3 w-3 rounded-full bg-red-500/80" />
                     <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
