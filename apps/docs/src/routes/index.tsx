@@ -21,14 +21,21 @@ export const Route = createFileRoute("/")({
 })
 
 function Home() {
-  const [copied, setCopied] = useState(false)
+  const [copiedShadcn, setCopiedShadcn] = useState(false)
+  const [copiedHeroui, setCopiedHeroui] = useState(false)
 
-  const copyCommand = () => {
+  const copyShadcnCommand = () => {
     navigator.clipboard.writeText(
-      'npx shadcn@latest add "https://better-auth-ui.com/r/sign-in"'
+      "bunx shadcn@latest add https://better-auth-ui.com/r/auth"
     )
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    setCopiedShadcn(true)
+    setTimeout(() => setCopiedShadcn(false), 2000)
+  }
+
+  const copyHeroUiCommand = () => {
+    navigator.clipboard.writeText("bun add @better-auth-ui/heroui")
+    setCopiedHeroui(true)
+    setTimeout(() => setCopiedHeroui(false), 2000)
   }
 
   return (
@@ -82,13 +89,13 @@ function Home() {
             <Link
               to="/docs/$"
               params={{ _splat: "shadcn" }}
-              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-neutral-900/25 transition-all hover:bg-neutral-800 hover:shadow-xl hover:shadow-neutral-900/30 dark:bg-white dark:text-neutral-900 dark:shadow-white/10 dark:hover:bg-neutral-100 dark:hover:shadow-white/20"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-neutral-900/25 transition-all hover:bg-neutral-800 hover:shadow-xl hover:shadow-neutral-900/30 dark:bg-white dark:text-neutral-900 dark:shadow-white/5 dark:hover:bg-neutral-100 dark:hover:shadow-white/10"
             >
               Get Started
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <a
-              href="https://github.com/daveyplate/better-auth-ui"
+              href="https://github.com/better-auth-ui/better-auth-ui"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white/80 px-6 py-3 text-sm font-semibold text-neutral-700 backdrop-blur-sm transition-all hover:border-neutral-300 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900/80 dark:text-neutral-300 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
@@ -98,31 +105,50 @@ function Home() {
             </a>
           </div>
 
-          {/* Install command */}
-          <div className="mt-10 w-full max-w-xl">
+          {/* Install commands */}
+          <div className="mt-12 grid w-full max-w-3xl gap-6 sm:grid-cols-2">
             <button
               type="button"
-              onClick={copyCommand}
-              className="group flex w-full items-center justify-between gap-4 rounded-xl border border-neutral-200 bg-white/80 px-5 py-3.5 text-left font-mono text-sm backdrop-blur-sm transition-all hover:border-neutral-300 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
+              onClick={copyShadcnCommand}
+              className="group flex items-center justify-between gap-3 rounded-xl border border-neutral-200 bg-white/80 px-4 py-3 text-left font-mono text-xs backdrop-blur-sm transition-all hover:border-neutral-300 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
             >
-              <div className="flex items-center gap-3 overflow-hidden">
+              <div className="flex items-center gap-2 overflow-hidden">
                 <span className="shrink-0 text-orange-500">$</span>
                 <span className="truncate text-neutral-600 dark:text-neutral-400">
-                  npx shadcn@latest add "https://better-auth-ui.com/r/sign-in"
+                  bunx shadcn@latest add https://better-auth-ui.com/r/auth
                 </span>
               </div>
               <span className="shrink-0 text-neutral-400 transition-colors group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-400">
-                {copied ? (
-                  <Check className="h-4 w-4 text-green-500" />
+                {copiedShadcn ? (
+                  <Check className="h-3.5 w-3.5 text-green-500" />
                 ) : (
-                  <Copy className="h-4 w-4" />
+                  <Copy className="h-3.5 w-3.5" />
+                )}
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={copyHeroUiCommand}
+              className="group flex items-center justify-between gap-3 rounded-xl border border-neutral-200 bg-white/80 px-4 py-3 text-left font-mono text-xs backdrop-blur-sm transition-all hover:border-neutral-300 hover:bg-white dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
+            >
+              <div className="flex items-center gap-2 overflow-hidden">
+                <span className="shrink-0 text-orange-500">$</span>
+                <span className="truncate text-neutral-600 dark:text-neutral-400">
+                  bun add @better-auth-ui/heroui
+                </span>
+              </div>
+              <span className="shrink-0 text-neutral-400 transition-colors group-hover:text-neutral-600 dark:text-neutral-600 dark:group-hover:text-neutral-400">
+                {copiedHeroui ? (
+                  <Check className="h-3.5 w-3.5 text-green-500" />
+                ) : (
+                  <Copy className="h-3.5 w-3.5" />
                 )}
               </span>
             </button>
           </div>
 
           {/* Component Screenshots */}
-          <div className="relative mt-16 w-full max-w-5xl sm:mt-20 lg:mt-24">
+          <div className="relative mt-12 w-full max-w-5xl sm:mt-16">
             {/* Glow effect behind cards */}
             <div className="absolute inset-x-0 top-1/2 h-64 -translate-y-1/2 bg-linear-to-r from-orange-500/20 via-amber-500/20 to-orange-500/20 blur-3xl dark:from-orange-500/10 dark:via-amber-500/10 dark:to-orange-500/10" />
 
