@@ -1,5 +1,7 @@
-import { useAuthenticate } from "@better-auth-ui/heroui"
-import { Avatar, Card, Spinner } from "@heroui/react"
+import { useAuthenticate } from "@better-auth-ui/shadcn"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Card } from "@/components/ui/card"
+import { Spinner } from "@/components/ui/spinner"
 import { createFileRoute, Link } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/dashboard")({
@@ -54,11 +56,11 @@ function Dashboard() {
     <div className="container min-h-svh p-4 md:p-6 flex flex-col items-center justify-center">
       <Card className="w-full max-w-2xl p-8 md:p-12 border-2">
         <div className="flex flex-col items-center gap-6 text-center">
-          <Avatar size="lg" className="size-24">
-            {user.image && <Avatar.Image alt={userName} src={user.image} />}
-            <Avatar.Fallback className="text-3xl font-semibold bg-linear-to-br from-rose-500/20 to-pink-500/20 text-foreground">
+          <Avatar className="size-24">
+            {user.image && <AvatarImage alt={userName} src={user.image} />}
+            <AvatarFallback className="text-3xl font-semibold bg-linear-to-br from-rose-500/20 to-pink-500/20 text-foreground">
               {userInitials}
-            </Avatar.Fallback>
+            </AvatarFallback>
           </Avatar>
 
           <div className="flex flex-col gap-2">
