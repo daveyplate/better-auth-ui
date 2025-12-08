@@ -8,12 +8,17 @@ import {
   DocsBody,
   DocsDescription,
   DocsPage,
-  DocsTitle
+  DocsTitle,
+  PageLastUpdate
 } from "fumadocs-ui/layouts/docs/page"
 import { useMemo } from "react"
+import { LLMCopyButton, ViewOptions } from "@/components/page-actions"
 import { baseOptions } from "@/lib/layout.shared"
 import { getMDXComponents } from "@/lib/mdx-components"
 import { source } from "@/lib/source"
+
+const owner = "better-auth-ui"
+const repo = "better-auth-ui"
 
 export const Route = createFileRoute("/docs/$")({
   component: Page,
@@ -36,12 +41,15 @@ const loader = createServerFn({
 
     return {
       tree: source.pageTree as object,
-      path: page.path
+      path: page.path,
+      url: page.url
     }
   })
 
 const clientLoader = browserCollections.docs.createClientLoader({
-  component({ toc, frontmatter, default: MDX }) {
+  component({ toc, frontmatter, lastModified, default: MDX }) {
+    const data = Route.useLoaderData()
+
     return (
       <DocsPage
         toc={toc}
@@ -50,10 +58,22 @@ const clientLoader = browserCollections.docs.createClientLoader({
         }}
       >
         <DocsTitle>{frontmatter.title}</DocsTitle>
+        <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
+          <LLMCopyButton markdownUrl={`${data.url}.mdx`} />
+          <ViewOptions
+            markdownUrl={`${data.url}.mdx`}
+            githubUrl={`https://github.com/${owner}/${repo}/blob/dev/apps/docs/content/docs/${data.path}`}
+          />
+          {`${data.url}.mdx`}
+        </div>
         <DocsDescription>{frontmatter.description}</DocsDescription>
         <DocsBody>
           <MDX components={getMDXComponents()} />
         </DocsBody>
+
+        {lastModified && (
+          <PageLastUpdate className="border-t pt-4" date={lastModified} />
+        )}
       </DocsPage>
     )
   }
