@@ -1,4 +1,4 @@
-import { useAuthenticate } from "@better-auth-ui/shadcn"
+import { useAuthenticate } from "@better-auth-ui/react"
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card } from "@/components/ui/card"
@@ -30,9 +30,9 @@ function getUserInitials(user: {
 }
 
 function Dashboard() {
-  const { data: session } = useAuthenticate()
+  const { data: sessionData } = useAuthenticate()
 
-  if (!session) {
+  if (!sessionData) {
     return (
       <div className="min-h-svh flex items-center justify-center">
         <Spinner color="current" />
@@ -40,7 +40,7 @@ function Dashboard() {
     )
   }
 
-  const user = session.user
+  const user = sessionData.user
   const userName = user.name || user.email?.split("@")[0] || "User"
   const userInitials = getUserInitials(user)
 

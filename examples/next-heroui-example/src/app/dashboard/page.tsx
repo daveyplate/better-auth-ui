@@ -29,9 +29,9 @@ function getUserInitials(user: {
 }
 
 export default function Dashboard() {
-  const { data: session } = useAuthenticate()
+  const { data: sessionData } = useAuthenticate()
 
-  if (!session) {
+  if (!sessionData) {
     return (
       <div className="min-h-svh flex items-center justify-center">
         <Spinner color="current" />
@@ -39,7 +39,7 @@ export default function Dashboard() {
     )
   }
 
-  const user = session.user
+  const user = sessionData.user
   const userName = user.name || user.email?.split("@")[0] || "User"
   const userInitials = getUserInitials(user)
 
