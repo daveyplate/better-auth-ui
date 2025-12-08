@@ -58,6 +58,10 @@ const clientLoader = browserCollections.docs.createClientLoader({
         }}
       >
         <DocsTitle>{frontmatter.title}</DocsTitle>
+        <DocsDescription className="mb-0">
+          {frontmatter.description}
+        </DocsDescription>
+
         <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
           <LLMCopyButton markdownUrl={`${data.url}.mdx`} />
           <ViewOptions
@@ -65,7 +69,7 @@ const clientLoader = browserCollections.docs.createClientLoader({
             githubUrl={`https://github.com/${owner}/${repo}/blob/dev/apps/docs/content/docs/${data.path}`}
           />
         </div>
-        <DocsDescription>{frontmatter.description}</DocsDescription>
+
         <DocsBody>
           <MDX components={getMDXComponents()} />
         </DocsBody>
