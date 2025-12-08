@@ -46,6 +46,10 @@
           "type": "registry:hook"
         },
         {
+          "path": "../react/src/hooks/auth/use-authenticate.ts",
+          "type": "registry:hook"
+        },
+        {
           "path": "../react/src/hooks/auth/use-sign-in-email.ts",
           "type": "registry:hook"
         },

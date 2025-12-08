@@ -1,5 +1,5 @@
-import { viewPaths } from "@better-auth-ui/react/core"
 import { Auth } from "@better-auth-ui/shadcn"
+import { viewPaths } from "@better-auth-ui/shadcn/core"
 import { createFileRoute, redirect } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/auth/$path")({

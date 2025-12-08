@@ -2,5 +2,6 @@
   "title": "shadcn/ui",
   "icon": "Shadcn",
   "description": "shadcn/ui components",
-  "root": true
+  "root": true,
+  "pages": ["index", "integrations", "components"]
 }

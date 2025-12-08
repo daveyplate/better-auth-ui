@@ -1,6 +1,7 @@
-import { useAuthenticate } from "@better-auth-ui/react"
 import { createFileRoute, Link } from "@tanstack/react-router"
+
 import { Spinner } from "@/components/ui/spinner"
+import { useAuthenticate } from "@/hooks/auth/use-authenticate"
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard

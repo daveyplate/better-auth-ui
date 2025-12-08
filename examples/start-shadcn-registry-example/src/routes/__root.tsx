@@ -17,7 +17,7 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1"
       },
       {
-        title: "Start HeroUI Example"
+        title: "Start shadcn/ui Example"
       }
     ],
     links: [
