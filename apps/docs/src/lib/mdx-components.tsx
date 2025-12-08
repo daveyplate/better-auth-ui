@@ -5,6 +5,8 @@ import defaultComponents from "fumadocs-ui/mdx"
 import type { MDXComponents } from "mdx/types"
 
 import { DemoIframe } from "@/components/demo-iframe"
+import { NextJS } from "@/components/icons/nextjs"
+import { TanStackStart } from "@/components/icons/tanstack-start"
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -18,6 +20,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ),
     Demo: DemoIframe,
     TypeTable: (props) => <TypeTable {...props} />,
+    NextJS,
+    TanStackStart,
     ...components
   }
 }
