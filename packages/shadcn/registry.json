@@ -26,10 +26,6 @@
       ],
       "files": [
         {
-          "path": "../react/src/components/auth/auth-provider.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/auth/sign-in.tsx",
           "type": "registry:component"
         },
@@ -80,10 +76,6 @@
       ],
       "files": [
         {
-          "path": "../react/src/components/auth/auth-provider.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/auth/sign-up.tsx",
           "type": "registry:component"
         },
@@ -130,10 +122,6 @@
       ],
       "files": [
         {
-          "path": "../react/src/components/auth/auth-provider.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/auth/magic-link.tsx",
           "type": "registry:component"
         },
@@ -175,10 +163,6 @@
       ],
       "files": [
         {
-          "path": "../react/src/components/auth/auth-provider.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/auth/forgot-password.tsx",
           "type": "registry:component"
         },
@@ -212,10 +196,6 @@
       ],
       "files": [
         {
-          "path": "../react/src/components/auth/auth-provider.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/auth/reset-password.tsx",
           "type": "registry:component"
         },
@@ -238,10 +218,6 @@
       "registryDependencies": ["card", "spinner"],
       "files": [
         {
-          "path": "../react/src/components/auth/auth-provider.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/auth/sign-out.tsx",
           "type": "registry:component"
         },
@@ -262,6 +238,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
+        "https://better-auth-ui.pages.dev/r/auth-provider.json",
         "https://better-auth-ui.pages.dev/r/sign-in.json",
         "https://better-auth-ui.pages.dev/r/sign-up.json",
         "https://better-auth-ui.pages.dev/r/magic-link.json",
