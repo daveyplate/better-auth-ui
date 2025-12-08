@@ -1,7 +1,39 @@
 ---
 title: Quick Start
-description: Getting Started with Fumadocs
-icon: Album
+description: Getting Started with Better Auth UI for shadcn/ui
+icon: Rocket
 ---
 
-my-folder
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+## Prerequisites
+
+Before you start, make sure you have the following prerequisites integrated into your project:
+
+- [Better Auth](https://www.better-auth.com/docs/installation)
+- [shadcn/ui](https://ui.shadcn.com/docs/installation)
+- [Sonner](https://ui.shadcn.com/docs/components/sonner)
+
+## Installation
+
+<Steps>
+<Step>
+### Install the library
+
+Install the `@better-auth-ui/shadcn` library using your preferred package manager.
+
+```package-install
+@better-auth-ui/shadcn@latest
+```
+
+</Step>
+<Step>
+### Configure TailwindCSS
+
+Add the following `@import` to your global css.
+
+```css title="styles/globals.css"
+@import "@better-auth-ui/shadcn/styles";
+```
+</Step>
+</Steps>
