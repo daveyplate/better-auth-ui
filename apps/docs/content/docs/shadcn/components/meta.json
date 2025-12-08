@@ -1,5 +1,5 @@
 {
   "icon": "Box",
   "defaultOpen": true,
-  "pages": ["auth-provider", "---Auth---", "sign-in"]
+  "pages": ["auth-provider", "---Auth---", "auth", "sign-in"]
 }
