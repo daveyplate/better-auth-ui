@@ -18,7 +18,7 @@ Make sure you've completed the [Quick Start](/docs/heroui) guide first.
 
 Configure `AuthProvider` with TanStack Router's navigation.
 
-```tsx file=<rootDir>/../../examples/start-heroui-example/src/components/providers.tsx
+```tsx title="components/providers.tsx" file=<rootDir>/../../examples/start-heroui-example/src/components/providers.tsx
 ```
 
 The `navigate`, `replace`, and `Link` props integrate with TanStack Router's navigation system.
@@ -29,7 +29,7 @@ The `navigate`, `replace`, and `Link` props integrate with TanStack Router's nav
 
 Wrap your application with the `Providers` component in your root route.
 
-```tsx file=<rootDir>/../../examples/start-heroui-example/src/routes/__root.tsx
+```tsx title="routes/__root.tsx" file=<rootDir>/../../examples/start-heroui-example/src/routes/__root.tsx
 ```
 
 </Step>
@@ -38,7 +38,7 @@ Wrap your application with the `Providers` component in your root route.
 
 Create a dynamic auth page that renders the appropriate authentication view based on the path.
 
-```tsx file=<rootDir>/../../examples/start-heroui-example/src/routes/auth/$path.tsx
+```tsx title="routes/auth/$path.tsx" file=<rootDir>/../../examples/start-heroui-example/src/routes/auth/$path.tsx
 ```
 
 The `viewPaths.auth` object contains all valid auth paths: `sign-in`, `sign-up`, `sign-out`, `forgot-password`, `reset-password`, and `magic-link`.
@@ -50,7 +50,7 @@ The `viewPaths.auth` object contains all valid auth paths: `sign-in`, `sign-up`,
 
 Use the `useAuthenticate` hook to protect routes and access session data.
 
-```tsx file=<rootDir>/../../examples/start-heroui-example/src/routes/dashboard.tsx
+```tsx title="routes/dashboard.tsx" file=<rootDir>/../../examples/start-heroui-example/src/routes/dashboard.tsx
 ```
 
 The `useAuthenticate` hook will automatically redirect unauthenticated users to the sign-in page.

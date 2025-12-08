@@ -1,5 +1,5 @@
 {
   "icon": "LayoutGrid",
   "defaultOpen": true,
-  "pages": ["tanstack-start"]
+  "pages": ["tanstack-start", "nextjs"]
 }
