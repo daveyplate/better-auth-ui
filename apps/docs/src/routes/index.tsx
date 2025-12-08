@@ -87,8 +87,7 @@ function Home() {
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Link
-              to="/docs/$"
-              params={{ _splat: "shadcn" }}
+              to="/docs"
               className="group inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-neutral-900/25 transition-all hover:bg-neutral-800 hover:shadow-xl hover:shadow-neutral-900/30 dark:bg-white dark:text-neutral-900 dark:shadow-white/5 dark:hover:bg-neutral-100 dark:hover:shadow-white/10"
             >
               Get Started
