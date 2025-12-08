@@ -4,3 +4,11 @@
     cursor: pointer;
   }
 }
+
+[role="menuitem"]:not(:disabled) {
+  cursor: pointer;
+}
+
+[role="option"]:not(:disabled) {
+  cursor: pointer;
+}

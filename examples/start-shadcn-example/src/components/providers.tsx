@@ -15,6 +15,7 @@ export function Providers({ children }: { children: ReactNode }) {
         authClient={authClient}
         magicLink
         socialProviders={["github", "google"]}
+        redirectTo="/dashboard"
         navigate={(path) => navigate({ to: path })}
         replace={(path) => navigate({ to: path, replace: true })}
         Link={({ href, ...props }) => <Link to={href} {...props} />}

@@ -4,7 +4,7 @@ import { useCallback } from "react"
 import { useAuth } from "./use-auth"
 
 export function useSignOut(config?: AnyAuthConfig) {
-  const { authClient, basePaths, viewPaths, navigate, toast } = useAuth(config)
+  const { authClient, basePaths, viewPaths, replace, toast } = useAuth(config)
   const { refetch } = authClient.useSession()
 
   const signOut = useCallback(async () => {
@@ -18,12 +18,12 @@ export function useSignOut(config?: AnyAuthConfig) {
 
     await refetch()
 
-    navigate(`${basePaths.auth}/${viewPaths.auth.signIn}`)
+    replace(`${basePaths.auth}/${viewPaths.auth.signIn}`)
   }, [
     authClient,
     basePaths.auth,
     viewPaths.auth.signIn,
-    navigate,
+    replace,
     refetch,
     toast.error
   ])

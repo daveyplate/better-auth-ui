@@ -1,5 +1,5 @@
-import { useAuthenticate } from "@better-auth-ui/shadcn"
-import { createFileRoute, Link } from "@tanstack/react-router"
+import { UserButton, useAuthenticate } from "@better-auth-ui/shadcn"
+import { createFileRoute } from "@tanstack/react-router"
 import { Spinner } from "@/components/ui/spinner"
 
 export const Route = createFileRoute("/dashboard")({
@@ -19,11 +19,7 @@ function Dashboard() {
 
   return (
     <div className="min-h-svh flex flex-col items-center justify-center gap-4">
-      <h1 className="text-2xl">Hello, {sessionData.user.email}</h1>
-
-      <Link to="/auth/$path" params={{ path: "sign-out" }}>
-        Sign Out
-      </Link>
+      <UserButton />
     </div>
   )
 }

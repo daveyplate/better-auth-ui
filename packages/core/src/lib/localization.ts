@@ -1,5 +1,8 @@
 export const localization = {
   auth: {
+    /** @remarks `"Account"` */
+    account: "Account",
+
     /** @remarks `"Already have an account?"` */
     alreadyHaveAnAccount: "Already have an account?",
 
@@ -92,6 +95,9 @@ export const localization = {
 
     /** @remarks `"Sign In"` */
     signIn: "Sign In",
+
+    /** @remarks `"Sign Out"` */
+    signOut: "Sign Out",
 
     /** @remarks `"Sign Up"` */
     signUp: "Sign Up",
