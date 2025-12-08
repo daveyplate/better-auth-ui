@@ -10,7 +10,10 @@ export const docs = defineDocs({
 
 export default defineConfig({
   mdxOptions: {
-    remarkPlugins: [remarkCodeImport, [remarkAutoTypeTable, { generator }]],
+    remarkPlugins: [
+      [remarkCodeImport, { allowImportingFromOutside: true }],
+      [remarkAutoTypeTable, { generator }]
+    ],
     remarkNpmOptions: {
       persist: {
         id: "package-manager"

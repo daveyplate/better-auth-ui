@@ -9,7 +9,7 @@ export function Providers({ children }: { children: ReactNode }) {
   const navigate = useNavigate()
 
   return (
-    <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+    <ThemeProvider defaultTheme="system" enableSystem>
       <AuthProvider
         authClient={authClient}
         socialProviders={["google", "github"]}
