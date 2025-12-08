@@ -4,10 +4,7 @@
   "type": "registry:component",
   "title": "Auth Provider",
   "description": "A context provider component that supplies AuthConfig to all descendant components.",
-  "dependencies": [
-    "@better-auth-ui/react@workspace:*",
-    "better-auth"
-  ],
+  "dependencies": ["@better-auth-ui/react@workspace:*", "better-auth"],
   "files": [
     {
       "path": "../react/src/components/auth/auth-provider.tsx",

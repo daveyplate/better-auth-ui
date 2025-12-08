@@ -10,6 +10,9 @@
     "sign-out",
     "forgot-password",
     "reset-password",
-    "magic-link"
+    "magic-link",
+    "---User---",
+    "user-avatar",
+    "user-button"
   ]
 }
