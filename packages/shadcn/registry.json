@@ -244,7 +244,8 @@
         "https://better-auth-ui.pages.dev/r/magic-link.json",
         "https://better-auth-ui.pages.dev/r/forgot-password.json",
         "https://better-auth-ui.pages.dev/r/reset-password.json",
-        "https://better-auth-ui.pages.dev/r/sign-out.json"
+        "https://better-auth-ui.pages.dev/r/sign-out.json",
+        "https://better-auth-ui.pages.dev/r/user-button.json"
       ],
       "files": [
         {
@@ -262,6 +263,54 @@
       "files": [
         {
           "path": "../react/src/components/auth/auth-provider.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/hooks/auth/use-auth.tsx",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "user-avatar",
+      "type": "registry:component",
+      "title": "User Avatar",
+      "description": "Renders the current user's avatar using session data. Shows a skeleton while loading and falls back to initials when no image is available.",
+      "dependencies": [
+        "@better-auth-ui/react@workspace:*",
+        "better-auth",
+        "lucide-react"
+      ],
+      "registryDependencies": ["avatar", "skeleton"],
+      "files": [
+        {
+          "path": "src/components/user/user-avatar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/hooks/auth/use-auth.tsx",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "user-button",
+      "type": "registry:component",
+      "title": "User Button",
+      "description": "Renders a user button with dropdown menu showing user info and sign out option.",
+      "dependencies": [
+        "@better-auth-ui/react@workspace:*",
+        "better-auth",
+        "lucide-react"
+      ],
+      "registryDependencies": ["avatar", "button", "dropdown-menu", "skeleton"],
+      "files": [
+        {
+          "path": "src/components/user/user-button.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/user/user-avatar.tsx",
           "type": "registry:component"
         },
         {
