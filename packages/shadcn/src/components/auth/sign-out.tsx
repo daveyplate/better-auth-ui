@@ -26,7 +26,12 @@ export function SignOut({ className, ...config }: SignOutProps) {
   }, [signOut])
 
   return (
-    <Card className={cn("w-full max-w-sm py-4 md:py-6 gap-6", className)}>
+    <Card
+      className={cn(
+        "w-full max-w-sm py-4 md:py-6 gap-6 bg-transparent border-none",
+        className
+      )}
+    >
       <CardContent className="flex items-center justify-center min-h-[200px]">
         <Spinner className="mx-auto my-auto" />
       </CardContent>

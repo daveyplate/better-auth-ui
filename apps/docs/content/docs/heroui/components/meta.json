@@ -1,5 +1,15 @@
 {
   "icon": "Box",
   "defaultOpen": true,
-  "pages": ["auth-provider", "---Auth---", "auth", "sign-in"]
+  "pages": [
+    "auth-provider",
+    "---Auth---",
+    "auth",
+    "sign-in",
+    "sign-up",
+    "sign-out",
+    "forgot-password",
+    "reset-password",
+    "magic-link"
+  ]
 }

@@ -1,5 +1,5 @@
 import type { AnyAuthConfig } from "@better-auth-ui/react"
-import { Eye, EyeOff, Link } from "lucide-react"
+import { Eye, EyeOff } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -38,7 +38,8 @@ export function ResetPassword({ className, ...config }: ResetPasswordProps) {
     localization,
     viewPaths,
     navigate,
-    toast
+    toast,
+    Link
   } = context
 
   const [{ password, confirmPassword }, resetPassword, isPending] =
