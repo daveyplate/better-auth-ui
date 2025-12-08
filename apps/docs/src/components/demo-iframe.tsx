@@ -22,7 +22,7 @@ export function DemoIframe({
     const handleLoad = () => {
       setTimeout(() => {
         setIsLoaded(true)
-      }, 100)
+      }, 150)
     }
 
     try {
