@@ -1,9 +1,11 @@
 "use client"
 
-import type { AnyAuthClient, AnyAuthConfig } from "@better-auth-ui/react"
-import { createContext, type PropsWithChildren } from "react"
-
-export const AuthContext = createContext<AnyAuthConfig | undefined>(undefined)
+import {
+  type AnyAuthClient,
+  type AnyAuthConfig,
+  AuthContext
+} from "@better-auth-ui/react"
+import type { PropsWithChildren } from "react"
 
 export type AuthProviderProps = PropsWithChildren<AnyAuthConfig> & {
   authClient: AnyAuthClient

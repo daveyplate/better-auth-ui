@@ -1,4 +1,4 @@
-import { viewPaths } from "@better-auth-ui/shadcn/core"
+import { viewPaths } from "@better-auth-ui/react/core"
 import { notFound } from "next/navigation"
 
 import { Auth } from "@/components/auth/auth"

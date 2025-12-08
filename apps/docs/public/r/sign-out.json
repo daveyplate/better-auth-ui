@@ -15,7 +15,7 @@
   "files": [
     {
       "path": "../react/src/components/auth/auth-provider.tsx",
-      "content": "\"use client\"\n\nimport type { AnyAuthClient, AnyAuthConfig } from \"@better-auth-ui/react\"\nimport { createContext, type PropsWithChildren } from \"react\"\n\nexport const AuthContext = createContext<AnyAuthConfig | undefined>(undefined)\n\nexport type AuthProviderProps = PropsWithChildren<AnyAuthConfig> & {\n  authClient: AnyAuthClient\n}\n\n/**\n * Provides AuthConfig to descendant components.\n */\nexport function AuthProvider({ children, ...config }: AuthProviderProps) {\n  return <AuthContext.Provider value={config}>{children}</AuthContext.Provider>\n}\n",
+      "content": "\"use client\"\n\nimport {\n  type AnyAuthClient,\n  type AnyAuthConfig,\n  AuthContext\n} from \"@better-auth-ui/react\"\nimport type { PropsWithChildren } from \"react\"\n\nexport type AuthProviderProps = PropsWithChildren<AnyAuthConfig> & {\n  authClient: AnyAuthClient\n}\n\n/**\n * Provides AuthConfig to descendant components.\n */\nexport function AuthProvider({ children, ...config }: AuthProviderProps) {\n  return <AuthContext.Provider value={config}>{children}</AuthContext.Provider>\n}\n",
       "type": "registry:component"
     },
     {
