@@ -55,7 +55,10 @@ export function UserButton({
         {size === "icon" ? (
           <UserAvatar {...config} user={user} />
         ) : (
-          <Button variant={variant} className={cn("h-auto", className)}>
+          <Button
+            variant={variant}
+            className={cn("h-auto font-normal", className)}
+          >
             <UserAvatar {...config} user={user} />
 
             {isPending ? (
