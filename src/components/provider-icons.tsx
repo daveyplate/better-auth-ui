@@ -345,26 +345,20 @@ export const TwitchIcon: ProviderIcon = ({ className }) => (
 
 export const VercelIcon: ProviderIcon = ({ className }) => (
     <svg
+        data-testid="geist-icon"
+        height="16"
+        stroke-linejoin="round"
+        viewBox="0 0 16 16"
+        width="16"
         className={className}
-        viewBox="0 0 46 46"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        style={{ color: "currentcolor" }}
     >
-        <g clipPath="url(#clip0_618_288)">
-            <path
-                d="M23 46C35.7026 46 46 35.7026 46 23C46 10.2975 35.7026 0 23 0C10.2975 0 0 10.2975 0 23C0 35.7026 10.2975 46 23 46Z"
-                fill="white"
-            />
-            <path
-                d="M34.3977 30.5223H11.6022C15.41 23.8561 19.1781 17.2615 22.9987 10.5749C26.8077 17.2398 30.5823 23.8446 34.3977 30.5223Z"
-                fill="black"
-            />
-        </g>
-        <defs>
-            <clipPath id="clip0_618_288">
-                <rect width="46" height="46" fill="white" />
-            </clipPath>
-        </defs>
+        <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M8 1L16 15H0L8 1Z"
+            fill="currentColor"
+        />
     </svg>
 )
 
