@@ -19,12 +19,12 @@ export function DemoProviders({ children }: { children: React.ReactNode }) {
               },
               user: {
                 id: "123",
-                name: "Seto",
-                email: "seto@kaibacorp.com",
+                name: "daveycodez",
+                email: "daveycodez@example.com",
                 createdAt: new Date(),
                 updatedAt: new Date(),
                 emailVerified: true,
-                image: "/avatars/seto.png"
+                image: "/avatars/daveycodez.png"
               }
             },
             isPending: false,
