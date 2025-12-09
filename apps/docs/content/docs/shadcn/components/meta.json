@@ -3,6 +3,9 @@
   "defaultOpen": true,
   "pages": [
     "auth-provider",
+    "---User---",
+    "user-avatar",
+    "user-button",
     "---Auth---",
     "auth",
     "sign-in",
@@ -10,9 +13,6 @@
     "sign-out",
     "forgot-password",
     "reset-password",
-    "magic-link",
-    "---User---",
-    "user-avatar",
-    "user-button"
+    "magic-link"
   ]
 }
