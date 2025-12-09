@@ -1,7 +1,13 @@
 "use client"
 
 import { ArrowLeftIcon } from "lucide-react"
-import { type ReactNode, useContext, useEffect, useState } from "react"
+import {
+    Fragment,
+    type ReactNode,
+    useContext,
+    useEffect,
+    useState
+} from "react"
 import { useIsHydrated } from "../../hooks/use-hydrated"
 import { AuthUIContext } from "../../lib/auth-ui-provider"
 import { socialProviders } from "../../lib/social-providers"
@@ -52,6 +58,11 @@ export interface AuthViewProps {
     pathname?: string
     redirectTo?: string
     socialLayout?: "auto" | "horizontal" | "grid" | "vertical"
+    /**
+     * Controls whether social buttons render before or after the form.
+     * @default "after"
+     */
+    socialPlacement?: "before" | "after"
     view?: keyof AuthViewPaths
     otpSeparators?: 0 | 1 | 2
 }
@@ -67,6 +78,7 @@ export function AuthView({
     pathname,
     redirectTo,
     socialLayout: socialLayoutProp = "auto",
+    socialPlacement = "after",
     view: viewProp,
     otpSeparators = 0
 }: AuthViewProps) {
@@ -121,6 +133,161 @@ export function AuthView({
             ? localization.DISABLED_CREDENTIALS_DESCRIPTION
             : localization[`${view}_DESCRIPTION` as keyof typeof localization]
 
+    const hasFormSection = Boolean(credentials || magicLink || emailOTP)
+
+    const hasSocialSection =
+        view !== "RESET_PASSWORD" &&
+        (social?.providers?.length ||
+            genericOAuth?.providers?.length ||
+            (view === "SIGN_IN" && passkey))
+
+    const formSection = hasFormSection ? (
+        <div className="grid gap-4">
+            <AuthForm
+                classNames={classNames?.form}
+                callbackURL={callbackURL}
+                isSubmitting={isSubmitting}
+                localization={localization}
+                otpSeparators={otpSeparators}
+                view={view}
+                redirectTo={redirectTo}
+                setIsSubmitting={setIsSubmitting}
+            />
+
+            {magicLink &&
+                ((credentials &&
+                    [
+                        "FORGOT_PASSWORD",
+                        "SIGN_UP",
+                        "SIGN_IN",
+                        "MAGIC_LINK",
+                        "EMAIL_OTP"
+                    ].includes(view as string)) ||
+                    (emailOTP && view === "EMAIL_OTP")) && (
+                    <MagicLinkButton
+                        classNames={classNames}
+                        localization={localization}
+                        view={view}
+                        isSubmitting={isSubmitting}
+                    />
+                )}
+
+            {emailOTP &&
+                ((credentials &&
+                    [
+                        "FORGOT_PASSWORD",
+                        "SIGN_UP",
+                        "SIGN_IN",
+                        "MAGIC_LINK",
+                        "EMAIL_OTP"
+                    ].includes(view as string)) ||
+                    (magicLink &&
+                        ["SIGN_IN", "MAGIC_LINK"].includes(
+                            view as string
+                        ))) && (
+                    <EmailOTPButton
+                        classNames={classNames}
+                        localization={localization}
+                        view={view}
+                        isSubmitting={isSubmitting}
+                    />
+                )}
+        </div>
+    ) : null
+
+    const socialSection = hasSocialSection ? (
+        <div className="grid gap-4">
+            {(social?.providers?.length || genericOAuth?.providers?.length) && (
+                <div
+                    className={cn(
+                        "flex w/full items-center justify-between gap-4",
+                        socialLayout === "horizontal" && "flex-wrap",
+                        socialLayout === "vertical" && "flex-col",
+                        socialLayout === "grid" && "grid grid-cols-2"
+                    )}
+                >
+                    {social?.providers?.map((provider) => {
+                        const socialProvider = socialProviders.find(
+                            (socialProvider) =>
+                                socialProvider.provider === provider
+                        )
+                        if (!socialProvider) return null
+                        return (
+                            <ProviderButton
+                                key={provider}
+                                classNames={classNames}
+                                callbackURL={callbackURL}
+                                isSubmitting={isSubmitting}
+                                localization={localization}
+                                provider={socialProvider}
+                                redirectTo={redirectTo}
+                                setIsSubmitting={setIsSubmitting}
+                                socialLayout={socialLayout}
+                            />
+                        )
+                    })}
+                    {genericOAuth?.providers?.map((provider) => (
+                        <ProviderButton
+                            key={provider.provider}
+                            classNames={classNames}
+                            callbackURL={callbackURL}
+                            isSubmitting={isSubmitting}
+                            localization={localization}
+                            provider={provider}
+                            redirectTo={redirectTo}
+                            setIsSubmitting={setIsSubmitting}
+                            socialLayout={socialLayout}
+                            other
+                        />
+                    ))}
+                </div>
+            )}
+
+            {passkey &&
+                [
+                    "SIGN_IN",
+                    "MAGIC_LINK",
+                    "EMAIL_OTP",
+                    "RECOVER_ACCOUNT",
+                    "TWO_FACTOR",
+                    "FORGOT_PASSWORD"
+                ].includes(view as string) && (
+                    <PasskeyButton
+                        classNames={classNames}
+                        isSubmitting={isSubmitting}
+                        localization={localization}
+                        redirectTo={redirectTo}
+                        setIsSubmitting={setIsSubmitting}
+                    />
+                )}
+        </div>
+    ) : null
+
+    const continueWithSection =
+        hasFormSection && hasSocialSection ? (
+            <div
+                className={cn(
+                    "flex items-center gap-2",
+                    classNames?.continueWith
+                )}
+            >
+                <Separator
+                    className={cn("!w-auto grow", classNames?.separator)}
+                />
+                <span className="flex-shrink-0 text-muted-foreground text-sm">
+                    {localization.OR_CONTINUE_WITH}
+                </span>
+                <Separator
+                    className={cn("!w-auto grow", classNames?.separator)}
+                />
+            </div>
+        ) : null
+
+    const orderedSections =
+        socialPlacement === "before"
+            ? [socialSection, continueWithSection, formSection]
+            : [formSection, continueWithSection, socialSection]
+
     return (
         <Card className={cn("w-full max-w-sm", className, classNames?.base)}>
             <CardHeader className={classNames?.header}>
@@ -161,169 +328,9 @@ export function AuthView({
                         />
                     )}
 
-                {(credentials || magicLink || emailOTP) && (
-                    <div className="grid gap-4">
-                        <AuthForm
-                            classNames={classNames?.form}
-                            callbackURL={callbackURL}
-                            isSubmitting={isSubmitting}
-                            localization={localization}
-                            otpSeparators={otpSeparators}
-                            view={view}
-                            redirectTo={redirectTo}
-                            setIsSubmitting={setIsSubmitting}
-                        />
-
-                        {magicLink &&
-                            ((credentials &&
-                                [
-                                    "FORGOT_PASSWORD",
-                                    "SIGN_UP",
-                                    "SIGN_IN",
-                                    "MAGIC_LINK",
-                                    "EMAIL_OTP"
-                                ].includes(view as string)) ||
-                                (emailOTP && view === "EMAIL_OTP")) && (
-                                <MagicLinkButton
-                                    classNames={classNames}
-                                    localization={localization}
-                                    view={view}
-                                    isSubmitting={isSubmitting}
-                                />
-                            )}
-
-                        {emailOTP &&
-                            ((credentials &&
-                                [
-                                    "FORGOT_PASSWORD",
-                                    "SIGN_UP",
-                                    "SIGN_IN",
-                                    "MAGIC_LINK",
-                                    "EMAIL_OTP"
-                                ].includes(view as string)) ||
-                                (magicLink &&
-                                    ["SIGN_IN", "MAGIC_LINK"].includes(
-                                        view as string
-                                    ))) && (
-                                <EmailOTPButton
-                                    classNames={classNames}
-                                    localization={localization}
-                                    view={view}
-                                    isSubmitting={isSubmitting}
-                                />
-                            )}
-                    </div>
+                {orderedSections.map((section, index) =>
+                    section ? <Fragment key={index}>{section}</Fragment> : null
                 )}
-
-                {view !== "RESET_PASSWORD" &&
-                    (social?.providers?.length ||
-                        genericOAuth?.providers?.length ||
-                        (view === "SIGN_IN" && passkey)) && (
-                        <>
-                            {(credentials || magicLink || emailOTP) && (
-                                <div
-                                    className={cn(
-                                        "flex items-center gap-2",
-                                        classNames?.continueWith
-                                    )}
-                                >
-                                    <Separator
-                                        className={cn(
-                                            "!w-auto grow",
-                                            classNames?.separator
-                                        )}
-                                    />
-                                    <span className="flex-shrink-0 text-muted-foreground text-sm">
-                                        {localization.OR_CONTINUE_WITH}
-                                    </span>
-                                    <Separator
-                                        className={cn(
-                                            "!w-auto grow",
-                                            classNames?.separator
-                                        )}
-                                    />
-                                </div>
-                            )}
-
-                            <div className="grid gap-4">
-                                {(social?.providers?.length ||
-                                    genericOAuth?.providers?.length) && (
-                                    <div
-                                        className={cn(
-                                            "flex w-full items-center justify-between gap-4",
-                                            socialLayout === "horizontal" &&
-                                                "flex-wrap",
-                                            socialLayout === "vertical" &&
-                                                "flex-col",
-                                            socialLayout === "grid" &&
-                                                "grid grid-cols-2"
-                                        )}
-                                    >
-                                        {social?.providers?.map((provider) => {
-                                            const socialProvider =
-                                                socialProviders.find(
-                                                    (socialProvider) =>
-                                                        socialProvider.provider ===
-                                                        provider
-                                                )
-                                            if (!socialProvider) return null
-                                            return (
-                                                <ProviderButton
-                                                    key={provider}
-                                                    classNames={classNames}
-                                                    callbackURL={callbackURL}
-                                                    isSubmitting={isSubmitting}
-                                                    localization={localization}
-                                                    provider={socialProvider}
-                                                    redirectTo={redirectTo}
-                                                    setIsSubmitting={
-                                                        setIsSubmitting
-                                                    }
-                                                    socialLayout={socialLayout}
-                                                />
-                                            )
-                                        })}
-                                        {genericOAuth?.providers?.map(
-                                            (provider) => (
-                                                <ProviderButton
-                                                    key={provider.provider}
-                                                    classNames={classNames}
-                                                    callbackURL={callbackURL}
-                                                    isSubmitting={isSubmitting}
-                                                    localization={localization}
-                                                    provider={provider}
-                                                    redirectTo={redirectTo}
-                                                    setIsSubmitting={
-                                                        setIsSubmitting
-                                                    }
-                                                    socialLayout={socialLayout}
-                                                    other
-                                                />
-                                            )
-                                        )}
-                                    </div>
-                                )}
-
-                                {passkey &&
-                                    [
-                                        "SIGN_IN",
-                                        "MAGIC_LINK",
-                                        "EMAIL_OTP",
-                                        "RECOVER_ACCOUNT",
-                                        "TWO_FACTOR",
-                                        "FORGOT_PASSWORD"
-                                    ].includes(view as string) && (
-                                        <PasskeyButton
-                                            classNames={classNames}
-                                            isSubmitting={isSubmitting}
-                                            localization={localization}
-                                            redirectTo={redirectTo}
-                                            setIsSubmitting={setIsSubmitting}
-                                        />
-                                    )}
-                            </div>
-                        </>
-                    )}
             </CardContent>
 
             {cardFooter && (
