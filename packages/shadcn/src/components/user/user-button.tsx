@@ -53,13 +53,13 @@ export function UserButton({
     <DropdownMenu>
       <DropdownMenuTrigger asChild={size === "default"}>
         {size === "icon" ? (
-          <UserAvatar {...config} user={user} />
+          <UserAvatar {...config} />
         ) : (
           <Button
             variant={variant}
             className={cn("h-auto font-normal", className)}
           >
-            <UserAvatar {...config} user={user} />
+            <UserAvatar {...config} />
 
             {isPending ? (
               <div className="grid flex-1 gap-1 text-left text-sm leading-tight">
@@ -97,21 +97,19 @@ export function UserButton({
       >
         {user && (
           <>
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <UserAvatar {...config} user={user} />
+            <DropdownMenuLabel className="flex items-center gap-2 text-sm font-normal">
+              <UserAvatar {...config} />
 
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">
-                    {user.displayUsername || user.name || user.email}
+              <div className="grid flex-1 leading-tight">
+                <span className="truncate font-medium">
+                  {user.displayUsername || user.name || user.email}
+                </span>
+
+                {(user.displayUsername || user.name) && (
+                  <span className="text-muted-foreground truncate text-xs">
+                    {user.email}
                   </span>
-
-                  {(user.displayUsername || user.name) && (
-                    <span className="text-muted-foreground truncate text-xs">
-                      {user.email}
-                    </span>
-                  )}
-                </div>
+                )}
               </div>
             </DropdownMenuLabel>
 
