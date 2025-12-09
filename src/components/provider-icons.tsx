@@ -346,13 +346,11 @@ export const TwitchIcon: ProviderIcon = ({ className }) => (
 export const VercelIcon: ProviderIcon = ({ className }) => (
     <svg
         className={className}
-        width="46"
-        height="46"
         viewBox="0 0 46 46"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <g clip-path="url(#clip0_618_288)">
+        <g clipPath="url(#clip0_618_288)">
             <path
                 d="M23 46C35.7026 46 46 35.7026 46 23C46 10.2975 35.7026 0 23 0C10.2975 0 0 10.2975 0 23C0 35.7026 10.2975 46 23 46Z"
                 fill="white"
