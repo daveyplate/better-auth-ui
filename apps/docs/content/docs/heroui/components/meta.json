@@ -3,6 +3,8 @@
   "defaultOpen": true,
   "pages": [
     "auth-provider",
+    "---User---",
+    "user-avatar",
     "---Auth---",
     "auth",
     "sign-in",
