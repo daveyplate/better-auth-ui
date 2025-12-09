@@ -15,7 +15,7 @@ export type UserAvatarProps = AnyAuthConfig & {
   fallback?: ReactNode
   isPending?: boolean
   rounded?: boolean
-  user?: User & { username?: string | null }
+  user?: User & { username?: string | null; displayUsername?: string | null }
 }
 
 /**
@@ -49,15 +49,18 @@ export function UserAvatar({
 
   const resolvedUser = user ?? sessionData?.user
 
-  const initials =
-    resolvedUser?.username?.slice(0, 2).toUpperCase() ||
-    resolvedUser?.name?.slice(0, 2).toUpperCase() ||
-    resolvedUser?.email?.slice(0, 2).toUpperCase()
+  const initials = (
+    resolvedUser?.username ||
+    resolvedUser?.name ||
+    resolvedUser?.email
+  )
+    ?.slice(0, 2)
+    .toUpperCase()
 
   return (
     <Avatar
       className={cn(
-        "size-8",
+        "size-8 bg-muted text-foreground",
         rounded ? "rounded-full" : "rounded-lg",
         className
       )}
@@ -65,17 +68,14 @@ export function UserAvatar({
       <AvatarImage
         src={resolvedUser?.image ?? undefined}
         alt={
-          resolvedUser?.username || resolvedUser?.name || resolvedUser?.email
+          resolvedUser?.displayUsername ||
+          resolvedUser?.name ||
+          resolvedUser?.email
         }
       />
 
-      <AvatarFallback
-        className={cn(
-          "text-foreground text-sm font-normal",
-          rounded ? "rounded-full" : "rounded-lg"
-        )}
-      >
-        {initials ? initials : fallback || <User2 className="size-4" />}
+      <AvatarFallback delayMs={resolvedUser?.image ? 600 : undefined}>
+        {fallback || initials || <User2 />}
       </AvatarFallback>
     </Avatar>
   )
