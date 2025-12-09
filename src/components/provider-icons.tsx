@@ -345,6 +345,7 @@ export const TwitchIcon: ProviderIcon = ({ className }) => (
 
 export const VercelIcon: ProviderIcon = ({ className }) => (
     <svg
+        className={className}
         width="46"
         height="46"
         viewBox="0 0 46 46"
